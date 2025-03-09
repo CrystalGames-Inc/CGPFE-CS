@@ -1,7 +1,8 @@
-﻿namespace CGPFE.Data.Models.Item.Weapon;
+﻿namespace CGPFE.Data.Models.Item.Offense;
 
-public abstract class Ammunition(string name, int id, int amount, double cost, double weight)
+public class Ammunition(string name, int id, double cost, int amount, int weight)
 	: Item(name, id, cost) {
+
 	public int Amount = amount;
-	public double Weight = weight;
+	public int Weight = weight;
 }

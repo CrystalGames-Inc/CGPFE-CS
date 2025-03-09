@@ -1,25 +1,17 @@
 ﻿using CGPFE.Data.Models.Item.Offense.Properties;
 using Type = CGPFE.Data.Models.Item.Offense.Properties.Type;
 
-namespace CGPFE.Data.Models.Item.Weapon;
+namespace CGPFE.Data.Models.Item.Offense;
 
-public class Weapon: Item{
-	public readonly int MaxCapacity;
-	public Damage DamageS;
-	public Damage DamageM;
-	public int? Range;
-	public double Weight;
-	public Type[]? Type;
-	public Special[]? Special;
-
-	protected Weapon(string name, int id, int maxCapacity, double? cost, Damage damageS, Damage damageM, int? range, double? weight, Type[]? type, Special[]? special) : base(name, id, (double)cost!) {
-		MaxCapacity = maxCapacity;
-		DamageS = damageS;
-		DamageM = damageM;
-		Range = range;
-		Weight = (double)weight!;
-		Type = type;
-		Type = type;
-		Special = special;
-	}
+public class Weapon(string name, int id, int maxCapacity, double? cost, Damage damageS, Damage damageM, Critical critical, int? range, double? weight, Type[]? type, Special[]? special)
+	: Item(name, id, (double)cost!) {
+	
+	public int MaxCapacity = maxCapacity;
+	public Damage DamageS = damageS;
+	public Damage DamageM = damageM;
+	public Critical Critical = critical;
+	public int? Range = range;
+	public double? Weight = weight;
+	public Type[]? Type = type;
+	public Special[]? Special = special;
 }
