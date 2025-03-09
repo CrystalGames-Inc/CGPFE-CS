@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Data.Models.Item.Weapon.Properties;
+﻿namespace CGPFE.Data.Models.Item.Offense.Properties;
 
 public enum Special {
 	Brace,

@@ -1,11 +1,11 @@
 ﻿namespace CGPFE.Mechanics;
 
 public class Dice {
-	Random random = new Random();
+	private readonly Random _random = new Random();
 
 	//Single-Die roll.
 	public int Roll(int faces) {
-		return random.Next(1, faces + 1);
+		return _random.Next(1, faces + 1);
 	}
 
 	//Multiple dice roll.

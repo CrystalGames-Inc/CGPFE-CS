@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Data.Models.Item.Weapon.Properties;
+﻿namespace CGPFE.Data.Models.Item.Offense.Properties;
 
 public abstract class Damage(int die, int amount) {
 	public int Die = die;

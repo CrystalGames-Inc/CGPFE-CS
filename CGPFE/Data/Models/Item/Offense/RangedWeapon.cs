@@ -1,5 +1,5 @@
-﻿using CGPFE.Data.Models.Item.Weapon.Properties;
-using Type = CGPFE.Data.Models.Item.Weapon.Properties.Type;
+﻿using CGPFE.Data.Models.Item.Offense.Properties;
+using Type = CGPFE.Data.Models.Item.Offense.Properties.Type;
 
 namespace CGPFE.Data.Models.Item.Weapon;
 
