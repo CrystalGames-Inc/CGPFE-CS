@@ -70,18 +70,21 @@ public class Weapons {
 		new Critical(2),
 		10,3, 
 		[Type.Bludgeoning], null);
+	
 	public static Weapon HeavyMace = new Weapon(
 		"Heavy Mace",8,1,12,
 		new Damage(6),new Damage(8),
 		new Critical(2),
 		0,3, 
 		[Type.Bludgeoning], null);
+	
 	public static Weapon Morningstar = new Weapon(
 		"Morningstar",9,1, 8, 
 		new Damage(6), new Damage(8), 
 		new Critical(2),
 		0,6,
 		[Type.Bludgeoning, Type.Piercing, Type.And], null);
+	
 	public static Weapon Shortspear = new Weapon(
 			"Shortspear",10,1, 1, 
 			new Damage(4), new Damage(6),
@@ -91,7 +94,30 @@ public class Weapons {
 	
 	#endregion
 	
+	#region Two-Handed Melee Weapons
 	
+	public static Weapon Longspear = new Weapon(
+		"Longspear",11,1, 5, 
+		new Damage(6), new Damage(8), 
+		new Critical(3),
+		0, 9, 
+		[Type.Bludgeoning], [Special.Brace, Special.Reach]);
+	
+	public static Weapon Quarterstaff = new Weapon(
+		"Quarterstaff",12,1,0, 
+		new Damage(4),new Damage(6),
+		new Critical(2),
+		0, 4, 
+		[Type.Bludgeoning], [Special.Double, Special.Monk]);
+	
+	public static Weapon Spear = new Weapon(
+			"Spear", 13,1,2, 
+			new Damage(6),new Damage(8),
+			new Critical(3),
+			20,6,
+			[Type.Piercing], [Special.Brace]);
+	
+	#endregion
 	
 	#endregion
 }
