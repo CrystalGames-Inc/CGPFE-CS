@@ -13,10 +13,10 @@ public class RangedWeapon(
 	Critical critical, 
 	int? range,
 	double? weight,
-	Ammunition ammunition,
+	Ammunition? ammunition,
 	Type[]? type,
 	Special[]? special) : 
 	Weapon(name, id, maxCapacity, cost, damageS, damageM, critical, range, weight, type, special) {
 
-	public Ammunition Ammunition = ammunition;
+	public Ammunition? Ammunition = ammunition;
 }

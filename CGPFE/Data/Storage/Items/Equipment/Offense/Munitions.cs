@@ -3,14 +3,14 @@
 namespace CGPFE.Data.Storage.Items.Equipment.Offense;
 
 public class Munitions {
-	public static Ammunition BlowgunDarts = new Ammunition(
+	public static Ammunition? BlowgunDarts = new Ammunition(
 		"Blowgun Darts",
 		0,
 		0.5,
 		10,
 		0);
 
-	public static Ammunition CrossbowBolts = new Ammunition(
+	public static Ammunition? CrossbowBolts = new Ammunition(
 		"Crossbow Bolts",
 		1,
 		1,

@@ -119,5 +119,57 @@ public class Weapons {
 	
 	#endregion
 	
+	#region Ranged Weapons
+	
+	public static RangedWeapon Blowgun = new RangedWeapon(
+		"Blowgun",14,1, 2, 
+		new Damage(1),new Damage(2),
+		new Critical(2),
+		20,1, 
+		Munitions.BlowgunDarts, 
+		[Type.Piercing], null);
+	
+	public static RangedWeapon HeavyCrossbow = new RangedWeapon(
+		"Heavy Crossbow",15,1, 50,
+		new Damage(8),new Damage(10),
+		new Critical(2,19),
+		120,8,
+		Munitions.CrossbowBolts,
+		[Type.Piercing], null);
+	
+	public static RangedWeapon LightCrossbow = new RangedWeapon(
+		"Light Crossbow",16,1, 30,
+		new Damage(6),new Damage(8),
+		new Critical(2,19),
+		80, 4,
+		Munitions.CrossbowBolts,
+		[Type.Piercing], null);
+	
+	public static RangedWeapon Dart = new RangedWeapon(
+		"Dart",17,1, 0.5,
+		new Damage(3), new Damage(4),
+		new Critical(2),
+		20, 0.5,
+		null,
+		[Type.Piercing], null);
+	
+	public static RangedWeapon Javelin = new RangedWeapon(
+		"Javelin",18,1,1,
+		new Damage(4),new Damage(6),
+		new Critical(2),
+		30,2,
+		null,
+		[Type.Piercing], null);
+	
+	public static RangedWeapon Sling = new RangedWeapon(
+		"Sling",19,1,0,
+		new Damage(3),new Damage(4),
+		new Critical(2),
+		50, 0.0,
+		Munitions.SlingBullets,
+		[Type.Bludgeoning], null);
+	
+	#endregion
+	
 	#endregion
 }
