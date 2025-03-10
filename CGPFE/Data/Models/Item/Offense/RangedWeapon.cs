@@ -1,8 +1,7 @@
-﻿using CGPFE.Data.Models.Item.Offense;
-using CGPFE.Data.Models.Item.Offense.Properties;
+﻿using CGPFE.Data.Models.Item.Offense.Properties;
 using Type = CGPFE.Data.Models.Item.Offense.Properties.Type;
 
-namespace CGPFE.Data.Models.Item.Weapon;
+namespace CGPFE.Data.Models.Item.Offense;
 
 public class RangedWeapon(
 	string name,
@@ -11,12 +10,13 @@ public class RangedWeapon(
 	double? cost,
 	Damage damageS,
 	Damage damageM,
+	Critical critical, 
 	int? range,
 	double? weight,
+	Ammunition ammunition,
 	Type[]? type,
-	Special[]? special,
-	Ammunition ammunition)
-	: Offense.Weapon(name, id, maxCapacity, cost, damageS, damageM, range, weight, type, special) {
+	Special[]? special) : 
+	Weapon(name, id, maxCapacity, cost, damageS, damageM, critical, range, weight, type, special) {
 
 	public Ammunition Ammunition = ammunition;
 }
