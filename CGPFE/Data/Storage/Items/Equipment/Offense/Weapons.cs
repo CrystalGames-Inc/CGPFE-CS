@@ -61,5 +61,37 @@ public class Weapons {
 		[Type.Slashing], [Special.Trip]);
 
 	#endregion
+	
+	#region One-Handed Melee Weapons
+	
+	public static Weapon Club = new Weapon(
+		"Club",7,1,0, 
+		new Damage(4),new Damage(6),
+		new Critical(2),
+		10,3, 
+		[Type.Bludgeoning], null);
+	public static Weapon HeavyMace = new Weapon(
+		"Heavy Mace",8,1,12,
+		new Damage(6),new Damage(8),
+		new Critical(2),
+		0,3, 
+		[Type.Bludgeoning], null);
+	public static Weapon Morningstar = new Weapon(
+		"Morningstar",9,1, 8, 
+		new Damage(6), new Damage(8), 
+		new Critical(2),
+		0,6,
+		[Type.Bludgeoning, Type.Piercing, Type.And], null);
+	public static Weapon Shortspear = new Weapon(
+			"Shortspear",10,1, 1, 
+			new Damage(4), new Damage(6),
+			new Critical(2),
+			20, 3, 
+			[Type.Piercing], null);
+	
+	#endregion
+	
+	
+	
 	#endregion
 }
