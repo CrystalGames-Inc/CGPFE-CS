@@ -2,7 +2,7 @@
 using CGPFE.Data.Models.Item.Offense.Properties;
 using Type = CGPFE.Data.Models.Item.Offense.Properties.Type;
 
-namespace CGPFE.Data.Storage.Items.Equipment.Offense;
+namespace CGPFE.God.War.Combat.Offense;
 
 public class Weapons {
 	#region Simple Weapons

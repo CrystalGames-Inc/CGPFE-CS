@@ -1,6 +1,6 @@
 ﻿using CGPFE.Data.Models.Item.Defense;
 
-namespace CGPFE.Data.Storage.Items.Equipment.Defense;
+namespace CGPFE.God.War.Combat.Defense;
 
 public class Shields {
 	public static Shield Buckler = new Shield(

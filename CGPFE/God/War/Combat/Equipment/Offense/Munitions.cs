@@ -1,6 +1,6 @@
 ﻿using CGPFE.Data.Models.Item.Offense;
 
-namespace CGPFE.Data.Storage.Items.Equipment.Offense;
+namespace CGPFE.God.War.Combat.Offense;
 
 public class Munitions {
 	public static Ammunition? BlowgunDarts = new Ammunition(
