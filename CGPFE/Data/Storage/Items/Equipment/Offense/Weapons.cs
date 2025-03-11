@@ -412,4 +412,174 @@ public class Weapons {
 	#endregion
 	
 	#endregion
+	
+	#region Exotic Weapons
+
+	#region Light Melee Weapons
+
+	public static Weapon Kama = new Weapon(
+		"Kama",51,1,2,
+		new Damage(4), new Damage(6),
+		new Critical(2),
+		0,2,
+		[Type.Slashing], [Special.Monk, Special.Trip]);
+	
+	public static Weapon Nunchaku = new Weapon(
+		"Nunchaku",52,1,2,
+		new Damage(4),new Damage(6),
+		new Critical(2),
+		0,2,
+		[Type.Bludgeoning], [Special.Disarm, Special.Monk]);
+	
+	public static Weapon Sai = new Weapon(
+		"Sai",53,1,1,
+		new Damage(3), new Damage(4),
+		new Critical(2),
+		0,1, 
+		[Type.Bludgeoning], [Special.Disarm, Special.Monk]);
+	
+	public static Weapon Siangham = new Weapon(
+		"Siangham",54,1,3,
+		new Damage(4), new Damage(6),
+		new Critical(2),
+		0,1,
+		[Type.Piercing], [Special.Monk]);
+
+	#endregion
+
+	#region One-Handed Melee Weapons
+
+	public static Weapon BastardSword = new Weapon(
+		"Bastard sword",55,1,35,
+		new Damage(8), new Damage(10),
+		new Critical(2,9),
+		0, 6,
+		[Type.Slashing], null);
+	
+	public static Weapon DwarvenWaraxe = new Weapon(
+		"Dwarven waraxe",56,1,30,
+		new Damage(8), new Damage(10),
+		new Critical(3),
+		0,8,
+		[Type.Slashing], null);
+	
+	public static Weapon Whip = new Weapon(
+		"Whip",57,1,1,
+		new Damage(2), new Damage(3),
+		new Critical(2),
+		0,2, 
+		[Type.Slashing], [Special.Disarm, Special.Nonlethal, Special.Reach, Special.Trip]);
+
+	#endregion
+	
+	#region Two-Handed Melee Weapons
+	
+	public static Weapon OrcDoubleAxe = new Weapon(
+		"Orc Double Axe",58,1,60,
+		new Damage(6), new Damage(8),
+		new Critical(3),
+		0,15,
+		[Type.Slashing], [Special.Double]);
+	
+	public static Weapon SpikedChain = new Weapon(
+		"Spiked Chain",59,1, 25,
+		new Damage(6), new Damage(2,4),
+		new Critical(2),0,10,
+		[Type.Piercing], [Special.Disarm, Special.Trip]);
+	
+	public static Weapon ElvenCurveBlade = new Weapon(
+		"Elven Curve Blade",60,1,80,
+		new Damage(8), new Damage(10),
+		new Critical(2,18),
+		0,7,
+		[Type.Slashing], null);
+	
+	public static Weapon DireFlail = new Weapon(
+		"Dire Flail",61,1,90,
+		new Damage(6), new Damage(8),
+		new Critical(2),
+		0, 10,
+		[Type.Bludgeoning], [Special.Disarm, Special.Double, Special.Trip]);
+	
+	public static Weapon GnomeHookedHammer = new Weapon(
+		"Gnome-Hooked Hammer",62,1,20,
+		new Damage(6), new Damage(8),
+		new Critical(3),
+		0,6,
+		[Type.Bludgeoning, Type.Piercing, Type.Or], [Special.Double, Special.Trip]);
+	
+	public static Weapon TwoBladedSword = new Weapon(
+		"Two-Bladed Sword",63,1,100,
+		new Damage(6), new Damage(8),
+		new Critical(2,19),
+		0,10,
+		[Type.Slashing], [Special.Double]);
+	
+	public static Weapon DwarvenEngrosh = new Weapon(
+		"Dwarven Engrosh",64,1,50,
+		new Damage(6), new Damage(8),
+		new Critical(3),
+		0, 12, 
+		[Type.Piercing, Type.Slashing, Type.Or], [Special.Brace, Special.Double]);
+	
+	#endregion
+
+	#region Ranged Weapons
+
+	public static Weapon Bolas = new Weapon(
+		"Bolas",65,1,5,
+		new Damage(3), new Damage(4),
+		new Critical(2),
+		10, 2,
+		[Type.Bludgeoning], [Special.Nonlethal, Special.Trip]);
+	
+	public static RangedWeapon HandCrossbow = new RangedWeapon(
+		"Hand Crossbow",66,1,100,
+		new Damage(3), new Damage(4),
+		new Critical(2,19),
+		30,2, 
+		Munitions.HandCrossbowBolts,
+		[Type.Piercing], null);
+	
+	public static RangedWeapon RepeatingHeavyCrossbow = new RangedWeapon(
+		"Repeating Heavy Crossbow",67,1,400,
+		new Damage(8), new Damage(10),
+		new Critical(2,19),
+		120,12,
+		Munitions.RepeatingCrossbowBolts,
+		[Type.Piercing], null);
+	
+	public static RangedWeapon RepeatingLightCrossbow = new RangedWeapon(
+		"Repeating Light Crossbow",68,1,250,
+		new Damage(6), new Damage(8),
+		new Critical(2,19),
+		80,6,
+		Munitions.RepeatingCrossbowBolts,
+		[Type.Piercing], null);
+	
+	public static Weapon Net = new Weapon(
+		"Net",69,1,20,
+		null,null,
+		null,
+		10, 6,
+		null, null);
+	
+	public static Weapon Shuriken = new Weapon(
+		"Shuriken",70,1,1,
+		new Damage(1), new Damage(2),
+		new Critical(2),
+		10,0.5,
+		[Type.Piercing], [Special.Monk]);
+	
+	public static RangedWeapon HalflingSlingStaff = new RangedWeapon(
+		"Halfling Sling Staff",71,1,20,
+		new Damage(6), new Damage(8),
+		new Critical(3),
+		80,3,
+		Munitions.SlingBullets,
+		[Type.Bludgeoning], null);
+
+	#endregion
+	
+	#endregion
 }
