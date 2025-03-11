@@ -170,6 +170,28 @@ public class Weapons {
 		[Type.Bludgeoning], null);
 	
 	#endregion
+
+	public static Weapon[] SimpleWeapons = [
+		Gauntlet,
+		Dagger,
+		PunchingDagger,
+		SpikedGauntlet,
+		LightMace,
+		Sickle,
+		Club,
+		HeavyMace,
+		Morningstar,
+		Shortspear,
+		Longspear,
+		Quarterstaff,
+		Spear,
+		Blowgun,
+		HeavyCrossbow,
+		LightCrossbow,
+		Dart,
+		Javelin,
+		Sling
+	];
 	
 	#endregion
 	
@@ -410,6 +432,40 @@ public class Weapons {
 			[Type.Piercing], null);
 	
 	#endregion
+
+	public static Weapon[] MartialWeapons = [
+		ThrowingAxe,
+		LightHammer,
+		Handaxe,
+		Kukri,
+		LightPick,
+		Sap,
+		Starknife,
+		ShortSword,
+		Battleaxe,
+		Flail,
+		Longsword,
+		HeavyPick,
+		Rapier,
+		Scimitar,
+		Trident,
+		Warhammer,
+		Falchion,
+		Glaive,
+		Greataxe,
+		Greatclub,
+		HeavyFlail,
+		Greatsword,
+		Guisarme,
+		Halbred,
+		Lance,
+		Ranseur,
+		Scythe,
+		Longbow,
+		CompositeLongbow,
+		Shortbow,
+		CompositeShortbow
+	];
 	
 	#endregion
 	
@@ -580,6 +636,30 @@ public class Weapons {
 		[Type.Bludgeoning], null);
 
 	#endregion
-	
+
+	public static Weapon[] ExoticWeapons = [
+		Kama,
+		Nunchaku,
+		Sai,
+		Siangham,
+		BastardSword,
+		DwarvenWaraxe,
+		Whip,
+		OrcDoubleAxe,
+		SpikedChain,
+		ElvenCurveBlade,
+		DireFlail,
+		GnomeHookedHammer,
+		TwoBladedSword,
+		DwarvenEngrosh,
+		Bolas,
+		HandCrossbow,
+		RepeatingHeavyCrossbow,
+		RepeatingLightCrossbow,
+		Net,
+		Shuriken,
+		HalflingSlingStaff
+	];
+
 	#endregion
 }
