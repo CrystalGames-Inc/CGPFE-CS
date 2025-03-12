@@ -10,10 +10,10 @@ public class Info {
 	public Gender Gender { get; set; } = Gender.MALE;
 	public Alignment Alignment { get; set; } = Alignment.NEUTRAL;
 	public int Age { get; set; } = 0;
-	public Race Race { get; set; } = Race.NONE;
+	public Race Race { get; set; } = Race.None;
 	public Size Size { get; set; } = Size.MEDIUM;
 	public int SizeMod { get; set; } = 0;
-	public Class Class { get; set; } = Class.NONE;
+	public Class Class { get; set; } = Class.None;
 
 	#endregion
 	

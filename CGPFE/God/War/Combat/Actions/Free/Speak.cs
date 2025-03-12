@@ -2,6 +2,6 @@
 
 namespace CGPFE.God.War.Combat.Actions.Free;
 
-public class Speak(string name, bool attackOfOpportunity) : FreeAction("Speak", false) {
-	
+public class Speak() : FreeAction("Speak", false) {
+
 }

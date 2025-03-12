@@ -1,12 +1,12 @@
 ﻿namespace CGPFE.Data.Constants;
 
 public enum Race {
-	DWARF,
-	ELF,
-	GNOME,
-	HALFELF,
-	HALFORC,
-	HALFLING,
-	HUMAN,
-	NONE
+	Dwarf,
+	Elf,
+	Gnome,
+	HalfElf,
+	Halforc,
+	Halfling,
+	Human,
+	None
 }
