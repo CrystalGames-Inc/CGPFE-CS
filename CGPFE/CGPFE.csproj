@@ -8,9 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Data\Storage\Items\" />
-      <Folder Include="God\War\Combat\Actions\Move\" />
-      <Folder Include="God\War\Combat\Actions\None\" />
-      <Folder Include="God\War\Combat\Actions\Standard\" />
       <Folder Include="God\War\Combat\Equipment\" />
     </ItemGroup>
 
