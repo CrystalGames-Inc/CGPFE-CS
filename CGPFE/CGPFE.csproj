@@ -7,8 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Data\Storage\Items\" />
-      <Folder Include="God\War\Combat\Equipment\" />
+      <Folder Include="Data\Models\Item\Equipment\" />
     </ItemGroup>
 
 </Project>

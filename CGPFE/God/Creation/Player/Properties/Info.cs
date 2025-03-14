@@ -7,11 +7,11 @@ public class Info {
 	#region Characteristics
 	
 	public string Name { get; set; } = "Nameless";
-	public Gender Gender { get; set; } = Gender.MALE;
-	public Alignment Alignment { get; set; } = Alignment.NEUTRAL;
+	public Gender Gender { get; set; } = Gender.Male;
+	public Alignment Alignment { get; set; } = Alignment.Neutral;
 	public int Age { get; set; } = 0;
 	public Race Race { get; set; } = Race.None;
-	public Size Size { get; set; } = Size.MEDIUM;
+	public Size Size { get; set; } = Size.Medium;
 	public int SizeMod { get; set; } = 0;
 	public Class Class { get; set; } = Class.None;
 
@@ -25,4 +25,20 @@ public class Info {
 	public int Health { get; set; } = 0;
 
 	#endregion
+}
+
+public struct PlayerInfo() {
+	public string Name;
+	public Gender Gender;
+	public Alignment Alignment;
+	public int Age;
+	public Race Race;
+	public Size Size;
+	public int SizeMod;
+	public Class Class;
+	
+	public int Level;
+	public int Xp;
+	public int MaxHealth;
+	public int Health;
 }

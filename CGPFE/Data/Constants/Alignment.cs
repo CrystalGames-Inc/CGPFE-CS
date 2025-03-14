@@ -1,13 +1,13 @@
 ﻿namespace CGPFE.Data.Constants;
 
 public enum Alignment {
-	LAWFULGOOD,
-	NEUTRALGOOD,
-	CHAOTICGOOD,
-	LAWFULNEUTRAL,
-	NEUTRAL,
-	CHAOTICNEUTRAL,
-	LAWFULEVIL,
-	NEUTRALEVIL,
-	CHAOTICEVIL
+	LawfulGood,
+	NeutralGood,
+	ChaoticGood,
+	LawfulNeutral,
+	Neutral,
+	ChaoticNeutral,
+	LawfulEvil,
+	NeutralEvil,
+	ChaoticEvil
 }

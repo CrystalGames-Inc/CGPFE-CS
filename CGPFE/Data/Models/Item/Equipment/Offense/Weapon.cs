@@ -1,7 +1,7 @@
-﻿using CGPFE.Data.Models.Item.Offense.Properties;
-using Type = CGPFE.Data.Models.Item.Offense.Properties.Type;
+﻿using CGPFE.Data.Models.Item.Equipment.Offense.Properties;
+using Type = CGPFE.Data.Models.Item.Equipment.Offense.Properties.Type;
 
-namespace CGPFE.Data.Models.Item.Offense;
+namespace CGPFE.Data.Models.Item.Equipment.Offense;
 
 public class Weapon(string name, int id, int maxCapacity, double? cost, Damage? damageS, Damage? damageM, Critical? critical, int? range, double? weight, Type[]? type, Special[]? special)
 	: Item(name, id, (double)cost!) {

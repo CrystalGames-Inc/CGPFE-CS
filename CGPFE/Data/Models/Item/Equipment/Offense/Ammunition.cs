@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Data.Models.Item.Offense;
+﻿namespace CGPFE.Data.Models.Item.Equipment.Offense;
 
 public class Ammunition(string name, int id, double cost, int amount, int weight)
 	: Item(name, id, cost) {

@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Data.Models.Item.Defense;
+﻿namespace CGPFE.Data.Models.Item.Equipment.Defense;
 
 public class ArmorExtra(
 	string name,

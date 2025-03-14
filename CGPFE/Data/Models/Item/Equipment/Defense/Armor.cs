@@ -1,6 +1,6 @@
 ﻿using CGPFE.Data.Constants;
 
-namespace CGPFE.Data.Models.Item.Defense;
+namespace CGPFE.Data.Models.Item.Equipment.Defense;
 
 public class Armor(
 	string name,

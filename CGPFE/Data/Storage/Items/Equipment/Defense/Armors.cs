@@ -1,12 +1,12 @@
 ﻿using CGPFE.Data.Constants;
-using CGPFE.Data.Models.Item.Defense;
+using CGPFE.Data.Models.Item.Equipment.Defense;
 
-namespace CGPFE.God.War.Combat.Defense;
+namespace CGPFE.Data.Storage.Items.Equipment.Defense;
 
 public class Armors {
 	#region Light Armor
 
-	public static Armor PaddedArmor = new Armor(
+	public static readonly Armor PaddedArmor = new Armor(
 		"Padded Armor",
 		0,
 		5,
@@ -18,7 +18,7 @@ public class Armors {
 		[30, 20],
 		10);
 
-	public static Armor LeatherArmor = new Armor(
+	public static readonly Armor LeatherArmor = new Armor(
 		"Leather Armor",
 		1,
 		10,
@@ -30,7 +30,7 @@ public class Armors {
 		[30, 20],
 		15);
 
-	public static Armor StuddedLeatherArmor = new Armor(
+	public static readonly Armor StuddedLeatherArmor = new Armor(
 		"Studded Leather Armor",
 		2,
 		25,
@@ -42,7 +42,7 @@ public class Armors {
 		[30, 20],
 		20);
 
-	public static Armor ChainShirt = new Armor(
+	public static readonly Armor ChainShirt = new Armor(
 		"Chain Shirt",
 		3,
 		100,
@@ -58,7 +58,7 @@ public class Armors {
 	
 	#region Medium Armor
 	
-	public static Armor HideArmor = new Armor(
+	public static readonly Armor HideArmor = new Armor(
 		"Hide Armor",
 		4,
 		15,
@@ -70,7 +70,7 @@ public class Armors {
 		[20,15],
 		25);
 
-	public static Armor ScaleMail = new Armor(
+	public static readonly Armor ScaleMail = new Armor(
 		"Scale Mail",
 		5,
 		15,
@@ -82,7 +82,7 @@ public class Armors {
 		[20,15],
 		30);
 
-	public static Armor Chainmail = new Armor(
+	public static readonly Armor Chainmail = new Armor(
 		"Chainmail",
 		6,
 		150,
@@ -94,7 +94,7 @@ public class Armors {
 		[20,15],
 		40);
 
-	public static Armor Breastplate = new Armor(
+	public static readonly Armor Breastplate = new Armor(
 		"Breastplate",
 		7,
 		200,
@@ -110,7 +110,7 @@ public class Armors {
 	
 	#region Heavy Armor
 
-	public static Armor SplintMail = new Armor(
+	public static readonly Armor SplintMail = new Armor(
 		"Splint Mail",
 		8,
 		200,
@@ -122,7 +122,7 @@ public class Armors {
 		[20,15],
 		45);
 
-	public static Armor BandedMail = new Armor(
+	public static readonly Armor BandedMail = new Armor(
 		"Banded Mail",
 		9,
 		250,
@@ -134,7 +134,7 @@ public class Armors {
 		[20, 15],
 		35);
 
-	public static Armor HalfPlate = new Armor(
+	public static readonly Armor HalfPlate = new Armor(
 		"Half-Plate",
 		10,
 		600,
@@ -146,7 +146,7 @@ public class Armors {
 		[20, 15],
 		50);
 
-	public static Armor FullPlate = new Armor(
+	public static readonly Armor FullPlate = new Armor(
 		"Full Plate",
 		11,
 		1500,
