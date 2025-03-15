@@ -3,18 +3,23 @@
 namespace CGPFE.World.Settlement;
 
 public class Settlement {
-
-	#region Properties
 	
-	public Info Info { get; set; }
-	public Modifiers Modifiers { get; set; }
-	public Marketplace Marketplace { get; set; }
-	public Location[] Locations { get; set; }
+	#region Properties
+
+	public Info Info;
+	public Modifiers Modifiers;
+	public Marketplace Marketplace;
+	public Location[]? Locations;
 
 	#endregion
 
-	public Settlement(Info info) {
+	public Settlement(Info info, Modifiers mods, Marketplace marketplace, Location[]? locations) {
 		Info = info;
+		Modifiers = mods;
+		Marketplace = marketplace;
+		if (locations != null)
+			Locations = locations;
+		CalculateSettlementData();
 	}
 
 	#region Checkers
@@ -39,7 +44,7 @@ public class Settlement {
 	
 	#region Data Calculations
 
-	public void CalculateSettlementData() {
+	private void CalculateSettlementData() {
 		CalculateDanger();
 		CalculateQualitySize();
 		CalculateBaseValue();
@@ -50,28 +55,28 @@ public class Settlement {
 
 	private void CalculateDanger() {
 		switch (Info.Type) {
-			case Type.THORPE:
+			case Type.Thorpe:
 				Info.Danger = -4 ;
 				break;
-			case Type.HAMLET:
+			case Type.Hamlet:
 				Info.Danger = -5 ;
 				break;
-			case Type.VILLAGE:
+			case Type.Village:
 				Info.Danger = 0;
 				break;
-			case Type.S_TOWN:
+			case Type.SmallTown:
 				Info.Danger = 0;
 				break;
-			case Type.L_TOWN:
+			case Type.LargeTown:
 				Info.Danger = 5;
 				break;
-			case Type.S_CITY:
+			case Type.SmallCity:
 				Info.Danger = 5 ;
 				break;
-			case Type.L_CITY:
+			case Type.LargeCity:
 				Info.Danger = 10;
 				break;
-			case Type.METROPOLIS:
+			case Type.Metropolis:
 				Info.Danger = 10;
 				break;
 		}
@@ -79,56 +84,56 @@ public class Settlement {
 
 	private void CalculateQualitySize() {
 		Modifiers.Qualities = Info.Type switch {
-			Type.THORPE => new Quality[1],
-			Type.HAMLET => new Quality[1],
-			Type.VILLAGE => new Quality[2],
-			Type.S_TOWN => new Quality[2],
-			Type.L_TOWN => new Quality[3],
-			Type.S_CITY => new Quality[4],
-			Type.L_CITY => new Quality[5],
-			Type.METROPOLIS => new Quality[6],
+			Type.Thorpe => new Quality[1],
+			Type.Hamlet => new Quality[1],
+			Type.Village => new Quality[2],
+			Type.SmallTown => new Quality[2],
+			Type.LargeTown => new Quality[3],
+			Type.SmallCity => new Quality[4],
+			Type.LargeCity => new Quality[5],
+			Type.Metropolis => new Quality[6],
 			_ => Modifiers.Qualities
 		};
 	}
 
 	private void CalculateBaseValue() {
 		Marketplace.BaseValue = Info.Type switch {
-			Type.THORPE => 50,
-			Type.HAMLET => 200,
-			Type.VILLAGE => 500,
-			Type.S_TOWN => 1000,
-			Type.L_TOWN => 2000,
-			Type.S_CITY => 4000,
-			Type.L_CITY => 8000,
-			Type.METROPOLIS => 16000,
+			Type.Thorpe => 50,
+			Type.Hamlet => 200,
+			Type.Village => 500,
+			Type.SmallTown => 1000,
+			Type.LargeTown => 2000,
+			Type.SmallCity => 4000,
+			Type.LargeCity => 8000,
+			Type.Metropolis => 16000,
 			_ => Marketplace.BaseValue
 		};
 	}
 
 	private void CalculatePurchaseLimit() {
 		Marketplace.PurchaseLimit = Info.Type switch {
-			Type.THORPE => 500,
-			Type.HAMLET => 1000,
-			Type.VILLAGE => 2500,
-			Type.S_TOWN => 5000,
-			Type.L_TOWN => 10000,
-			Type.S_CITY => 25000,
-			Type.L_CITY => 50000,
-			Type.METROPOLIS => 100000,
+			Type.Thorpe => 500,
+			Type.Hamlet => 1000,
+			Type.Village => 2500,
+			Type.SmallTown => 5000,
+			Type.LargeTown => 10000,
+			Type.SmallCity => 25000,
+			Type.LargeCity => 50000,
+			Type.Metropolis => 100000,
 			_ => Marketplace.PurchaseLimit
 		};
 	}
 
 	private void CalculateSpellcasting() {
 		Marketplace.Spellcasting = Info.Type switch {
-			Type.THORPE => 1,
-			Type.HAMLET => 2,
-			Type.VILLAGE => 3,
-			Type.S_TOWN => 4,
-			Type.L_TOWN => 5,
-			Type.S_CITY => 6,
-			Type.L_CITY => 7,
-			Type.METROPOLIS => 8,
+			Type.Thorpe => 1,
+			Type.Hamlet => 2,
+			Type.Village => 3,
+			Type.SmallTown => 4,
+			Type.LargeTown => 5,
+			Type.SmallCity => 6,
+			Type.LargeCity => 7,
+			Type.Metropolis => 8,
 			_ => Marketplace.Spellcasting
 		};
 	}
@@ -141,51 +146,51 @@ public class Settlement {
 
 	private void CalculateGovernmentModifiers() {
 		switch (Info.Government) {
-			case Government.COLONIAL:
+			case Government.Colonial:
 				Modifiers.Corruption += 2;
 				Modifiers.Economy += 1;
 				Modifiers.Law += 1;
 			break;
-			case Government.COUNCIL:
+			case Government.Council:
 				Modifiers.Society += 4;
 				Modifiers.Law -= 2;
 				Modifiers.Lore -= 2;
 			break;
-			case Government.DYNASTY:
+			case Government.Dynasty:
 				Modifiers.Corruption += 1;
 				Modifiers.Law += 1;
 				Modifiers.Society -= 2;
 			break;
-			case Government.MAGICAL:
+			case Government.Magical:
 				Modifiers.Lore += 2;
 				Modifiers.Corruption -= 2;
 				Modifiers.Society -= 2;
 				Marketplace.Spellcasting -= 1;
 			break;
-			case Government.MILITARY:
+			case Government.Military:
 				Modifiers.Law += 3;
 				Modifiers.Corruption -= 1;
 				Modifiers.Society -= 1; 
 			break;
-			case Government.OVERLORD:
+			case Government.Overlord:
 				Modifiers.Corruption += 2;
 				Modifiers.Law += 2;
 				Modifiers.Crime -= 2;
 				Modifiers.Society -= 2;
 			break;
-			case Government.SECRET_SYNDICATE:
+			case Government.SecretSyndicate:
 				Modifiers.Corruption += 2;
 				Modifiers.Economy += 2;
 				Modifiers.Crime += 2;
 				Modifiers.Law -= 6;
 			break;
-			case Government.PLUTOCRACY:
+			case Government.Plutocracy:
 				Modifiers.Corruption += 2;
 				Modifiers.Crime += 2;
 				Modifiers.Economy += 3;
 				Modifiers.Society -= 2;
 			break;
-			case Government.UTOPIA:
+			case Government.Utopia:
 				Modifiers.Society += 2;
 				Modifiers.Lore += 1;
 				Modifiers.Corruption -= 2;
@@ -197,63 +202,63 @@ public class Settlement {
 	private void CalculateQualityModifiers() {
 		foreach (Quality q in Modifiers.Qualities){
 			switch (q) {
-				case Quality.ABUNDANT:
+				case Quality.Abundant:
 					Modifiers.Economy += 1;
 				break;
-				case Quality.ABSTINENT:
+				case Quality.Abstinent:
 					Modifiers.Corruption += 2;
 					Modifiers.Law += 1;
 					Modifiers.Society -= 2;
 					break;
-				case Quality.ACADEMIC:
+				case Quality.Academic:
 					Modifiers.Lore += 1; 
 					Marketplace.Spellcasting += 1;
 				break;
-				case Quality.ADVENTURESITE:
+				case Quality.AdventureSite:
 					Modifiers.Society += 2;
 					Marketplace.PurchaseLimit *= 1.5;
 				break;
-				case Quality.ANIMAL_POLYGLOT:
+				case Quality.AnimalPolyglot:
 					Modifiers.Economy -= 1;
 					Modifiers.Lore += 1;
 					Marketplace.Spellcasting += 1;
 				break;
-				case Quality.ARTIFACTGATHERER: 
+				case Quality.ArtifactGatherer: 
 					Modifiers.Economy += 2;
 					Marketplace.BaseValue /= 2;
 				break;
-				case Quality.ARTISTCOLONY:
+				case Quality.ArtistColony:
 					Modifiers.Economy += 1;
 					Modifiers.Society += 1;
 				break;
-				case Quality.ASYLUM:
+				case Quality.Asylum:
 					Modifiers.Lore += 1;
 					Modifiers.Society -= 2;
 				break;
-				case Quality.BROADMINDED:
+				case Quality.Broadminded:
 					Modifiers.Lore += 1;
 					Modifiers.Society += 1;
 				break;
-				case Quality.DEADCITY:
+				case Quality.DeadCity:
 					Modifiers.Economy -= 2;
 					Modifiers.Lore += 2;
 					Modifiers.Law += 1;
 				break;
-				case Quality.CRUELWATCH:
+				case Quality.CruelWatch:
 					Modifiers.Corruption += 1;
 					Modifiers.Law = 2;
 					Modifiers.Crime -= 3;
 					Modifiers.Society -= 2;
 				break;
-				case Quality.CULTURED:
+				case Quality.Cultured:
 					Modifiers.Society += 1;
 					Modifiers.Law -= 1;
 				break;
-				case Quality.DARKVISION:
+				case Quality.DarkVision:
 					Modifiers.Economy += 1;
 					Modifiers.Crime -= 1;
 				break;
-				case Quality.DECADENT:
+				case Quality.Decadent:
 					Modifiers.Corruption += 1;
 					Modifiers.Crime += 1;
 					Modifiers.Economy += 1;
@@ -261,71 +266,71 @@ public class Settlement {
 					Info.Danger += 10;
 					Marketplace.PurchaseLimit *= 1.25;
 				break;
-				case Quality.DEEPTRADITIONS:
+				case Quality.DeepTraditions:
 					Modifiers.Law += 2;
 					Modifiers.Crime -= 2;
 					Modifiers.Society -= 2;
 				break;
-				case Quality.DEFENSIBLE:
+				case Quality.Defensible:
 					Modifiers.Corruption += 1;
 					Modifiers.Crime += 1;
 					Modifiers.Economy += 2;
 					Modifiers.Society -= 1;
 				break;
-				case Quality.DEFIANT:
+				case Quality.Defiant:
 					Modifiers.Society += 1;
 					Modifiers.Law -= 1;
 				break;
-				case Quality.ELDRITCH:
+				case Quality.Eldritch:
 					Modifiers.Lore += 2;
 					Info.Danger += 13;
 					Marketplace.Spellcasting += 2;
 				break;
-				case Quality.FAMEDBREEDERS:
+				case Quality.FamedBreeders:
 					Modifiers.Economy += 1;
 					Marketplace.BaseValue *= 1.2;
 					Marketplace.PurchaseLimit *= 1.2;
 				break;
-				case Quality.FINANCIALCENTER:
+				case Quality.FinancialCenter:
 					Modifiers.Economy += 2;
 					Modifiers.Law += 1;
 					Marketplace.BaseValue *= 1.4;
 					Marketplace.PurchaseLimit *= 1.4;
 				break;
-				case Quality.FREECITY:
+				case Quality.FreeCity:
 					Modifiers.Crime += 2;
 					Info.Danger += 5;
 					Modifiers.Law -= 2;
 				break;
-				case Quality.GAMBLING:
+				case Quality.Gambling:
 					Modifiers.Crime += 2;
 					Modifiers.Corruption += 2;
 					Modifiers.Economy += 2;
 					Modifiers.Law -= 1;
 					Marketplace.PurchaseLimit *= 1.1;
 				break;
-				case Quality.GODRULED:
+				case Quality.GodRuled:
 					Modifiers.Corruption -= 2;
 					Modifiers.Society -= 2;
 				break;
-				case Quality.GOODROADS:
+				case Quality.GoodRoads:
 					Modifiers.Economy += 2;
 				break;
-				case Quality.GUILDS:
+				case Quality.Guilds:
 					Modifiers.Corruption += 1;
 					Modifiers.Economy += 1;
 					Modifiers.Lore -= 1;
 				break;
-				case Quality.HOLYSITE:
+				case Quality.HolySite:
 					Modifiers.Corruption -= 2;
 					Marketplace.Spellcasting += 2;
 				break;
-				case Quality.INSULAR:
+				case Quality.Insular:
 					Modifiers.Law += 1;
 					Modifiers.Crime -= 1;
 				break;
-				case Quality.LEGENDARYMARKETPLACE:
-					if (Info.Type == Type.METROPOLIS) {
+				case Quality.Legendarymarketplace:
+					if (Info.Type == Type.Metropolis) {
 						Marketplace.BaseValue *= 2;
 						Marketplace.PurchaseLimit *= 2;
 					}
@@ -333,202 +338,202 @@ public class Settlement {
 					Modifiers.Economy += 2;
 					Modifiers.Crime += 2;
 				break;
-				case Quality.LIVINGFOREST:
+				case Quality.LivingForest:
 					Modifiers.Lore += 1;
 					Modifiers.Society += 2;
 					Modifiers.Crime -= 2;
 					Modifiers.Economy -= 4;
 					Marketplace.Spellcasting += 4;
 				break;
-				case Quality.MAGICALLYATTUNED:
+				case Quality.MagicallyAttuned:
 					Marketplace.BaseValue *= 1.2;
 					Marketplace.PurchaseLimit *= 1.2;
 					Marketplace.Spellcasting += 2;
 				break;
-				case Quality.MAGICALPOLYGLOT:
+				case Quality.MagicalPolyglot:
 					Modifiers.Economy += 1;
 					Modifiers.Lore += 1;
 					Modifiers.Society += 1;
 				break;
-				case Quality.MAJESTIC:
+				case Quality.Majestic:
 					Marketplace.Spellcasting += 1;
 				break;
-				case Quality.MILITARIZED:
+				case Quality.Militarized:
 					Modifiers.Law += 4;
 					Modifiers.Society -= 4;
 				break;
-				case Quality.MOBILEFRONTLINES:
+				case Quality.MobileFrontlines:
 					Modifiers.Corruption -= 1;
 					Modifiers.Economy -= 1;
 					Modifiers.Society -= 1;
 					Marketplace.BaseValue *= 1.25;
 					Marketplace.PurchaseLimit *= 1.25;
 				break;
-				case Quality.MOBILESANCTUARY:
+				case Quality.MobileSanctuary:
 					Modifiers.Economy += 1;
 					Modifiers.Society -= 1;
 				break;
-				case Quality.MORALLYPERMISSIVE:
+				case Quality.MorallyPermissive:
 					Modifiers.Corruption += 1;
 					Modifiers.Economy += 1;
 					Marketplace.Spellcasting -= 1;
 				break;
-				case Quality.MYTHICSANCTUM:
+				case Quality.MythicSanctum:
 					Modifiers.Corruption -= 2;
 				break;
-				case Quality.NOQUESTIONSASKED:
+				case Quality.NoQuestionsAsked:
 					Modifiers.Society += 1;
 					Modifiers.Lore -= 1;
 				break;
-				case Quality.NOTORIOUS:
+				case Quality.Notorious:
 					Modifiers.Crime += 1;
 					Info.Danger += 10;
 					Modifiers.Law -= 1;
 					Marketplace.BaseValue *= 1.3;
 					Marketplace.PurchaseLimit *= 1.5;
 				break;
-				case Quality.PEACEBONDING:
+				case Quality.PeaceBonding:
 					Modifiers.Law += 1;
 					Modifiers.Crime -= 1;
 				break;
-				case Quality.PHANTASMAL:
+				case Quality.Phantasmal:
 					Modifiers.Economy -= 2;
 					Modifiers.Society -= 2;
 					Marketplace.Spellcasting += 2;
 				break;
-				case Quality.PIOUS:
+				case Quality.Pious:
 					Marketplace.Spellcasting += 1;
 				break;
-				case Quality.PLANARCROSSROADS:
+				case Quality.PlanarCrossroads:
 					Modifiers.Crime += 3;
 					Modifiers.Economy += 2;
 					Info.Danger += 20;
 					Marketplace.Spellcasting += 2;
 					Marketplace.PurchaseLimit *= 1.25;
 				break;
-				case Quality.PLANNEDCOMMUNITY:
+				case Quality.PlannedCommunity:
 					Modifiers.Economy += 1;
 					Modifiers.Crime -= 1;
 					Modifiers.Society -= 1;
 				break;
-				case Quality.POCKETUNIVERSE:
+				case Quality.PocketUniverse:
 					Marketplace.Spellcasting += 2;
 					Modifiers.Economy -= 2;
 				break;
-				case Quality.POPULATIONSURGE:
+				case Quality.PopulationSurge:
 					Modifiers.Crime += 1;
 					Modifiers.Society += 2;
 				break;
-				case Quality.PROSPEROUS:
+				case Quality.Prosperous:
 					Modifiers.Economy += 1;
 					Marketplace.BaseValue *= 1.3;
 					Marketplace.PurchaseLimit *= 1.5;
 				break;
-				case Quality.RACIALENCLAVE:
+				case Quality.RacialEnclave:
 					Modifiers.Society -= 1;
 				break;
-				case Quality.RESETTLEDRUINS:
+				case Quality.ResettledRuins:
 					Modifiers.Economy += 1;
 					Modifiers.Lore += 1;
 				break;
-				case Quality.RELIGIOUSTOLERANCE:
+				case Quality.ReligiousTolerance:
 					Modifiers.Lore += 1;
 					Modifiers.Society += 1;
 					Marketplace.Spellcasting += 2;
 				break;
-				case Quality.RESTRICTIVE:
+				case Quality.Restrictive:
 					Modifiers.Corruption -= 1;
 					Modifiers.Lore -= 1;
 				break;
-				case Quality.ROMANTIC:
+				case Quality.Romantic:
 					Modifiers.Society += 1;
 				break;
-				case Quality.ROYALACCOMMODATIONS:
+				case Quality.RoyalAccommodations:
 					Modifiers.Economy += 1;
 					Modifiers.Law += 2;
 					Modifiers.Society -= 1;
 				break;
-				case Quality.RULEOFMIGHT:
+				case Quality.RuleOfMight:
 					Modifiers.Law += 2;
 					Modifiers.Society -= 2;
 				break;
-				case Quality.RUMORMONGERINGCITIZENS:
+				case Quality.RumorMongeringCitizens:
 					Modifiers.Lore += 1;
 					Modifiers.Society -= 1;
 				break;
-				case Quality.RURAL:
+				case Quality.Rural:
 					Modifiers.Economy -= 1;
 					Modifiers.Crime -= 1;
 					Info.Danger -= 5;
 				break;
-				case Quality.SACREDANIMALS:
+				case Quality.SacredAnimals:
 					Modifiers.Lore += 1;
 					Modifiers.Corruption -= 1;
 					Modifiers.Economy -= 1;
 				break;
-				case Quality.SEXIST:
+				case Quality.Sexist:
 					Modifiers.Society -= 2;
 				break;
-				case Quality.SLUMBERINGMONSTER:
+				case Quality.SlumberingMonster:
 					Modifiers.Lore += 2;
 					Modifiers.Society += 1;
 					Marketplace.Spellcasting += 2;
 				break;
-				case Quality.SMALLFOLKSETTLEMENT:
+				case Quality.SmallFolkSettlement:
 					Modifiers.Law += 1;
 					Modifiers.Lore += 1;
 				break;
-				case Quality.STRATEGICLOCATION:
+				case Quality.StrategicLocation:
 					Modifiers.Economy += 1;
 					Marketplace.BaseValue *= 1.1;
 				break;
-				case Quality.SUBTERRANEAN:
+				case Quality.Subterranean:
 					Modifiers.Law += 1;
 					Modifiers.Lore -= 1;
 					Info.Danger -= 5;
 				break;
-				case Quality.SUPERSTITIOUS:
+				case Quality.Superstitious:
 					Modifiers.Law += 2;
 					Modifiers.Society += 2;
 					Modifiers.Crime -= 4;
 					Marketplace.Spellcasting -= 2;
 				break;
-				case Quality.SUPPORTIVE:
+				case Quality.Supportive:
 					Modifiers.Society += 2;
 				break;
-				case Quality.TIMIDCITIZENS:
+				case Quality.TimidCitizens:
 					Modifiers.Crime += 2;
 					Modifiers.Lore -= 2;
 				break;
-				case Quality.THERAPEUTIC:
+				case Quality.Therapeutic:
 					Modifiers.Economy += 1;
 					Modifiers.Lore += 1;
 				break;
-				case Quality.TRADINGPOST:
+				case Quality.TradingPost:
 					Marketplace.PurchaseLimit *= 2;
 				break;
-				case Quality.TOURISTATTRACTION:
+				case Quality.TouristAttraction:
 					Modifiers.Economy += 1;
 					Marketplace.BaseValue *= 1.2;
 				break;
-				case Quality.UNAGING:
+				case Quality.Unaging:
 					Modifiers.Lore += 4;
 					Modifiers.Society -= 3;
 					Marketplace.Spellcasting += 1;
 				break;
-				case Quality.UNDERCITY:
+				case Quality.UnderCity:
 					Modifiers.Lore += 1;
 					Info.Danger += 20;
 				break;
-				case Quality.UNHOLYSITE:
+				case Quality.UnholySite:
 					Modifiers.Corruption += 2;
 					Marketplace.Spellcasting += 2;
 				break;
-				case Quality.WELLEDUCATED:
+				case Quality.WellEducated:
 					Modifiers.Lore += 1;
 					Modifiers.Society += 2;
 				break;
-				case Quality.WEALTHDISPARITY:
+				case Quality.WealthDisparity:
 					//TODO Add poor/rich districts
 				break;
 			}
@@ -538,65 +543,65 @@ public class Settlement {
 	private void CalculateDisadvantageModifiers() {
 		foreach (Disadvantage d in Modifiers.Disadvantages){
 			switch (d) {
-				case Disadvantage.ANARCHY:
+				case Disadvantage.Anarchy:
 					Modifiers.Crime += 4;
 					Modifiers.Economy -= 4;
 					Modifiers.Society -= 4;
 					Modifiers.Law -= 6;
 				break;
-				case Disadvantage.BUREAUCRATICNIGHTMARE:
+				case Disadvantage.BureaucraticNightmare:
 					Modifiers.Economy -= 2;
 					Modifiers.Crime += 2;
 					Modifiers.Corruption += 2;
 				break;
-				case Disadvantage.FASCISTIC:
+				case Disadvantage.Fascistic:
 					Modifiers.Law += 4;
 					Modifiers.Society -= 4;
 				break;
-				case Disadvantage.HEAVILYTAXED:
+				case Disadvantage.HeavilyTaxed:
 					Modifiers.Society -= 2;
 					Marketplace.BaseValue *= 0.9;
 					Marketplace.PurchaseLimit /= 2;
 					Marketplace.Spellcasting -= 2;
 				break;
-				case Disadvantage.HUNTED:
+				case Disadvantage.Hunted:
 					Modifiers.Economy -= 4;
 					Modifiers.Law -= 4;
 					Modifiers.Society -= 4;
 					Info.Danger += 20;
 					Marketplace.BaseValue *= 0.8;
 				break;
-				case Disadvantage.IGNORANT:
+				case Disadvantage.Ignorant:
 					Modifiers.Economy -= 3;
 					Modifiers.Lore -= 6;
 					Modifiers.Society -= 3;
 				break;
-				case Disadvantage.IMPOVERISHED:
+				case Disadvantage.Impoverished:
 					Modifiers.Corruption += 1;
 					Modifiers.Crime += 1;
 					Marketplace.BaseValue /= 2;
 					Marketplace.PurchaseLimit /= 2;
 				break;
-				case Disadvantage.MAGICALLYDEADENED:
+				case Disadvantage.MagicallyDeadened:
 					Modifiers.Lore -= 1;
 					Modifiers.Economy -= 1;
 					Marketplace.Spellcasting -= 4;
 				break;
-				case Disadvantage.MAGICALDEADZONE:
+				case Disadvantage.MagicalDeadZone:
 					Marketplace.Spellcasting = 0;
 				break;
-				case Disadvantage.MARTIALLAW:
+				case Disadvantage.MartialLaw:
 					Modifiers.Law += 2;
 					Modifiers.Corruption -= 4;
 					Modifiers.Crime -= 2;
 					Modifiers.Economy -= 4;
 					Info.Danger += 10;
 				break;
-				case Disadvantage.OPPRESSED:
+				case Disadvantage.Oppressed:
 					Modifiers.Lore -= 6;
 					Modifiers.Society -= 6;
 				break;
-				case Disadvantage.PLAGUED:
+				case Disadvantage.Plagued:
 					Modifiers.Corruption -= 2;
 					Modifiers.Crime -= 2;
 					Modifiers.Economy -= 2;
@@ -605,16 +610,16 @@ public class Settlement {
 					Modifiers.Society -= 2;
 					Marketplace.BaseValue *= 0.8;
 				break;
-				case Disadvantage.RAMPANTINFLATION:
+				case Disadvantage.RampantInflation:
 					Modifiers.Economy -= 4;
 					Modifiers.Corruption += 2;
 					Modifiers.Crime += 4;
 				break;
-				case Disadvantage.POLLUTED:
+				case Disadvantage.Polluted:
 					Modifiers.Corruption += 2;
 					Modifiers.Economy += 4;
 				break;
-				case Disadvantage.WILDMAGICZONE:
+				case Disadvantage.WildMagicZone:
 					Marketplace.Spellcasting -= 2;
 				break;
 			}

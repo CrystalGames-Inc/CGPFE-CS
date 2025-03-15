@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "hHWSyp+hMXg=",
+  "dgSpecHash": "onAdKLD3nVI=",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\CGPFE.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
