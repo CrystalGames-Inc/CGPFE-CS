@@ -1,22 +1,25 @@
-﻿using CGPFE.World.Settlement.Properties;
+﻿using CGPFE.Data.Constants;
+using CGPFE.Mechanics;
+using CGPFE.World.Settlement.Properties;
 
 namespace CGPFE.World.Settlement;
 
 public class Settlement {
 	
+	Dice _dice = new Dice();
+	
 	#region Properties
 
 	public Info Info;
 	public Modifiers Modifiers;
-	public Marketplace Marketplace;
+	public Marketplace Marketplace = new Marketplace(0,0,0);
 	public Location[]? Locations;
 
 	#endregion
 
-	public Settlement(Info info, Modifiers mods, Marketplace marketplace, Location[]? locations) {
+	public Settlement(Info info, Modifiers mods, Location[]? locations) {
 		Info = info;
 		Modifiers = mods;
-		Marketplace = marketplace;
 		if (locations != null)
 			Locations = locations;
 		CalculateSettlementData();
@@ -41,16 +44,80 @@ public class Settlement {
 	}
 	
 	#endregion
-	
+
 	#region Data Calculations
 
 	private void CalculateSettlementData() {
 		CalculateDanger();
 		CalculateQualitySize();
-		CalculateBaseValue();
-		CalculatePurchaseLimit();
-		CalculateSpellcasting();
-		CalculateModifiers();
+		CalculateSettlementMarketplace();
+		CalculateSettlementModifiers();
+	}
+
+
+	private void CalculateSettlementMarketplace()
+	{
+		switch (Info.Type)
+		{
+			case Type.Thorpe:
+				Marketplace.BaseValue = 50;
+				Marketplace.PurchaseLimit = 500;
+				Marketplace.Spellcasting = 1;
+				Marketplace.MinorMagicItems = new int[_dice.Roll(4)];
+				break;
+			case Type.Hamlet:
+				Marketplace.BaseValue = 200;
+				Marketplace.PurchaseLimit = 1000;
+				Marketplace.Spellcasting = 2;
+				Marketplace.MinorMagicItems = new int[_dice.Roll(6)];
+				break;
+			case Type.Village:
+				Marketplace.BaseValue = 500;
+				Marketplace.PurchaseLimit = 2500;
+				Marketplace.Spellcasting = 3;
+				Marketplace.MinorMagicItems = new int[_dice.Roll(4,2)];
+				Marketplace.MediumMagicItems = new int[_dice.Roll(4)];
+				break;
+			case Type.SmallTown:
+				Marketplace.BaseValue = 1000;
+				Marketplace.PurchaseLimit = 5000;
+				Marketplace.Spellcasting = 4;
+				Marketplace.MinorMagicItems = new int[_dice.Roll(4,3)];
+				Marketplace.MediumMagicItems = new int[_dice.Roll(6)];
+				break;
+			case Type.LargeTown:
+				Marketplace.BaseValue = 2000;
+				Marketplace.PurchaseLimit = 10000;
+				Marketplace.Spellcasting = 5;
+				Marketplace.MinorMagicItems = new int[_dice.Roll(4,3)];
+				Marketplace.MediumMagicItems = new int[_dice.Roll(4,2)];
+				Marketplace.MajorMagicItems = new int[_dice.Roll(4)];
+				break;
+			case Type.SmallCity:
+				Marketplace.BaseValue = 4000;
+				Marketplace.PurchaseLimit = 25000;
+				Marketplace.Spellcasting = 6;
+				Marketplace.MinorMagicItems = new int[_dice.Roll(4,4)];
+				Marketplace.MediumMagicItems = new int[_dice.Roll(4,3)];
+				Marketplace.MajorMagicItems = new int[_dice.Roll(6)];
+				break;
+			case Type.LargeCity:
+				Marketplace.BaseValue = 8000;
+				Marketplace.PurchaseLimit = 50000;
+				Marketplace.Spellcasting = 7;
+				Marketplace.MinorMagicItems = new int[_dice.Roll(4,4)];
+				Marketplace.MediumMagicItems = new int[_dice.Roll(4,3)];
+				Marketplace.MajorMagicItems = new int[_dice.Roll(4,2)];
+				break;
+			case Type.Metropolis:
+				Marketplace.BaseValue = 16000;
+				Marketplace.PurchaseLimit = 100000;
+				Marketplace.Spellcasting = 8;
+				Marketplace.MinorMagicItems = new int[25];
+				Marketplace.MediumMagicItems = new int[_dice.Roll(4,4)];
+				Marketplace.MajorMagicItems = new int[_dice.Roll(4,3)];
+				break;
+		}
 	}
 
 	private void CalculateDanger() {
@@ -96,49 +163,8 @@ public class Settlement {
 		};
 	}
 
-	private void CalculateBaseValue() {
-		Marketplace.BaseValue = Info.Type switch {
-			Type.Thorpe => 50,
-			Type.Hamlet => 200,
-			Type.Village => 500,
-			Type.SmallTown => 1000,
-			Type.LargeTown => 2000,
-			Type.SmallCity => 4000,
-			Type.LargeCity => 8000,
-			Type.Metropolis => 16000,
-			_ => Marketplace.BaseValue
-		};
-	}
-
-	private void CalculatePurchaseLimit() {
-		Marketplace.PurchaseLimit = Info.Type switch {
-			Type.Thorpe => 500,
-			Type.Hamlet => 1000,
-			Type.Village => 2500,
-			Type.SmallTown => 5000,
-			Type.LargeTown => 10000,
-			Type.SmallCity => 25000,
-			Type.LargeCity => 50000,
-			Type.Metropolis => 100000,
-			_ => Marketplace.PurchaseLimit
-		};
-	}
-
-	private void CalculateSpellcasting() {
-		Marketplace.Spellcasting = Info.Type switch {
-			Type.Thorpe => 1,
-			Type.Hamlet => 2,
-			Type.Village => 3,
-			Type.SmallTown => 4,
-			Type.LargeTown => 5,
-			Type.SmallCity => 6,
-			Type.LargeCity => 7,
-			Type.Metropolis => 8,
-			_ => Marketplace.Spellcasting
-		};
-	}
-
-	private void CalculateModifiers() {
+	private void CalculateSettlementModifiers() {
+		CalculateAlignmentModifiers();
 		CalculateGovernmentModifiers();
 		CalculateQualityModifiers();
 		CalculateDisadvantageModifiers();
@@ -626,5 +652,97 @@ public class Settlement {
 		}
 	}
 	
+	private void CalculateAlignmentModifiers() {
+		switch (Info.Alignment) {
+			case Alignment.LawfulGood:
+				Modifiers.Society += 1;
+				Modifiers.Law += 1;
+				break;
+			case Alignment.NeutralGood:
+				Modifiers.Society += 1;
+				break;
+			case Alignment.ChaoticGood:
+				Modifiers.Crime += 1;
+				Modifiers.Society += 1;
+				break;
+			case Alignment.LawfulNeutral:
+				Modifiers.Lore += 1;
+				Modifiers.Law += 1;
+				break;
+			case Alignment.Neutral:
+				Modifiers.Lore += 2;
+				break;
+			case Alignment.ChaoticNeutral:
+				Modifiers.Crime += 1;
+				Modifiers.Lore += 1;
+				break;
+			case Alignment.LawfulEvil:
+				Modifiers.Corruption += 1;
+				Modifiers.Law += 1;
+				break;
+			case Alignment.NeutralEvil:
+				Modifiers.Corruption += 1;
+				break;
+			case Alignment.ChaoticEvil:
+				Modifiers.Crime += 1;
+				Modifiers.Corruption += 1;
+				break;
+		}
+	}
+	
+	#endregion
+
+	#region Data Displays
+
+	public void DisplaySettlementData() {
+		DisplaySettlementInfo();
+		Console.WriteLine();
+		DisplaySettlementMarketplace();
+		Console.WriteLine();
+		DisplaySettlementModifiers();
+	}
+
+	public void DisplaySettlementInfo() {
+		Console.WriteLine("Info: ");
+		Console.WriteLine(" Name: " + Info.Name);
+		if(Info.Nickname != null) Console.WriteLine(" Nickname: " + Info.Nickname);
+		Console.WriteLine(" Type: "  + Info.Type);
+		Console.WriteLine(" Alignment: " + Info.Alignment);
+		Console.WriteLine(" Danger: " + Info.Danger);
+		Console.WriteLine(" Government: " + Info.Government);
+		Console.WriteLine(" Population: " +  Info.Population);
+	}
+
+	public void DisplaySettlementMarketplace() {
+		Console.WriteLine("Marketplace: ");
+		Console.WriteLine(" Base Value: " +  Marketplace.BaseValue);
+		Console.WriteLine(" Purchase Limit: " + Marketplace.PurchaseLimit);
+		Console.WriteLine(" Spellcasting: " + Marketplace.Spellcasting);
+		Console.WriteLine(" Magic Items: ");
+		Console.WriteLine("  Amount of minor magic items: " + Marketplace.MinorMagicItems);
+		if(Marketplace.MediumMagicItems != null) Console.WriteLine(" Medium Magic Items: " + Marketplace.MediumMagicItems);
+		if(Marketplace.MajorMagicItems != null) Console.WriteLine(" Major Magic Items: " + Marketplace.MajorMagicItems);
+	}
+
+	public void DisplaySettlementModifiers() {
+		Console.WriteLine("Modifiers: ");
+		Console.WriteLine(" Corruption: " + Modifiers.Corruption);
+		Console.WriteLine(" Crime: " + Modifiers.Crime);
+		Console.WriteLine(" Economy: " + Modifiers.Economy);
+		Console.WriteLine(" Law: " + Modifiers.Law);
+		Console.WriteLine(" Lore: " + Modifiers.Lore);
+		Console.WriteLine(" Society: " + Modifiers.Society);
+
+		Console.WriteLine("\n Qualities: ");
+		foreach (var q in Modifiers.Qualities) {
+			Console.WriteLine("  " + q);
+		}
+
+		Console.WriteLine("\n Disadvantages: ");
+		foreach (var d in Modifiers.Disadvantages) {
+			Console.WriteLine("  " + d);
+		}
+	}
+
 	#endregion
 }
