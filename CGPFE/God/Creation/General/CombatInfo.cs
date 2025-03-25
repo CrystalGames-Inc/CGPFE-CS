@@ -5,6 +5,7 @@ using Attribute = CGPFE.Data.Constants.Attribute;
 namespace CGPFE.God.Creation.General;
 
 public class CombatInfo {
+	private CombatTableRow[] CombatTable { get; set; } = new CombatTableRow[20];
 	public int InitMod { get; set; } = 0;
 	public int ArmorClass { get; set; } = 0;
 	public int Fortitude { get; set; } = 0;

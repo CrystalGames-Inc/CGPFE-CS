@@ -1,11 +1,11 @@
 ﻿namespace CGPFE.God.Creation.General;
 
-public struct Attributes {
-	public int Strength;
-	public int Dexterity;
-	public int Constitution;
-	public int Intelligence;
-	public int Wisdom;
-	public int Charisma;
-	public int MoveSpeed;
+public class Attributes {
+	public int Strength = 0;
+	public int Dexterity = 0;
+	public int Constitution = 0;
+	public int Intelligence = 0;
+	public int Wisdom = 0;
+	public int Charisma = 0;
+	public int MoveSpeed = 30;
 }
