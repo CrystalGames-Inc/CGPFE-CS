@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CGPFE")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e6bcde89cac9e44c14ac782217eb3f8b72cfeb8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5796c37303417768d4d54b4c0681b6667cec8d6c")]
 [assembly: System.Reflection.AssemblyProductAttribute("CGPFE")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CGPFE")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

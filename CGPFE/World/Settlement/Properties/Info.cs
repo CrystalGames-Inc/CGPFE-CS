@@ -3,30 +3,44 @@
 namespace CGPFE.World.Settlement.Properties;
 
 public class Info {
-	public string Name;
-	public string? Nickname;
+	public readonly string Name;
+	public readonly string? Nickname;
 	
 	public Type Type;
-	public Alignment Alignment;
+	public readonly Alignment Alignment;
 	public int Danger;
 	
-	public Government Government;
+	public readonly Government Government;
 	public int Population;
 
-	public Info(string name, string? nickname, Type type, Alignment alignment, Government government) {
+	public Info(string name, string nickname, Type type, Alignment alignment, Government government) {
 		Name = name;
-		if (nickname != null)
-			Nickname = nickname;
+		Nickname = nickname;
 		Type = type;
 		Alignment = alignment;
 		Government = government;
 		CalculatePopulationByType();
 	}
 
-	public Info(string name, string? nickname, int population, Type type, Alignment alignment) {
+	public Info(string name, string nickname, int population, Type type, Alignment alignment) {
 		Name = name;
-		if (nickname != null)
-			Nickname = nickname;
+		Nickname = nickname;
+		Population = population;
+		Type = type;
+		Alignment = alignment;
+		CalculateTypeByPopulation();
+	}
+	
+	public Info(string name, Type type, Alignment alignment, Government government) {
+		Name = name;
+		Type = type;
+		Alignment = alignment;
+		Government = government;
+		CalculatePopulationByType();
+	}
+
+	public Info(string name, int population, Type type, Alignment alignment) {
+		Name = name;
 		Population = population;
 		Type = type;
 		Alignment = alignment;

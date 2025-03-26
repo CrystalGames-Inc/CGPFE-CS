@@ -1,20 +1,19 @@
 {
   "version": 2,
-<<<<<<< Updated upstream
-  "dgSpecHash": "yfad602f6kY=",
-=======
-  "dgSpecHash": "GKLwSyUqfM0=",
->>>>>>> Stashed changes
+  "dgSpecHash": "zg5q9RWjxMQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\User.EYLON\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\CGPFE.csproj",
+  "projectFilePath": "D:\\Users\\User\\Documents\\GitHub\\CrystalGames\\CGPFE-CS\\CGPFE\\CGPFE.csproj",
   "expectedPackageFiles": [
-<<<<<<< Updated upstream
-    "C:\\Users\\User.EYLON\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
-=======
-    "C:\\Users\\Admin\\.nuget\\packages\\system.io.pipelines\\9.0.3\\system.io.pipelines.9.0.3.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\system.text.encodings.web\\9.0.3\\system.text.encodings.web.9.0.3.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\system.text.json\\9.0.3\\system.text.json.9.0.3.nupkg.sha512"
->>>>>>> Stashed changes
+    "C:\\Users\\USER.EYLON\\.nuget\\packages\\system.io.pipelines\\9.0.3\\system.io.pipelines.9.0.3.nupkg.sha512",
+    "C:\\Users\\USER.EYLON\\.nuget\\packages\\system.text.encodings.web\\9.0.3\\system.text.encodings.web.9.0.3.nupkg.sha512",
+    "C:\\Users\\USER.EYLON\\.nuget\\packages\\system.text.json\\9.0.3\\system.text.json.9.0.3.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\Users\\User\\Documents\\GitHub\\CrystalGames\\CGPFE-CS\\CGPFE\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

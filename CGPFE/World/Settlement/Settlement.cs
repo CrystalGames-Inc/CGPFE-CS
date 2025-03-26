@@ -4,7 +4,7 @@ using CGPFE.World.Settlement.Properties;
 
 namespace CGPFE.World.Settlement;
 
-public class Settlement {
+public class Settlement{
 	
 	Dice _dice = new Dice();
 	
