@@ -1,19 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "zg5q9RWjxMQ=",
+  "dgSpecHash": "0N0oW2MnB24=",
   "success": true,
   "projectFilePath": "D:\\Users\\User\\Documents\\GitHub\\CrystalGames\\CGPFE-CS\\CGPFE\\CGPFE.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\USER.EYLON\\.nuget\\packages\\system.io.pipelines\\9.0.3\\system.io.pipelines.9.0.3.nupkg.sha512",
-    "C:\\Users\\USER.EYLON\\.nuget\\packages\\system.text.encodings.web\\9.0.3\\system.text.encodings.web.9.0.3.nupkg.sha512",
-    "C:\\Users\\USER.EYLON\\.nuget\\packages\\system.text.json\\9.0.3\\system.text.json.9.0.3.nupkg.sha512"
+    "C:\\Users\\USER.EYLON\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file D:\\Users\\User\\Documents\\GitHub\\CrystalGames\\CGPFE-CS\\CGPFE\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }
