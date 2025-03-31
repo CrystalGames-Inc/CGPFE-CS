@@ -2,6 +2,7 @@
 using CGPFE.Data.Constants;
 using CGPFE.God.Creation.General;
 using CGPFE.God.Creation.Player.Properties;
+using Newtonsoft.Json;
 
 namespace CGPFE.God.Creation.Player;
 
@@ -11,8 +12,8 @@ public class Player {
 	public Attributes AttributeModifiers = new Attributes();
 	public CombatInfo CombatInfo = new CombatInfo();
 	public Wallet Wallet;
-
-	private async Task RegisterCombatTable() {
+	
+	private void RegisterCombatTable() {
 		var fileName = "PlaceholderCT.json";
 		switch (PlayerInfo.Class) {
 			case Class.Alchemist:
@@ -67,9 +68,7 @@ public class Player {
 				fileName = "WizardCT.json";
 			break;
 		}
-		using FileStream openStream = File.Open(fileName, FileMode.Open);
-		CombatTableRow[]? combatTable =
-			await JsonSerializer.DeserializeAsync<CombatTableRow[]?>(openStream);
+		var combatTable = JsonConvert.DeserializeObject<CombatTableRow[]?>(fileName);
 		for (int i = 0; i < 20; i++) {
 			Console.WriteLine($"Level: {combatTable?[i + 1]}");
 			Console.WriteLine($"BAB: {combatTable?[i].BAB}");

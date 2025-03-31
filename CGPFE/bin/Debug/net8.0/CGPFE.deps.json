@@ -8,45 +8,17 @@
     ".NETCoreApp,Version=v8.0": {
       "CGPFE/1.0.0": {
         "dependencies": {
-          "System.Text.Json": "9.0.3"
+          "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {
           "CGPFE.dll": {}
         }
       },
-      "System.IO.Pipelines/9.0.3": {
+      "Newtonsoft.Json/13.0.3": {
         "runtime": {
-          "lib/net8.0/System.IO.Pipelines.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.325.11113"
-          }
-        }
-      },
-      "System.Text.Encodings.Web/9.0.3": {
-        "runtime": {
-          "lib/net8.0/System.Text.Encodings.Web.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.325.11113"
-          }
-        },
-        "runtimeTargets": {
-          "runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll": {
-            "rid": "browser",
-            "assetType": "runtime",
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.325.11113"
-          }
-        }
-      },
-      "System.Text.Json/9.0.3": {
-        "dependencies": {
-          "System.IO.Pipelines": "9.0.3",
-          "System.Text.Encodings.Web": "9.0.3"
-        },
-        "runtime": {
-          "lib/net8.0/System.Text.Json.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.325.11113"
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.3.27908"
           }
         }
       }
@@ -58,26 +30,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "System.IO.Pipelines/9.0.3": {
+    "Newtonsoft.Json/13.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-aP1Qh9llcEmo0qN+VKvVDHFMe5Cqpfb1VjhBO7rjmxCXtLs3IfVSOiNqqLBZ/4Qbcr4J0SDdJq9S7EKAGpnwEA==",
-      "path": "system.io.pipelines/9.0.3",
-      "hashPath": "system.io.pipelines.9.0.3.nupkg.sha512"
-    },
-    "System.Text.Encodings.Web/9.0.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-5L+iI4fBMtGwt4FHLQh40/rgdbxnw6lHaLkR3gbaHG97TohzUv+z/oP03drsTR1lKCLhOkp40cFnHYOQLtpT5A==",
-      "path": "system.text.encodings.web/9.0.3",
-      "hashPath": "system.text.encodings.web.9.0.3.nupkg.sha512"
-    },
-    "System.Text.Json/9.0.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-r2JRkLjsYrq5Dpo7+y3Wa73OfirZPdVhxiTJWwZ+oJM7FOAe0LkM3GlH+pgkNRdd1G1kwUbmRCdmh4uoaWwu1g==",
-      "path": "system.text.json/9.0.3",
-      "hashPath": "system.text.json.9.0.3.nupkg.sha512"
+      "sha512": "sha512-HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "path": "newtonsoft.json/13.0.3",
+      "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
     }
   }
 }

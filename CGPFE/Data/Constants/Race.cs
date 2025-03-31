@@ -5,7 +5,7 @@ public enum Race {
 	Elf,
 	Gnome,
 	HalfElf,
-	Halforc,
+	HalfOrc,
 	Halfling,
 	Human,
 	None
