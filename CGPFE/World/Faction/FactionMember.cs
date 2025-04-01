@@ -1,9 +1,9 @@
 ﻿using CGPFE.Data.Constants;
+using CGPFE.God.Creation.NPC;
 
 namespace CGPFE.World.Faction;
 
 public class FactionMember(Rank factionRank) {
-	//TODO Add Entity Class
-	
+	public NPC Member;
 	public Rank FactionRank = factionRank;
 }
