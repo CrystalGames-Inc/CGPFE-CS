@@ -8,4 +8,5 @@ public enum Rank {
 	Spy,
 	SpyGeneral,
 	Medic,
+	Leader
 }
