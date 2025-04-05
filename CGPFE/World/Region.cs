@@ -2,7 +2,7 @@
 
 namespace CGPFE.World;
 
-public abstract class Region(string name, Terrain terrainType, Climate climate) {
+public class Region(string name, Terrain terrainType, Climate climate) {
 	public readonly string Name = name;
 	public readonly Terrain TerrainType = terrainType;
 	public readonly Climate Climate = climate;

@@ -1,7 +1,6 @@
 C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\CGPFE.deps.json
 C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\CGPFE.dll
 C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\CGPFE.pdb
-C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.csproj.AssemblyReference.cache
 C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.AssemblyInfoInputs.cache
 C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.AssemblyInfo.cs

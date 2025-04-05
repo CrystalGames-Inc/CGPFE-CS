@@ -2,7 +2,6 @@
 using CGPFE.Data.Constants;
 using CGPFE.God.Creation.General;
 using CGPFE.God.Creation.Player.Properties;
-using Newtonsoft.Json;
 
 namespace CGPFE.God.Creation.Player;
 
@@ -67,15 +66,6 @@ public class Player {
 			case Class.Wizard:
 				fileName = "WizardCT.json";
 			break;
-		}
-		var combatTable = JsonConvert.DeserializeObject<CombatTableRow[]?>(fileName);
-		for (int i = 0; i < 20; i++) {
-			Console.WriteLine($"Level: {combatTable?[i + 1]}");
-			Console.WriteLine($"BAB: {combatTable?[i].BAB}");
-			Console.WriteLine($"Fort: {combatTable?[i].Fort}");
-			Console.WriteLine($"Ref: {combatTable?[i].Ref}");
-			Console.WriteLine($"Will: {combatTable?[i].Will}");
-			
 		}
 	}
 	
