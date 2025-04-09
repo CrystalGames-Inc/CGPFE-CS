@@ -1,15 +1,15 @@
 ﻿namespace CGPFE.Mechanics;
 
-public class Dice {
-	private readonly Random _random = new Random();
+public static class Dice {
+	private static  readonly Random Random = new Random();
 
 	//Single-Die roll.
-	public int Roll(int faces) {
-		return _random.Next(1, faces + 1);
+	public static int Roll(int faces) {
+		return Random.Next(1, faces + 1);
 	}
 
 	//Multiple dice roll.
-	public int Roll(int faces, int amount) {
+	public static int Roll(int faces, int amount) {
 		int sum = 0;
 		for (int i = 0; i < amount; i++) {
 			sum += Roll(faces);
@@ -18,7 +18,7 @@ public class Dice {
 	}
 
 	//Die roll with modifier.
-	public int Roll(int faces, int amount, int modifier) {
+	public static int Roll(int faces, int amount, int modifier) {
 		int sum = 0;
 		for (int i = 0; i < amount; i++) {
 			sum += Roll(faces);

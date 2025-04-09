@@ -5,9 +5,6 @@ using CGPFE.World.Settlement.Properties;
 namespace CGPFE.World.Settlement;
 
 public class Settlement{
-	
-	Dice _dice = new Dice();
-	
 	#region Properties
 
 	public Info Info;
@@ -63,59 +60,59 @@ public class Settlement{
 				Marketplace.BaseValue = 50;
 				Marketplace.PurchaseLimit = 500;
 				Marketplace.Spellcasting = 1;
-				Marketplace.MinorMagicItems = new int[_dice.Roll(4)];
+				Marketplace.MinorMagicItems = new int[Dice.Roll(4)];
 				break;
 			case Type.Hamlet:
 				Marketplace.BaseValue = 200;
 				Marketplace.PurchaseLimit = 1000;
 				Marketplace.Spellcasting = 2;
-				Marketplace.MinorMagicItems = new int[_dice.Roll(6)];
+				Marketplace.MinorMagicItems = new int[Dice.Roll(6)];
 				break;
 			case Type.Village:
 				Marketplace.BaseValue = 500;
 				Marketplace.PurchaseLimit = 2500;
 				Marketplace.Spellcasting = 3;
-				Marketplace.MinorMagicItems = new int[_dice.Roll(4,2)];
-				Marketplace.MediumMagicItems = new int[_dice.Roll(4)];
+				Marketplace.MinorMagicItems = new int[Dice.Roll(4,2)];
+				Marketplace.MediumMagicItems = new int[Dice.Roll(4)];
 				break;
 			case Type.SmallTown:
 				Marketplace.BaseValue = 1000;
 				Marketplace.PurchaseLimit = 5000;
 				Marketplace.Spellcasting = 4;
-				Marketplace.MinorMagicItems = new int[_dice.Roll(4,3)];
-				Marketplace.MediumMagicItems = new int[_dice.Roll(6)];
+				Marketplace.MinorMagicItems = new int[Dice.Roll(4,3)];
+				Marketplace.MediumMagicItems = new int[Dice.Roll(6)];
 				break;
 			case Type.LargeTown:
 				Marketplace.BaseValue = 2000;
 				Marketplace.PurchaseLimit = 10000;
 				Marketplace.Spellcasting = 5;
-				Marketplace.MinorMagicItems = new int[_dice.Roll(4,3)];
-				Marketplace.MediumMagicItems = new int[_dice.Roll(4,2)];
-				Marketplace.MajorMagicItems = new int[_dice.Roll(4)];
+				Marketplace.MinorMagicItems = new int[Dice.Roll(4,3)];
+				Marketplace.MediumMagicItems = new int[Dice.Roll(4,2)];
+				Marketplace.MajorMagicItems = new int[Dice.Roll(4)];
 				break;
 			case Type.SmallCity:
 				Marketplace.BaseValue = 4000;
 				Marketplace.PurchaseLimit = 25000;
 				Marketplace.Spellcasting = 6;
-				Marketplace.MinorMagicItems = new int[_dice.Roll(4,4)];
-				Marketplace.MediumMagicItems = new int[_dice.Roll(4,3)];
-				Marketplace.MajorMagicItems = new int[_dice.Roll(6)];
+				Marketplace.MinorMagicItems = new int[Dice.Roll(4,4)];
+				Marketplace.MediumMagicItems = new int[Dice.Roll(4,3)];
+				Marketplace.MajorMagicItems = new int[Dice.Roll(6)];
 				break;
 			case Type.LargeCity:
 				Marketplace.BaseValue = 8000;
 				Marketplace.PurchaseLimit = 50000;
 				Marketplace.Spellcasting = 7;
-				Marketplace.MinorMagicItems = new int[_dice.Roll(4,4)];
-				Marketplace.MediumMagicItems = new int[_dice.Roll(4,3)];
-				Marketplace.MajorMagicItems = new int[_dice.Roll(4,2)];
+				Marketplace.MinorMagicItems = new int[Dice.Roll(4,4)];
+				Marketplace.MediumMagicItems = new int[Dice.Roll(4,3)];
+				Marketplace.MajorMagicItems = new int[Dice.Roll(4,2)];
 				break;
 			case Type.Metropolis:
 				Marketplace.BaseValue = 16000;
 				Marketplace.PurchaseLimit = 100000;
 				Marketplace.Spellcasting = 8;
 				Marketplace.MinorMagicItems = new int[25];
-				Marketplace.MediumMagicItems = new int[_dice.Roll(4,4)];
-				Marketplace.MajorMagicItems = new int[_dice.Roll(4,3)];
+				Marketplace.MediumMagicItems = new int[Dice.Roll(4,4)];
+				Marketplace.MajorMagicItems = new int[Dice.Roll(4,3)];
 				break;
 		}
 	}

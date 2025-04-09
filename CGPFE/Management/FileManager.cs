@@ -5,39 +5,52 @@ namespace CGPFE.Management;
 
 public static class FileManager {
 	
-	private static readonly JsonSerializerOptions options = new JsonSerializerOptions() {
+	private static readonly JsonSerializerOptions Options = new JsonSerializerOptions() {
 		WriteIndented = true
 	};
 	
-	private static readonly string EnginePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	private static readonly string GameDataFileName = "Settings.json";
-	private static string CampaignPath;
+	private static readonly string SavesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
+	private static string _gameDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
+	private static string _worldPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
+	private static string _NPCsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
+	private static string _playerPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
+	private const string GameDataFileName = "Settings.json";
+	private static string _campaignPath = string.Empty;
 
-	#region Game Data Management
+	#region Campaign Data Management
 	
-	public static void NewGameData() {
-		Console.WriteLine("Please choose the campaign's name: ");
-		string campaignName = Console.ReadLine();
-
-		Console.WriteLine("Please choose a game fantasty:\nLow - 1\nStandard - 2\nHigh - 3\nEpic - 4");
-		int gameFantasty = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException()) - 1;
+	public static GameData NewGameData() {
+		var g = GameData.RegisterGameData();
 		
-		Console.WriteLine("Please choose the game speed:\nSlow - 1\nMedium - 2\nFast - 3");
-		int gameSpeed = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
-
-		Console.WriteLine("Please choose the method of initial point distribution:\nStandard - 1\nClassic - 2\nHeroic - 3\nPurchase - 4");
-		int abilityScoreType = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+		UpdatePaths(g.CampaignName);
+		CreateDirectories();
 		
-		GameData g = new GameData(campaignName, gameFantasty, gameSpeed, abilityScoreType);
-		CampaignPath = Path.Combine(EnginePath, campaignName);
-		if(!Directory.Exists(CampaignPath))
-			Directory.CreateDirectory(CampaignPath);
-		string gameDataPath = Path.Combine(CampaignPath, GameDataFileName);
+		if(!Directory.Exists(_campaignPath))
+			Directory.CreateDirectory(_campaignPath);
+		var gameDataPath = Path.Combine(_gameDataPath, GameDataFileName);
+		
 		CreateJsonFile(g, gameDataPath);
+		
+		return g;
+	}
+
+	private static void UpdatePaths(string campaignName) {
+		_campaignPath = Path.Combine(SavesPath, campaignName);
+		_gameDataPath = Path.Combine(_campaignPath, "Game");
+		_worldPath = Path.Combine(_campaignPath, "World");
+		_NPCsPath = Path.Combine(_campaignPath, "NPCs");
+		_playerPath = Path.Combine(_campaignPath, "Player");
+	}
+	
+	private static void CreateDirectories() {
+		Directory.CreateDirectory(_gameDataPath);
+		Directory.CreateDirectory(_worldPath);
+		Directory.CreateDirectory(_NPCsPath);
+		Directory.CreateDirectory(_playerPath);
 	}
 
 	public static GameData LoadGameData() {
-		string[] campaigns = Directory.GetDirectories(EnginePath);
+		var campaigns = Directory.GetDirectories(SavesPath);
 
 		for (var i = 0; i < campaigns.Length; i++) 
 			campaigns[i] = campaigns[i].Split("\\").Last();
@@ -51,8 +64,8 @@ public static class FileManager {
 		if (loadedCampaign < 1 || loadedCampaign > campaigns.Length)
 			throw new IndexOutOfRangeException();
 		
-		var filePath = Path.Combine(EnginePath, campaigns[loadedCampaign - 1], GameDataFileName);
-		var g = JsonSerializer.Deserialize<GameData>(File.ReadAllText(filePath), options)!;
+		var filePath = Path.Combine(SavesPath, campaigns[loadedCampaign - 1], GameDataFileName);
+		var g = JsonSerializer.Deserialize<GameData>(File.ReadAllText(filePath), Options)!;
 		
 		return g;
 	}
@@ -62,8 +75,7 @@ public static class FileManager {
 	#region General Data Management
 	
 	public static void CreateJsonFile(object obj, string path) {
-		while (true) {
-			string jsonString = JsonSerializer.Serialize(obj, options);
+			var jsonString = JsonSerializer.Serialize(obj, Options);
 
 			if (File.Exists(path)) {
 				Console.WriteLine($"File already exists at {path}\nOverwrite? [Y/N]");
@@ -81,35 +93,12 @@ public static class FileManager {
 						Console.WriteLine(e);
 					}
 				}
-				else {
-					Console.WriteLine("Invalid input");
-					continue;
-				}
-			}
-			else {
+			} else {
 				File.Create(path).Close();
 				File.WriteAllText(path, jsonString);
 
 				Console.WriteLine($"File successfully created at {path}");
 			}
-
-			break;
-		}
-	}
-	
-	public static object ReadJsonFile(string path) {
-		object obj;
-		try {
-			obj = JsonSerializer.Deserialize<dynamic>(File.ReadAllText(path)) ?? throw new InvalidOperationException();
-
-			Console.WriteLine("Successfully read json file");
-		}
-		catch (Exception e) {
-			Console.WriteLine(e);
-			throw;
-		}
-
-		return obj;
 	}
 	
 	#endregion

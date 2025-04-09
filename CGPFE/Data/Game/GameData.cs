@@ -60,4 +60,20 @@ public class GameData(string campaignName, int gameFantasty, int gameSpeed, int 
 				break;
 		}
 	}
+
+	public static GameData RegisterGameData() {
+		Console.WriteLine("Please choose the campaign's name: ");
+		var campaignName = Console.ReadLine();
+
+		Console.WriteLine("Please choose a game fantasty:\nLow - 1\nStandard - 2\nHigh - 3\nEpic - 4");
+		var gameFantasty = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException()) - 1;
+		
+		Console.WriteLine("Please choose the game speed:\nSlow - 1\nMedium - 2\nFast - 3");
+		var gameSpeed = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+
+		Console.WriteLine("Please choose the method of initial point distribution:\nStandard - 1\nClassic - 2\nHeroic - 3\nPurchase - 4");
+		var abilityScoreType = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+		
+		return new GameData(campaignName, gameFantasty, gameSpeed, abilityScoreType);
+	}
 }
