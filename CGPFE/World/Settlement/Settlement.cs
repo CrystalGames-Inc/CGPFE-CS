@@ -7,6 +7,8 @@ namespace CGPFE.World.Settlement;
 public class Settlement{
 	#region Properties
 
+	public bool Discovered { get; set; }
+	
 	public Info Info;
 	public Modifiers Modifiers;
 	public Marketplace Marketplace = new Marketplace(0,0,0);
@@ -15,6 +17,7 @@ public class Settlement{
 	#endregion
 
 	public Settlement(Info info, Modifiers mods, Location[]? locations) {
+		Discovered = false;
 		Info = info;
 		Modifiers = mods;
 		if (locations != null)

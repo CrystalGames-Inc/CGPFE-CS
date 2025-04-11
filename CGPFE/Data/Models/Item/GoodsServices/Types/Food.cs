@@ -2,7 +2,4 @@
 
 namespace CGPFE.Data.Models.Item.GoodsServices.Types;
 
-public class Food: Consumable {
-	protected Food(string name, int id, double cost) : base(name, id, cost) {
-	}
-}
+public class Food(string name, int id, double cost) : Consumable(name, id, cost);
