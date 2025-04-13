@@ -2,7 +2,7 @@
 
 namespace CGPFE.Data.Storage.Items.GoodsServices;
 
-public static class Drinks {
+public static class Beverages {
 	#region Alcoholic Beverages
 	
 	public static Drink AbsintheGlass = new Drink("Absinthe (Glass)", 0, 3, true);
