@@ -41,6 +41,41 @@ public static class AdventureGear {
 	public static AdventuringGear CarrierBackpack = new AdventuringGear("Carrier Backpack", 23, 25, 5);
 	public static AdventuringGear HydrationBackpack = new AdventuringGear("Hydration Backpack", 24, 40, 4);
 	public static AdventuringGear WeaponrackBackpack = new AdventuringGear("Weaponrack Backpack", 25, 25, 5);
+	public static AdventuringGear Bell = new AdventuringGear("Bell", 26, 1);
+	public static AdventuringGear CommonBuoy = new AdventuringGear("Common Buoy", 27, 0.5, 16);
+	public static AdventuringGear SuperiorBuoy = new AdventuringGear("Superior Buoy", 28, 10, 30);
+	public static AdventuringGear Compass = new AdventuringGear("Compass", 29, 10, 0.5);
+	public static AdventuringGear CoolerChest = new AdventuringGear("Cooler Chest", 30, 25, 60);
+	public static AdventuringGear CamouflagedCanvas = new AdventuringGear("Camouflaged Canvas", 31, 1, 1);
+	public static AdventuringGear DuoSaw = new AdventuringGear("Duo Saw", 32, 100, 20);
+	public static AdventuringGear EfficientTent = new AdventuringGear("Efficient Tent", 33, 150, 15);
+	public static AdventuringGear FieldSurvivalGuide = new AdventuringGear("Field-Survival Guide", 34, 20, 1);
+	public static AdventuringGear GoblinFishingLure = new AdventuringGear("Goblin Fishing Lure", 35, 5);
+	public static AdventuringGear Heatstone = new AdventuringGear("Heatstone", 36, 20, 1);
+	public static AdventuringGear PowderHorn = new AdventuringGear("Powder Horn", 37, 3, 1);
+	public static AdventuringGear SignalHorn = new AdventuringGear("Signal Horn", 38, 1, 2);
+	public static AdventuringGear HunterStand = new AdventuringGear("Hunter's Stand", 39, 25, 15);
+	public static AdventuringGear InsulatedFlask = new AdventuringGear("Insulated Flask", 40, 0.2, 1);
+	public static AdventuringGear Map = new AdventuringGear("Map", 41, 50, 2);
+	public static AdventuringGear SmallSteelMirror = new AdventuringGear("Small Steel Mirror", 42, 10, 0.5);
+	public static AdventuringGear NatureClimbingHarness = new AdventuringGear("Nature Climbing Harness", 43, 60, 4);
+	public static AdventuringGear SilentPiton = new AdventuringGear("Silent Piton", 44, 0.5, 0.5);
+	public static AdventuringGear PrivacyShelter = new AdventuringGear("Privacy Shelter", 45, 5, 10);
+	public static AdventuringGear HempRope = new AdventuringGear("Hemp Rope (50ft)", 46, 1, 10);
+	public static AdventuringGear BloodvineRope = new AdventuringGear("Bloodvine Rope", 47, 200, 5);
+	public static AdventuringGear SilkRope = new AdventuringGear("Silk Rope (50ft)", 48, 10, 5);
+	public static AdventuringGear SpiderSilkRope = new AdventuringGear("Spider's Silk Rope (50ft)", 49, 100, 4);
+	public static AdventuringGear StretchCords = new AdventuringGear("Stretch Cords", 50, 0.5, 0.5);
+	public static AdventuringGear TentCover = new AdventuringGear("Tent Cover", 51, 15, 15);
+	public static AdventuringGear TrekkingPole = new AdventuringGear("Trekking Pole", 52, 15, 2);
+	public static AdventuringGear WindupMusicBox = new AdventuringGear("Windup Music Box", 53, 25, 0.5);
+	public static AdventuringGear StarCharts = new AdventuringGear("Star Charts", 54, 200, 0.5);
+	public static AdventuringGear String = new AdventuringGear("String", 55, 0.01, 0.5);
+	public static AdventuringGear Twine = new AdventuringGear("Twine", 56, 0.01, 0.5);
+	public static AdventuringGear Whetstone = new AdventuringGear("Whetstone", 57, 0.02, 1);
+	public static AdventuringGear BeastWhistle = new AdventuringGear("Beast Whistle", 58, 5);
+	public static AdventuringGear SignalWhistle = new AdventuringGear("Signal Whistle", 59, 0.8);
+	public static AdventuringGear SilentWhistle = new AdventuringGear("Silent Whistle", 60, 0.9);
 
 	#endregion
 }
