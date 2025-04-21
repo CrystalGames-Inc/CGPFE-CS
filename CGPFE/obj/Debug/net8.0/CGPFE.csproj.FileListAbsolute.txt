@@ -13,7 +13,6 @@ C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\ref\CGPFE.dll
 C:\Users\User.EYLON\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\CGPFE.deps.json
 C:\Users\User.EYLON\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\CGPFE.dll
 C:\Users\User.EYLON\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\CGPFE.pdb
-C:\Users\User.EYLON\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.csproj.AssemblyReference.cache
 C:\Users\User.EYLON\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\User.EYLON\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.AssemblyInfoInputs.cache
 C:\Users\User.EYLON\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.AssemblyInfo.cs

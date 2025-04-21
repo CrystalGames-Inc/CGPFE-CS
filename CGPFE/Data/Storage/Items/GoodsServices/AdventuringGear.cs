@@ -78,4 +78,31 @@ public static class AdventureGear {
 	public static AdventuringGear SilentWhistle = new AdventuringGear("Silent Whistle", 60, 0.9);
 
 	#endregion
+	
+	#region Illuminations
+	
+	public static AdventuringGear Candle = new AdventuringGear("Candle", 61, 0.01);
+	public static AdventuringGear HelmetCandle = new AdventuringGear("Helmet Candle", 62, 2, 4);
+	public static AdventuringGear CandleLamp = new AdventuringGear("Candle Lamp", 63, 5, 1);
+	public static AdventuringGear Candlestick = new AdventuringGear("Candlestick", 64, 0.01, 0.5);
+	public static AdventuringGear Darkflare = new AdventuringGear("Darkflare", 65, 1);
+	public static AdventuringGear Firewood = new AdventuringGear("Firewood", 66, 0.01);
+	public static AdventuringGear Lamp = new AdventuringGear("Lamp", 67, 0.01);
+	public static AdventuringGear CelestialLamp = new AdventuringGear("Celestial Lamp", 68, 300, 2);
+	public static AdventuringGear BullseyeLantern = new AdventuringGear("Bullseye Lantern", 69, 12, 3);
+	public static AdventuringGear WaterproofBullseyeLantern = new AdventuringGear("Waterproof Bullseye Lantern", 70, 17);
+	public static AdventuringGear DarklightLantern = new AdventuringGear("Darklight Lantern", 71, 20, 2);
+	public static AdventuringGear WaterproofDarklightLantern = new AdventuringGear("Waterproof Darklight Lantern", 72, 25);
+	public static AdventuringGear HoodedLantern = new  AdventuringGear("Hooded Lantern", 73, 7, 2);
+	public static AdventuringGear WaterproofHoodedLantern = new AdventuringGear("Waterproof Hooded Lantern", 74, 12);
+	public static AdventuringGear MinerLantern = new AdventuringGear("Miner's Lantern", 75, 15, 2);
+	public static AdventuringGear WaterproofMinerLantern = new AdventuringGear("Waterproof Miner's Lantern", 76, 20, 2);
+	public static AdventuringGear Moonrod = new AdventuringGear("Moonrod", 77, 10, 1);
+	public static AdventuringGear LampOil = new AdventuringGear("Lamp Oil", 78, 0.1, 1);
+	public static AdventuringGear Sunrod = new AdventuringGear("Sunrod", 79, 2, 1);
+	public static AdventuringGear Thurible = new AdventuringGear("Thurible", 80, 50, 3);
+	public static AdventuringGear Torch = new AdventuringGear("Torch", 81, 0.01, 1);
+	public static AdventuringGear EverburningTorch = new AdventuringGear("Everburning Torch", 82, 110, 1);
+
+	#endregion
 }
