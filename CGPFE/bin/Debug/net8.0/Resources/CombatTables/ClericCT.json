@@ -1,0 +1,122 @@
+[
+  {
+    "BAB": 0,
+    "Fort": 2,
+    "Ref": 0,
+    "Will": 2
+  },
+  {
+    "BAB": 1,
+    "Fort": 3,
+    "Ref": 0,
+    "Will": 3
+  },
+  {
+    "BAB": 2,
+    "Fort": 3,
+    "Ref": 1,
+    "Will": 3
+  },
+  {
+    "BAB": 3,
+    "Fort": 4,
+    "Ref": 1,
+    "Will": 4
+  },
+  {
+    "BAB": 3,
+    "Fort": 4,
+    "Ref": 1,
+    "Will": 4
+  },
+  {
+    "BAB": 4,
+    "Fort": 5,
+    "Ref": 2,
+    "Will": 5
+  },
+  {
+    "BAB": 5,
+    "Fort": 5,
+    "Ref": 2,
+    "Will": 5
+  },
+  {
+    "BAB": 6,
+    "Fort": 6,
+    "Ref": 2,
+    "Will": 6
+  },
+  {
+    "BAB": 6,
+    "Fort": 6,
+    "Ref": 3,
+    "Will": 6
+  },
+  {
+    "BAB": 7,
+    "Fort": 7,
+    "Ref": 3,
+    "Will": 7
+  },
+  {
+    "BAB": 8,
+    "Fort": 7,
+    "Ref": 3,
+    "Will": 7
+  },
+  {
+    "BAB": 9,
+    "Fort": 8,
+    "Ref": 4,
+    "Will": 8
+  },
+  {
+    "BAB": 9,
+    "Fort": 8,
+    "Ref": 4,
+    "Will": 8
+  },
+  {
+    "BAB": 10,
+    "Fort": 9,
+    "Ref": 4,
+    "Will": 9
+  },
+  {
+    "BAB": 11,
+    "Fort": 9,
+    "Ref": 5,
+    "Will": 9
+  },
+  {
+    "BAB": 12,
+    "Fort": 10,
+    "Ref": 5,
+    "Will": 10
+  },
+  {
+    "BAB": 12,
+    "Fort": 10,
+    "Ref": 5,
+    "Will": 10
+  },
+  {
+    "BAB": 13,
+    "Fort": 11,
+    "Ref": 6,
+    "Will": 11
+  },
+  {
+    "BAB": 14,
+    "Fort": 11,
+    "Ref": 6,
+    "Will": 11
+  },
+  {
+    "BAB": 15,
+    "Fort": 12,
+    "Ref": 6,
+    "Will": 12
+  }
+]

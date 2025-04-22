@@ -1,6 +1,8 @@
 ﻿using System.Net.Mime;
+using System.Text.Json;
 using CGPFE.Data.Constants;
 using CGPFE.Data.Game;
+using CGPFE.God.Creation.General;
 using CGPFE.God.Creation.Player;
 
 namespace CGPFE.Management;
@@ -27,6 +29,7 @@ public class PlayerDataManager {
 		RegisterPlayerGender();
 		
 		RegisterPlayerRace();
+		RegisterPlayerClass();
 	}
 
 	private void RegisterPlayerName() {
@@ -96,54 +99,73 @@ public class PlayerDataManager {
 
 	private void RegisterPlayerClass() {
 		string pClass;
-		do {
-			Console.WriteLine("Please select a class: ");
-			pClass = Console.ReadLine();
-			Player.PlayerInfo.Class = pClass.ToUpper() switch {
-				"ALCHEMIST" => Class.Alchemist,
-				"BARBARIAN" => Class.Barbarian,
-				"BARD" => Class.Bard,
-				"CAVALIER" => Class.Cavalier,
-				"CLERIC" => Class.Cleric,
-				"DRUID" => Class.Druid,
-				"FIGHTER" => Class.Fighter,
-				"INQUISITOR" => Class.Inquisitor,
-				"MONK" => Class.Monk,
-				"ORACLE" => Class.Oracle,
-				"PALADIN" => Class.Paladin,
-				"RANGER" => Class.Ranger,
-				"ROGUE" => Class.Rogue,
-				"SORCERER" => Class.Sorcerer,
-				"SUMMONER" => Class.Summoner,
-				"WITCH" => Class.Witch,
-				"WIZARD" => Class.Wizard,
-				_ => throw new NotImplementedException()
-			};
-		} while(pClass.ToUpper() is not "BARBARIAN" or "BARD" or "CLERIC" or "DRUID" or "FIGHTER" or "MONK" or "PALADIN" or "RANGER" or "ROGUE" or "SORCERER" or "WIZARD");
-		LoadPlayerCombatDataTable(Player.PlayerInfo.Class);
+
+		Console.WriteLine(
+			"Please select a class:\nAlchemist\nBarbarian\nBard\nCavalier\nCleric\nDruid\nFighter\nInquisitor\nMonk\nOracle\nPaladin\nRanger\nRogue\nSorcerer\nSummoner\nWitch\nWizard");
+		pClass = Console.ReadLine();
+		Player.PlayerInfo.Class = pClass?.ToUpper() switch {
+			"ALCHEMIST" => Class.Alchemist,
+			"BARBARIAN" => Class.Barbarian,
+			"BARD" => Class.Bard,
+			"CAVALIER" => Class.Cavalier,
+			"CLERIC" => Class.Cleric,
+			"DRUID" => Class.Druid,
+			"FIGHTER" => Class.Fighter,
+			"INQUISITOR" => Class.Inquisitor,
+			"MONK" => Class.Monk,
+			"ORACLE" => Class.Oracle,
+			"PALADIN" => Class.Paladin,
+			"RANGER" => Class.Ranger,
+			"ROGUE" => Class.Rogue,
+			"SORCERER" => Class.Sorcerer,
+			"SUMMONER" => Class.Summoner,
+			"WITCH" => Class.Witch,
+			"WIZARD" => Class.Wizard,
+			_ => throw new NotImplementedException()
+		};
+		LoadPlayerCombatDataTable();
 	}
 
-	private void LoadPlayerCombatDataTable(Class pClass) {
-		string combatTableAddon = pClass switch {
-			Class.Alchemist => "AlchemistCT",
-			Class.Barbarian => "BarbarianCT",
-			Class.Bard => "BardCT",
-			Class.Cavalier => "CavalierCT",
-			Class.Cleric => "ClericCT",
-			Class.Druid => "DruidCT",
-			Class.Fighter => "FighterCT",
-			Class.Inquisitor => "InquisitorCT",
-			Class.Monk => "MonkCT",
-			Class.Oracle => "OracleCT",
-			Class.Paladin => "PaladinCT",
-			Class.Ranger => "RangerCT",
-			Class.Rogue => "RogueCT",
-			Class.Sorcerer => "SorcererCT",
-			Class.Summoner => "SummonerCT",
-			Class.Witch => "WitchCT",
-			Class.Wizard => "WizardCT"
+	private void LoadPlayerCombatDataTable() {
+		var fileName = Player.PlayerInfo.Class switch {
+			Class.Alchemist => "AlchemistCT.json",
+			Class.Barbarian => "BarbarianCT.json",
+			Class.Bard => "BardCT.json",
+			Class.Cavalier => "CavalierCT.json",
+			Class.Cleric => "ClericCT.json",
+			Class.Druid => "DruidCT.json",
+			Class.Fighter => "FighterCT.json",
+			Class.Inquisitor => "InquisitorCT.json",
+			Class.Monk => "MonkCT.json",
+			Class.Oracle => "OracleCT.json",
+			Class.Paladin => "PaladinCT.json",
+			Class.Ranger => "RangerCT.json",
+			Class.Rogue => "RogueCT.json",
+			Class.Sorcerer => "SorcererCT.json",
+			Class.Summoner => "SummonerCT.json",
+			Class.Witch => "WitchCT.json",
+			Class.Wizard => "WizardCT.json",
+			Class.None => throw new NotImplementedException(),
+			_ => throw new NotImplementedException()
 		};
-		using (StreamReader r = new StreamReader(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location + $"/Resources/CombatTables/{combatTableAddon}.json"))) ;
+		var path = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)!, "/Resources/CombatTables/", fileName);
+		var combatTable = JsonSerializer.Deserialize<CombatTableRow[]>(File.ReadAllText(path));
+		if (combatTable == null) {
+			Console.WriteLine("Error loading combat table");
+			return;
+		}	
+		Player.CombatInfo.BaseAttackBonus = combatTable[0].BAB;
+		Player.CombatInfo.Fortitude = combatTable[0].Fort;
+		Player.CombatInfo.Reflex = combatTable[0].Ref;
+		Player.CombatInfo.Will = combatTable[0].Will;
+	}
+
+	private Alignment RegisterAlignment(Alignment[] alignments) {
+		Console.WriteLine("Please choose your alignment:");
+		foreach (var a in alignments) {
+			Console.WriteLine(a);
+		}
+		return Alignment.Neutral;
 	}
 
 	#endregion
