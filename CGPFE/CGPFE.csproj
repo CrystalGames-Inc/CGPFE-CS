@@ -9,5 +9,11 @@
     <ItemGroup>
       <Folder Include="Data\Models\Item\Equipment\" />
     </ItemGroup>
+    
+    <ItemGroup>
+        <Content Include="Resources\**\*">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
 
 </Project>

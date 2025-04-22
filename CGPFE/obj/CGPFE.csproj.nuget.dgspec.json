@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User.EYLON\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\CGPFE.csproj": {}
+    "D:\\Users\\User\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\CGPFE.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User.EYLON\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\CGPFE.csproj": {
+    "D:\\Users\\User\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\CGPFE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User.EYLON\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\CGPFE.csproj",
+        "projectUniqueName": "D:\\Users\\User\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\CGPFE.csproj",
         "projectName": "CGPFE",
-        "projectPath": "C:\\Users\\User.EYLON\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\CGPFE.csproj",
-        "packagesPath": "C:\\Users\\User.EYLON\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User.EYLON\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\obj\\",
+        "projectPath": "D:\\Users\\User\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\CGPFE.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "D:\\Users\\User\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User.EYLON\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -58,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\User.EYLON\\.dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\User\\.dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

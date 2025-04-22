@@ -1,4 +1,5 @@
-﻿using CGPFE.Data.Constants;
+﻿using System.Net.Mime;
+using CGPFE.Data.Constants;
 using CGPFE.Data.Game;
 using CGPFE.God.Creation.Player;
 
@@ -91,6 +92,58 @@ public class PlayerDataManager {
 
 			break;
 		}
+	}
+
+	private void RegisterPlayerClass() {
+		string pClass;
+		do {
+			Console.WriteLine("Please select a class: ");
+			pClass = Console.ReadLine();
+			Player.PlayerInfo.Class = pClass.ToUpper() switch {
+				"ALCHEMIST" => Class.Alchemist,
+				"BARBARIAN" => Class.Barbarian,
+				"BARD" => Class.Bard,
+				"CAVALIER" => Class.Cavalier,
+				"CLERIC" => Class.Cleric,
+				"DRUID" => Class.Druid,
+				"FIGHTER" => Class.Fighter,
+				"INQUISITOR" => Class.Inquisitor,
+				"MONK" => Class.Monk,
+				"ORACLE" => Class.Oracle,
+				"PALADIN" => Class.Paladin,
+				"RANGER" => Class.Ranger,
+				"ROGUE" => Class.Rogue,
+				"SORCERER" => Class.Sorcerer,
+				"SUMMONER" => Class.Summoner,
+				"WITCH" => Class.Witch,
+				"WIZARD" => Class.Wizard,
+				_ => throw new NotImplementedException()
+			};
+		} while(pClass.ToUpper() is not "BARBARIAN" or "BARD" or "CLERIC" or "DRUID" or "FIGHTER" or "MONK" or "PALADIN" or "RANGER" or "ROGUE" or "SORCERER" or "WIZARD");
+		LoadPlayerCombatDataTable(Player.PlayerInfo.Class);
+	}
+
+	private void LoadPlayerCombatDataTable(Class pClass) {
+		string combatTableAddon = pClass switch {
+			Class.Alchemist => "AlchemistCT",
+			Class.Barbarian => "BarbarianCT",
+			Class.Bard => "BardCT",
+			Class.Cavalier => "CavalierCT",
+			Class.Cleric => "ClericCT",
+			Class.Druid => "DruidCT",
+			Class.Fighter => "FighterCT",
+			Class.Inquisitor => "InquisitorCT",
+			Class.Monk => "MonkCT",
+			Class.Oracle => "OracleCT",
+			Class.Paladin => "PaladinCT",
+			Class.Ranger => "RangerCT",
+			Class.Rogue => "RogueCT",
+			Class.Sorcerer => "SorcererCT",
+			Class.Summoner => "SummonerCT",
+			Class.Witch => "WitchCT",
+			Class.Wizard => "WizardCT"
+		};
+		using (StreamReader r = new StreamReader(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location + $"/Resources/CombatTables/{combatTableAddon}.json"))) ;
 	}
 
 	#endregion
