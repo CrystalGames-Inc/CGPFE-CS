@@ -148,16 +148,18 @@ public class PlayerDataManager {
 			Class.None => throw new NotImplementedException(),
 			_ => throw new NotImplementedException()
 		};
-		var path = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)!, "/Resources/CombatTables/", fileName);
-		var combatTable = JsonSerializer.Deserialize<CombatTableRow[]>(File.ReadAllText(path));
-		if (combatTable == null) {
-			Console.WriteLine("Error loading combat table");
-			return;
-		}	
-		Player.CombatInfo.BaseAttackBonus = combatTable[0].BAB;
-		Player.CombatInfo.Fortitude = combatTable[0].Fort;
-		Player.CombatInfo.Reflex = combatTable[0].Ref;
-		Player.CombatInfo.Will = combatTable[0].Will;
+		var path = Path.Combine(System.Reflection.Assembly.GetExecutingAssembly().Location, "Resources", "CombatTables", fileName);
+		Console.WriteLine("Final Path: " + path);
+		
+		//TODO fix the god damn combat table loading.
+		// if (combatTable == null) {
+		// 	Console.WriteLine("Error loading combat table");
+		// 	return;
+		// }	
+		// Player.CombatInfo.BaseAttackBonus = combatTable[0].BAB;
+		// Player.CombatInfo.Fortitude = combatTable[0].Fort;
+		// Player.CombatInfo.Reflex = combatTable[0].Ref;
+		// Player.CombatInfo.Will = combatTable[0].Will;
 	}
 
 	private Alignment RegisterAlignment(Alignment[] alignments) {

@@ -11,6 +11,7 @@ public static class FileManager {
 	
 	private static readonly string SavesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
 	private static string _gameDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
+	private static string _resourcesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
 	private static string _worldPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
 	private static string _NPCsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
 	private static string _playerPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
@@ -37,6 +38,7 @@ public static class FileManager {
 	private static void UpdatePaths(string campaignName) {
 		_campaignPath = Path.Combine(SavesPath, campaignName);
 		_gameDataPath = Path.Combine(_campaignPath, "Game");
+		_resourcesPath = Path.Combine(_campaignPath, "Resources");
 		_worldPath = Path.Combine(_campaignPath, "World");
 		_NPCsPath = Path.Combine(_campaignPath, "NPCs");
 		_playerPath = Path.Combine(_campaignPath, "Player");
