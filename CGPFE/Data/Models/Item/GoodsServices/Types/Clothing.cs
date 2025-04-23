@@ -2,7 +2,4 @@
 
 namespace CGPFE.Data.Models.Item.GoodsServices.Types;
 
-public class Clothing: Outfit {
-	protected Clothing(string name, int id, double cost) : base(name, id, cost) {
-	}
-}
+public class Clothing(string name, int id, double cost) : Outfit(name, id, cost);

@@ -11,8 +11,8 @@ public class Player {
 	public Attributes AttributeModifiers = new Attributes();
 	public CombatInfo CombatInfo = new CombatInfo();
 	public Wallet Wallet;
-
-	private async Task RegisterCombatTable() {
+	
+	private void RegisterCombatTable() {
 		var fileName = "PlaceholderCT.json";
 		switch (PlayerInfo.Class) {
 			case Class.Alchemist:
@@ -66,17 +66,6 @@ public class Player {
 			case Class.Wizard:
 				fileName = "WizardCT.json";
 			break;
-		}
-		using FileStream openStream = File.Open(fileName, FileMode.Open);
-		CombatTableRow[]? combatTable =
-			await JsonSerializer.DeserializeAsync<CombatTableRow[]?>(openStream);
-		for (int i = 0; i < 20; i++) {
-			Console.WriteLine($"Level: {combatTable?[i + 1]}");
-			Console.WriteLine($"BAB: {combatTable?[i].BAB}");
-			Console.WriteLine($"Fort: {combatTable?[i].Fort}");
-			Console.WriteLine($"Ref: {combatTable?[i].Ref}");
-			Console.WriteLine($"Will: {combatTable?[i].Will}");
-			
 		}
 	}
 	

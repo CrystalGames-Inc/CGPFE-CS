@@ -1,7 +1,6 @@
 C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\CGPFE.deps.json
 C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\CGPFE.dll
 C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\CGPFE.pdb
-C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.csproj.AssemblyReference.cache
 C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.AssemblyInfoInputs.cache
 C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.AssemblyInfo.cs
@@ -14,7 +13,6 @@ C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\ref\CGPFE.dll
 C:\Users\User.EYLON\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\CGPFE.deps.json
 C:\Users\User.EYLON\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\CGPFE.dll
 C:\Users\User.EYLON\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\CGPFE.pdb
-C:\Users\User.EYLON\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.csproj.AssemblyReference.cache
 C:\Users\User.EYLON\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\User.EYLON\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.AssemblyInfoInputs.cache
 C:\Users\User.EYLON\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.AssemblyInfo.cs
@@ -37,3 +35,20 @@ D:\Users\User\Documents\GitHub\CrystalGames\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPF
 D:\Users\User\Documents\GitHub\CrystalGames\CGPFE-CS\CGPFE\obj\Debug\net8.0\refint\CGPFE.dll
 D:\Users\User\Documents\GitHub\CrystalGames\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.pdb
 D:\Users\User\Documents\GitHub\CrystalGames\CGPFE-CS\CGPFE\obj\Debug\net8.0\ref\CGPFE.dll
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\AlchemistCT.json
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\BarbarianCT.json
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\BardCT.json
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\CavalierCT.json
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\ClericCT.json
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\DruidCT.json
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\FighterCT.json
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\InquisitorCT.json
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\MonkCT.json
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\OracleCT.json
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\PaladinCT.json
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\RangerCT.json
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\RogueCT.json
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\SorcererCT.json
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\SummonerCT.json
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\WitchCT.json
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\bin\Debug\net8.0\Resources\CombatTables\WizardCT.json
