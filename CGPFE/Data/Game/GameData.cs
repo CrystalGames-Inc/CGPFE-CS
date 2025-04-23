@@ -1,18 +1,19 @@
 ﻿using System.Text.Json;
 using CGPFE.Data.Game.StoryModifiers;
+using CGPFE.Management;
 using CGPFE.World;
 
 namespace CGPFE.Data.Game;
 
 public class GameData(string campaignName, int gameFantasty, int gameSpeed, int abilityScoreType) {
 
-	public string CampaignName { get; set; } = campaignName;
+	public string CampaignName { get; init; } = campaignName;
 
-	public int GameFantasty { get; set; } = gameFantasty;
+	public int GameFantasty { get; init; } = gameFantasty;
 
-	public int GameSpeed { get; set; } = gameSpeed;
+	public int GameSpeed { get; init; } = gameSpeed;
 
-	public int AbilityScoreType { get; set; } = abilityScoreType;
+	public int AbilityScoreType { get; init; } = abilityScoreType;
 
 	public GameWorld? GameWorld;
 
@@ -73,6 +74,17 @@ public class GameData(string campaignName, int gameFantasty, int gameSpeed, int 
 
 		Console.WriteLine("Please choose the method of initial point distribution:\nStandard - 1\nClassic - 2\nHeroic - 3\nPurchase - 4");
 		var abilityScoreType = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+
+		Console.WriteLine("Would you also like to create a new player? [Y/N] (Default: N)");
+		var newPlayer = Console.ReadLine();
+		switch (newPlayer.ToUpper()) {
+			case "Y":
+				PlayerDataManager.Instance.RegisterPlayer();
+				break;
+			default:
+				Console.WriteLine();
+				break;
+		}
 		
 		return new GameData(campaignName, gameFantasty, gameSpeed, abilityScoreType);
 	}
