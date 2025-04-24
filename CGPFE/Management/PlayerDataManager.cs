@@ -30,6 +30,10 @@ public class PlayerDataManager {
 		
 		RegisterPlayerRace();
 		RegisterPlayerClass();
+		
+		//TODO add the rest of the registration & calculation methods here :)
+		
+		CalculatePlayerCombatInfo();
 	}
 
 	private void RegisterPlayerName() {
@@ -114,6 +118,68 @@ public class PlayerDataManager {
 
 	#endregion
 	
+	#region Data Calculations
+
+	private void CalculateInitMod() {
+		var init = 0;
+
+		init += Player.AttributeModifiers.Dexterity;
+
+		Player.CombatInfo.InitMod = init;
+	}
+	
+	private void CalculatePlayerCombatInfo() {
+		CalculateArmorClass();
+		CalculateCombatManeuverBonus();
+		CalculateCombatManeuverDefense();
+	}
+
+	private void CalculateArmorClass() {
+		var ac = 10;
+
+		if (Player.CombatInfo.Armors != null) {
+			foreach (var a in Player.CombatInfo.Armors) {
+				if (a != null)
+					ac += a.ArmorBonus;
+			}
+		}
+
+		if (Player.CombatInfo.Shields != null) {
+			foreach (var s in Player.CombatInfo.Shields) {
+				if (s != null)
+					ac += s.ShieldBonus;
+			}
+		}
+
+		ac += Player.AttributeModifiers.Dexterity;
+		ac += Player.PlayerInfo.SizeMod;
+
+		Player.CombatInfo.ArmorClass = ac;
+	}
+
+	private void CalculateCombatManeuverBonus() {
+		var cmb = 0;
+
+		cmb += Player.CombatInfo.BaseAttackBonus;
+		cmb += Player.AttributeModifiers.Strength;
+		cmb += Player.PlayerInfo.SizeMod;
+
+		Player.CombatInfo.CombatManeuverBonus = cmb;
+	}
+
+	private void CalculateCombatManeuverDefense() {
+		var cmd = 10;
+		
+		cmd += Player.CombatInfo.BaseAttackBonus;
+		cmd += Player.AttributeModifiers.Strength;
+		cmd += Player.AttributeModifiers.Dexterity;
+		cmd += Player.PlayerInfo.SizeMod;
+		
+		Player.CombatInfo.CombatManeuverDefense = cmd;
+	}
+	
+	#endregion
+	
 	#region Ability Points
 
 	private void RegisterAbilityPoints() {
@@ -148,10 +214,13 @@ public class PlayerDataManager {
 
 	public void DisplayCombatInfo() {
 		Console.WriteLine("Combat Info: ");
+		Console.WriteLine($"  Init Modifier: {Player.CombatInfo.InitMod}");
 		Console.WriteLine($"  Base Attack Bonus: {Player.CombatInfo.BaseAttackBonus}");
 		Console.WriteLine($"  Fortitude: {Player.CombatInfo.Fortitude}");
 		Console.WriteLine($"  Reflex: {Player.CombatInfo.Reflex}");
 		Console.WriteLine($"  Will: {Player.CombatInfo.Will}");
+		Console.WriteLine($"  CMB: {Player.CombatInfo.CombatManeuverBonus}");
+		Console.WriteLine($"  CMD: {Player.CombatInfo.CombatManeuverDefense}");
 		Console.WriteLine($"  Armor Class:  {Player.CombatInfo.ArmorClass}");
 	}
 	

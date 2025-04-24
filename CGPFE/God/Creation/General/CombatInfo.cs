@@ -11,7 +11,7 @@ public class CombatInfo {
 	public int Fortitude { get; set; } = 0;
 	public int Reflex { get; set; } = 0;
 	public int Will { get; set; } = 0;
-	public int BaseAttackBonus { get; set; }
+	public int BaseAttackBonus { get; set; } = 0;
 	public Attribute CmbCalcBonus { get; set; } = Attribute.Strength;
 	public int CombatManeuverBonus { get; set; } = 0;
 	public int CombatManeuverDefense { get; set; } = 0;
