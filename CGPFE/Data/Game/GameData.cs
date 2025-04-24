@@ -74,18 +74,20 @@ public class GameData(string campaignName, int gameFantasty, int gameSpeed, int 
 
 		Console.WriteLine("Please choose the method of initial point distribution:\nStandard - 1\nClassic - 2\nHeroic - 3\nPurchase - 4");
 		var abilityScoreType = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+		
+		return new GameData(campaignName, gameFantasty, gameSpeed, abilityScoreType);
+	}
 
+	public static void AskNewCharacter() {
 		Console.WriteLine("Would you also like to create a new player? [Y/N] (Default: N)");
 		var newPlayer = Console.ReadLine();
 		switch (newPlayer.ToUpper()) {
 			case "Y":
 				PlayerDataManager.Instance.RegisterPlayer();
-				break;
+			break;
 			default:
 				Console.WriteLine();
-				break;
+			break;
 		}
-		
-		return new GameData(campaignName, gameFantasty, gameSpeed, abilityScoreType);
 	}
 }

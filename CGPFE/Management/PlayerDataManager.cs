@@ -8,7 +8,7 @@ using CGPFE.God.Creation.Player;
 namespace CGPFE.Management;
 
 public class PlayerDataManager {
-	private readonly Player _player = new Player();
+	public readonly Player Player = new Player();
 
 	private static PlayerDataManager _instance = null;
 	private static readonly object Padlock = new object();
@@ -39,7 +39,7 @@ public class PlayerDataManager {
 			Console.WriteLine("Cannot enter an empty name");
 			RegisterPlayerName();
 		}
-		_player.PlayerInfo.Name = name;
+		Player.PlayerInfo.Name = name;
 	}
 
 	private void RegisterPlayerGender() {
@@ -48,10 +48,10 @@ public class PlayerDataManager {
 			var gender = Console.ReadLine();
 			switch (gender.ToUpper()) {
 				case "MALE":
-					_player.PlayerInfo.Gender = Gender.Male;
+					Player.PlayerInfo.Gender = Gender.Male;
 				break;
 				case "FEMALE":
-					_player.PlayerInfo.Gender = Gender.Female;
+					Player.PlayerInfo.Gender = Gender.Female;
 				break;
 				default:
 					Console.WriteLine("Invalid gender selected");
@@ -63,45 +63,25 @@ public class PlayerDataManager {
 	}
 
 	private void RegisterPlayerRace() {
-		while (true) {
-			Console.WriteLine("Please choose your character's race:\nDwarf\nElf\nGnome\nHalfElf\nHalfOrc\nHalfling\nHuman");
-			var race = Console.ReadLine();
-			switch (race.ToUpper()) {
-				case "DWARF":
-					_player.PlayerInfo.Race = Race.Dwarf;
-				break;
-				case "ELF":
-					_player.PlayerInfo.Race = Race.Elf;
-				break;
-				case "GNOME":
-					_player.PlayerInfo.Race = Race.Gnome;
-				break;
-				case "HALFELF":
-					_player.PlayerInfo.Race = Race.HalfElf;
-				break;
-				case "HALFORC":
-					_player.PlayerInfo.Race = Race.HalfOrc;
-				break;
-				case "HALFLING":
-					_player.PlayerInfo.Race = Race.Halfling;
-				break;
-				case "HUMAN":
-					_player.PlayerInfo.Race = Race.Human;
-				break;
-				default:
-					Console.WriteLine("Invalid race selected");
-					continue;
-			}
-
-			break;
-		}
+		Console.WriteLine("Please choose your character's race:\nDwarf\nElf\nGnome\nHalfElf\nHalfOrc\nHalfling\nHuman");
+		var race = Console.ReadLine();
+		Player.PlayerInfo.Race = race.ToUpper() switch {
+			"DWARF" => Race.Dwarf,
+			"ELF" => Race.Elf,
+			"GNOME" => Race.Gnome,
+			"HALFELF" => Race.HalfElf,
+			"HALFORC" => Race.HalfOrc,
+			"HALFLING" => Race.Halfling,
+			"HUMAN" => Race.Human,
+			_ => Race.None
+		};
 	}
 
 	private void RegisterPlayerClass() {
 		Console.WriteLine(
 			"Please select a class:\nAlchemist\nBarbarian\nBard\nCavalier\nCleric\nDruid\nFighter\nInquisitor\nMonk\nOracle\nPaladin\nRanger\nRogue\nSorcerer\nSummoner\nWitch\nWizard");
 		var pClass = Console.ReadLine();
-		_player.PlayerInfo.Class = pClass?.ToUpper() switch {
+		Player.PlayerInfo.Class = pClass?.ToUpper() switch {
 			"ALCHEMIST" => Class.Alchemist,
 			"BARBARIAN" => Class.Barbarian,
 			"BARD" => Class.Bard,
@@ -119,45 +99,9 @@ public class PlayerDataManager {
 			"SUMMONER" => Class.Summoner,
 			"WITCH" => Class.Witch,
 			"WIZARD" => Class.Wizard,
-			_ => throw new NotImplementedException()
+			_ => throw new ArgumentException()
 		};
-		LoadPlayerCombatDataTable();
-	}
-
-	private void LoadPlayerCombatDataTable() {
-		var fileName = _player.PlayerInfo.Class switch {
-			Class.Alchemist => "AlchemistCT.json",
-			Class.Barbarian => "BarbarianCT.json",
-			Class.Bard => "BardCT.json",
-			Class.Cavalier => "CavalierCT.json",
-			Class.Cleric => "ClericCT.json",
-			Class.Druid => "DruidCT.json",
-			Class.Fighter => "FighterCT.json",
-			Class.Inquisitor => "InquisitorCT.json",
-			Class.Monk => "MonkCT.json",
-			Class.Oracle => "OracleCT.json",
-			Class.Paladin => "PaladinCT.json",
-			Class.Ranger => "RangerCT.json",
-			Class.Rogue => "RogueCT.json",
-			Class.Sorcerer => "SorcererCT.json",
-			Class.Summoner => "SummonerCT.json",
-			Class.Witch => "WitchCT.json",
-			Class.Wizard => "WizardCT.json",
-			Class.None => throw new NotImplementedException(),
-			_ => throw new NotImplementedException()
-		};
-		var path = Path.Combine(System.Reflection.Assembly.GetExecutingAssembly().Location, "Resources", "CombatTables", fileName);
-		Console.WriteLine("Final Path: " + path);
-		
-		//TODO fix the god damn combat table loading.
-		// if (combatTable == null) {
-		// 	Console.WriteLine("Error loading combat table");
-		// 	return;
-		// }	
-		// Player.CombatInfo.BaseAttackBonus = combatTable[0].BAB;
-		// Player.CombatInfo.Fortitude = combatTable[0].Fort;
-		// Player.CombatInfo.Reflex = combatTable[0].Ref;
-		// Player.CombatInfo.Will = combatTable[0].Will;
+		FileManager.CreateCombatTable();
 	}
 
 	private Alignment RegisterAlignment(Alignment[] alignments) {
@@ -182,33 +126,33 @@ public class PlayerDataManager {
 
 	public void DisplayAttributes() {
 		Console.WriteLine("Attributes: ");
-		Console.WriteLine($"  Strength: {_player.Attributes.Strength}");
-		Console.WriteLine($"  Dexterity: {_player.Attributes.Dexterity}");
-		Console.WriteLine($"  Constitution: {_player.Attributes.Constitution}");
-		Console.WriteLine($"  Intelligence: {_player.Attributes.Intelligence}");
-		Console.WriteLine($"  Wisdom: {_player.Attributes.Wisdom}");
-		Console.WriteLine($"  Charisma: {_player.Attributes.Charisma}");
-		Console.WriteLine($"  Move Speed: {_player.Attributes.MoveSpeed}");
+		Console.WriteLine($"  Strength: {Player.Attributes.Strength}");
+		Console.WriteLine($"  Dexterity: {Player.Attributes.Dexterity}");
+		Console.WriteLine($"  Constitution: {Player.Attributes.Constitution}");
+		Console.WriteLine($"  Intelligence: {Player.Attributes.Intelligence}");
+		Console.WriteLine($"  Wisdom: {Player.Attributes.Wisdom}");
+		Console.WriteLine($"  Charisma: {Player.Attributes.Charisma}");
+		Console.WriteLine($"  Move Speed: {Player.Attributes.MoveSpeed}");
 	}
 
 	public void DisplayAttributeMods() {
 		Console.WriteLine("Attribute Modifiers: ");
-		Console.WriteLine($"  Strength: {_player.AttributeModifiers.Strength}");
-		Console.WriteLine($"  Dexterity: {_player.AttributeModifiers.Dexterity}");
-		Console.WriteLine($"  Constitution: {_player.AttributeModifiers.Constitution}");
-		Console.WriteLine($"  Intelligence: {_player.AttributeModifiers.Intelligence}");
-		Console.WriteLine($"  Wisdom: {_player.AttributeModifiers.Wisdom}");
-		Console.WriteLine($"  Charisma: {_player.AttributeModifiers.Charisma}");
-		Console.WriteLine($"  Move Speed: {_player.AttributeModifiers.MoveSpeed}");
+		Console.WriteLine($"  Strength: {Player.AttributeModifiers.Strength}");
+		Console.WriteLine($"  Dexterity: {Player.AttributeModifiers.Dexterity}");
+		Console.WriteLine($"  Constitution: {Player.AttributeModifiers.Constitution}");
+		Console.WriteLine($"  Intelligence: {Player.AttributeModifiers.Intelligence}");
+		Console.WriteLine($"  Wisdom: {Player.AttributeModifiers.Wisdom}");
+		Console.WriteLine($"  Charisma: {Player.AttributeModifiers.Charisma}");
+		Console.WriteLine($"  Move Speed: {Player.AttributeModifiers.MoveSpeed}");
 	}
 
 	public void DisplayCombatInfo() {
-		Console.WriteLine("Comat Info: ");
-		Console.WriteLine($"  Base Attack Bonus: {_player.CombatInfo.BaseAttackBonus}");
-		Console.WriteLine($"  Fortitude: {_player.CombatInfo.Fortitude}");
-		Console.WriteLine($"  Reflex: {_player.CombatInfo.Reflex}");
-		Console.WriteLine($"  Will: {_player.CombatInfo.Will}");
-		Console.WriteLine($"  Armor Class:  {_player.CombatInfo.ArmorClass}");
+		Console.WriteLine("Combat Info: ");
+		Console.WriteLine($"  Base Attack Bonus: {Player.CombatInfo.BaseAttackBonus}");
+		Console.WriteLine($"  Fortitude: {Player.CombatInfo.Fortitude}");
+		Console.WriteLine($"  Reflex: {Player.CombatInfo.Reflex}");
+		Console.WriteLine($"  Will: {Player.CombatInfo.Will}");
+		Console.WriteLine($"  Armor Class:  {Player.CombatInfo.ArmorClass}");
 	}
 	
 	#endregion

@@ -1,5 +1,7 @@
 ﻿using System.Text.Json;
+using CGPFE.Data.Constants;
 using CGPFE.Data.Game;
+using CGPFE.God.Creation.General;
 
 namespace CGPFE.Management;
 
@@ -10,11 +12,11 @@ public static class FileManager {
 	};
 	
 	private static readonly string SavesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	private static string _gameDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	private static string _resourcesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	private static string _worldPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	private static string _NPCsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	private static string _playerPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
+	public static string GameDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
+	public static string ResourcesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
+	public static string WorldPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
+	public static string NpCsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
+	public static string PlayerPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
 	private const string GameDataFileName = "Settings.json";
 	private static string _campaignPath = string.Empty;
 
@@ -24,11 +26,12 @@ public static class FileManager {
 		var g = GameData.RegisterGameData();
 		
 		UpdatePaths(g.CampaignName);
-		CreateDirectories();
+		
+		GameData.AskNewCharacter();
 		
 		if(!Directory.Exists(_campaignPath))
 			Directory.CreateDirectory(_campaignPath);
-		var gameDataPath = Path.Combine(_gameDataPath, GameDataFileName);
+		var gameDataPath = Path.Combine(GameDataPath, GameDataFileName);
 		
 		CreateJsonFile(g, gameDataPath);
 		
@@ -37,44 +40,85 @@ public static class FileManager {
 
 	private static void UpdatePaths(string campaignName) {
 		_campaignPath = Path.Combine(SavesPath, campaignName);
-		_gameDataPath = Path.Combine(_campaignPath, "Game");
-		_resourcesPath = Path.Combine(_campaignPath, "Resources");
-		_worldPath = Path.Combine(_campaignPath, "World");
-		_NPCsPath = Path.Combine(_campaignPath, "NPCs");
-		_playerPath = Path.Combine(_campaignPath, "Player");
+		GameDataPath = Path.Combine(_campaignPath, "Game");
+		ResourcesPath = Path.Combine(_campaignPath, "Resources");
+		WorldPath = Path.Combine(_campaignPath, "World");
+		NpCsPath = Path.Combine(_campaignPath, "NPCs");
+		PlayerPath = Path.Combine(_campaignPath, "Player");
+		CreateGameDirectories();
 	}
 	
-	private static void CreateDirectories() {
-		Directory.CreateDirectory(_gameDataPath);
-		Directory.CreateDirectory(_resourcesPath);
-		Directory.CreateDirectory(_worldPath);
-		Directory.CreateDirectory(_NPCsPath);
-		Directory.CreateDirectory(_playerPath);
+	private static void CreateGameDirectories() {
+		Directory.CreateDirectory(GameDataPath);
+		Directory.CreateDirectory(ResourcesPath);
+		Directory.CreateDirectory(WorldPath);
+		Directory.CreateDirectory(NpCsPath);
+		Directory.CreateDirectory(PlayerPath);
 	}
 
-	private static void CreateResources() {
-		File.Create(Path.Combine(_resourcesPath, "AlchemistCT.json"));
-		File.Create(Path.Combine(_resourcesPath, "BarbarianCT.json"));
-		File.Create(Path.Combine(_resourcesPath, "BardCT.json"));
-		File.Create(Path.Combine(_resourcesPath, "CavalierCT.json"));
-		File.Create(Path.Combine(_resourcesPath, "ClericCT.json"));
-		File.Create(Path.Combine(_resourcesPath, "DruidCT.json"));
-		File.Create(Path.Combine(_resourcesPath, "FighterCT.json"));
-		File.Create(Path.Combine(_resourcesPath, "InquisitorCT.json"));
-		File.Create(Path.Combine(_resourcesPath, "MonkCT.json"));
-		File.Create(Path.Combine(_resourcesPath, "OracleCT.json"));
-		File.Create(Path.Combine(_resourcesPath, "PaladinCT.json"));
-		File.Create(Path.Combine(_resourcesPath, "RangerCT.json"));
-		File.Create(Path.Combine(_resourcesPath, "RogueCT.json"));
-		File.Create(Path.Combine(_resourcesPath, "SorcererCT.json"));
-		File.Create(Path.Combine(_resourcesPath, "SummonerCT.json"));
-		File.Create(Path.Combine(_resourcesPath, "WitchCT.json"));
-		File.Create(Path.Combine(_resourcesPath, "WizardCT.json"));
+	public static void CreateCombatTable() {
+		var path = Path.Combine(PlayerPath, "CombatTable.json");
+		File.Create(path).Dispose();
+		switch (PlayerDataManager.Instance.Player.PlayerInfo.Class) {
+			case Class.Alchemist:
+				File.WriteAllText(path, """[{"BAB":0,"Fort":0,"Ref":0,"Will":2},{"BAB":1,"Fort":0,"Ref":0,"Will":3},{"BAB":1,"Fort":1,"Ref":1,"Will":3},{"BAB":2,"Fort":1,"Ref":1,"Will":4},{"BAB":2,"Fort":1,"Ref":1,"Will":4},{"BAB":3,"Fort":2,"Ref":2,"Will":5},{"BAB":3,"Fort":2,"Ref":2,"Will":5},{"BAB":4,"Fort":2,"Ref":2,"Will":6},{"BAB":4,"Fort":3,"Ref":3,"Will":6},{"BAB":5,"Fort":3,"Ref":3,"Will":7},{"BAB":5,"Fort":3,"Ref":3,"Will":7},{"BAB":6,"Fort":4,"Ref":4,"Will":8},{"BAB":6,"Fort":4,"Ref":4,"Will":8},{"BAB":7,"Fort":4,"Ref":4,"Will":9},{"BAB":7,"Fort":5,"Ref":5,"Will":9},{"BAB":8,"Fort":5,"Ref":5,"Will":10},{"BAB":8,"Fort":5,"Ref":5,"Will":10},{"BAB":9,"Fort":6,"Ref":6,"Will":11},{"BAB":9,"Fort":6,"Ref":6,"Will":11},{"BAB":10,"Fort":6,"Ref":6,"Will":12}]""");
+			break;
+			case Class.Barbarian:
+				File.WriteAllText(path, """[{"BAB":1,"Fort":2,"Ref":0,"Will":0},{"BAB":2,"Fort":3,"Ref":0,"Will":0},{"BAB":3,"Fort":3,"Ref":1,"Will":1},{"BAB":4,"Fort":4,"Ref":1,"Will":1},{"BAB":5,"Fort":4,"Ref":1,"Will":1},{"BAB":6,"Fort":5,"Ref":2,"Will":2},{"BAB":7,"Fort":5,"Ref":2,"Will":2},{"BAB":8,"Fort":6,"Ref":2,"Will":2},{"BAB":9,"Fort":6,"Ref":3,"Will":3},{"BAB":10,"Fort":7,"Ref":3,"Will":3},{"BAB":11,"Fort":7,"Ref":3,"Will":3},{"BAB":12,"Fort":8,"Ref":4,"Will":4},{"BAB":13,"Fort":8,"Ref":4,"Will":4},{"BAB":14,"Fort":9,"Ref":4,"Will":4},{"BAB":15,"Fort":9,"Ref":5,"Will":5},{"BAB":16,"Fort":10,"Ref":5,"Will":5},{"BAB":17,"Fort":10,"Ref":5,"Will":5},{"BAB":18,"Fort":11,"Ref":6,"Will":6},{"BAB":19,"Fort":11,"Ref":6,"Will":6},{"BAB":20,"Fort":12,"Ref":6,"Will":6}]""");
+			break;
+			case Class.Bard:
+				File.WriteAllText(path, """[{"BAB":0,"Fort":0,"Ref":2,"Will":2},{"BAB":1,"Fort":0,"Ref":3,"Will":3},{"BAB":2,"Fort":1,"Ref":3,"Will":3},{"BAB":3,"Fort":1,"Ref":4,"Will":4},{"BAB":3,"Fort":1,"Ref":4,"Will":4},{"BAB":4,"Fort":2,"Ref":5,"Will":5},{"BAB":5,"Fort":2,"Ref":5,"Will":5},{"BAB":6,"Fort":2,"Ref":6,"Will":6},{"BAB":6,"Fort":3,"Ref":6,"Will":6},{"BAB":7,"Fort":3,"Ref":7,"Will":7},{"BAB":8,"Fort":3,"Ref":7,"Will":7},{"BAB":9,"Fort":4,"Ref":8,"Will":8},{"BAB":9,"Fort":4,"Ref":8,"Will":8},{"BAB":10,"Fort":4,"Ref":9,"Will":9},{"BAB":11,"Fort":5,"Ref":9,"Will":9},{"BAB":12,"Fort":5,"Ref":10,"Will":10},{"BAB":12,"Fort":5,"Ref":10,"Will":10},{"BAB":13,"Fort":6,"Ref":11,"Will":11},{"BAB":14,"Fort":6,"Ref":11,"Will":11},{"BAB":15,"Fort":6,"Ref":12,"Will":12}]""");
+			break;
+			case Class.Cavalier:
+				File.WriteAllText(path, """[{"BAB":1,"Fort":2,"Ref":0,"Will":0},{"BAB":2,"Fort":3,"Ref":0,"Will":0},{"BAB":3,"Fort":3,"Ref":1,"Will":1},{"BAB":4,"Fort":4,"Ref":1,"Will":1},{"BAB":5,"Fort":4,"Ref":1,"Will":1},{"BAB":6,"Fort":5,"Ref":2,"Will":2},{"BAB":7,"Fort":5,"Ref":2,"Will":2},{"BAB":8,"Fort":6,"Ref":2,"Will":2},{"BAB":9,"Fort":6,"Ref":3,"Will":3},{"BAB":10,"Fort":7,"Ref":3,"Will":3},{"BAB":11,"Fort":7,"Ref":3,"Will":3},{"BAB":12,"Fort":8,"Ref":4,"Will":4},{"BAB":13,"Fort":8,"Ref":4,"Will":4},{"BAB":14,"Fort":9,"Ref":4,"Will":4},{"BAB":15,"Fort":9,"Ref":5,"Will":5},{"BAB":16,"Fort":10,"Ref":5,"Will":5},{"BAB":17,"Fort":10,"Ref":5,"Will":5},{"BAB":18,"Fort":11,"Ref":6,"Will":6},{"BAB":19,"Fort":11,"Ref":6,"Will":6},{"BAB":20,"Fort":12,"Ref":6,"Will":6}]""");
+			break;
+			case Class.Cleric:
+				File.WriteAllText(path, """[{"BAB":0,"Fort":2,"Ref":0,"Will":2},{"BAB":1,"Fort":3,"Ref":0,"Will":3},{"BAB":2,"Fort":3,"Ref":1,"Will":3},{"BAB":3,"Fort":4,"Ref":1,"Will":4},{"BAB":3,"Fort":4,"Ref":1,"Will":4},{"BAB":4,"Fort":5,"Ref":2,"Will":5},{"BAB":5,"Fort":5,"Ref":2,"Will":5},{"BAB":6,"Fort":6,"Ref":2,"Will":6},{"BAB":6,"Fort":6,"Ref":3,"Will":6},{"BAB":7,"Fort":7,"Ref":3,"Will":7},{"BAB":8,"Fort":7,"Ref":3,"Will":7},{"BAB":9,"Fort":8,"Ref":4,"Will":8},{"BAB":9,"Fort":8,"Ref":4,"Will":8},{"BAB":10,"Fort":9,"Ref":4,"Will":9},{"BAB":11,"Fort":9,"Ref":5,"Will":9},{"BAB":12,"Fort":10,"Ref":5,"Will":10},{"BAB":12,"Fort":10,"Ref":5,"Will":10},{"BAB":13,"Fort":11,"Ref":6,"Will":11},{"BAB":14,"Fort":11,"Ref":6,"Will":11},{"BAB":15,"Fort":12,"Ref":6,"Will":12}]""");
+			break;
+			case Class.Druid:
+				File.WriteAllText(path, """[{"BAB":0,"Fort":2,"Ref":0,"Will":2},{"BAB":1,"Fort":3,"Ref":0,"Will":3},{"BAB":2,"Fort":3,"Ref":1,"Will":3},{"BAB":3,"Fort":4,"Ref":1,"Will":4},{"BAB":3,"Fort":4,"Ref":1,"Will":4},{"BAB":4,"Fort":5,"Ref":2,"Will":5},{"BAB":5,"Fort":5,"Ref":2,"Will":5},{"BAB":6,"Fort":6,"Ref":2,"Will":6},{"BAB":6,"Fort":6,"Ref":3,"Will":6},{"BAB":7,"Fort":7,"Ref":3,"Will":7},{"BAB":8,"Fort":7,"Ref":3,"Will":7},{"BAB":9,"Fort":8,"Ref":4,"Will":8},{"BAB":9,"Fort":8,"Ref":4,"Will":8},{"BAB":10,"Fort":9,"Ref":4,"Will":9},{"BAB":11,"Fort":9,"Ref":5,"Will":9},{"BAB":12,"Fort":10,"Ref":5,"Will":10},{"BAB":12,"Fort":10,"Ref":5,"Will":10},{"BAB":13,"Fort":11,"Ref":6,"Will":11},{"BAB":14,"Fort":11,"Ref":6,"Will":11},{"BAB":15,"Fort":12,"Ref":6,"Will":12}]""");
+			break;
+			case Class.Fighter:
+				File.WriteAllText(path, """[{"BAB":1,"Fort":2,"Ref":0,"Will":0},{"BAB":2,"Fort":3,"Ref":0,"Will":0},{"BAB":3,"Fort":3,"Ref":1,"Will":1},{"BAB":4,"Fort":4,"Ref":1,"Will":1},{"BAB":5,"Fort":4,"Ref":1,"Will":1},{"BAB":6,"Fort":5,"Ref":2,"Will":2},{"BAB":7,"Fort":5,"Ref":2,"Will":2},{"BAB":8,"Fort":6,"Ref":2,"Will":2},{"BAB":9,"Fort":6,"Ref":3,"Will":3},{"BAB":10,"Fort":7,"Ref":3,"Will":3},{"BAB":11,"Fort":7,"Ref":3,"Will":3},{"BAB":12,"Fort":8,"Ref":4,"Will":4},{"BAB":13,"Fort":8,"Ref":4,"Will":4},{"BAB":14,"Fort":9,"Ref":4,"Will":4},{"BAB":15,"Fort":9,"Ref":5,"Will":5},{"BAB":16,"Fort":10,"Ref":5,"Will":5},{"BAB":17,"Fort":10,"Ref":5,"Will":5},{"BAB":18,"Fort":11,"Ref":6,"Will":6},{"BAB":19,"Fort":11,"Ref":6,"Will":6},{"BAB":20,"Fort":12,"Ref":6,"Will":6}]""");
+			break;
+			case Class.Inquisitor:
+				File.WriteAllText(path, """[{"BAB":1,"Fort":2,"Ref":0,"Will":2},{"BAB":2,"Fort":3,"Ref":0,"Will":3},{"BAB":3,"Fort":3,"Ref":1,"Will":3},{"BAB":3,"Fort":4,"Ref":1,"Will":4},{"BAB":4,"Fort":4,"Ref":1,"Will":4},{"BAB":5,"Fort":5,"Ref":2,"Will":5},{"BAB":6,"Fort":5,"Ref":2,"Will":5},{"BAB":6,"Fort":6,"Ref":2,"Will":6},{"BAB":7,"Fort":6,"Ref":3,"Will":6},{"BAB":8,"Fort":7,"Ref":3,"Will":7},{"BAB":9,"Fort":7,"Ref":3,"Will":7},{"BAB":9,"Fort":8,"Ref":4,"Will":8},{"BAB":10,"Fort":8,"Ref":4,"Will":8},{"BAB":11,"Fort":9,"Ref":4,"Will":9},{"BAB":11,"Fort":9,"Ref":5,"Will":9},{"BAB":12,"Fort":10,"Ref":5,"Will":10},{"BAB":12,"Fort":10,"Ref":5,"Will":10},{"BAB":13,"Fort":11,"Ref":6,"Will":11},{"BAB":14,"Fort":11,"Ref":6,"Will":11},{"BAB":15,"Fort":12,"Ref":6,"Will":12}]""");
+			break;
+			case Class.Monk:
+				File.WriteAllText(path, """[{"BAB":0,"Fort":2,"Ref":2,"Will":2},{"BAB":1,"Fort":3,"Ref":3,"Will":3},{"BAB":2,"Fort":3,"Ref":3,"Will":3},{"BAB":3,"Fort":4,"Ref":4,"Will":4},{"BAB":3,"Fort":4,"Ref":4,"Will":4},{"BAB":4,"Fort":5,"Ref":5,"Will":5},{"BAB":5,"Fort":5,"Ref":5,"Will":5},{"BAB":6,"Fort":6,"Ref":6,"Will":6},{"BAB":6,"Fort":6,"Ref":6,"Will":6},{"BAB":7,"Fort":7,"Ref":7,"Will":7},{"BAB":8,"Fort":7,"Ref":7,"Will":7},{"BAB":9,"Fort":8,"Ref":8,"Will":8},{"BAB":9,"Fort":8,"Ref":8,"Will":8},{"BAB":10,"Fort":9,"Ref":9,"Will":9},{"BAB":11,"Fort":9,"Ref":9,"Will":9},{"BAB":12,"Fort":10,"Ref":10,"Will":10},{"BAB":12,"Fort":10,"Ref":10,"Will":10},{"BAB":13,"Fort":11,"Ref":11,"Will":11},{"BAB":14,"Fort":11,"Ref":11,"Will":11},{"BAB":15,"Fort":12,"Ref":12,"Will":12}]""");
+			break;
+			case Class.Oracle:
+				File.WriteAllText(path, """[{"BAB":1,"Fort":0,"Ref":0,"Will":2},{"BAB":2,"Fort":0,"Ref":0,"Will":3},{"BAB":3,"Fort":1,"Ref":1,"Will":3},{"BAB":3,"Fort":1,"Ref":1,"Will":4},{"BAB":4,"Fort":1,"Ref":1,"Will":4},{"BAB":5,"Fort":2,"Ref":2,"Will":5},{"BAB":6,"Fort":2,"Ref":2,"Will":5},{"BAB":6,"Fort":2,"Ref":2,"Will":6},{"BAB":7,"Fort":3,"Ref":3,"Will":6},{"BAB":8,"Fort":3,"Ref":3,"Will":7},{"BAB":9,"Fort":3,"Ref":3,"Will":7},{"BAB":9,"Fort":4,"Ref":4,"Will":8},{"BAB":10,"Fort":4,"Ref":4,"Will":8},{"BAB":11,"Fort":4,"Ref":4,"Will":9},{"BAB":11,"Fort":5,"Ref":5,"Will":9},{"BAB":12,"Fort":5,"Ref":5,"Will":10},{"BAB":12,"Fort":5,"Ref":5,"Will":10},{"BAB":13,"Fort":6,"Ref":6,"Will":11},{"BAB":14,"Fort":6,"Ref":6,"Will":11},{"BAB":15,"Fort":6,"Ref":6,"Will":12}]""");
+			break;
+			case Class.Paladin:
+				File.WriteAllText(path, """[{"BAB":1,"Fort":2,"Ref":0,"Will":2},{"BAB":2,"Fort":3,"Ref":0,"Will":3},{"BAB":3,"Fort":3,"Ref":1,"Will":3},{"BAB":4,"Fort":4,"Ref":1,"Will":4},{"BAB":5,"Fort":4,"Ref":1,"Will":4},{"BAB":6,"Fort":5,"Ref":2,"Will":5},{"BAB":7,"Fort":5,"Ref":2,"Will":5},{"BAB":8,"Fort":6,"Ref":2,"Will":6},{"BAB":9,"Fort":6,"Ref":3,"Will":6},{"BAB":10,"Fort":7,"Ref":3,"Will":7},{"BAB":11,"Fort":7,"Ref":3,"Will":7},{"BAB":12,"Fort":8,"Ref":4,"Will":8},{"BAB":13,"Fort":8,"Ref":4,"Will":8},{"BAB":14,"Fort":9,"Ref":4,"Will":9},{"BAB":15,"Fort":9,"Ref":5,"Will":9},{"BAB":16,"Fort":10,"Ref":5,"Will":10},{"BAB":17,"Fort":10,"Ref":5,"Will":10},{"BAB":18,"Fort":11,"Ref":6,"Will":11},{"BAB":19,"Fort":11,"Ref":6,"Will":11},{"BAB":20,"Fort":12,"Ref":6,"Will":12}]""");
+			break;
+			case Class.Ranger:
+				File.WriteAllText(path, """[{"BAB":1,"Fort":2,"Ref":2,"Will":0},{"BAB":2,"Fort":3,"Ref":3,"Will":0},{"BAB":3,"Fort":3,"Ref":3,"Will":1},{"BAB":4,"Fort":4,"Ref":4,"Will":1},{"BAB":5,"Fort":4,"Ref":4,"Will":1},{"BAB":6,"Fort":5,"Ref":5,"Will":2},{"BAB":7,"Fort":5,"Ref":5,"Will":2},{"BAB":8,"Fort":6,"Ref":6,"Will":2},{"BAB":9,"Fort":6,"Ref":6,"Will":3},{"BAB":10,"Fort":7,"Ref":7,"Will":3},{"BAB":11,"Fort":7,"Ref":7,"Will":3},{"BAB":12,"Fort":8,"Ref":8,"Will":4},{"BAB":13,"Fort":8,"Ref":8,"Will":4},{"BAB":14,"Fort":9,"Ref":9,"Will":4},{"BAB":15,"Fort":9,"Ref":9,"Will":5},{"BAB":16,"Fort":10,"Ref":10,"Will":5},{"BAB":17,"Fort":10,"Ref":10,"Will":5},{"BAB":18,"Fort":11,"Ref":11,"Will":6},{"BAB":19,"Fort":11,"Ref":11,"Will":6},{"BAB":20,"Fort":12,"Ref":12,"Will":6}]""");
+			break;
+			case Class.Rogue:
+				File.WriteAllText(path, """[{"BAB":1,"Fort":2,"Ref":2,"Will":0},{"BAB":2,"Fort":3,"Ref":3,"Will":0},{"BAB":3,"Fort":3,"Ref":3,"Will":1},{"BAB":4,"Fort":4,"Ref":4,"Will":1},{"BAB":5,"Fort":4,"Ref":4,"Will":1},{"BAB":6,"Fort":5,"Ref":5,"Will":2},{"BAB":7,"Fort":5,"Ref":5,"Will":2},{"BAB":8,"Fort":6,"Ref":6,"Will":2},{"BAB":9,"Fort":6,"Ref":6,"Will":3},{"BAB":10,"Fort":7,"Ref":7,"Will":3},{"BAB":11,"Fort":7,"Ref":7,"Will":3},{"BAB":12,"Fort":8,"Ref":8,"Will":4},{"BAB":13,"Fort":8,"Ref":8,"Will":4},{"BAB":14,"Fort":9,"Ref":9,"Will":4},{"BAB":15,"Fort":9,"Ref":9,"Will":5},{"BAB":16,"Fort":10,"Ref":10,"Will":5},{"BAB":17,"Fort":10,"Ref":10,"Will":5},{"BAB":18,"Fort":11,"Ref":11,"Will":6},{"BAB":19,"Fort":11,"Ref":11,"Will":6},{"BAB":20,"Fort":12,"Ref":12,"Will":6}]""");
+			break;
+			case Class.Sorcerer:
+				File.WriteAllText(path, """[{"BAB":0,"Fort":0,"Ref":0,"Will":2},{"BAB":1,"Fort":0,"Ref":0,"Will":3},{"BAB":1,"Fort":1,"Ref":1,"Will":3},{"BAB":2,"Fort":1,"Ref":1,"Will":4},{"BAB":2,"Fort":1,"Ref":1,"Will":4},{"BAB":3,"Fort":2,"Ref":2,"Will":5},{"BAB":3,"Fort":2,"Ref":2,"Will":5},{"BAB":4,"Fort":2,"Ref":2,"Will":6},{"BAB":4,"Fort":3,"Ref":3,"Will":6},{"BAB":5,"Fort":3,"Ref":3,"Will":7},{"BAB":5,"Fort":3,"Ref":3,"Will":7},{"BAB":6,"Fort":4,"Ref":4,"Will":8},{"BAB":6,"Fort":4,"Ref":4,"Will":8},{"BAB":7,"Fort":4,"Ref":4,"Will":9},{"BAB":7,"Fort":5,"Ref":5,"Will":9},{"BAB":8,"Fort":5,"Ref":5,"Will":10},{"BAB":8,"Fort":5,"Ref":5,"Will":10},{"BAB":9,"Fort":6,"Ref":6,"Will":11},{"BAB":9,"Fort":6,"Ref":6,"Will":11},{"BAB":10,"Fort":6,"Ref":6,"Will":12}]""");
+			break;
+			case Class.Summoner:
+				File.WriteAllText(path, """[{"BAB":1,"Fort":0,"Ref":0,"Will":2},{"BAB":2,"Fort":0,"Ref":0,"Will":3},{"BAB":3,"Fort":1,"Ref":1,"Will":3},{"BAB":3,"Fort":1,"Ref":1,"Will":4},{"BAB":4,"Fort":1,"Ref":1,"Will":4},{"BAB":5,"Fort":2,"Ref":2,"Will":5},{"BAB":6,"Fort":2,"Ref":2,"Will":5},{"BAB":6,"Fort":2,"Ref":2,"Will":6},{"BAB":7,"Fort":3,"Ref":3,"Will":6},{"BAB":8,"Fort":3,"Ref":3,"Will":7},{"BAB":9,"Fort":3,"Ref":3,"Will":7},{"BAB":9,"Fort":4,"Ref":4,"Will":8},{"BAB":10,"Fort":4,"Ref":4,"Will":8},{"BAB":11,"Fort":4,"Ref":4,"Will":9},{"BAB":11,"Fort":5,"Ref":5,"Will":9},{"BAB":12,"Fort":5,"Ref":5,"Will":10},{"BAB":12,"Fort":5,"Ref":5,"Will":10},{"BAB":13,"Fort":6,"Ref":6,"Will":11},{"BAB":14,"Fort":6,"Ref":6,"Will":11},{"BAB":15,"Fort":6,"Ref":6,"Will":12}]""");
+			break;
+			case Class.Witch:
+				File.WriteAllText(path, """[{"BAB":0,"Fort":0,"Ref":0,"Will":2},{"BAB":1,"Fort":0,"Ref":0,"Will":3},{"BAB":1,"Fort":1,"Ref":1,"Will":3},{"BAB":2,"Fort":1,"Ref":1,"Will":4},{"BAB":2,"Fort":1,"Ref":1,"Will":4},{"BAB":3,"Fort":2,"Ref":2,"Will":5},{"BAB":3,"Fort":2,"Ref":2,"Will":5},{"BAB":4,"Fort":2,"Ref":2,"Will":6},{"BAB":4,"Fort":3,"Ref":3,"Will":6},{"BAB":5,"Fort":3,"Ref":3,"Will":7},{"BAB":5,"Fort":3,"Ref":3,"Will":7},{"BAB":6,"Fort":4,"Ref":4,"Will":8},{"BAB":6,"Fort":4,"Ref":4,"Will":8},{"BAB":7,"Fort":4,"Ref":4,"Will":9},{"BAB":7,"Fort":5,"Ref":5,"Will":9},{"BAB":8,"Fort":5,"Ref":5,"Will":10},{"BAB":8,"Fort":5,"Ref":5,"Will":10},{"BAB":9,"Fort":6,"Ref":6,"Will":11},{"BAB":9,"Fort":6,"Ref":6,"Will":11},{"BAB":10,"Fort":6,"Ref":6,"Will":12}]""");
+			break;
+			case Class.Wizard:
+				File.WriteAllText(path, """[{"BAB":0,"Fort":0,"Ref":0,"Will":2},{"BAB":1,"Fort":0,"Ref":0,"Will":3},{"BAB":1,"Fort":1,"Ref":1,"Will":3},{"BAB":2,"Fort":1,"Ref":1,"Will":4},{"BAB":2,"Fort":1,"Ref":1,"Will":4},{"BAB":3,"Fort":2,"Ref":2,"Will":5},{"BAB":3,"Fort":2,"Ref":2,"Will":5},{"BAB":4,"Fort":2,"Ref":2,"Will":6},{"BAB":4,"Fort":3,"Ref":3,"Will":6},{"BAB":5,"Fort":3,"Ref":3,"Will":7},{"BAB":5,"Fort":3,"Ref":3,"Will":7},{"BAB":6,"Fort":4,"Ref":4,"Will":8},{"BAB":6,"Fort":4,"Ref":4,"Will":8},{"BAB":7,"Fort":4,"Ref":4,"Will":9},{"BAB":7,"Fort":5,"Ref":5,"Will":9},{"BAB":8,"Fort":5,"Ref":5,"Will":10},{"BAB":8,"Fort":5,"Ref":5,"Will":10},{"BAB":9,"Fort":6,"Ref":6,"Will":11},{"BAB":9,"Fort":6,"Ref":6,"Will":11},{"BAB":10,"Fort":6,"Ref":6,"Will":12}]""");
+			break;
+		}
 		
-		File.WriteAllText(Path.Combine(_resourcesPath, "AlchemistCT.json"), "[{'BAB':0,'Fort':0,'Ref':0,'Will':2},{'BAB':1,'Fort':0,'Ref':0,'Will':3},{'BAB':1,'Fort':1,'Ref':1,'Will':3},{'BAB':2,'Fort':1,'Ref':1,'Will':4},{'BAB':2,'Fort':1,'Ref':1,'Will':4},{'BAB':3,'Fort':2,'Ref':2,'Will':5},{'BAB':3,'Fort':2,'Ref':2,'Will':5},{'BAB':4,'Fort':2,'Ref':2,'Will':6},{'BAB':4,'Fort':3,'Ref':3,'Will':6},{'BAB':5,'Fort':3,'Ref':3,'Will':7},{'BAB':5,'Fort':3,'Ref':3,'Will':7},{'BAB':6,'Fort':4,'Ref':4,'Will':8},{'BAB':6,'Fort':4,'Ref':4,'Will':8},{'BAB':7,'Fort':4,'Ref':4,'Will':9},{'BAB':7,'Fort':5,'Ref':5,'Will':9},{'BAB':8,'Fort':5,'Ref':5,'Will':10},{'BAB':8,'Fort':5,'Ref':5,'Will':10},{'BAB':9,'Fort':6,'Ref':6,'Will':11},{'BAB':9,'Fort':6,'Ref':6,'Will':11},{'BAB':10,'Fort':6,'Ref':6,'Will':12}]");
-		File.WriteAllText(Path.Combine(_resourcesPath, "BarbarianCT.json"), "[{'BAB':1,'Fort':2,'Ref':0,'Will':0},{'BAB':2,'Fort':3,'Ref':0,'Will':0},{'BAB':3,'Fort':3,'Ref':1,'Will':1},{'BAB':4,'Fort':4,'Ref':1,'Will':1},{'BAB':5,'Fort':4,'Ref':1,'Will':1},{'BAB':6,'Fort':5,'Ref':2,'Will':2},{'BAB':7,'Fort':5,'Ref':2,'Will':2},{'BAB':8,'Fort':6,'Ref':2,'Will':2},{'BAB':9,'Fort':6,'Ref':3,'Will':3},{'BAB':10,'Fort':7,'Ref':3,'Will':3},{'BAB':11,'Fort':7,'Ref':3,'Will':3},{'BAB':12,'Fort':8,'Ref':4,'Will':4},{'BAB':13,'Fort':8,'Ref':4,'Will':4},{'BAB':14,'Fort':9,'Ref':4,'Will':4},{'BAB':15,'Fort':9,'Ref':5,'Will':5},{'BAB':16,'Fort':10,'Ref':5,'Will':5},{'BAB':17,'Fort':10,'Ref':5,'Will':5},{'BAB':18,'Fort':11,'Ref':6,'Will':6},{'BAB':19,'Fort':11,'Ref':6,'Will':6},{'BAB':20,'Fort':12,'Ref':6,'Will':6}]");
-		
-		
+		var combatTable = JsonSerializer.Deserialize<CombatTableRow[]>(File.ReadAllText(path));
+		if (combatTable == null) return;
+		PlayerDataManager.Instance.Player.CombatInfo.BaseAttackBonus = combatTable[0].BAB;
+		PlayerDataManager.Instance.Player.CombatInfo.Fortitude = combatTable[0].Fort;
+		PlayerDataManager.Instance.Player.CombatInfo.Reflex = combatTable[0].Ref;
+		PlayerDataManager.Instance.Player.CombatInfo.Will = combatTable[0].Will;
 	}
 
 	public static GameData LoadGameData() {
