@@ -106,20 +106,91 @@ public class PlayerDataManager {
 			_ => throw new ArgumentException()
 		};
 		FileManager.CreateCombatTable();
+		
+		RegisterAlignment();
 	}
 
-	private Alignment RegisterAlignment(Alignment[] alignments) {
-		Console.WriteLine("Please choose your alignment:");
-		foreach (var a in alignments) {
-			Console.WriteLine(a);
-		}
-		return Alignment.Neutral;
+	private void RegisterAlignment() {
+		var alignmentIn = "";
+        switch (Player.PlayerInfo.Class){
+            case Class.Barbarian: {
+                Console.WriteLine("Please Select An Alignment:\nNeutralGood\nChaoticGood\nNeutral\nChaoticNeutral\nNeutralEvil\nChaoticEvil");
+                alignmentIn = Console.ReadLine();
+                Player.PlayerInfo.Alignment = alignmentIn.ToUpper() switch {
+	                "NEUTRALGOOD" => Alignment.NeutralGood,
+	                "CHAOTICGOOD" => Alignment.ChaoticGood,
+	                "NEUTRAL" => Alignment.Neutral,
+	                "CHAOTICNEUTRAL" => Alignment.ChaoticNeutral,
+	                "NEUTRALEVIL" => Alignment.NeutralEvil,
+	                "CHAOTICEVIL" => Alignment.ChaoticEvil,
+	                _ => Player.PlayerInfo.Alignment
+                };
+                break;
+            }
+	        case Class.Alchemist: case Class.Bard: case Class.Cavalier: case Class.Cleric: case Class.Fighter: case Class.Oracle: case Class.Ranger: case Class.Rogue: case Class.Sorcerer: case Class.Summoner: case Class.Witch: case Class.Wizard:
+                Console.WriteLine("Please Select An Alignment:\nLawfulGood\nNeutralGood\nChaoticGood\nLawfulNeutral\nNeutral\nChaoticNeutral\nLawfulEvil\nNeutralEvil\nChaoticEvil");
+                alignmentIn = Console.ReadLine().ToUpper();
+                Player.PlayerInfo.Alignment = alignmentIn switch {
+	                "LAWFULGOOD" => Player.PlayerInfo.Alignment = Alignment.LawfulGood,
+	                "NEUTRALGOOD" => Player.PlayerInfo.Alignment = Alignment.NeutralGood,
+	                "CHAOTICGOOD" => Player.PlayerInfo.Alignment = Alignment.ChaoticGood,
+	                "LAWFULNEUTRAL" => Player.PlayerInfo.Alignment = Alignment.LawfulNeutral,
+	                "NEUTRAL" => Player.PlayerInfo.Alignment = Alignment.Neutral,
+	                "CHAOTICNEUTRAL" => Player.PlayerInfo.Alignment = Alignment.ChaoticNeutral,
+	                "LAWFULEVIL" => Player.PlayerInfo.Alignment = Alignment.LawfulEvil,
+	                "NEUTRALEVIL" => Player.PlayerInfo.Alignment = Alignment.NeutralEvil,
+	                "CHAOTICEVIL" => Player.PlayerInfo.Alignment = Alignment.ChaoticEvil,
+	                _ => Player.PlayerInfo.Alignment
+                };
+		        break;
+	        
+            case Class.Druid:
+                Console.WriteLine("Please Select An Alignment:\nNeutralGood\nLawfulNeutral\nNeutral\nChaoticNeutral\nNeutralEvil");
+                alignmentIn = Console.ReadLine().ToUpper();
+                Player.PlayerInfo.Alignment = alignmentIn switch{
+                    "NEUTRALGOOD" => Player.PlayerInfo.Alignment = Alignment.NeutralGood,
+                    "LAWFULNEUTRAL" => Player.PlayerInfo.Alignment = Alignment.LawfulNeutral,
+                    "NEUTRAL" => Player.PlayerInfo.Alignment = Alignment.Neutral,
+                    "CHAOTICNEUTRAL" => Player.PlayerInfo.Alignment = Alignment.ChaoticNeutral,
+                    "NEUTRALEVIL" => Player.PlayerInfo.Alignment = Alignment.NeutralEvil,
+                    _ => Player.PlayerInfo.Alignment
+                } ;
+	            break;
+            
+            case Class.Monk:
+                Console.WriteLine("Please Select An Alignment:\nLawfulGood\nLawfulNeutral\nLawfulEvil");
+                alignmentIn = Console.ReadLine().ToUpper();
+                Player.PlayerInfo.Alignment = alignmentIn switch {
+	                "LAWFULGOOD" => Player.PlayerInfo.Alignment = Alignment.LawfulGood,
+	                "LAWFULNEUTRAL" => Player.PlayerInfo.Alignment = Alignment.LawfulNeutral,
+	                "LAWFULEVIL" => Player.PlayerInfo.Alignment = Alignment.LawfulEvil,
+                };
+				break;
+            case Class.Paladin: Player.PlayerInfo.Alignment = Alignment.LawfulGood; break;
+        }
 	}
 
 	#endregion
 	
 	#region Data Calculations
 
+	private void CalculateAbilityModifiers() {
+		int[] abilities = [Player.Attributes.Strength, Player.Attributes.Dexterity, Player.Attributes.Constitution, Player.Attributes.Intelligence, Player.Attributes.Wisdom, Player.Attributes.Charisma];
+		var abilityMods = new int[6];
+		
+		for (var i = 0; i < abilities.Length; i++) {
+			double value = abilities[i];
+			abilityMods[i] = (int)Math.Floor((value - 10) / 2);
+		}
+		
+		Player.AttributeModifiers.Strength =     abilityMods[abilityMods[0]];
+		Player.AttributeModifiers.Dexterity =    abilityMods[abilityMods[1]];
+		Player.AttributeModifiers.Constitution = abilityMods[abilityMods[2]];
+		Player.AttributeModifiers.Intelligence = abilityMods[abilityMods[3]];
+		Player.AttributeModifiers.Wisdom =   	 abilityMods[abilityMods[4]];
+		Player.AttributeModifiers.Charisma = 	 abilityMods[abilityMods[5]];
+	}
+	
 	private void CalculateInitMod() {
 		var init = 0;
 

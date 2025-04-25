@@ -10,5 +10,5 @@ public class Player {
 	public Attributes Attributes = new Attributes();
 	public Attributes AttributeModifiers = new Attributes();
 	public CombatInfo CombatInfo = new CombatInfo();
-	public Wallet Wallet;
+	public Wallet Wallet = new Wallet();
 }
