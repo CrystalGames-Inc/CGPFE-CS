@@ -2,18 +2,18 @@
 
 namespace CGPFE.God.Creation.Player.Properties;
 
-public struct PlayerInfo {
-	public string Name;
-	public Gender Gender;
-	public Alignment Alignment;
-	public int Age;
-	public Race Race;
-	public Size Size;
-	public int SizeMod;
-	public Class Class;
+public class PlayerInfo {
+	public string Name { get; set; }
+	public Gender Gender { get; set; }
+	public Alignment Alignment { get; set; }
+	public int Age { get; set; }
+	public Race Race { get; set; }
+	public Size Size { get; set; }
+	public int SizeMod { get; set; }
+	public Class Class { get; set; }
 	
-	public int Level;
-	public int Xp;
-	public int MaxHealth;
-	public int Health;
+	public int Level { get; set; }
+	public int Xp { get; set; }
+	public int MaxHealth { get; set; }
+	public int Health { get; set; }
 }

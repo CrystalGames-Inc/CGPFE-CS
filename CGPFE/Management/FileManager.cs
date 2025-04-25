@@ -2,6 +2,8 @@
 using CGPFE.Data.Constants;
 using CGPFE.Data.Game;
 using CGPFE.God.Creation.General;
+using CGPFE.God.Creation.Player;
+using CGPFE.God.Creation.Player.Properties;
 
 namespace CGPFE.Management;
 
@@ -19,8 +21,14 @@ public static class FileManager {
 	private static string _playerPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
 	private const string GameDataFileName = "Settings.json";
 	private static string _campaignPath = string.Empty;
+	
+	/*Player Data File Names*/
+	private const string PlayerInfoFileName = "PlayerInfo.json";
+	private const string AttributesFileName = "PlayerAttributes.json";
+	private const string AttributeModsFileName = "PlayerAttributeMods.json";
+	
 
-	#region Campaign Data Management
+	#region Campaign File Management
 	
 	public static GameData NewGameData() {
 		var g = GameData.RegisterGameData();
@@ -57,7 +65,44 @@ public static class FileManager {
 		Directory.CreateDirectory(_playerPath);
 	}
 
-	public static void CreateCombatTable() {
+	public static GameData LoadGameData() {
+		var campaigns = Directory.GetDirectories(SavesPath);
+
+		for (var i = 0; i < campaigns.Length; i++) 
+			campaigns[i] = campaigns[i].Split("\\").Last();
+
+		Console.WriteLine("Choose campaign to load: ");
+		for(var i = 0; i < campaigns.Length; i++)
+			Console.WriteLine($"{i + 1}. {campaigns[i]}");
+		
+		var loadedCampaign = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+
+		if (loadedCampaign < 1 || loadedCampaign > campaigns.Length)
+			throw new IndexOutOfRangeException();
+		
+		var filePath = Path.Combine(SavesPath, campaigns[loadedCampaign - 1], GameDataFileName);
+		var g = JsonSerializer.Deserialize<GameData>(File.ReadAllText(filePath), Options)!;
+		
+		return g;
+	}
+	
+	#endregion
+	
+	#region Player File Management
+	
+	public static void WritePlayerData() {
+		WritePlayerInfo();
+		WritePlayerAttributes();
+		WritePlayerAttributeMods();
+	}
+
+	public static void LoadPlayerData() {
+		PlayerDataManager.Instance.Player.PlayerInfo = LoadPlayerInfo();
+		PlayerDataManager.Instance.Player.Attributes = LoadPlayerAttributes();
+		PlayerDataManager.Instance.Player.AttributeModifiers = LoadPlayerAttributeMods();
+	}
+	
+		public static void CreateCombatTable() {
 		var path = Path.Combine(_playerPath, "CombatTable.json");
 		File.Create(path).Dispose();
 		switch (PlayerDataManager.Instance.Player.PlayerInfo.Class) {
@@ -121,31 +166,55 @@ public static class FileManager {
 		PlayerDataManager.Instance.Player.CombatInfo.Reflex = combatTable[0].Ref;
 		PlayerDataManager.Instance.Player.CombatInfo.Will = combatTable[0].Will;
 	}
+	
+	private static void WritePlayerInfo() {
+		var path = Path.Combine(_playerPath, PlayerInfoFileName);
+		File.Create(path).Dispose();
+		var json = JsonSerializer.Serialize(PlayerDataManager.Instance.Player.PlayerInfo, Options);
+		File.WriteAllText(path, json);
 
-	public static GameData LoadGameData() {
-		var campaigns = Directory.GetDirectories(SavesPath);
+		Console.WriteLine($"Player Info successfully written to {path}");
+	}
 
-		for (var i = 0; i < campaigns.Length; i++) 
-			campaigns[i] = campaigns[i].Split("\\").Last();
+	private static PlayerInfo LoadPlayerInfo() {
+		var path = Path.Combine(_playerPath, PlayerInfoFileName);
+		var json = File.ReadAllText(path);
+		return JsonSerializer.Deserialize<PlayerInfo>(json, Options)!;
+	}
 
-		Console.WriteLine("Choose campaign to load: ");
-		for(var i = 0; i < campaigns.Length; i++)
-			Console.WriteLine($"{i + 1}. {campaigns[i]}");
+	private static void WritePlayerAttributes() {
+		var path = Path.Combine(_playerPath, AttributesFileName);
+		File.Create(path).Dispose();
+		var json = JsonSerializer.Serialize(PlayerDataManager.Instance.Player.Attributes, Options);
+		File.WriteAllText(path, json);
+
+		Console.WriteLine($"Successfully written player attributes to {path}");
+	}
+
+	private static Attributes LoadPlayerAttributes() {
+		var path = Path.Combine(_playerPath, AttributesFileName);
+		var json = File.ReadAllText(path);
+		return JsonSerializer.Deserialize<Attributes>(json, Options)!;
+	}
+
+	private static void WritePlayerAttributeMods() {
+		var path = Path.Combine(_playerPath, AttributeModsFileName);
+		File.Create(path).Dispose();
+		var json = JsonSerializer.Serialize(PlayerDataManager.Instance.Player.AttributeModifiers, Options);
+		File.WriteAllText(path, json);
 		
-		var loadedCampaign = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
-
-		if (loadedCampaign < 1 || loadedCampaign > campaigns.Length)
-			throw new IndexOutOfRangeException();
-		
-		var filePath = Path.Combine(SavesPath, campaigns[loadedCampaign - 1], GameDataFileName);
-		var g = JsonSerializer.Deserialize<GameData>(File.ReadAllText(filePath), Options)!;
-		
-		return g;
+		Console.WriteLine($"Successfully written player attribute mods to {path}");
+	}
+	
+	private static Attributes LoadPlayerAttributeMods() {
+		var path = Path.Combine(_playerPath, AttributeModsFileName);
+		var json = File.ReadAllText(path);
+		return JsonSerializer.Deserialize<Attributes>(json, Options)!;
 	}
 	
 	#endregion
 
-	#region General Data Management
+	#region General File Management
 	
 	public static void CreateJsonFile(object obj, string path) {
 			var jsonString = JsonSerializer.Serialize(obj, Options);

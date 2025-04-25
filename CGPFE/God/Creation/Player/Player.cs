@@ -6,9 +6,9 @@ using CGPFE.God.Creation.Player.Properties;
 namespace CGPFE.God.Creation.Player;
 
 public class Player {
-	public PlayerInfo PlayerInfo;
-	public Attributes Attributes = new Attributes();
-	public Attributes AttributeModifiers = new Attributes();
-	public CombatInfo CombatInfo = new CombatInfo();
-	public Wallet Wallet = new Wallet();
+	public PlayerInfo PlayerInfo = new();
+	public Attributes Attributes = new();
+	public Attributes AttributeModifiers = new();
+	public CombatInfo CombatInfo = new();
+	public Wallet Wallet = new();
 }

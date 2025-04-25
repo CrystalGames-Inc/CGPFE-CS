@@ -34,6 +34,9 @@ public class PlayerDataManager {
 		//TODO add the rest of the registration & calculation methods here :)
 		
 		CalculatePlayerCombatInfo();
+		CalculateAbilityModifiers();
+		
+		FileManager.WritePlayerData();
 	}
 
 	private void RegisterPlayerName() {
@@ -183,12 +186,14 @@ public class PlayerDataManager {
 			abilityMods[i] = (int)Math.Floor((value - 10) / 2);
 		}
 		
-		Player.AttributeModifiers.Strength =     abilityMods[abilityMods[0]];
-		Player.AttributeModifiers.Dexterity =    abilityMods[abilityMods[1]];
-		Player.AttributeModifiers.Constitution = abilityMods[abilityMods[2]];
-		Player.AttributeModifiers.Intelligence = abilityMods[abilityMods[3]];
-		Player.AttributeModifiers.Wisdom =   	 abilityMods[abilityMods[4]];
-		Player.AttributeModifiers.Charisma = 	 abilityMods[abilityMods[5]];
+		Player.AttributeModifiers.Strength =     abilityMods[0];
+		Player.AttributeModifiers.Dexterity =    abilityMods[1];
+		Player.AttributeModifiers.Constitution = abilityMods[2];
+		Player.AttributeModifiers.Intelligence = abilityMods[3];
+		Player.AttributeModifiers.Wisdom =   	 abilityMods[4];
+		Player.AttributeModifiers.Charisma = 	 abilityMods[5];
+		
+		CalculateInitMod();
 	}
 	
 	private void CalculateInitMod() {
