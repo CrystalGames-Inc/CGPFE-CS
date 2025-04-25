@@ -12,11 +12,11 @@ public static class FileManager {
 	};
 	
 	private static readonly string SavesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	public static string GameDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	public static string ResourcesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	public static string WorldPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	public static string NpCsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	public static string PlayerPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
+	private static string _gameDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
+	private static string _resourcesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
+	private static string _worldPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
+	private static string _npCsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
+	private static string _playerPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
 	private const string GameDataFileName = "Settings.json";
 	private static string _campaignPath = string.Empty;
 
@@ -31,7 +31,7 @@ public static class FileManager {
 		
 		if(!Directory.Exists(_campaignPath))
 			Directory.CreateDirectory(_campaignPath);
-		var gameDataPath = Path.Combine(GameDataPath, GameDataFileName);
+		var gameDataPath = Path.Combine(_gameDataPath, GameDataFileName);
 		
 		CreateJsonFile(g, gameDataPath);
 		
@@ -40,24 +40,25 @@ public static class FileManager {
 
 	private static void UpdatePaths(string campaignName) {
 		_campaignPath = Path.Combine(SavesPath, campaignName);
-		GameDataPath = Path.Combine(_campaignPath, "Game");
-		ResourcesPath = Path.Combine(_campaignPath, "Resources");
-		WorldPath = Path.Combine(_campaignPath, "World");
-		NpCsPath = Path.Combine(_campaignPath, "NPCs");
-		PlayerPath = Path.Combine(_campaignPath, "Player");
+		_gameDataPath = Path.Combine(_campaignPath, "Game");
+		_resourcesPath = Path.Combine(_campaignPath, "Resources");
+		_worldPath = Path.Combine(_campaignPath, "World");
+		_npCsPath = Path.Combine(_campaignPath, "NPCs");
+		_playerPath = Path.Combine(_campaignPath, "Player");
+		
 		CreateGameDirectories();
 	}
 	
 	private static void CreateGameDirectories() {
-		Directory.CreateDirectory(GameDataPath);
-		Directory.CreateDirectory(ResourcesPath);
-		Directory.CreateDirectory(WorldPath);
-		Directory.CreateDirectory(NpCsPath);
-		Directory.CreateDirectory(PlayerPath);
+		Directory.CreateDirectory(_gameDataPath);
+		Directory.CreateDirectory(_resourcesPath);
+		Directory.CreateDirectory(_worldPath);
+		Directory.CreateDirectory(_npCsPath);
+		Directory.CreateDirectory(_playerPath);
 	}
 
 	public static void CreateCombatTable() {
-		var path = Path.Combine(PlayerPath, "CombatTable.json");
+		var path = Path.Combine(_playerPath, "CombatTable.json");
 		File.Create(path).Dispose();
 		switch (PlayerDataManager.Instance.Player.PlayerInfo.Class) {
 			case Class.Alchemist:
