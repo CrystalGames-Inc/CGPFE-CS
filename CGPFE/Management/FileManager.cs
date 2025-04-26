@@ -31,40 +31,19 @@ public static class FileManager {
 	#region Campaign File Management
 	
 	public static GameData NewGameData() {
-		var g = GameData.RegisterGameData();
+		GameDataManager.Instance.GameData = GameDataManager.Instance.RegisterGameData();
 		
-		UpdatePaths(g.CampaignName);
-		
-		GameData.AskNewCharacter();
+		GameDataManager.Instance.AskNewCharacter();
 		
 		if(!Directory.Exists(_campaignPath))
 			Directory.CreateDirectory(_campaignPath);
 		var gameDataPath = Path.Combine(_gameDataPath, GameDataFileName);
 		
-		CreateJsonFile(g, gameDataPath);
+		CreateJsonFile(GameDataManager.Instance.GameData, gameDataPath);
 		
-		return g;
-	}
-
-	private static void UpdatePaths(string campaignName) {
-		_campaignPath = Path.Combine(SavesPath, campaignName);
-		_gameDataPath = Path.Combine(_campaignPath, "Game");
-		_resourcesPath = Path.Combine(_campaignPath, "Resources");
-		_worldPath = Path.Combine(_campaignPath, "World");
-		_npCsPath = Path.Combine(_campaignPath, "NPCs");
-		_playerPath = Path.Combine(_campaignPath, "Player");
-		
-		CreateGameDirectories();
+		return GameDataManager.Instance.GameData;
 	}
 	
-	private static void CreateGameDirectories() {
-		Directory.CreateDirectory(_gameDataPath);
-		Directory.CreateDirectory(_resourcesPath);
-		Directory.CreateDirectory(_worldPath);
-		Directory.CreateDirectory(_npCsPath);
-		Directory.CreateDirectory(_playerPath);
-	}
-
 	public static GameData LoadGameData() {
 		var campaigns = Directory.GetDirectories(SavesPath);
 
@@ -85,7 +64,26 @@ public static class FileManager {
 		
 		return g;
 	}
+
+	public static void UpdatePaths(string campaignName) {
+		_campaignPath = Path.Combine(SavesPath, campaignName);
+		_gameDataPath = Path.Combine(_campaignPath, "Game");
+		_resourcesPath = Path.Combine(_campaignPath, "Resources");
+		_worldPath = Path.Combine(_campaignPath, "World");
+		_npCsPath = Path.Combine(_campaignPath, "NPCs");
+		_playerPath = Path.Combine(_campaignPath, "Player");
+		
+		CreateGameDirectories();
+	}
 	
+	private static void CreateGameDirectories() {
+		Directory.CreateDirectory(_gameDataPath);
+		Directory.CreateDirectory(_resourcesPath);
+		Directory.CreateDirectory(_worldPath);
+		Directory.CreateDirectory(_npCsPath);
+		Directory.CreateDirectory(_playerPath);
+	}
+
 	#endregion
 	
 	#region Player File Management
