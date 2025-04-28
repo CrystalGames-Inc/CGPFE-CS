@@ -59,7 +59,8 @@ public static class FileManager {
 		if (loadedCampaign < 1 || loadedCampaign > campaigns.Length)
 			throw new IndexOutOfRangeException();
 		
-		var filePath = Path.Combine(SavesPath, campaigns[loadedCampaign - 1], GameDataFileName);
+		var filePath = Path.Combine(SavesPath, campaigns[loadedCampaign - 1], "Game", GameDataFileName);
+		UpdatePaths(campaigns[loadedCampaign - 1]);
 		var g = JsonSerializer.Deserialize<GameData>(File.ReadAllText(filePath), Options)!;
 		
 		return g;
@@ -94,13 +95,19 @@ public static class FileManager {
 		WritePlayerAttributeMods();
 	}
 
-	public static void LoadPlayerData() {
+	public static Player LoadPlayerData() {
 		PlayerDataManager.Instance.Player.PlayerInfo = LoadPlayerInfo();
 		PlayerDataManager.Instance.Player.Attributes = LoadPlayerAttributes();
 		PlayerDataManager.Instance.Player.AttributeModifiers = LoadPlayerAttributeMods();
+
+		return new Player() {
+			PlayerInfo = PlayerDataManager.Instance.Player.PlayerInfo,
+			Attributes = PlayerDataManager.Instance.Player.Attributes,
+			AttributeModifiers = PlayerDataManager.Instance.Player.AttributeModifiers
+		};
 	}
 	
-		public static void CreateCombatTable() {
+	public static void CreateCombatTable() {
 		var path = Path.Combine(_playerPath, "CombatTable.json");
 		File.Create(path).Dispose();
 		switch (PlayerDataManager.Instance.Player.PlayerInfo.Class) {

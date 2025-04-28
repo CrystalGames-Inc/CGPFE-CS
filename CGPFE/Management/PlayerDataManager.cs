@@ -263,42 +263,4 @@ public class PlayerDataManager {
 	}
 	
 	#endregion
-	
-	#region Stat Displays
-
-	public void DisplayAttributes() {
-		Console.WriteLine("Attributes: ");
-		Console.WriteLine($"  Strength: {Player.Attributes.Strength}");
-		Console.WriteLine($"  Dexterity: {Player.Attributes.Dexterity}");
-		Console.WriteLine($"  Constitution: {Player.Attributes.Constitution}");
-		Console.WriteLine($"  Intelligence: {Player.Attributes.Intelligence}");
-		Console.WriteLine($"  Wisdom: {Player.Attributes.Wisdom}");
-		Console.WriteLine($"  Charisma: {Player.Attributes.Charisma}");
-		Console.WriteLine($"  Move Speed: {Player.Attributes.MoveSpeed}");
-	}
-
-	public void DisplayAttributeMods() {
-		Console.WriteLine("Attribute Modifiers: ");
-		Console.WriteLine($"  Strength: {Player.AttributeModifiers.Strength}");
-		Console.WriteLine($"  Dexterity: {Player.AttributeModifiers.Dexterity}");
-		Console.WriteLine($"  Constitution: {Player.AttributeModifiers.Constitution}");
-		Console.WriteLine($"  Intelligence: {Player.AttributeModifiers.Intelligence}");
-		Console.WriteLine($"  Wisdom: {Player.AttributeModifiers.Wisdom}");
-		Console.WriteLine($"  Charisma: {Player.AttributeModifiers.Charisma}");
-		Console.WriteLine($"  Move Speed: {Player.AttributeModifiers.MoveSpeed}");
-	}
-
-	public void DisplayCombatInfo() {
-		Console.WriteLine("Combat Info: ");
-		Console.WriteLine($"  Init Modifier: {Player.CombatInfo.InitMod}");
-		Console.WriteLine($"  Base Attack Bonus: {Player.CombatInfo.BaseAttackBonus}");
-		Console.WriteLine($"  Fortitude: {Player.CombatInfo.Fortitude}");
-		Console.WriteLine($"  Reflex: {Player.CombatInfo.Reflex}");
-		Console.WriteLine($"  Will: {Player.CombatInfo.Will}");
-		Console.WriteLine($"  CMB: {Player.CombatInfo.CombatManeuverBonus}");
-		Console.WriteLine($"  CMD: {Player.CombatInfo.CombatManeuverDefense}");
-		Console.WriteLine($"  Armor Class:  {Player.CombatInfo.ArmorClass}");
-	}
-	
-	#endregion
 }
