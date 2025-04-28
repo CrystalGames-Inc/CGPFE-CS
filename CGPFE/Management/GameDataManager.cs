@@ -18,65 +18,39 @@ public class GameDataManager {
 			return _instance;
 		}
 	}
-	
-	
-	public void DisplayGameData() {
-		Console.WriteLine($"Campaign Name: {GameData.CampaignName}");
-		switch (GameData.GameFantasty) {
-			case 0:
-				Console.WriteLine($"Game Fantasty: {Fantasty.Low}");
-				break;
-			case 1:
-				Console.WriteLine($"Game Fantasty: {Fantasty.Standard}");
-				break;
-			case 2:
-				Console.WriteLine($"Game Fantasty: {Fantasty.High}");
-				break;
-			case 3:
-				Console.WriteLine($"Game Fantasty: {Fantasty.Epic}");
-				break;
-		}
-
-		switch (GameData.GameSpeed) {
-			case 0:
-				Console.WriteLine($"Game Speed: {GameSpeed.Slow}");
-				break;
-			case 1:
-				Console.WriteLine($"Game Speed: {GameSpeed.Medium}");
-				break;
-			case 2:
-				Console.WriteLine($"Game Speed: {GameSpeed.Fast}");
-				break;
-		}
-
-		switch (GameData.AbilityScoreType) {
-			case 0:
-				Console.WriteLine($"Initial Point Distribution: {AbilityScoreType.Standard}");
-				break;
-			case 1:
-				Console.WriteLine($"Initial Point Distribution: {AbilityScoreType.Classic}");
-				break;
-			case 2:
-				Console.WriteLine($"Initial Point Distribution: {AbilityScoreType.Heroic}");
-				break;
-			case 3:
-				Console.WriteLine($"Initial Point Distribution: {AbilityScoreType.Purchase}");
-				break;
-		}
-	}
 
 	public GameData RegisterGameData() {
 		Console.WriteLine("Please choose the campaign's name: ");
 		GameData.CampaignName = Console.ReadLine();
 
-		Console.WriteLine("Please choose a game fantasty:\nLow - 1\nStandard - 2\nHigh - 3\nEpic - 4");
-		GameData.GameFantasty = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException()) - 1;
+		Console.WriteLine("Please choose a game fantasty:\nLow - 1\nStandard - 2\nHigh - 3\nEpic - 4 (Default - Standard)");
+		var fantasty = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException()) - 1;
+		GameData.GameFantasty = fantasty switch {
+			0 => Fantasty.Low,
+			1 => Fantasty.Standard,
+			2 => Fantasty.High,
+			3 => Fantasty.Epic,
+			_ => Fantasty.Standard
+		};
 		
-		Console.WriteLine("Please choose the game speed:\nSlow - 1\nMedium - 2\nFast - 3");
-		GameData.GameSpeed = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+		Console.WriteLine("Please choose the game speed:\nSlow - 1\nMedium - 2\nFast - 3 (Default - Medium)");
+		var gameSpeed = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+		GameData.GameSpeed = gameSpeed switch {
+			1 => GameSpeed.Slow,
+			2 => GameSpeed.Medium,
+			3 => GameSpeed.Fast,
+			_ => GameSpeed.Medium
+		};
 
-		Console.WriteLine("Please choose the method of initial point distribution:\nStandard - 1\nClassic - 2\nHeroic - 3\nPurchase - 4");
-		GameData.AbilityScoreType = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+		Console.WriteLine("Please choose the method of initial point distribution:\nStandard - 1\nClassic - 2\nHeroic - 3\nPurchase - 4 ( Default - Standard)");
+		var scoreType = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+		GameData.AbilityScoreType = scoreType switch {
+			1 => AbilityScoreType.Standard,
+			2 => AbilityScoreType.Classic,
+			3 => AbilityScoreType.Heroic,
+			4 => AbilityScoreType.Purchase,
+			_ => AbilityScoreType.Standard
+		};
 		
 		FileManager.UpdatePaths(GameData.CampaignName);
 

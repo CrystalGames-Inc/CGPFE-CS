@@ -32,6 +32,7 @@ public static class FileManager {
 	
 	public static GameData NewGameData() {
 		GameDataManager.Instance.GameData = GameDataManager.Instance.RegisterGameData();
+		CreateGameDirectories();
 		
 		GameDataManager.Instance.AskNewCharacter();
 		
@@ -73,8 +74,6 @@ public static class FileManager {
 		_worldPath = Path.Combine(_campaignPath, "World");
 		_npCsPath = Path.Combine(_campaignPath, "NPCs");
 		_playerPath = Path.Combine(_campaignPath, "Player");
-		
-		CreateGameDirectories();
 	}
 	
 	private static void CreateGameDirectories() {
@@ -96,6 +95,11 @@ public static class FileManager {
 	}
 
 	public static Player LoadPlayerData() {
+		if (!Directory.EnumerateFiles(_playerPath).Any()) {
+			Console.WriteLine("No player found to load, returning null");
+			return null;
+		}
+		
 		PlayerDataManager.Instance.Player.PlayerInfo = LoadPlayerInfo();
 		PlayerDataManager.Instance.Player.Attributes = LoadPlayerAttributes();
 		PlayerDataManager.Instance.Player.AttributeModifiers = LoadPlayerAttributeMods();
@@ -229,16 +233,15 @@ public static class FileManager {
 				var ans = Console.ReadLine() ?? throw new InvalidOperationException();
 				if (string.Equals(ans, "N", StringComparison.OrdinalIgnoreCase))
 					return;
-				if (string.Equals(ans, "Y", StringComparison.OrdinalIgnoreCase)) {
-					try {
-						File.Create(path).Close();
-						File.WriteAllText(path, jsonString);
+				if (!string.Equals(ans, "Y", StringComparison.OrdinalIgnoreCase)) return;
+				try {
+					File.Create(path).Close();
+					File.WriteAllText(path, jsonString);
 
-						Console.WriteLine($"File successfully created at {path}");
-					}
-					catch (Exception e) {
-						Console.WriteLine(e);
-					}
+					Console.WriteLine($"File successfully created at {path}");
+				}
+				catch (Exception e) {
+					Console.WriteLine(e);
 				}
 			} else {
 				File.Create(path).Close();
