@@ -23,7 +23,7 @@ public class GameDataManager {
 		Console.WriteLine("Please choose the campaign's name: ");
 		GameData.CampaignName = Console.ReadLine();
 
-		Console.WriteLine("Please choose a game fantasty:\nLow - 1\nStandard - 2\nHigh - 3\nEpic - 4 (Default - Standard)");
+		Console.WriteLine("Please choose a game fantasty (Default - Standard):\nLow - 1\nStandard - 2\nHigh - 3\nEpic - 4");
 		var fantasty = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException()) - 1;
 		GameData.GameFantasty = fantasty switch {
 			0 => Fantasty.Low,
@@ -33,7 +33,7 @@ public class GameDataManager {
 			_ => Fantasty.Standard
 		};
 		
-		Console.WriteLine("Please choose the game speed:\nSlow - 1\nMedium - 2\nFast - 3 (Default - Medium)");
+		Console.WriteLine("Please choose the game speed (Default - Medium):\nSlow - 1\nMedium - 2\nFast - 3");
 		var gameSpeed = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
 		GameData.GameSpeed = gameSpeed switch {
 			1 => GameSpeed.Slow,
@@ -42,7 +42,7 @@ public class GameDataManager {
 			_ => GameSpeed.Medium
 		};
 
-		Console.WriteLine("Please choose the method of initial point distribution:\nStandard - 1\nClassic - 2\nHeroic - 3\nPurchase - 4 ( Default - Standard)");
+		Console.WriteLine("Please choose the method of initial point distribution ( Default - Standard):\nStandard - 1\nClassic - 2\nHeroic - 3\nPurchase - 4");
 		var scoreType = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
 		GameData.AbilityScoreType = scoreType switch {
 			1 => AbilityScoreType.Standard,
@@ -54,7 +54,7 @@ public class GameDataManager {
 		
 		FileManager.UpdatePaths(GameData.CampaignName);
 
-		return new GameData();
+		return GameData;
 	}
 
 	public void AskNewCharacter() {

@@ -7,13 +7,13 @@ namespace CGPFE.Data.Game;
 
 public class GameData {
 
-	public string CampaignName { get; set; } = "Placeholder";
+	public string CampaignName { get; set; }
 
-	public Fantasty GameFantasty { get; set; } = Fantasty.Standard;
+	public Fantasty GameFantasty { get; set; }
 
-	public GameSpeed GameSpeed { get; set; } = GameSpeed.Medium;
+	public GameSpeed GameSpeed { get; set; }
 
-	public AbilityScoreType AbilityScoreType { get; set; } = AbilityScoreType.Standard;
+	public AbilityScoreType AbilityScoreType { get; set; }
 
 	public GameWorld? GameWorld;
 
@@ -28,9 +28,9 @@ public class GameData {
 		AbilityScoreType = abilityScoreType;
 	}
 
-	public void DisplayGameData() {
-		Console.WriteLine($"Data for Campaign {CampaignName}:");
-		switch (GameFantasty) {
+	public void DisplayGameData(GameData g) {
+		Console.WriteLine($"Data for Campaign {g.CampaignName}:");
+		switch (g.GameFantasty) {
 			case Fantasty.Low:
 				Console.WriteLine("  Game Fantasty: Low");
 			break;
@@ -45,7 +45,7 @@ public class GameData {
 			break;
 		}
 
-		switch (GameSpeed) {
+		switch (g.GameSpeed) {
 			case GameSpeed.Slow:
 				Console.WriteLine("  Game Speed: Slow");
 			break;
@@ -57,7 +57,7 @@ public class GameData {
 			break;
 		}
 
-		switch (AbilityScoreType) {
+		switch (g.AbilityScoreType) {
 			case AbilityScoreType.Standard:
 				Console.WriteLine("  Ability Score Type: Standard");
 			break;
