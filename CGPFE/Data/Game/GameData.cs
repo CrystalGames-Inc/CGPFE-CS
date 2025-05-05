@@ -5,72 +5,34 @@ using CGPFE.World;
 
 namespace CGPFE.Data.Game;
 
-public class GameData {
+public class GameData(
+	string campaignName,
+	Fantasty gameFantasty,
+	GameSpeed gameSpeed,
+	AbilityScoreType abilityScoreType) {
 
-	public string CampaignName { get; set; }
+	public string CampaignName = campaignName;
 
-	public Fantasty GameFantasty { get; set; }
+	public Fantasty GameFantasty = gameFantasty;
 
-	public GameSpeed GameSpeed { get; set; }
+	public GameSpeed GameSpeed = gameSpeed;
 
-	public AbilityScoreType AbilityScoreType { get; set; }
+	public AbilityScoreType AbilityScoreType = abilityScoreType;
 
 	public GameWorld? GameWorld;
 
-	public GameData() {
-		
+	public string GetJson() {
+		return JsonSerializer.Serialize(this);
 	}
 
-	public GameData(string campaignName, Fantasty gameFantasty, GameSpeed gameSpeed, AbilityScoreType abilityScoreType) {
-		CampaignName = campaignName;
-		GameFantasty = gameFantasty;
-		GameSpeed = gameSpeed;
-		AbilityScoreType = abilityScoreType;
-	}
+	public void DisplayGameData() {
+		Console.WriteLine($"Data for Campaign {GameDataManager.Instance.GameData.CampaignName}:");
 
-	public void DisplayGameData(GameData g) {
-		Console.WriteLine($"Data for Campaign {g.CampaignName}:");
-		switch (g.GameFantasty) {
-			case Fantasty.Low:
-				Console.WriteLine("  Game Fantasty: Low");
-			break;
-			case Fantasty.Standard:
-				Console.WriteLine("  Game Fantasty: Standard");
-			break;
-			case Fantasty.High:
-				Console.WriteLine("  Game Fantasty: High");
-			break;
-			case Fantasty.Epic:
-				Console.WriteLine("  Game Fantasty: Epic");
-			break;
-		}
+		Console.WriteLine($"  Game Fantasty: {GameDataManager.Instance.GameData.GameFantasty}");
 
-		switch (g.GameSpeed) {
-			case GameSpeed.Slow:
-				Console.WriteLine("  Game Speed: Slow");
-			break;
-			case GameSpeed.Medium:
-				Console.WriteLine("  Game Speed: Medium");
-			break;
-			case GameSpeed.Fast:
-				Console.WriteLine("  Game Speed: Fast");
-			break;
-		}
+		Console.WriteLine($"  Game Speed: {GameDataManager.Instance.GameData.GameSpeed}");
 
-		switch (g.AbilityScoreType) {
-			case AbilityScoreType.Standard:
-				Console.WriteLine("  Ability Score Type: Standard");
-			break;
-			case AbilityScoreType.Classic:
-				Console.WriteLine("  Ability Score Type: Classic");
-			break;
-			case AbilityScoreType.Heroic:
-				Console.WriteLine("  Ability Score Type: Heroic");
-			break;
-			case AbilityScoreType.Purchase:
-				Console.WriteLine("  Ability Score Type: Purchase");
-			break;
-		}
+		Console.WriteLine($"  Ability Score Type: {GameDataManager.Instance.GameData.AbilityScoreType}");
 	}
 
 }

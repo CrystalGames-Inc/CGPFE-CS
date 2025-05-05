@@ -5,7 +5,7 @@ namespace CGPFE.Management;
 
 public class GameDataManager {
 
-	public GameData GameData = new GameData();
+	public GameData GameData = new GameData("Placeholder", Fantasty.Standard, GameSpeed.Medium, AbilityScoreType.Standard);
 	
 	private static GameDataManager _instance = null;
 	private static readonly object Padlock = new object();

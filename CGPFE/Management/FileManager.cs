@@ -31,7 +31,7 @@ public static class FileManager {
 	#region Campaign File Management
 	
 	public static GameData NewGameData() {
-		GameDataManager.Instance.GameData = GameDataManager.Instance.RegisterGameData();
+		var g = GameDataManager.Instance.RegisterGameData();
 		CreateGameDirectories();
 		
 		GameDataManager.Instance.AskNewCharacter();
@@ -40,9 +40,10 @@ public static class FileManager {
 			Directory.CreateDirectory(_campaignPath);
 		var gameDataPath = Path.Combine(_gameDataPath, GameDataFileName);
 		
-		CreateJsonFile(GameDataManager.Instance.GameData, gameDataPath);
+		CreateJsonFile(gameDataPath, g);
+		GameDataManager.Instance.GameData = g;
 		
-		return GameDataManager.Instance.GameData;
+		return g;
 	}
 	
 	public static GameData LoadGameData() {
@@ -63,6 +64,8 @@ public static class FileManager {
 		var filePath = Path.Combine(SavesPath, campaigns[loadedCampaign - 1], "Game", GameDataFileName);
 		UpdatePaths(campaigns[loadedCampaign - 1]);
 		var g = JsonSerializer.Deserialize<GameData>(File.ReadAllText(filePath), Options)!;
+
+		Console.WriteLine($"Loaded json file from path {filePath}: {File.ReadAllText(filePath)}");
 		
 		return g;
 	}
@@ -224,8 +227,8 @@ public static class FileManager {
 	#endregion
 
 	#region General File Management
-	
-	public static void CreateJsonFile(object obj, string path) {
+
+	private static void CreateJsonFile(string path, object obj) {
 			var jsonString = JsonSerializer.Serialize(obj, Options);
 
 			if (File.Exists(path)) {
@@ -235,7 +238,7 @@ public static class FileManager {
 					return;
 				if (!string.Equals(ans, "Y", StringComparison.OrdinalIgnoreCase)) return;
 				try {
-					File.Create(path).Close();
+					File.Create(path).Dispose();
 					File.WriteAllText(path, jsonString);
 
 					Console.WriteLine($"File successfully created at {path}");
@@ -249,6 +252,30 @@ public static class FileManager {
 
 				Console.WriteLine($"File successfully created at {path}");
 			}
+	}
+	
+	private static void WriteToFile(string path, string data) {
+		if (File.Exists(path)) {
+			Console.WriteLine($"File already exists at {path}\nOverwrite? [Y/N]");
+			var ans = Console.ReadLine() ?? throw new InvalidOperationException();
+			if (string.Equals(ans, "N", StringComparison.OrdinalIgnoreCase))
+				return;
+			if (!string.Equals(ans, "Y", StringComparison.OrdinalIgnoreCase)) return;
+			try {
+				File.Create(path).Close();
+				File.WriteAllText(path, data);
+
+				Console.WriteLine($"File successfully created at {path}");
+			}
+			catch (Exception e) {
+				Console.WriteLine(e);
+			}
+		} else {
+			File.Create(path).Dispose();
+			File.WriteAllText(path, data);
+
+			Console.WriteLine($"File successfully created at {path}");
+		}
 	}
 	
 	#endregion
