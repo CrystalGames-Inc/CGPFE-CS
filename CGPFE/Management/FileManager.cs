@@ -10,8 +10,10 @@ namespace CGPFE.Management;
 public static class FileManager {
 	
 	private static readonly JsonSerializerOptions Options = new JsonSerializerOptions() {
-		WriteIndented = true
+		WriteIndented = false
 	};
+	
+	#region Paths
 	
 	private static readonly string SavesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
 	private static string _gameDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
@@ -22,11 +24,15 @@ public static class FileManager {
 	private const string GameDataFileName = "Settings.json";
 	private static string _campaignPath = string.Empty;
 	
-	/*Player Data File Names*/
+	#endregion
+	
+	#region FileNames
+	
 	private const string PlayerInfoFileName = "PlayerInfo.json";
 	private const string AttributesFileName = "PlayerAttributes.json";
 	private const string AttributeModsFileName = "PlayerAttributeMods.json";
 	
+	#endregion
 
 	#region Campaign File Management
 	
@@ -40,7 +46,7 @@ public static class FileManager {
 			Directory.CreateDirectory(_campaignPath);
 		var gameDataPath = Path.Combine(_gameDataPath, GameDataFileName);
 		
-		CreateJsonFile(gameDataPath, g);
+		SerializeToFile(gameDataPath, g);
 		GameDataManager.Instance.GameData = g;
 		
 		return g;
@@ -63,7 +69,8 @@ public static class FileManager {
 		
 		var filePath = Path.Combine(SavesPath, campaigns[loadedCampaign - 1], "Game", GameDataFileName);
 		UpdatePaths(campaigns[loadedCampaign - 1]);
-		var g = JsonSerializer.Deserialize<GameData>(File.ReadAllText(filePath), Options)!;
+		var jsonString = File.ReadAllText(filePath);
+		GameData g = JsonSerializer.Deserialize<GameData>(jsonString, Options);
 
 		Console.WriteLine($"Loaded json file from path {filePath}: {File.ReadAllText(filePath)}");
 		
@@ -228,7 +235,7 @@ public static class FileManager {
 
 	#region General File Management
 
-	private static void CreateJsonFile(string path, object obj) {
+	private static void SerializeToFile(string path, object obj) {
 			var jsonString = JsonSerializer.Serialize(obj, Options);
 
 			if (File.Exists(path)) {
