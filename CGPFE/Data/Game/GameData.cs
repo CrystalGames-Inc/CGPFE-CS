@@ -9,30 +9,23 @@ public class GameData(
 	string campaignName,
 	Fantasty gameFantasty,
 	GameSpeed gameSpeed,
-	AbilityScoreType abilityScoreType) {
+	AbilityScoreType abilityScoreType)
+{
+	public string CampaignName { get; set; } = campaignName;
+	public Fantasty GameFantasty { get; set; } = gameFantasty;
+	public GameSpeed GameSpeed { get; set; } = gameSpeed;
+	public AbilityScoreType AbilityScoreType { get; set; } = abilityScoreType;
 
-	public string CampaignName = campaignName;
+	public GameWorld? GameWorld { get; set; }
 
-	public Fantasty GameFantasty = gameFantasty;
+	
+	public string GetJson() => JsonSerializer.Serialize(this);
 
-	public GameSpeed GameSpeed = gameSpeed;
-
-	public AbilityScoreType AbilityScoreType = abilityScoreType;
-
-	public GameWorld? GameWorld;
-
-	public string GetJson() {
-		return JsonSerializer.Serialize(this);
+	public void DisplayGameData()
+	{
+		Console.WriteLine($"Data for Campaign {CampaignName}:");
+		Console.WriteLine($"  Game Fantasty: {GameFantasty}");
+		Console.WriteLine($"  Game Speed: {GameSpeed}");
+		Console.WriteLine($"  Ability Score Type: {AbilityScoreType}");
 	}
-
-	public void DisplayGameData() {
-		Console.WriteLine($"Data for Campaign {GameDataManager.Instance.GameData.CampaignName}:");
-
-		Console.WriteLine($"  Game Fantasty: {GameDataManager.Instance.GameData.GameFantasty}");
-
-		Console.WriteLine($"  Game Speed: {GameDataManager.Instance.GameData.GameSpeed}");
-
-		Console.WriteLine($"  Ability Score Type: {GameDataManager.Instance.GameData.AbilityScoreType}");
-	}
-
 }

@@ -9,8 +9,8 @@ namespace CGPFE.Management;
 
 public static class FileManager {
 	
-	private static readonly JsonSerializerOptions Options = new JsonSerializerOptions() {
-		WriteIndented = false
+	private static readonly JsonSerializerOptions Options = new() {
+		WriteIndented = true,
 	};
 	
 	#region Paths
@@ -73,7 +73,11 @@ public static class FileManager {
 		GameData g = JsonSerializer.Deserialize<GameData>(jsonString, Options);
 
 		Console.WriteLine($"Loaded json file from path {filePath}: {File.ReadAllText(filePath)}");
-		
+
+		if (!File.Exists(_playerPath + "\\PlayerInfo.json")) return g;
+		Console.WriteLine("Player data detected, loading player");
+		PlayerDataManager.Instance.Player = LoadPlayerData();
+
 		return g;
 	}
 
@@ -104,7 +108,7 @@ public static class FileManager {
 		WritePlayerAttributeMods();
 	}
 
-	public static Player LoadPlayerData() {
+	private static Player LoadPlayerData() {
 		if (!Directory.EnumerateFiles(_playerPath).Any()) {
 			Console.WriteLine("No player found to load, returning null");
 			return null;

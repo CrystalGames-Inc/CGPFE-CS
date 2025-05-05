@@ -8,7 +8,7 @@ using CGPFE.God.Creation.Player;
 namespace CGPFE.Management;
 
 public class PlayerDataManager {
-	public readonly Player Player = new Player();
+	public Player Player = new Player();
 
 	private static PlayerDataManager _instance = null;
 	private static readonly object Padlock = new object();
