@@ -82,6 +82,8 @@ public class PlayerDataManager {
 			"HUMAN" => Race.Human,
 			_ => Race.None
 		};
+		
+		CalculateRacialBonus();
 	}
 
 	private void RegisterPlayerClass() {
@@ -176,6 +178,64 @@ public class PlayerDataManager {
 	#endregion
 	
 	#region Data Calculations
+
+	private void CalculateRacialBonus() {
+		while (true) {
+			switch (Player.PlayerInfo.Race) {
+				case Race.Dwarf:
+					Player.Attributes.Constitution += 2;
+					Player.Attributes.Wisdom += 2;
+					Player.Attributes.Charisma -= 2;
+					break;
+				case Race.Elf:
+					Player.Attributes.Dexterity += 2;
+					Player.Attributes.Intelligence += 2;
+					Player.Attributes.Constitution -= 2;
+					break;
+				case Race.Gnome:
+					Player.Attributes.Constitution += 2;
+					Player.Attributes.Charisma += 2;
+					Player.Attributes.Strength -= 2;
+					break;
+				case Race.HalfElf:
+				case Race.HalfOrc:
+				case Race.Human:
+					Console.WriteLine("Choose an attribute to enhance by 2:\n1. Strength\n2. Dexterity\n3. Constitution\n4. Intelligence\n5. Wisdom\n6. Charisma");
+					var ans = Convert.ToInt32(Console.ReadLine());
+					switch (ans) {
+						case 1:
+							Player.Attributes.Strength += 2;
+							break;
+						case 2:
+							Player.Attributes.Dexterity += 2;
+							break;
+						case 3:
+							Player.Attributes.Constitution += 2;
+							break;
+						case 4:
+							Player.Attributes.Intelligence += 2;
+							break;
+						case 5:
+							Player.Attributes.Wisdom += 2;
+							break;
+						case 6:
+							Player.Attributes.Charisma += 2;
+							break;
+						default:
+							continue;
+					}
+
+					break;
+				case Race.Halfling:
+					Player.Attributes.Dexterity += 2;
+					Player.Attributes.Charisma += 2;
+					Player.Attributes.Strength -= 2;
+					break;
+			}
+
+			break;
+		}
+	}
 
 	private void CalculateAbilityModifiers() {
 		int[] abilities = [Player.Attributes.Strength, Player.Attributes.Dexterity, Player.Attributes.Constitution, Player.Attributes.Intelligence, Player.Attributes.Wisdom, Player.Attributes.Charisma];
