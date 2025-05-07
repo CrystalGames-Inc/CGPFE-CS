@@ -31,6 +31,7 @@ public class PlayerDataManager {
 		
 		RegisterPlayerRace();
 		RegisterPlayerClass();
+		RegisterPlayerAge();
 		
 		//TODO add the rest of the registration & calculation methods here :)
 		
@@ -215,6 +216,39 @@ public class PlayerDataManager {
 		
 		CalculateMaxHealth();
 		RegisterAlignment();
+	}
+
+	private void RegisterPlayerAge() {
+		switch (Player.PlayerInfo.Race) {
+			case Race.Dwarf:
+				AskAge(40, 450); break;
+			case Race.Elf:
+				AskAge(110, 750); break;
+			case Race.Gnome:
+				AskAge(40, 500); break;
+			case Race.HalfElf:
+				AskAge(20, 185); break;
+			case Race.HalfOrc:
+				AskAge(14, 80); break;
+			case Race.Halfling:
+				AskAge(20, 200); break;
+			case Race.Human:
+				AskAge(15, 110); break;
+		}
+		
+		CalculateAgeEffects();
+	}
+
+	private void AskAge(int minAge, int maxAge) {
+		Console.WriteLine($"Please choose your player's age ({minAge} - {maxAge})");
+		var age = Convert.ToInt32(Console.ReadLine());
+		
+		if (age < minAge || age > maxAge) {
+			Console.WriteLine("Invalid age. Please try again.");
+			AskAge(minAge, maxAge);
+		}
+		
+		Player.PlayerInfo.Age = age;
 	}
 
 	private void RegisterAlignment() {
@@ -436,6 +470,187 @@ public class PlayerDataManager {
 			Class.Witch => 7 + Player.AttributeModifiers.Constitution,
 			Class.Wizard => 7 + Player.AttributeModifiers.Constitution
 		};
+	}
+
+	private void CalculateAgeEffects() {
+		int age = Player.PlayerInfo.Age;
+		switch (Player.PlayerInfo.Race) {
+			case Race.Dwarf:
+				if (age is >= 125 and < 188) {
+					Player.Attributes.Strength -= 1;
+					Player.Attributes.Dexterity -= 1;
+					Player.Attributes.Constitution -= 1;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				} else if (age is >= 188 and < 250) {
+					Player.Attributes.Strength -= 2;
+					Player.Attributes.Dexterity -= 2;
+					Player.Attributes.Constitution -= 2;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				}
+				else {
+					Player.Attributes.Strength -= 3;
+					Player.Attributes.Dexterity -= 3;
+					Player.Attributes.Constitution -= 3;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				}
+			break;
+			case Race.Elf:
+				if (age is >= 175 and < 263) {
+					Player.Attributes.Strength -= 1;
+					Player.Attributes.Dexterity -= 1;
+					Player.Attributes.Constitution -= 1;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				} else if (age is >= 263 and < 350) {
+					Player.Attributes.Strength -= 2;
+					Player.Attributes.Dexterity -= 2;
+					Player.Attributes.Constitution -= 2;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				}
+				else {
+					Player.Attributes.Strength -= 3;
+					Player.Attributes.Dexterity -= 3;
+					Player.Attributes.Constitution -= 3;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				}
+			break;
+			case Race.Gnome:
+				if (age is >= 100 and < 150) {
+					Player.Attributes.Strength -= 1;
+					Player.Attributes.Dexterity -= 1;
+					Player.Attributes.Constitution -= 1;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				} else if (age is >= 150 and < 200) {
+					Player.Attributes.Strength -= 2;
+					Player.Attributes.Dexterity -= 2;
+					Player.Attributes.Constitution -= 2;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				}
+				else {
+					Player.Attributes.Strength -= 3;
+					Player.Attributes.Dexterity -= 3;
+					Player.Attributes.Constitution -= 3;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				}
+			break;
+			case Race.HalfElf:
+				if (age is >= 62 and < 93) {
+					Player.Attributes.Strength -= 1;
+					Player.Attributes.Dexterity -= 1;
+					Player.Attributes.Constitution -= 1;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				} else if (age is >= 93 and < 125) {
+					Player.Attributes.Strength -= 2;
+					Player.Attributes.Dexterity -= 2;
+					Player.Attributes.Constitution -= 2;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				}
+				else {
+					Player.Attributes.Strength -= 3;
+					Player.Attributes.Dexterity -= 3;
+					Player.Attributes.Constitution -= 3;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				}
+			break;
+			case Race.HalfOrc:
+				if (age is >= 30 and < 45) {
+					Player.Attributes.Strength -= 1;
+					Player.Attributes.Dexterity -= 1;
+					Player.Attributes.Constitution -= 1;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				} else if (age is >= 45 and < 60) {
+					Player.Attributes.Strength -= 2;
+					Player.Attributes.Dexterity -= 2;
+					Player.Attributes.Constitution -= 2;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				}
+				else {
+					Player.Attributes.Strength -= 3;
+					Player.Attributes.Dexterity -= 3;
+					Player.Attributes.Constitution -= 3;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				}
+			break;
+			case Race.Halfling:
+				if (age is >= 50 and < 75) {
+					Player.Attributes.Strength -= 1;
+					Player.Attributes.Dexterity -= 1;
+					Player.Attributes.Constitution -= 1;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				} else if (age is >= 75 and < 100) {
+					Player.Attributes.Strength -= 2;
+					Player.Attributes.Dexterity -= 2;
+					Player.Attributes.Constitution -= 2;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				}
+				else {
+					Player.Attributes.Strength -= 3;
+					Player.Attributes.Dexterity -= 3;
+					Player.Attributes.Constitution -= 3;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				}
+			break;
+			case Race.Human:
+				if (age is >= 35 and < 53) {
+					Player.Attributes.Strength -= 1;
+					Player.Attributes.Dexterity -= 1;
+					Player.Attributes.Constitution -= 1;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				} else if (age is >= 53 and < 70) {
+					Player.Attributes.Strength -= 2;
+					Player.Attributes.Dexterity -= 2;
+					Player.Attributes.Constitution -= 2;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				}
+				else {
+					Player.Attributes.Strength -= 3;
+					Player.Attributes.Dexterity -= 3;
+					Player.Attributes.Constitution -= 3;
+					Player.Attributes.Intelligence += 1;
+					Player.Attributes.Wisdom += 1;
+					Player.Attributes.Charisma += 1;
+				}
+			break;
+		}
 	}
 
 	#endregion
