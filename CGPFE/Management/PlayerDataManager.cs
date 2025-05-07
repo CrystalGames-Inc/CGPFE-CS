@@ -2,8 +2,11 @@
 using System.Text.Json;
 using CGPFE.Data.Constants;
 using CGPFE.Data.Game;
+using CGPFE.Data.Game.StoryModifiers;
 using CGPFE.God.Creation.General;
 using CGPFE.God.Creation.Player;
+using CGPFE.Mechanics;
+using Attribute = System.Attribute;
 
 namespace CGPFE.Management;
 
@@ -66,6 +69,50 @@ public class PlayerDataManager {
 			}
 
 			break;
+		}
+	}
+
+	private void RegisterAbilityScores() {
+		
+		List<int> abilityScores = [];
+		
+		switch (GameDataManager.Instance.GameData.AbilityScoreType) {
+			case AbilityScoreType.Standard:
+				for (var i = 0; i < 6; i++) {
+					int[] rolls = [
+						Dice.Roll(6),
+						Dice.Roll(6),
+						Dice.Roll(6),
+						Dice.Roll(6)
+					];
+					abilityScores.Add(rolls.OrderByDescending(x => x).Take(3).Sum());
+				}
+			break;
+			case AbilityScoreType.Classic:
+				for (var i = 0; i < 6; i++) {
+					int[] rolls = [
+						Dice.Roll(6),
+						Dice.Roll(6),
+						Dice.Roll(6)
+					];
+					abilityScores.Add(rolls.Sum());
+				}
+			break;
+			case AbilityScoreType.Heroic:
+				for (var i = 0; i < 6; i++) {
+					int[] rolls = [
+						Dice.Roll(6),
+						Dice.Roll(6),
+						Dice.Roll(6)
+					];
+					abilityScores.Add(rolls.Sum() + 6);
+				}
+			break;
+		}
+
+		Console.WriteLine("The dice results are: ");
+		for (int i = 0; i < 6; i++) {
+			Console.WriteLine(i + 1 + ". " + abilityScores[i]);
 		}
 	}
 

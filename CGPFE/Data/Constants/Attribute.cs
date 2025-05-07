@@ -1,10 +1,10 @@
 ﻿namespace CGPFE.Data.Constants;
 
 public enum Attribute {
-	Strength,
-	Dexterity,
-	Constitution,
-	Intelligence,
-	Wisdom,
-	Charisma
+	Strength = 1,
+	Dexterity = 2,
+	Constitution = 3,
+	Intelligence = 4,
+	Wisdom = 5,
+	Charisma = 6
 }
