@@ -1,12 +1,8 @@
-﻿using System.Net.Mime;
-using System.Text.Json;
-using CGPFE.Data.Constants;
-using CGPFE.Data.Game;
+﻿using CGPFE.Data.Constants;
 using CGPFE.Data.Game.StoryModifiers;
-using CGPFE.God.Creation.General;
 using CGPFE.God.Creation.Player;
 using CGPFE.Mechanics;
-using Attribute = System.Attribute;
+using Attribute = CGPFE.Data.Constants.Attribute;
 
 namespace CGPFE.Management;
 
@@ -30,6 +26,8 @@ public class PlayerDataManager {
 	public void RegisterPlayer() {
 		RegisterPlayerName();
 		RegisterPlayerGender();
+		
+		RegisterAbilityScores();
 		
 		RegisterPlayerRace();
 		RegisterPlayerClass();
@@ -87,7 +85,7 @@ public class PlayerDataManager {
 					];
 					abilityScores.Add(rolls.OrderByDescending(x => x).Take(3).Sum());
 				}
-			break;
+				break;
 			case AbilityScoreType.Classic:
 				for (var i = 0; i < 6; i++) {
 					int[] rolls = [
@@ -109,11 +107,67 @@ public class PlayerDataManager {
 				}
 			break;
 		}
+		
+		Attribute[] attributeOrder = [
+		Attribute.Strength,
+		Attribute.Dexterity,
+		Attribute.Constitution,
+		Attribute.Intelligence,
+		Attribute.Wisdom,
+		Attribute.Charisma
+		];
 
-		Console.WriteLine("The dice results are: ");
-		for (int i = 0; i < 6; i++) {
-			Console.WriteLine(i + 1 + ". " + abilityScores[i]);
+		foreach (var attribute in attributeOrder)
+		{
+			Console.WriteLine("Available scores:");
+			for (int i = 0; i < abilityScores.Count; i++)
+			{
+				Console.WriteLine($"{i + 1}. {abilityScores[i]}");
+			}
+
+			int index;
+			while (true)
+			{
+				Console.Write($"\nSelect the index (1-{abilityScores.Count}) of the score to assign to {attribute}: ");
+				if (int.TryParse(Console.ReadLine(), out index) &&
+				    index >= 1 &&
+				    index <= abilityScores.Count)
+				{
+					break;
+				}
+				Console.WriteLine("Invalid index. Please try again.");
+			}
+
+			int chosenScore = abilityScores[index - 1];
+			abilityScores.RemoveAt(index - 1);
+
+			// Assign the chosen score to the correct property
+			switch (attribute)
+			{
+				case Attribute.Strength:
+					Player.Attributes.Strength = chosenScore;
+					break;
+				case Attribute.Dexterity:
+					Player.Attributes.Dexterity = chosenScore;
+					break;
+				case Attribute.Constitution:
+					Player.Attributes.Constitution = chosenScore;
+					break;
+				case Attribute.Intelligence:
+					Player.Attributes.Intelligence = chosenScore;
+					break;
+				case Attribute.Wisdom:
+					Player.Attributes.Wisdom = chosenScore;
+					break;
+				case Attribute.Charisma:
+					Player.Attributes.Charisma = chosenScore;
+					break;
+			}
+
+			Console.WriteLine($"Assigned {chosenScore} to {attribute}");
 		}
+		
+		CalculateAbilityModifiers();
 	}
 
 	private void RegisterPlayerRace() {
@@ -359,14 +413,6 @@ public class PlayerDataManager {
 		cmd += Player.PlayerInfo.SizeMod;
 		
 		Player.CombatInfo.CombatManeuverDefense = cmd;
-	}
-	
-	#endregion
-	
-	#region Ability Points
-
-	private void RegisterAbilityPoints() {
-		
 	}
 	
 	#endregion
