@@ -85,7 +85,7 @@ public class PlayerDataManager {
 					];
 					abilityScores.Add(rolls.OrderByDescending(x => x).Take(3).Sum());
 				}
-				break;
+			break;
 			case AbilityScoreType.Classic:
 				for (var i = 0; i < 6; i++) {
 					int[] rolls = [
@@ -213,6 +213,7 @@ public class PlayerDataManager {
 		};
 		FileManager.CreateCombatTable();
 		
+		CalculateMaxHealth();
 		RegisterAlignment();
 	}
 
@@ -414,6 +415,28 @@ public class PlayerDataManager {
 		
 		Player.CombatInfo.CombatManeuverDefense = cmd;
 	}
-	
+
+	private void CalculateMaxHealth() {
+		Player.PlayerInfo.MaxHealth = Player.PlayerInfo.Class switch {
+			Class.Alchemist => 9 + Player.AttributeModifiers.Constitution,
+			Class.Barbarian => 13 + Player.AttributeModifiers.Constitution,
+			Class.Bard => 9 + Player.AttributeModifiers.Constitution,
+			Class.Cavalier => 11 + Player.AttributeModifiers.Constitution,
+			Class.Cleric => 9 + Player.AttributeModifiers.Constitution,
+			Class.Druid => 9 + Player.AttributeModifiers.Constitution,
+			Class.Fighter => 11 + Player.AttributeModifiers.Constitution,
+			Class.Inquisitor => 9 + Player.AttributeModifiers.Constitution,
+			Class.Monk => 9 + Player.AttributeModifiers.Constitution,
+			Class.Oracle => 9 + Player.AttributeModifiers.Constitution,
+			Class.Paladin => 11 + Player.AttributeModifiers.Constitution,
+			Class.Ranger => 11 + Player.AttributeModifiers.Constitution,
+			Class.Rogue => 9 + Player.AttributeModifiers.Constitution,
+			Class.Sorcerer => 7 + Player.AttributeModifiers.Constitution,
+			Class.Summoner => 9 + Player.AttributeModifiers.Constitution,
+			Class.Witch => 7 + Player.AttributeModifiers.Constitution,
+			Class.Wizard => 7 + Player.AttributeModifiers.Constitution
+		};
+	}
+
 	#endregion
 }
