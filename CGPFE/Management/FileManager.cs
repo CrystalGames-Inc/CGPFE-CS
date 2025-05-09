@@ -9,28 +9,31 @@ namespace CGPFE.Management;
 
 public static class FileManager {
 	
-	private static readonly JsonSerializerOptions Options = new() {
+	private static readonly JsonSerializerOptions? Options = new() {
 		WriteIndented = true,
 	};
 	
 	#region Paths
 	
-	private static readonly string SavesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	private static string _gameDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	private static string _resourcesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	private static string _worldPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	private static string _npCsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	private static string _playerPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CGPFE");
-	private const string GameDataFileName = "Settings.json";
+	private const string EngineName = "CGPFE";
+	
+	private static readonly string SavesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
+	private static string _gameDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
+	private static string _resourcesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
+	private static string _worldPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
+	private static string _npCsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
+	private static string _playerPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
 	private static string _campaignPath = string.Empty;
 	
 	#endregion
 	
 	#region FileNames
 	
+	private const string GameDataFileName = "Settings.json";
 	private const string PlayerInfoFileName = "PlayerInfo.json";
 	private const string AttributesFileName = "PlayerAttributes.json";
 	private const string AttributeModsFileName = "PlayerAttributeMods.json";
+	private const string WalletFileName = "PlayerWallet.json";
 	
 	#endregion
 
@@ -103,9 +106,10 @@ public static class FileManager {
 	#region Player File Management
 	
 	public static void WritePlayerData() {
-		WritePlayerInfo();
-		WritePlayerAttributes();
-		WritePlayerAttributeMods();
+		WritePlayerProperty(PlayerDataManager.Instance.Player.PlayerInfo, PlayerInfoFileName);
+		WritePlayerProperty(PlayerDataManager.Instance.Player.Attributes, AttributesFileName);
+		WritePlayerProperty(PlayerDataManager.Instance.Player.AttributeModifiers, AttributeModsFileName);
+		WritePlayerProperty(PlayerDataManager.Instance.Player.Wallet, WalletFileName);
 	}
 
 	private static Player LoadPlayerData() {
@@ -113,15 +117,17 @@ public static class FileManager {
 			Console.WriteLine("No player found to load, returning null");
 			return null;
 		}
-		
-		PlayerDataManager.Instance.Player.PlayerInfo = LoadPlayerInfo();
-		PlayerDataManager.Instance.Player.Attributes = LoadPlayerAttributes();
-		PlayerDataManager.Instance.Player.AttributeModifiers = LoadPlayerAttributeMods();
 
-		return new Player() {
+		PlayerDataManager.Instance.Player.PlayerInfo = LoadPlayerProperty<PlayerInfo>(PlayerInfoFileName);
+		PlayerDataManager.Instance.Player.Attributes = LoadPlayerProperty<Attributes>(AttributesFileName);
+		PlayerDataManager.Instance.Player.AttributeModifiers = LoadPlayerProperty<Attributes>(AttributeModsFileName);
+		PlayerDataManager.Instance.Player.Wallet =  LoadPlayerProperty<Wallet>(WalletFileName);
+
+		return new Player {
 			PlayerInfo = PlayerDataManager.Instance.Player.PlayerInfo,
 			Attributes = PlayerDataManager.Instance.Player.Attributes,
-			AttributeModifiers = PlayerDataManager.Instance.Player.AttributeModifiers
+			AttributeModifiers = PlayerDataManager.Instance.Player.AttributeModifiers,
+			Wallet = PlayerDataManager.Instance.Player.Wallet
 		};
 	}
 	
@@ -189,52 +195,27 @@ public static class FileManager {
 		PlayerDataManager.Instance.Player.CombatInfo.Reflex = combatTable[0].Ref;
 		PlayerDataManager.Instance.Player.CombatInfo.Will = combatTable[0].Will;
 	}
-	
-	private static void WritePlayerInfo() {
-		var path = Path.Combine(_playerPath, PlayerInfoFileName);
-		File.Create(path).Dispose();
-		var json = JsonSerializer.Serialize(PlayerDataManager.Instance.Player.PlayerInfo, Options);
-		File.WriteAllText(path, json);
-
-		Console.WriteLine($"Player Info successfully written to {path}");
-	}
 
 	private static PlayerInfo LoadPlayerInfo() {
 		var path = Path.Combine(_playerPath, PlayerInfoFileName);
 		var json = File.ReadAllText(path);
 		return JsonSerializer.Deserialize<PlayerInfo>(json, Options)!;
 	}
-
-	private static void WritePlayerAttributes() {
-		var path = Path.Combine(_playerPath, AttributesFileName);
+	
+	private static void WritePlayerProperty<T>(T o, string fileName) {
+		var path = Path.Combine(_playerPath, fileName);
 		File.Create(path).Dispose();
-		var json = JsonSerializer.Serialize(PlayerDataManager.Instance.Player.Attributes, Options);
-		File.WriteAllText(path, json);
-
-		Console.WriteLine($"Successfully written player attributes to {path}");
-	}
-
-	private static Attributes LoadPlayerAttributes() {
-		var path = Path.Combine(_playerPath, AttributesFileName);
-		var json = File.ReadAllText(path);
-		return JsonSerializer.Deserialize<Attributes>(json, Options)!;
-	}
-
-	private static void WritePlayerAttributeMods() {
-		var path = Path.Combine(_playerPath, AttributeModsFileName);
-		File.Create(path).Dispose();
-		var json = JsonSerializer.Serialize(PlayerDataManager.Instance.Player.AttributeModifiers, Options);
+		var json = JsonSerializer.Serialize(o, Options);
 		File.WriteAllText(path, json);
 		
 		Console.WriteLine($"Successfully written player attribute mods to {path}");
 	}
-	
-	private static Attributes LoadPlayerAttributeMods() {
-		var path = Path.Combine(_playerPath, AttributeModsFileName);
+
+	private static T LoadPlayerProperty<T>(string fileName) {
+		var path = Path.Combine(_playerPath, fileName);
 		var json = File.ReadAllText(path);
-		return JsonSerializer.Deserialize<Attributes>(json, Options)!;
+		return JsonSerializer.Deserialize<T>(json, Options);
 	}
-	
 	#endregion
 
 	#region General File Management

@@ -15,7 +15,7 @@ public class CombatInfo {
 	public Attribute CmbCalcBonus { get; set; } = Attribute.Strength;
 	public int CombatManeuverBonus { get; set; } = 0;
 	public int CombatManeuverDefense { get; set; } = 0;
-	public Weapon[]? Weapons { get; set; } = new Weapon[5];
-	public Armor[]? Armors { get; set; } = new Armor[5];
-	public Shield[]? Shields { get; set; } = new Shield[5];
+	public List<Weapon>? Weapons { get; set; } = [];
+	public List<Armor> Armors { get; set; } = [];
+	public List<Shield> Shields { get; set; } = [];
 }

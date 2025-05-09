@@ -44,4 +44,13 @@ public abstract class Munitions {
 		1,
 		5,
 		1);
+
+	public static List<Ammunition> Munition = [
+		BlowgunDarts,
+		CrossbowBolts,
+		SlingBullets,
+		Arrows,
+		HandCrossbowBolts,
+		RepeatingCrossbowBolts
+	];
 }

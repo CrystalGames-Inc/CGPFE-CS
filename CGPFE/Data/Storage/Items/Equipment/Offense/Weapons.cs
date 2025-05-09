@@ -171,7 +171,7 @@ public abstract class Weapons {
 	
 	#endregion
 
-	public static Weapon[] SimpleWeapons = [
+	public static List<Weapon> SimpleWeapons = [
 		Gauntlet,
 		Dagger,
 		PunchingDagger,
@@ -433,7 +433,7 @@ public abstract class Weapons {
 	
 	#endregion
 
-	public static readonly Weapon[] MartialWeapons = [
+	public static readonly List<Weapon> MartialWeapons = [
 		ThrowingAxe,
 		LightHammer,
 		Handaxe,
@@ -637,7 +637,7 @@ public abstract class Weapons {
 
 	#endregion
 
-	public static readonly Weapon[] ExoticWeapons = [
+	public static readonly List<Weapon> ExoticWeapons = [
 		Kama,
 		Nunchaku,
 		Sai,
@@ -662,4 +662,6 @@ public abstract class Weapons {
 	];
 
 	#endregion
+
+	public static List<Weapon> weapons = SimpleWeapons.Concat(ExoticWeapons).Concat(MartialWeapons).Concat(ExoticWeapons).ToList();
 }

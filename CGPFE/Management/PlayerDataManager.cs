@@ -1,5 +1,7 @@
 ﻿using CGPFE.Data.Constants;
 using CGPFE.Data.Game.StoryModifiers;
+using CGPFE.Data.Models.Item.Equipment.Offense;
+using CGPFE.Data.Storage.Items.Equipment.Offense;
 using CGPFE.God.Creation.Player;
 using CGPFE.Mechanics;
 using Attribute = CGPFE.Data.Constants.Attribute;
@@ -32,6 +34,7 @@ public class PlayerDataManager {
 		RegisterPlayerRace();
 		RegisterPlayerClass();
 		RegisterPlayerAge();
+		RegisterPlayerWealth();
 		
 		//TODO add the rest of the registration & calculation methods here :)
 		
@@ -249,6 +252,62 @@ public class PlayerDataManager {
 		}
 		
 		Player.PlayerInfo.Age = age;
+	}
+
+	private void RegisterPlayerWealth() {
+		var avg = Player.PlayerInfo.Class switch {
+			Class.Alchemist => 105,
+			Class.Barbarian => 105,
+			Class.Bard => 105,
+			Class.Cavalier => 175,
+			Class.Cleric => 140,
+			Class.Druid => 70,
+			Class.Fighter => 175,
+			Class.Inquisitor => 140,
+			Class.Monk => 35,
+			Class.Oracle => 105,
+			Class.Paladin => 175,
+			Class.Ranger => 175,
+			Class.Rogue => 140,
+			Class.Sorcerer => 70,
+			Class.Summoner => 70,
+			Class.Witch => 105,
+			Class.Wizard => 70
+		};
+		
+		Console.WriteLine($"Please choose the way you'd like to get your starter wealth (default - average):\n1. Average (Your class's average is {avg})\n2. Random");
+		var ans = Convert.ToInt32(Console.ReadLine());
+
+		Player.Wallet.GoldPieces = ans switch {
+			1 => avg,
+			2 => Player.PlayerInfo.Class switch {
+				Class.Alchemist => Dice.Roll(6, 3) * 10,
+				Class.Barbarian => Dice.Roll(6, 3) * 10,
+				Class.Bard => Dice.Roll(6, 3) * 10,
+				Class.Cavalier => Dice.Roll(6, 5) * 10,
+				Class.Cleric => Dice.Roll(6, 4) * 10,
+				Class.Druid => Dice.Roll(6, 2) * 10,
+				Class.Fighter => Dice.Roll(6, 5) * 10,
+				Class.Inquisitor => Dice.Roll(6, 4) * 10,
+				Class.Monk => Dice.Roll(6, 1) * 10,
+				Class.Oracle => Dice.Roll(6, 3) * 10,
+				Class.Paladin => Dice.Roll(6, 5) * 10,
+				Class.Ranger => Dice.Roll(6, 5) * 10,
+				Class.Rogue => Dice.Roll(6, 4) * 10,
+				Class.Sorcerer => Dice.Roll(6, 2) * 10,
+				Class.Summoner => Dice.Roll(6, 2) * 10,
+				Class.Witch => Dice.Roll(6, 3) * 10,
+				Class.Wizard => Dice.Roll(6, 2) * 10
+			}
+		};
+		Console.WriteLine($"{Player.Wallet}gp added to your player");
+		Console.WriteLine("Would you like to purchase starting gear? [Y/N] (Default - Y):");
+		var gear = Console.ReadLine().ToUpper();
+		if (gear.Equals("N"))
+			return;
+		else {
+			PurchaseStartingWeapons();
+		}
 	}
 
 	private void RegisterAlignment() {
@@ -653,5 +712,48 @@ public class PlayerDataManager {
 		}
 	}
 
+	#endregion
+	
+	#region Initial item purchase
+
+	private void PurchaseStartingWeapons() {
+		List<Weapon> purchasableWeapons = [];
+		purchasableWeapons.AddRange(Weapons.weapons.Where(weapon => weapon.Cost <= Player.Wallet.GoldPieces));
+
+		Console.WriteLine("Available Weapons:");
+		for (var i = 1; i <= purchasableWeapons.Count; i++) {
+			Console.WriteLine($"{i}. {purchasableWeapons[i - 1].Name} - {purchasableWeapons[i - 1].Cost}gp");
+		}
+
+		while (true) {
+			Console.WriteLine("Please enter the index of the weapon you'd like to purchase (0 to advance to armor and shields): ");
+			var ans = Convert.ToInt32(Console.ReadLine());
+			if (ans == 0) 
+				PurchaseStartingArmor();
+			else if (ans > purchasableWeapons.Count) {
+				Console.WriteLine("Invalid weapon index entered");
+				continue;
+			}
+			Player.CombatInfo.Weapons.Add(purchasableWeapons[ans - 1]);
+
+			Console.WriteLine("Would you like to purchase another weapon? [Y/N] (Default - N)");
+			var again = Console.ReadLine().ToUpper();
+			if(again.Equals("Y"))
+				continue;
+			break;
+		}
+
+		Console.WriteLine("All weapons purchased");
+		Console.WriteLine("Would you like to buy armor and shields? [Y/N] (Default - Y):");
+		var armor = Console.ReadLine().ToUpper();
+		if(armor.Equals("N"))
+			return;
+		PurchaseStartingArmor();
+	}
+
+	private void PurchaseStartingArmor() {
+		
+	}
+	
 	#endregion
 }
