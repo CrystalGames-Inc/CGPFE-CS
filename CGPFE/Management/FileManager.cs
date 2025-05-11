@@ -33,6 +33,7 @@ public static class FileManager {
 	private const string PlayerInfoFileName = "PlayerInfo.json";
 	private const string AttributesFileName = "PlayerAttributes.json";
 	private const string AttributeModsFileName = "PlayerAttributeMods.json";
+	private const string CombatInfoFileName = "CombatInfo.json";
 	private const string WalletFileName = "PlayerWallet.json";
 	
 	#endregion
@@ -110,6 +111,7 @@ public static class FileManager {
 		WritePlayerProperty(PlayerDataManager.Instance.Player.Attributes, AttributesFileName);
 		WritePlayerProperty(PlayerDataManager.Instance.Player.AttributeModifiers, AttributeModsFileName);
 		WritePlayerProperty(PlayerDataManager.Instance.Player.Wallet, WalletFileName);
+		WritePlayerProperty(PlayerDataManager.Instance.Player.CombatInfo, CombatInfoFileName);
 	}
 
 	private static Player LoadPlayerData() {
@@ -122,6 +124,7 @@ public static class FileManager {
 		PlayerDataManager.Instance.Player.Attributes = LoadPlayerProperty<Attributes>(AttributesFileName);
 		PlayerDataManager.Instance.Player.AttributeModifiers = LoadPlayerProperty<Attributes>(AttributeModsFileName);
 		PlayerDataManager.Instance.Player.Wallet =  LoadPlayerProperty<Wallet>(WalletFileName);
+		PlayerDataManager.Instance.Player.CombatInfo = LoadPlayerProperty<CombatInfo>(CombatInfoFileName);
 
 		return new Player {
 			PlayerInfo = PlayerDataManager.Instance.Player.PlayerInfo,
@@ -194,12 +197,6 @@ public static class FileManager {
 		PlayerDataManager.Instance.Player.CombatInfo.Fortitude = combatTable[0].Fort;
 		PlayerDataManager.Instance.Player.CombatInfo.Reflex = combatTable[0].Ref;
 		PlayerDataManager.Instance.Player.CombatInfo.Will = combatTable[0].Will;
-	}
-
-	private static PlayerInfo LoadPlayerInfo() {
-		var path = Path.Combine(_playerPath, PlayerInfoFileName);
-		var json = File.ReadAllText(path);
-		return JsonSerializer.Deserialize<PlayerInfo>(json, Options)!;
 	}
 	
 	private static void WritePlayerProperty<T>(T o, string fileName) {

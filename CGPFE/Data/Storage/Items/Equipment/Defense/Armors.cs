@@ -54,6 +54,13 @@ public class Armors {
 		[30,20],
 		25);
 
+	public static List<Armor> LightArmors = [
+		PaddedArmor,
+		LeatherArmor,
+		StuddedLeatherArmor,
+		ChainShirt
+	];
+
 	#endregion
 	
 	#region Medium Armor
@@ -105,6 +112,13 @@ public class Armors {
 		25,
 		[20, 15],
 		30);
+
+	public static List<Armor> MediumArmors = [
+		HideArmor,
+		ScaleMail,
+		Chainmail,
+		Breastplate
+	];
 
 	#endregion
 	
@@ -158,5 +172,14 @@ public class Armors {
 		[20, 15],
 		50);
 
+	public static List<Armor> HeavyArmors = [
+	SplintMail,
+	BandedMail,
+	HalfPlate,
+	FullPlate
+	];
+
 	#endregion
+
+	public static List<Armor> armors = LightArmors.Concat(MediumArmors).Concat(HeavyArmors).ToList();
 }

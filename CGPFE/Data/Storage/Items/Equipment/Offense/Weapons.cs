@@ -663,5 +663,5 @@ public abstract class Weapons {
 
 	#endregion
 
-	public static List<Weapon> weapons = SimpleWeapons.Concat(ExoticWeapons).Concat(MartialWeapons).Concat(ExoticWeapons).ToList();
+	public static List<Weapon> weapons = SimpleWeapons.Concat(MartialWeapons).Concat(ExoticWeapons).ToList();
 }

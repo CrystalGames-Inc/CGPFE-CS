@@ -62,4 +62,13 @@ public class Shields {
 		-10,
 		50,
 		45);
+
+	public static List<Shield> shields = [
+		Buckler,
+		LightWoodenShield,
+		LightSteelShield,
+		HeavyWoodenShield,
+		HeavySteelShield,
+		TowerShield
+	];
 }

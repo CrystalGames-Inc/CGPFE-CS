@@ -61,4 +61,48 @@ public class Player {
 		Console.WriteLine($"  CMD: {CombatInfo.CombatManeuverDefense}");
 		Console.WriteLine($"  Armor Class:  {CombatInfo.ArmorClass}");
 	}
+
+	public void DisplayWeapons() {
+		if (CombatInfo.Weapons == null) {
+			Console.WriteLine("No weapons on character");
+		}
+		else {
+			Console.WriteLine("Weapons: ");
+			foreach (var weapon in CombatInfo.Weapons) {
+				Console.WriteLine($"  {weapon}");
+			}
+		}
+	}
+
+	public void DisplayArmors() {
+		if (CombatInfo.Armors == null) {
+			Console.WriteLine("No armor on character");
+		}
+		else {
+			Console.WriteLine("Armors: ");
+			foreach (var armor in CombatInfo.Armors) {
+				Console.WriteLine($"  {armor}");
+			}
+		}
+	}
+
+	public void DisplayShields() {
+		if (CombatInfo.Shields == null) {
+			Console.WriteLine("No shield on character");
+		}
+		else {
+			Console.WriteLine("Shields: ");
+			foreach (var shield in CombatInfo.Shields) {
+				Console.WriteLine($"  {shield}");
+			}
+		}
+	}
+
+	public void DisplayWallet() {
+		Console.WriteLine("Wallet: ");
+		Console.WriteLine($"  Copper: {Wallet.CopperPieces}");
+		Console.WriteLine($"  Silver: {Wallet.SilverPieces}");
+		Console.WriteLine($"  Gold: {Wallet.GoldPieces}");
+		Console.WriteLine($"  Platinum: {Wallet.PlatinumPieces}");
+	}
 }

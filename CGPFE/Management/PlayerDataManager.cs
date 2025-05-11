@@ -1,6 +1,8 @@
 ﻿using CGPFE.Data.Constants;
 using CGPFE.Data.Game.StoryModifiers;
+using CGPFE.Data.Models.Item.Equipment.Defense;
 using CGPFE.Data.Models.Item.Equipment.Offense;
+using CGPFE.Data.Storage.Items.Equipment.Defense;
 using CGPFE.Data.Storage.Items.Equipment.Offense;
 using CGPFE.God.Creation.Player;
 using CGPFE.Mechanics;
@@ -470,15 +472,14 @@ public class PlayerDataManager {
 
 		if (Player.CombatInfo.Armors != null) {
 			foreach (var a in Player.CombatInfo.Armors) {
-				if (a != null)
-					ac += a.ArmorBonus;
+				ac += GetMatchingArmor(a).ArmorBonus;
 			}
 		}
 
 		if (Player.CombatInfo.Shields != null) {
 			foreach (var s in Player.CombatInfo.Shields) {
 				if (s != null)
-					ac += s.ShieldBonus;
+					ac += GetMatchingShield(s).ShieldBonus;
 			}
 		}
 
@@ -712,6 +713,30 @@ public class PlayerDataManager {
 		}
 	}
 
+	private Weapon GetMatchingWeapon(string weaponName) {
+		foreach (var weapon in Weapons.weapons) {
+			if (weapon.Name.Equals(weaponName))
+				return weapon;
+		}
+		return null;
+	}
+	
+	private Armor GetMatchingArmor(string armorName) {
+		foreach (var armor in Armors.armors) {
+			if (armor.Name.Equals(armorName))
+				return armor;
+		}
+		return null;
+	}
+	
+	private Shield GetMatchingShield(string shieldName) {
+		foreach (var shield in Shields.shields) {
+			if (shield.Name.Equals(shieldName))
+				return shield;
+		}
+		return null;
+	}
+
 	#endregion
 	
 	#region Initial item purchase
@@ -734,7 +759,7 @@ public class PlayerDataManager {
 				Console.WriteLine("Invalid weapon index entered");
 				continue;
 			}
-			Player.CombatInfo.Weapons.Add(purchasableWeapons[ans - 1]);
+			Player.CombatInfo.Weapons.Add(purchasableWeapons[ans - 1].Name);
 
 			Console.WriteLine("Would you like to purchase another weapon? [Y/N] (Default - N)");
 			var again = Console.ReadLine().ToUpper();
@@ -743,7 +768,6 @@ public class PlayerDataManager {
 			break;
 		}
 
-		Console.WriteLine("All weapons purchased");
 		Console.WriteLine("Would you like to buy armor and shields? [Y/N] (Default - Y):");
 		var armor = Console.ReadLine().ToUpper();
 		if(armor.Equals("N"))
