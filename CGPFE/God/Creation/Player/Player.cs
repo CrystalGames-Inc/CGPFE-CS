@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-using CGPFE.Data.Constants;
-using CGPFE.God.Creation.General;
+﻿using CGPFE.God.Creation.General;
 using CGPFE.God.Creation.Player.Properties;
 
 namespace CGPFE.God.Creation.Player;
@@ -10,6 +8,8 @@ public class Player {
 	public Attributes Attributes = new();
 	public Attributes AttributeModifiers = new();
 	public CombatInfo CombatInfo = new();
+	public List<string> Skills = new();
+	public List<string> Feats = new();
 	public Wallet Wallet = new();
 
 	public void DisplayBasicInfo() {

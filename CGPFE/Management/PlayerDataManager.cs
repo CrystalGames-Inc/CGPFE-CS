@@ -4,6 +4,8 @@ using CGPFE.Data.Models.Item.Equipment.Defense;
 using CGPFE.Data.Models.Item.Equipment.Offense;
 using CGPFE.Data.Storage.Items.Equipment.Defense;
 using CGPFE.Data.Storage.Items.Equipment.Offense;
+using CGPFE.God.Creation.General.Feats;
+using CGPFE.God.Creation.General.Skills;
 using CGPFE.God.Creation.Player;
 using CGPFE.Mechanics;
 using Attribute = CGPFE.Data.Constants.Attribute;
@@ -559,7 +561,7 @@ public class PlayerDataManager {
 					Player.Attributes.Wisdom += 1;
 					Player.Attributes.Charisma += 1;
 				}
-			break;
+				break;
 			case Race.Elf:
 				if (age is >= 175 and < 263) {
 					Player.Attributes.Strength -= 1;
@@ -584,7 +586,7 @@ public class PlayerDataManager {
 					Player.Attributes.Wisdom += 1;
 					Player.Attributes.Charisma += 1;
 				}
-			break;
+				break;
 			case Race.Gnome:
 				if (age is >= 100 and < 150) {
 					Player.Attributes.Strength -= 1;
@@ -609,7 +611,7 @@ public class PlayerDataManager {
 					Player.Attributes.Wisdom += 1;
 					Player.Attributes.Charisma += 1;
 				}
-			break;
+				break;
 			case Race.HalfElf:
 				if (age is >= 62 and < 93) {
 					Player.Attributes.Strength -= 1;
@@ -634,7 +636,7 @@ public class PlayerDataManager {
 					Player.Attributes.Wisdom += 1;
 					Player.Attributes.Charisma += 1;
 				}
-			break;
+				break;
 			case Race.HalfOrc:
 				if (age is >= 30 and < 45) {
 					Player.Attributes.Strength -= 1;
@@ -659,7 +661,7 @@ public class PlayerDataManager {
 					Player.Attributes.Wisdom += 1;
 					Player.Attributes.Charisma += 1;
 				}
-			break;
+				break;
 			case Race.Halfling:
 				if (age is >= 50 and < 75) {
 					Player.Attributes.Strength -= 1;
@@ -684,7 +686,7 @@ public class PlayerDataManager {
 					Player.Attributes.Wisdom += 1;
 					Player.Attributes.Charisma += 1;
 				}
-			break;
+				break;
 			case Race.Human:
 				if (age is >= 35 and < 53) {
 					Player.Attributes.Strength -= 1;
@@ -709,7 +711,7 @@ public class PlayerDataManager {
 					Player.Attributes.Wisdom += 1;
 					Player.Attributes.Charisma += 1;
 				}
-			break;
+				break;
 		}
 	}
 
@@ -735,6 +737,19 @@ public class PlayerDataManager {
 				return shield;
 		}
 		return null;
+	}
+
+	private Skill GetMatchingSkill(string skillName) {
+		return null;
+	}
+
+	public bool HasFeat(Feat feat) {
+		foreach (var playerFeat in Player.Feats) {
+			if(playerFeat.Equals(feat.Name))
+				return true;
+		}
+
+		return false;
 	}
 
 	#endregion
