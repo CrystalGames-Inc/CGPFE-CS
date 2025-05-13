@@ -474,14 +474,14 @@ public class PlayerDataManager {
 
 		if (Player.CombatInfo.Armors != null) {
 			foreach (var a in Player.CombatInfo.Armors) {
-				ac += GetMatchingArmor(a).ArmorBonus;
+				ac += Player.GetMatchingArmor(a).ArmorBonus;
 			}
 		}
 
 		if (Player.CombatInfo.Shields != null) {
 			foreach (var s in Player.CombatInfo.Shields) {
 				if (s != null)
-					ac += GetMatchingShield(s).ShieldBonus;
+					ac += Player.GetMatchingShield(s).ShieldBonus;
 			}
 		}
 
@@ -560,8 +560,7 @@ public class PlayerDataManager {
 					Player.Attributes.Intelligence += 1;
 					Player.Attributes.Wisdom += 1;
 					Player.Attributes.Charisma += 1;
-				}
-				break;
+				} break;
 			case Race.Elf:
 				if (age is >= 175 and < 263) {
 					Player.Attributes.Strength -= 1;
@@ -585,8 +584,7 @@ public class PlayerDataManager {
 					Player.Attributes.Intelligence += 1;
 					Player.Attributes.Wisdom += 1;
 					Player.Attributes.Charisma += 1;
-				}
-				break;
+				} break;
 			case Race.Gnome:
 				if (age is >= 100 and < 150) {
 					Player.Attributes.Strength -= 1;
@@ -611,7 +609,7 @@ public class PlayerDataManager {
 					Player.Attributes.Wisdom += 1;
 					Player.Attributes.Charisma += 1;
 				}
-				break;
+			break;
 			case Race.HalfElf:
 				if (age is >= 62 and < 93) {
 					Player.Attributes.Strength -= 1;
@@ -635,8 +633,7 @@ public class PlayerDataManager {
 					Player.Attributes.Intelligence += 1;
 					Player.Attributes.Wisdom += 1;
 					Player.Attributes.Charisma += 1;
-				}
-				break;
+				} break;
 			case Race.HalfOrc:
 				if (age is >= 30 and < 45) {
 					Player.Attributes.Strength -= 1;
@@ -660,8 +657,7 @@ public class PlayerDataManager {
 					Player.Attributes.Intelligence += 1;
 					Player.Attributes.Wisdom += 1;
 					Player.Attributes.Charisma += 1;
-				}
-				break;
+				} break;
 			case Race.Halfling:
 				if (age is >= 50 and < 75) {
 					Player.Attributes.Strength -= 1;
@@ -685,8 +681,7 @@ public class PlayerDataManager {
 					Player.Attributes.Intelligence += 1;
 					Player.Attributes.Wisdom += 1;
 					Player.Attributes.Charisma += 1;
-				}
-				break;
+				} break;
 			case Race.Human:
 				if (age is >= 35 and < 53) {
 					Player.Attributes.Strength -= 1;
@@ -711,45 +706,8 @@ public class PlayerDataManager {
 					Player.Attributes.Wisdom += 1;
 					Player.Attributes.Charisma += 1;
 				}
-				break;
+			break;
 		}
-	}
-
-	private Weapon GetMatchingWeapon(string weaponName) {
-		foreach (var weapon in Weapons.weapons) {
-			if (weapon.Name.Equals(weaponName))
-				return weapon;
-		}
-		return null;
-	}
-	
-	private Armor GetMatchingArmor(string armorName) {
-		foreach (var armor in Armors.armors) {
-			if (armor.Name.Equals(armorName))
-				return armor;
-		}
-		return null;
-	}
-	
-	private Shield GetMatchingShield(string shieldName) {
-		foreach (var shield in Shields.shields) {
-			if (shield.Name.Equals(shieldName))
-				return shield;
-		}
-		return null;
-	}
-
-	private Skill GetMatchingSkill(string skillName) {
-		return null;
-	}
-
-	public bool HasFeat(Feat feat) {
-		foreach (var playerFeat in Player.Feats) {
-			if(playerFeat.Equals(feat.Name))
-				return true;
-		}
-
-		return false;
 	}
 
 	#endregion

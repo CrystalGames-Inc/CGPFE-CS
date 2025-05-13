@@ -3,9 +3,14 @@ using CGPFE.Management;
 
 namespace CGPFE.God.Creation.General.Feats;
 
-public interface Feat
-{
-    public string Name();
-    public FeatType Type();
-    public bool CanAcquire();
+public abstract class Feat(string name, FeatType type) {
+    public string Name { get; } = name;
+    public FeatType Type { get; } = type;
+    public List<IPrerequisite> Prerequisites { get; }
+
+    public Feat(string name) : this(name, FeatType.General) {
+    }
+
+    public abstract bool CanAcquire();
+    public abstract void Benefits();
 }

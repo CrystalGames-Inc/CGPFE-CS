@@ -1,5 +1,12 @@
-﻿using CGPFE.God.Creation.General;
+﻿using CGPFE.Data.Models.Item.Equipment.Defense;
+using CGPFE.Data.Models.Item.Equipment.Offense;
+using CGPFE.Data.Storage.Items.Equipment.Defense;
+using CGPFE.Data.Storage.Items.Equipment.Offense;
+using CGPFE.God.Creation.General;
+using CGPFE.God.Creation.General.Feats;
+using CGPFE.God.Creation.General.Skills;
 using CGPFE.God.Creation.Player.Properties;
+using Attribute = CGPFE.Data.Constants.Attribute;
 
 namespace CGPFE.God.Creation.Player;
 
@@ -12,6 +19,78 @@ public class Player {
 	public List<string> Feats = new();
 	public Wallet Wallet = new();
 
+	#region Getters
+	
+	public int GetAbilityScore(Attribute ability) {
+		return ability switch {
+			Attribute.Strength => Attributes.Strength,
+			Attribute.Dexterity => Attributes.Dexterity,
+			Attribute.Constitution => Attributes.Constitution,
+			Attribute.Intelligence => Attributes.Intelligence,
+			Attribute.Wisdom => Attributes.Wisdom,
+			Attribute.Charisma => Attributes.Charisma,
+			_ => 0
+		};
+	}
+	
+	public Feat GetMatchingFeat(string featName) {
+		return null;
+	}
+	
+	public Weapon GetMatchingWeapon(string weaponName) {
+		foreach (var weapon in Weapons.weapons) {
+			if (weapon.Name.Equals(weaponName))
+				return weapon;
+		}
+		return null;
+	}
+	
+	public Armor GetMatchingArmor(string armorName) {
+		foreach (var armor in Armors.armors) {
+			if (armor.Name.Equals(armorName))
+				return armor;
+		}
+		return null;
+	}
+	
+	public Shield GetMatchingShield(string shieldName) {
+		foreach (var shield in Shields.shields) {
+			if (shield.Name.Equals(shieldName))
+				return shield;
+		}
+		return null;
+	}
+
+	public Skill GetMatchingSkill(string skillName) {
+		foreach (var skill in General.Skills.Skills.skills) {
+			if(skill.Name.Equals(skillName))
+				return skill;
+		}
+		return null;
+	}
+	
+	#endregion
+
+	public bool HasFeat(Feat feat) {
+		foreach (var playerFeat in Feats) {
+			if(playerFeat.Equals(feat.Name))
+				return true;
+		}
+
+		return false;
+	}
+	
+	public bool HasFeat(string featName) {
+		foreach (var playerFeat in Feats) {
+			if(playerFeat.Equals(featName))
+				return true;
+		}
+
+		return false;
+	}
+	
+	#region Displays
+	
 	public void DisplayBasicInfo() {
 		Console.WriteLine("Player Info:");
 		Console.WriteLine($"  Name: {PlayerInfo.Name}");
@@ -105,4 +184,6 @@ public class Player {
 		Console.WriteLine($"  Gold: {Wallet.GoldPieces}");
 		Console.WriteLine($"  Platinum: {Wallet.PlatinumPieces}");
 	}
+	
+	#endregion
 }

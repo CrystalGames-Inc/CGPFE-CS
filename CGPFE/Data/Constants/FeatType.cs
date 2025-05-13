@@ -3,7 +3,6 @@
 public enum FeatType
 {
     Combat,
-    Creation,
     General,
     ItemCreation,
     Metamagic

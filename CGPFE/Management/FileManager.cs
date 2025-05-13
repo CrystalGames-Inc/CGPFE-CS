@@ -35,6 +35,7 @@ public static class FileManager {
 	private const string AttributeModsFileName = "PlayerAttributeMods.json";
 	private const string CombatInfoFileName = "CombatInfo.json";
 	private const string WalletFileName = "PlayerWallet.json";
+	private const string FeatsFileName = "PlayerFeats.json";
 	
 	#endregion
 
@@ -107,11 +108,14 @@ public static class FileManager {
 	#region Player File Management
 	
 	public static void WritePlayerData() {
-		WritePlayerProperty(PlayerDataManager.Instance.Player.PlayerInfo, PlayerInfoFileName);
-		WritePlayerProperty(PlayerDataManager.Instance.Player.Attributes, AttributesFileName);
-		WritePlayerProperty(PlayerDataManager.Instance.Player.AttributeModifiers, AttributeModsFileName);
-		WritePlayerProperty(PlayerDataManager.Instance.Player.Wallet, WalletFileName);
-		WritePlayerProperty(PlayerDataManager.Instance.Player.CombatInfo, CombatInfoFileName);
+		var player = PlayerDataManager.Instance.Player;
+		
+		WritePlayerProperty(player.PlayerInfo, PlayerInfoFileName);
+		WritePlayerProperty(player.Attributes, AttributesFileName);
+		WritePlayerProperty(player.AttributeModifiers, AttributeModsFileName);
+		WritePlayerProperty(player.Wallet, WalletFileName);
+		WritePlayerProperty(player.CombatInfo, CombatInfoFileName);
+		WritePlayerProperty(player.Feats, FeatsFileName);
 	}
 
 	private static Player LoadPlayerData() {
