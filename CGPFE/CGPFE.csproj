@@ -8,9 +8,9 @@
 
     <ItemGroup>
       <Folder Include="Data\Models\Item\Equipment\" />
-      <Folder Include="God\Creation\General\Feats\Feats\Combat\" />
-      <Folder Include="God\Creation\General\Feats\Feats\Critical\" />
-      <Folder Include="God\Creation\General\Feats\Feats\ItemCreation\" />
-      <Folder Include="God\Creation\General\Feats\Feats\Metamagic\" />
+      <Folder Include="God\Creation\General\Feat\Feats\Combat\" />
+      <Folder Include="God\Creation\General\Feat\Feats\Critical\" />
+      <Folder Include="God\Creation\General\Feat\Feats\ItemCreation\" />
+      <Folder Include="God\Creation\General\Feat\Feats\Metamagic\" />
     </ItemGroup>
 </Project>

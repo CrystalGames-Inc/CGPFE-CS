@@ -6,7 +6,7 @@ namespace CGPFE.God.Creation.General.Feats;
 public abstract class Feat(string name, FeatType type) {
     public string Name { get; } = name;
     public FeatType Type { get; } = type;
-    public List<IPrerequisite> Prerequisites { get; }
+    public List<IPrerequisite> Prerequisites { get; init; }
 
     public Feat(string name) : this(name, FeatType.General) {
     }
