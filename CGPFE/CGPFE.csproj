@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Data\Models\Item\Equipment\" />
-      <Folder Include="God\Creation\General\Feat\Feats\Combat\" />
       <Folder Include="God\Creation\General\Feat\Feats\Critical\" />
       <Folder Include="God\Creation\General\Feat\Feats\ItemCreation\" />
       <Folder Include="God\Creation\General\Feat\Feats\Metamagic\" />
