@@ -2,7 +2,7 @@ using CGPFE.Management;
 
 namespace CGPFE.God.Creation.General.Feat.Feats.General;
 
-public class Athletic() : Creation.General.Feats.Feat("Athletic") {
+public class Athletic() : Feat("Athletic") {
     public override bool CanAcquire()
     {
         return true;

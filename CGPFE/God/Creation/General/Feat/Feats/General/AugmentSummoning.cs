@@ -1,11 +1,11 @@
-﻿using CGPFE.Data.Constants;
-using CGPFE.Management;
+﻿using CGPFE.Management;
 
-namespace CGPFE.God.Creation.General.Feat.Feats.Combat;
+namespace CGPFE.God.Creation.General.Feat.Feats.General;
 
-public class ArcaneStrike: Feat {
-	public ArcaneStrike() : base("Arcane Strike", FeatType.Combat) {
+public class AugmentSummoning: Feat {
+	public AugmentSummoning() : base("Augment Summoning") {
 		Prerequisites = [
+
 		];
 	}
 

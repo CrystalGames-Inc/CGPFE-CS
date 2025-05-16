@@ -1,11 +1,12 @@
 ﻿using CGPFE.Data.Constants;
 using CGPFE.Management;
 
-namespace CGPFE.God.Creation.General.Feat.Feats.Combat;
+namespace CGPFE.God.Creation.General.Feat.Feats.Critical;
 
-public class ArcaneStrike: Feat {
-	public ArcaneStrike() : base("Arcane Strike", FeatType.Combat) {
+public class BleedingCritical: Feat {
+	public BleedingCritical() : base("Bleeding Critical", FeatType.Critical) {
 		Prerequisites = [
+			
 		];
 	}
 

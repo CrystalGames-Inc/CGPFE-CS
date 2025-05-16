@@ -2,7 +2,7 @@
 using CGPFE.Management;
 using Attribute = CGPFE.Data.Constants.Attribute;
 
-namespace CGPFE.God.Creation.General.Feats.Feats.Combat;
+namespace CGPFE.God.Creation.General.Feat.Feats.Combat;
 
 public class AgileManeuvers() : Feat("Agile Maneuvers", FeatType.Combat) {
 

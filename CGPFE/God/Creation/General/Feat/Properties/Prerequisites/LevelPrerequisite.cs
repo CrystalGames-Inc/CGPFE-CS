@@ -1,4 +1,4 @@
-﻿namespace CGPFE.God.Creation.General.Feats.Prerequisites;
+﻿namespace CGPFE.God.Creation.General.Feat.Properties.Prerequisites;
 
 public class LevelPrerequisite(int minLevel) : IPrerequisite {
 	

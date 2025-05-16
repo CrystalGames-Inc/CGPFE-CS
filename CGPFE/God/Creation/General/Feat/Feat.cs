@@ -1,7 +1,7 @@
 ﻿using CGPFE.Data.Constants;
-using CGPFE.Management;
+using CGPFE.God.Creation.General.Feat.Properties;
 
-namespace CGPFE.God.Creation.General.Feats;
+namespace CGPFE.God.Creation.General.Feat;
 
 public abstract class Feat(string name, FeatType type) {
     public string Name { get; } = name;

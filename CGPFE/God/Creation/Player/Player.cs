@@ -3,7 +3,7 @@ using CGPFE.Data.Models.Item.Equipment.Offense;
 using CGPFE.Data.Storage.Items.Equipment.Defense;
 using CGPFE.Data.Storage.Items.Equipment.Offense;
 using CGPFE.God.Creation.General;
-using CGPFE.God.Creation.General.Feats;
+using CGPFE.God.Creation.General.Feat;
 using CGPFE.God.Creation.General.Skills;
 using CGPFE.God.Creation.Player.Properties;
 using Attribute = CGPFE.Data.Constants.Attribute;
@@ -20,6 +20,20 @@ public class Player {
 	public Wallet Wallet = new();
 
 	#region Getters
+	
+	public int GetValueForKey(string key) {
+		return key switch {
+			"Str" => Attributes.Strength,
+			"Dex" => Attributes.Dexterity,
+			"Con" => Attributes.Constitution,
+			"Int" => Attributes.Intelligence,
+			"Wis" => Attributes.Wisdom,
+			"Cha" => Attributes.Charisma,
+			"Bab" => CombatInfo.BaseAttackBonus,
+			"Lvl" => PlayerInfo.Level,
+			_ => throw new InvalidOperationException($"Unsupported key: {key}"),
+		};
+	}
 	
 	public int GetAbilityScore(Attribute ability) {
 		return ability switch {

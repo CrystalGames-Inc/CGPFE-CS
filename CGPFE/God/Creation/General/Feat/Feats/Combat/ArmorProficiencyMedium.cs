@@ -1,7 +1,7 @@
 using CGPFE.Data.Constants;
-using CGPFE.God.Creation.General.Feats.Prerequisites;
+using CGPFE.God.Creation.General.Feat.Properties.Prerequisites;
 
-namespace CGPFE.God.Creation.General.Feats.Feats.Combat;
+namespace CGPFE.God.Creation.General.Feat.Feats.Combat;
 
 public class ArmorProficiencyMedium: Feat {
     public ArmorProficiencyMedium() : base("Armor Proficiency, Medium", FeatType.Combat) {

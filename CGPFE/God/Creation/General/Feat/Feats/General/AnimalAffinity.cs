@@ -2,7 +2,7 @@
 
 namespace CGPFE.God.Creation.General.Feat.Feats.General;
 
-public class AnimalAffinity(): Creation.General.Feats.Feat("Animal Affinity") {
+public class AnimalAffinity(): Feat("Animal Affinity") {
 	public override bool CanAcquire() {
 		return true;
 	}

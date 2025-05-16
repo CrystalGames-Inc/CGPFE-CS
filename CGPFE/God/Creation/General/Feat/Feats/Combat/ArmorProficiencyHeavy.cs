@@ -1,8 +1,8 @@
 using CGPFE.Data.Constants;
-using CGPFE.God.Creation.General.Feats.Prerequisites;
+using CGPFE.God.Creation.General.Feat.Properties.Prerequisites;
 using CGPFE.Management;
 
-namespace CGPFE.God.Creation.General.Feats.Feats.Combat;
+namespace CGPFE.God.Creation.General.Feat.Feats.Combat;
 
 public class ArmorProficiencyHeavy: Feat
 {

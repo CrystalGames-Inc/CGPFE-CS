@@ -4,7 +4,7 @@ using CGPFE.Data.Models.Item.Equipment.Defense;
 using CGPFE.Data.Models.Item.Equipment.Offense;
 using CGPFE.Data.Storage.Items.Equipment.Defense;
 using CGPFE.Data.Storage.Items.Equipment.Offense;
-using CGPFE.God.Creation.General.Feats;
+using CGPFE.God.Creation.General.Feat;
 using CGPFE.God.Creation.General.Skills;
 using CGPFE.God.Creation.Player;
 using CGPFE.Mechanics;
@@ -31,12 +31,22 @@ public class PlayerDataManager {
 
 	public void RegisterPlayer() {
 		RegisterPlayerName();
-		RegisterPlayerGender();
+		
+		Player.PlayerInfo.Gender = EnumPrompt<Gender>("Please choose your gender: "); //Registers the player's gender
 		
 		RegisterAbilityScores();
 		
-		RegisterPlayerRace();
-		RegisterPlayerClass();
+		/*Race registration and its calculations*/
+		Player.PlayerInfo.Race = EnumPrompt<Race>("Please choose your race: ");
+		CalculateRacialBonus();
+		
+		/*Class registration and its follow-up functions*/
+		Player.PlayerInfo.Class = EnumPrompt<Class>("Please choose your class: ");
+		FileManager.CreateCombatTable();
+		CalculateMaxHealth();
+		RegisterAlignment();
+		
+		
 		RegisterPlayerAge();
 		RegisterPlayerWealth();
 		
@@ -56,26 +66,6 @@ public class PlayerDataManager {
 			RegisterPlayerName();
 		}
 		Player.PlayerInfo.Name = name;
-	}
-
-	private void RegisterPlayerGender() {
-		while (true) {
-			Console.WriteLine("Please choose your character's gender:\nMale\nFemale");
-			var gender = Console.ReadLine();
-			switch (gender.ToUpper()) {
-				case "MALE":
-					Player.PlayerInfo.Gender = Gender.Male;
-				break;
-				case "FEMALE":
-					Player.PlayerInfo.Gender = Gender.Female;
-				break;
-				default:
-					Console.WriteLine("Invalid gender selected");
-					continue;
-			}
-
-			break;
-		}
 	}
 
 	private void RegisterAbilityScores() {
@@ -178,84 +168,30 @@ public class PlayerDataManager {
 		CalculateAbilityModifiers();
 	}
 
-	private void RegisterPlayerRace() {
-		Console.WriteLine("Please choose your character's race:\nDwarf\nElf\nGnome\nHalfElf\nHalfOrc\nHalfling\nHuman");
-		var race = Console.ReadLine();
-		Player.PlayerInfo.Race = race.ToUpper() switch {
-			"DWARF" => Race.Dwarf,
-			"ELF" => Race.Elf,
-			"GNOME" => Race.Gnome,
-			"HALFELF" => Race.HalfElf,
-			"HALFORC" => Race.HalfOrc,
-			"HALFLING" => Race.Halfling,
-			"HUMAN" => Race.Human,
-			_ => Race.None
-		};
-		
-		CalculateRacialBonus();
-	}
-
-	private void RegisterPlayerClass() {
-		Console.WriteLine(
-			"Please select a class:\nAlchemist\nBarbarian\nBard\nCavalier\nCleric\nDruid\nFighter\nInquisitor\nMonk\nOracle\nPaladin\nRanger\nRogue\nSorcerer\nSummoner\nWitch\nWizard");
-		var pClass = Console.ReadLine();
-		Player.PlayerInfo.Class = pClass?.ToUpper() switch {
-			"ALCHEMIST" => Class.Alchemist,
-			"BARBARIAN" => Class.Barbarian,
-			"BARD" => Class.Bard,
-			"CAVALIER" => Class.Cavalier,
-			"CLERIC" => Class.Cleric,
-			"DRUID" => Class.Druid,
-			"FIGHTER" => Class.Fighter,
-			"INQUISITOR" => Class.Inquisitor,
-			"MONK" => Class.Monk,
-			"ORACLE" => Class.Oracle,
-			"PALADIN" => Class.Paladin,
-			"RANGER" => Class.Ranger,
-			"ROGUE" => Class.Rogue,
-			"SORCERER" => Class.Sorcerer,
-			"SUMMONER" => Class.Summoner,
-			"WITCH" => Class.Witch,
-			"WIZARD" => Class.Wizard,
-			_ => throw new ArgumentException()
-		};
-		FileManager.CreateCombatTable();
-		
-		CalculateMaxHealth();
-		RegisterAlignment();
-	}
-
 	private void RegisterPlayerAge() {
-		switch (Player.PlayerInfo.Race) {
-			case Race.Dwarf:
-				AskAge(40, 450); break;
-			case Race.Elf:
-				AskAge(110, 750); break;
-			case Race.Gnome:
-				AskAge(40, 500); break;
-			case Race.HalfElf:
-				AskAge(20, 185); break;
-			case Race.HalfOrc:
-				AskAge(14, 80); break;
-			case Race.Halfling:
-				AskAge(20, 200); break;
-			case Race.Human:
-				AskAge(15, 110); break;
-		}
-		
+		Player.PlayerInfo.Age = Player.PlayerInfo.Race switch {
+			Race.Dwarf => AskAge(40, 450),
+			Race.Elf => AskAge(110, 750),
+			Race.Gnome => AskAge(40, 500),
+			Race.HalfElf => AskAge(20, 185),
+			Race.HalfOrc => AskAge(14, 80),
+			Race.Halfling => AskAge(20, 200),
+			Race.Human => AskAge(15, 110),
+			_ => Player.PlayerInfo.Age
+		};
+
 		CalculateAgeEffects();
 	}
 
-	private void AskAge(int minAge, int maxAge) {
+	private int AskAge(int minAge, int maxAge) {
 		Console.WriteLine($"Please choose your player's age ({minAge} - {maxAge})");
 		var age = Convert.ToInt32(Console.ReadLine());
-		
-		if (age < minAge || age > maxAge) {
-			Console.WriteLine("Invalid age. Please try again.");
-			AskAge(minAge, maxAge);
-		}
-		
-		Player.PlayerInfo.Age = age;
+
+		if (age >= minAge && age <= maxAge) return age;
+		Console.WriteLine("Invalid age. Please try again.");
+		AskAge(minAge, maxAge);
+
+		return 0;
 	}
 
 	private void RegisterPlayerWealth() {
@@ -304,7 +240,7 @@ public class PlayerDataManager {
 				Class.Wizard => Dice.Roll(6, 2) * 10
 			}
 		};
-		Console.WriteLine($"{Player.Wallet}gp added to your player");
+		Console.WriteLine($"{Player.Wallet.GoldPieces}gp added to your player");
 		Console.WriteLine("Would you like to purchase starting gear? [Y/N] (Default - Y):");
 		var gear = Console.ReadLine().ToUpper();
 		if (gear.Equals("N"))
@@ -750,6 +686,30 @@ public class PlayerDataManager {
 
 	private void PurchaseStartingArmor() {
 		
+	}
+	
+	#endregion
+	
+	#region Utility
+
+	private T Prompt<T>(string message, List<T> choices) {
+		while (true) {
+			Console.WriteLine(message);
+			for(int i = 0; i < choices.Count; i++)
+				Console.WriteLine($"{i + 1}. {choices[i]}");
+
+			Console.WriteLine("Please enter the index of your choice: ");
+			var input = Console.ReadLine();
+			
+			if(int.TryParse(input, out int index) && index >= 1 && index <= choices.Count)
+				return choices[index - 1];
+
+			Console.WriteLine("Invalid choice. Please try again.\n");
+		}
+	}
+
+	private T EnumPrompt<T>(string message) where T : Enum {
+		return Prompt<T>(message, Enum.GetValues(typeof(T)).Cast<T>().ToList());
 	}
 	
 	#endregion

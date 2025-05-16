@@ -2,7 +2,7 @@
 
 namespace CGPFE.God.Creation.General.Feat.Feats.General;
 
-public class Alertness(): Creation.General.Feats.Feat("Alertness") {
+public class Alertness(): Feat("Alertness") {
 	public override bool CanAcquire() {
 		return true;
 	}

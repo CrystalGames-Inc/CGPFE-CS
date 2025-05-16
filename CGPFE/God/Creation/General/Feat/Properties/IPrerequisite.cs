@@ -1,4 +1,4 @@
-﻿namespace CGPFE.God.Creation.General.Feats;
+﻿namespace CGPFE.God.Creation.General.Feat.Properties;
 
 public interface IPrerequisite {
 	bool IsSatisfiedBy(Player.Player player);

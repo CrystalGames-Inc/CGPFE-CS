@@ -2,17 +2,16 @@
 using CGPFE.God.Creation.General.Feat.Properties.Prerequisites;
 using CGPFE.Management;
 
-namespace CGPFE.God.Creation.General.Feat.Feats.Combat;
+namespace CGPFE.God.Creation.General.Feat.Feats.Critical;
 
-public class ArcaneArmorTraining : Feat {
-
-	public ArcaneArmorTraining() : base("Arcane Armor Training", FeatType.Combat) {
+public class BlindingCritical: Feat {
+	public BlindingCritical() : base("Blinding Critical", FeatType.Critical) {
 		Prerequisites = [
-			new FeatPrerequisite("Light Armor Proficiency"),
-			new LevelPrerequisite(3)
+			new FeatPrerequisite("Critical Focus"),
+			new ValuePrerequisite("Bab", 15)
 		];
 	}
-	
+
 	public override bool CanAcquire() {
 		return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
 	}

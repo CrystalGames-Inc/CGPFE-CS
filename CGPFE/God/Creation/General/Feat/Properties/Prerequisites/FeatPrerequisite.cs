@@ -1,4 +1,4 @@
-﻿namespace CGPFE.God.Creation.General.Feats.Prerequisites;
+﻿namespace CGPFE.God.Creation.General.Feat.Properties.Prerequisites;
 
 public class FeatPrerequisite(string name) : IPrerequisite {
 	public string Name { get; set; } = name;

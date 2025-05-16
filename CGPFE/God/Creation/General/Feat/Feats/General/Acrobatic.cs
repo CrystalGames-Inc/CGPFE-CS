@@ -1,9 +1,8 @@
-﻿using CGPFE.God.Creation.General.Feats;
-using CGPFE.Management;
+﻿using CGPFE.Management;
 
 namespace CGPFE.God.Creation.General.Feat.Feats.General;
 
-public class Acrobatic() : Creation.General.Feats.Feat("Acrobatic") {
+public class Acrobatic() : Feat("Acrobatic") {
 	public override bool CanAcquire() {
 		return true;
 	}

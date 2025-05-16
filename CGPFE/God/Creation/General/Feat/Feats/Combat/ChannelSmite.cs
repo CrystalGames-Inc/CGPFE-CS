@@ -1,18 +1,15 @@
 ﻿using CGPFE.Data.Constants;
-using CGPFE.God.Creation.General.Feat.Properties.Prerequisites;
 using CGPFE.Management;
 
 namespace CGPFE.God.Creation.General.Feat.Feats.Combat;
 
-public class ArcaneArmorTraining : Feat {
-
-	public ArcaneArmorTraining() : base("Arcane Armor Training", FeatType.Combat) {
+public class ChannelSmite: Feat {
+	public ChannelSmite() : base("Channel Smite", FeatType.Combat) {
 		Prerequisites = [
-			new FeatPrerequisite("Light Armor Proficiency"),
-			new LevelPrerequisite(3)
+			// TODO add the prerequisites
 		];
 	}
-	
+
 	public override bool CanAcquire() {
 		return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
 	}
