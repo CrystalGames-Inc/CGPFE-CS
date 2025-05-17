@@ -4,16 +4,15 @@ using CGPFE.Management;
 
 namespace CGPFE.God.Creation.General.Feat.Feats.Combat;
 
-public class ArcaneArmorMastery : Feat {
-
-	public ArcaneArmorMastery() : base("Arcane Armor Mastery", FeatType.Combat) {
+public class CriticalMastery: Feat {
+	public CriticalMastery() : base("Critical Mastery", FeatType.Combat) {
 		Prerequisites = [
-			new FeatPrerequisite("Arcane Armor Training"),
-			new FeatPrerequisite("Medium Armor Proficiency"),
-			new ValuePrerequisite("Lvl", 7)
+			new FeatPrerequisite("Critical Focus"),
+			new ValuePrerequisite("Lvl", 14),
+			new ValuePrerequisite("Cls", 7, "==")
 		];
 	}
-	
+
 	public override bool CanAcquire() {
 		return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
 	}

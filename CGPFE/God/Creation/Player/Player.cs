@@ -31,6 +31,9 @@ public class Player {
 			"Cha" => Attributes.Charisma,
 			"Bab" => CombatInfo.BaseAttackBonus,
 			"Lvl" => PlayerInfo.Level,
+			"Cls" => (int)PlayerInfo.Class,
+			"Rce" => (int)PlayerInfo.Race,
+			"Sze" => (int)PlayerInfo.Size,
 			_ => throw new InvalidOperationException($"Unsupported key: {key}"),
 		};
 	}

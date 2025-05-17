@@ -9,7 +9,7 @@ public class ArcaneArmorTraining : Feat {
 	public ArcaneArmorTraining() : base("Arcane Armor Training", FeatType.Combat) {
 		Prerequisites = [
 			new FeatPrerequisite("Light Armor Proficiency"),
-			new LevelPrerequisite(3)
+			new ValuePrerequisite("Lvl", 3)
 		];
 	}
 	
