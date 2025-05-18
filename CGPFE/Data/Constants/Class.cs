@@ -18,5 +18,4 @@ public enum Class {
 	Summoner = 15,
 	Witch = 16,
 	Wizard = 17,
-	None = 0
 }

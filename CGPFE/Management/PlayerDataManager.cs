@@ -655,12 +655,12 @@ public class PlayerDataManager {
 		purchasableWeapons.AddRange(Weapons.weapons.Where(weapon => weapon.Cost <= Player.Wallet.GoldPieces));
 
 		Console.WriteLine("Available Weapons:");
-		for (var i = 1; i <= purchasableWeapons.Count; i++) {
+		for (var i = 1; i <= purchasableWeapons.Count; i++) 
 			Console.WriteLine($"{i}. {purchasableWeapons[i - 1].Name} - {purchasableWeapons[i - 1].Cost}gp");
-		}
+		
 
 		while (true) {
-			Console.WriteLine("Please enter the index of the weapon you'd like to purchase (0 to advance to armor and shields): ");
+			Console.WriteLine("Please enter the index of the weapon you'd like to purchase (0 to advance to armors): ");
 			var ans = Convert.ToInt32(Console.ReadLine());
 			if (ans == 0) 
 				PurchaseStartingArmor();
@@ -668,7 +668,8 @@ public class PlayerDataManager {
 				Console.WriteLine("Invalid weapon index entered");
 				continue;
 			}
-			Player.CombatInfo.Weapons.Add(purchasableWeapons[ans - 1].Name);
+			else
+				Player.CombatInfo.Weapons.Add(purchasableWeapons[ans - 1].Name);
 
 			Console.WriteLine("Would you like to purchase another weapon? [Y/N] (Default - N)");
 			var again = Console.ReadLine().ToUpper();
@@ -685,6 +686,34 @@ public class PlayerDataManager {
 	}
 
 	private void PurchaseStartingArmor() {
+		List<Armor> purchasableArmors = [];
+		purchasableArmors.AddRange(Armors.armors.Where(armor => armor.Cost <= Player.Wallet.GoldPieces));
+
+		Console.WriteLine("Available Armors:");
+		for (var i = 1; i <= purchasableArmors.Count; i++)
+			Console.WriteLine($"{i}. {purchasableArmors[i - 1].Name} - {purchasableArmors[i - 1].Cost}gp");
+
+		while (true) {
+			Console.WriteLine("Please enter the index of the armor you'd like to purchase (0 to advance to shields): ");
+			var ans = Convert.ToInt32(Console.ReadLine());
+			if(ans == 0)
+				PurchaseStartingShields();
+			else if (ans > purchasableArmors.Count) {
+				Console.WriteLine("Invalid armor index entered");
+				continue;
+			}
+			else 
+				Player.CombatInfo.Armors.Add(purchasableArmors[ans - 1].Name);
+
+			Console.WriteLine("Would you like to purchase another armor? [Y/N] (Default - Y):");
+			var again = Console.ReadLine().ToUpper();
+			if(again.Equals("N"))
+				return;
+			PurchaseStartingShields();
+		}
+	}
+
+	private void PurchaseStartingShields() {
 		
 	}
 	

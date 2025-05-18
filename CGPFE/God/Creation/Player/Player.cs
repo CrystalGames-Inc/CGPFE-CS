@@ -22,18 +22,18 @@ public class Player {
 	#region Getters
 	
 	public int GetValueForKey(string key) {
-		return key switch {
-			"Str" => Attributes.Strength,
-			"Dex" => Attributes.Dexterity,
-			"Con" => Attributes.Constitution,
-			"Int" => Attributes.Intelligence,
-			"Wis" => Attributes.Wisdom,
-			"Cha" => Attributes.Charisma,
-			"Bab" => CombatInfo.BaseAttackBonus,
-			"Lvl" => PlayerInfo.Level,
-			"Cls" => (int)PlayerInfo.Class,
-			"Rce" => (int)PlayerInfo.Race,
-			"Sze" => (int)PlayerInfo.Size,
+		return key.ToUpper() switch {
+			"STR" => Attributes.Strength,
+			"DEX" => Attributes.Dexterity,
+			"CON" => Attributes.Constitution,
+			"INT" => Attributes.Intelligence,
+			"WIS" => Attributes.Wisdom,
+			"CHA" => Attributes.Charisma,
+			"BAB" => CombatInfo.BaseAttackBonus,
+			"LVL" => PlayerInfo.Level,
+			"CLS" => (int)PlayerInfo.Class,
+			"RCE" => (int)PlayerInfo.Race,
+			"SZE" => (int)PlayerInfo.Size,
 			_ => throw new InvalidOperationException($"Unsupported key: {key}"),
 		};
 	}
@@ -56,7 +56,7 @@ public class Player {
 	
 	public Weapon GetMatchingWeapon(string weaponName) {
 		foreach (var weapon in Weapons.weapons) {
-			if (weapon.Name.Equals(weaponName))
+			if (weapon.Name.ToUpper().Equals(weaponName.ToUpper()))
 				return weapon;
 		}
 		return null;
@@ -64,7 +64,7 @@ public class Player {
 	
 	public Armor GetMatchingArmor(string armorName) {
 		foreach (var armor in Armors.armors) {
-			if (armor.Name.Equals(armorName))
+			if (armor.Name.ToUpper().Equals(armorName.ToUpper()))
 				return armor;
 		}
 		return null;
@@ -72,7 +72,7 @@ public class Player {
 	
 	public Shield GetMatchingShield(string shieldName) {
 		foreach (var shield in Shields.shields) {
-			if (shield.Name.Equals(shieldName))
+			if (shield.Name.ToUpper().Equals(shieldName.ToUpper()))
 				return shield;
 		}
 		return null;
@@ -80,7 +80,7 @@ public class Player {
 
 	public Skill GetMatchingSkill(string skillName) {
 		foreach (var skill in General.Skills.Skills.skills) {
-			if(skill.Name.Equals(skillName))
+			if(skill.Name.ToUpper().Equals(skillName.ToUpper()))
 				return skill;
 		}
 		return null;
@@ -90,7 +90,7 @@ public class Player {
 
 	public bool HasFeat(Feat feat) {
 		foreach (var playerFeat in Feats) {
-			if(playerFeat.Equals(feat.Name))
+			if(playerFeat.ToUpper().Equals(feat.Name.ToUpper()))
 				return true;
 		}
 
@@ -99,7 +99,7 @@ public class Player {
 	
 	public bool HasFeat(string featName) {
 		foreach (var playerFeat in Feats) {
-			if(playerFeat.Equals(featName))
+			if(playerFeat.ToUpper().Equals(featName.ToUpper()))
 				return true;
 		}
 

@@ -8,5 +8,4 @@ public enum Race {
 	HalfOrc = 5,
 	Halfling = 6,
 	Human = 7,
-	None = 0
 }
