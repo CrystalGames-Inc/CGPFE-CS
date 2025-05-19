@@ -1,11 +1,7 @@
 ﻿using CGPFE.God.War.Combat.Action.ActionTypes;
 
-namespace CGPFE.God.War.Combat;
+namespace CGPFE.God.War.Combat.Actions.NoActions;
 
 public class Delay() : NoAction("Delay", false) {
-	
-}
-
-public class FiveFootStep() : NoAction("5-foot step", false) {
 	
 }
