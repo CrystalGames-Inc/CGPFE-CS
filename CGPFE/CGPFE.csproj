@@ -8,6 +8,5 @@
 
     <ItemGroup>
       <Folder Include="Data\Models\Item\Equipment\" />
-      <Folder Include="God\Creation\General\Feat\Feats\Metamagic\" />
     </ItemGroup>
 </Project>
