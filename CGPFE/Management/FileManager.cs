@@ -27,7 +27,7 @@ public static class FileManager {
 	
 	#endregion
 	
-	#region FileNames
+	#region File Names
 	
 	private const string GameDataFileName = "Settings.json";
 	private const string PlayerInfoFileName = "PlayerInfo.json";
@@ -217,6 +217,7 @@ public static class FileManager {
 		var json = File.ReadAllText(path);
 		return JsonSerializer.Deserialize<T>(json, Options);
 	}
+	
 	#endregion
 
 	#region General File Management

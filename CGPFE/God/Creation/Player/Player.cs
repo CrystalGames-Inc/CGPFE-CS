@@ -163,9 +163,9 @@ public class Player {
 			Console.WriteLine("No weapons on character");
 		}
 		else {
-			Console.WriteLine("Weapons: ");
-			foreach (var weapon in CombatInfo.Weapons) {
-				Console.WriteLine($"  {weapon}");
+			Console.WriteLine($"Weapons detected: {CombatInfo.Weapons.Count}");
+			for (var i = 0; i < CombatInfo.Weapons.Count; ++i) {
+				Console.WriteLine($"{i + 1}: {CombatInfo.Weapons[i]}");
 			}
 		}
 	}
