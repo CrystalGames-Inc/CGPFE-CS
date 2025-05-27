@@ -4,13 +4,17 @@ using CGPFE.Data.Game;
 using CGPFE.God.Creation.General;
 using CGPFE.God.Creation.Player;
 using CGPFE.God.Creation.Player.Properties;
+using CGPFE.God.Creation.Player.Properties.Inventory;
 
 namespace CGPFE.Management;
 
 public static class FileManager {
 	
+	public static bool DebugMode = false;
+	
 	private static readonly JsonSerializerOptions? Options = new() {
 		WriteIndented = true,
+		PropertyNameCaseInsensitive = true
 	};
 	
 	#region Paths
@@ -23,6 +27,7 @@ public static class FileManager {
 	private static string _worldPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
 	private static string _npCsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
 	private static string _playerPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
+	private static string _inventoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
 	private static string _campaignPath = string.Empty;
 	
 	#endregion
@@ -36,6 +41,12 @@ public static class FileManager {
 	private const string CombatInfoFileName = "CombatInfo.json";
 	private const string WalletFileName = "PlayerWallet.json";
 	private const string FeatsFileName = "PlayerFeats.json";
+	
+	/*The inventory items file names*/
+	private const string ItemsFileName = "PlayerItems.json";
+	private const string WeaponsFileName = "PlayerWeapons.json";
+	private const string ArmorsFileName = "PlayerArmors.json";
+	private const string ShieldsFileName = "PlayerShields.json";
 	
 	#endregion
 
@@ -93,6 +104,7 @@ public static class FileManager {
 		_worldPath = Path.Combine(_campaignPath, "World");
 		_npCsPath = Path.Combine(_campaignPath, "NPCs");
 		_playerPath = Path.Combine(_campaignPath, "Player");
+		_inventoryPath = Path.Combine(_playerPath, "Inventory");
 	}
 	
 	private static void CreateGameDirectories() {
@@ -101,6 +113,7 @@ public static class FileManager {
 		Directory.CreateDirectory(_worldPath);
 		Directory.CreateDirectory(_npCsPath);
 		Directory.CreateDirectory(_playerPath);
+		Directory.CreateDirectory(_inventoryPath);
 	}
 
 	#endregion
@@ -116,10 +129,17 @@ public static class FileManager {
 		WritePlayerProperty(player.Wallet, WalletFileName);
 		WritePlayerProperty(player.CombatInfo, CombatInfoFileName);
 		WritePlayerProperty(player.Feats, FeatsFileName);
+		WritePlayerProperty(player.Inventory.Items, ItemsFileName);
+		WritePlayerProperty(player.Inventory.Weapons, WeaponsFileName);
+		WritePlayerProperty(player.Inventory.Armors, ArmorsFileName);
+		WritePlayerProperty(player.Inventory.Shields, ShieldsFileName);
+		
+		if(DebugMode)
+			Console.WriteLine($"Loaded all files from {_playerPath}");
 	}
 
 	private static Player LoadPlayerData() {
-		if (!Directory.EnumerateFiles(_playerPath).Any()) {
+		if (!Directory.EnumerateFiles(_playerPath).Any() && DebugMode) {
 			Console.WriteLine("No player found to load, returning null");
 			return null;
 		}
@@ -129,12 +149,23 @@ public static class FileManager {
 		PlayerDataManager.Instance.Player.AttributeModifiers = LoadPlayerProperty<Attributes>(AttributeModsFileName);
 		PlayerDataManager.Instance.Player.Wallet =  LoadPlayerProperty<Wallet>(WalletFileName);
 		PlayerDataManager.Instance.Player.CombatInfo = LoadPlayerProperty<CombatInfo>(CombatInfoFileName);
+		PlayerDataManager.Instance.Player.Inventory = LoadPlayerInventory();
 
 		return new Player {
 			PlayerInfo = PlayerDataManager.Instance.Player.PlayerInfo,
 			Attributes = PlayerDataManager.Instance.Player.Attributes,
 			AttributeModifiers = PlayerDataManager.Instance.Player.AttributeModifiers,
+			Inventory = PlayerDataManager.Instance.Player.Inventory,
 			Wallet = PlayerDataManager.Instance.Player.Wallet
+		};
+	}
+
+	private static Inventory LoadPlayerInventory() {
+		return new Inventory {
+			Items = LoadPlayerProperty<List<InventoryItem>>(ItemsFileName),
+			Weapons = LoadPlayerProperty<List<InventoryItem>>(WeaponsFileName),
+			Armors = LoadPlayerProperty<List<InventoryItem>>(ArmorsFileName),
+			Shields = LoadPlayerProperty<List<InventoryItem>>(ShieldsFileName)
 		};
 	}
 	
@@ -209,13 +240,19 @@ public static class FileManager {
 		var json = JsonSerializer.Serialize(o, Options);
 		File.WriteAllText(path, json);
 		
-		Console.WriteLine($"Successfully written player attribute mods to {path}");
+		if(DebugMode)
+			Console.WriteLine($"Successfully written player attribute mods to {path}");
 	}
 
 	private static T LoadPlayerProperty<T>(string fileName) {
 		var path = Path.Combine(_playerPath, fileName);
 		var json = File.ReadAllText(path);
+		
+		if (DebugMode) 
+			Console.WriteLine($"Loaded file text: " + json);
+		
 		return JsonSerializer.Deserialize<T>(json, Options);
+
 	}
 	
 	#endregion
@@ -244,7 +281,8 @@ public static class FileManager {
 				File.Create(path).Close();
 				File.WriteAllText(path, jsonString);
 
-				Console.WriteLine($"File successfully created at {path}");
+				if(DebugMode)
+					Console.WriteLine($"File successfully created at {path}");
 			}
 	}
 	
@@ -268,7 +306,8 @@ public static class FileManager {
 			File.Create(path).Dispose();
 			File.WriteAllText(path, data);
 
-			Console.WriteLine($"File successfully created at {path}");
+			if(DebugMode)
+				Console.WriteLine($"File successfully created at {path}");
 		}
 	}
 	

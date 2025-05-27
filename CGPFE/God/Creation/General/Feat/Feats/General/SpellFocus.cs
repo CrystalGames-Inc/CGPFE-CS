@@ -1,8 +1,16 @@
 ﻿namespace CGPFE.God.Creation.General.Feat.Feats.General;
 
-public class SpellFocus(string spellName): Feat("Spell Focus") {
+public class SpellFocus: Feat {
 
-	private string SpellName { get; } = spellName;
+	private string SpellName { get; }
+
+	public SpellFocus() : base("Spell Focus") {
+		
+	}
+
+	public SpellFocus(string spellName) : base("Spell Focus") {
+		SpellName = spellName;
+	}
 
 	public override bool CanAcquire() {
 		return true;

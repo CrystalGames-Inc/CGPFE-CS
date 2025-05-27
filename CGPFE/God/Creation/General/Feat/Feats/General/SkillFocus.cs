@@ -2,9 +2,16 @@
 
 namespace CGPFE.God.Creation.General.Feat.Feats.General;
 
-public class SkillFocus(string skillName): Feat("Skill Focus") {
+public class SkillFocus: Feat {
 
-	private string SkillName { get; } = skillName;
+	private string SkillName { get; }
+
+	public SkillFocus() : base("Skill Focus") {
+	}
+
+	public SkillFocus(string skillName) : base("Skill Focus") { 
+		SkillName = skillName;
+	}
 	
 	public override bool CanAcquire() {
 		return true;

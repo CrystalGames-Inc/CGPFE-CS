@@ -7,6 +7,7 @@ using CGPFE.Data.Storage.Items.Equipment.Offense;
 using CGPFE.God.Creation.General.Feat;
 using CGPFE.God.Creation.General.Skills;
 using CGPFE.God.Creation.Player;
+using CGPFE.God.Creation.Player.Properties.Inventory;
 using CGPFE.Mechanics;
 using Attribute = CGPFE.Data.Constants.Attribute;
 
@@ -408,17 +409,12 @@ public class PlayerDataManager {
 	private void CalculateArmorClass() {
 		var ac = 10;
 
-		if (Player.CombatInfo.Armors != null) {
-			foreach (var a in Player.CombatInfo.Armors) {
-				ac += Player.GetMatchingArmor(a).ArmorBonus;
-			}
+		if (Player.Inventory.Armors != null) {
+			ac += Player.Inventory.Armors.Sum(a => Player.GetMatchingArmor(a.Name).ArmorBonus);
 		}
 
-		if (Player.CombatInfo.Shields != null) {
-			foreach (var s in Player.CombatInfo.Shields) {
-				if (s != null)
-					ac += Player.GetMatchingShield(s).ShieldBonus;
-			}
+		if (Player.Inventory.Shields != null) {
+			ac += Player.Inventory.Shields.Sum(s => Player.GetMatchingShield(s.Name).ShieldBonus);
 		}
 
 		ac += Player.AttributeModifiers.Dexterity;
@@ -669,7 +665,7 @@ public class PlayerDataManager {
 				continue;
 			}
 			else
-				Player.CombatInfo.Weapons.Add(purchasableWeapons[ans - 1].Name);
+				Player.Inventory.Weapons.Add(new InventoryItem(purchasableWeapons[ans - 1].Name));
 
 			Console.WriteLine("Would you like to purchase another weapon? [Y/N] (Default - N)");
 			var again = Console.ReadLine().ToUpper();
@@ -703,7 +699,7 @@ public class PlayerDataManager {
 				continue;
 			}
 			else 
-				Player.CombatInfo.Armors.Add(purchasableArmors[ans - 1].Name);
+				Player.Inventory.Armors.Add(new InventoryItem(purchasableArmors[ans - 1].Name));
 
 			Console.WriteLine("Would you like to purchase another armor? [Y/N] (Default - Y):");
 			var again = Console.ReadLine().ToUpper();

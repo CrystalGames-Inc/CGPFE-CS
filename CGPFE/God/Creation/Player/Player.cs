@@ -6,17 +6,19 @@ using CGPFE.God.Creation.General;
 using CGPFE.God.Creation.General.Feat;
 using CGPFE.God.Creation.General.Skills;
 using CGPFE.God.Creation.Player.Properties;
+using CGPFE.God.Creation.Player.Properties.Inventory;
 using Attribute = CGPFE.Data.Constants.Attribute;
 
 namespace CGPFE.God.Creation.Player;
 
 public class Player {
-	public PlayerInfo PlayerInfo = new();
-	public Attributes Attributes = new();
-	public Attributes AttributeModifiers = new();
-	public CombatInfo CombatInfo = new();
-	public List<string> Skills = new();
-	public List<string> Feats = new();
+	public PlayerInfo PlayerInfo { get; set; } = new();
+	public Attributes Attributes { get; set; } = new();
+	public Attributes AttributeModifiers { get; set; } = new() {MoveSpeed = 0};
+	public CombatInfo CombatInfo { get; set; } = new();
+	public List<string> Skills { get; set; } = [];
+	public List<string> Feats { get; set; } = [];
+	public Inventory Inventory { get; set; } = new();
 	public Wallet Wallet = new();
 
 	#region Getters
@@ -50,60 +52,30 @@ public class Player {
 		};
 	}
 	
-	public Feat GetMatchingFeat(string featName) {
-		return null;
+	public Feat? GetMatchingFeat(string featName) {
+		return General.Feat.Feats.Feats.feats.FirstOrDefault(feat => feat.Name.ToUpper().Equals(featName.ToUpper()));
 	}
 	
-	public Weapon GetMatchingWeapon(string weaponName) {
-		foreach (var weapon in Weapons.weapons) {
-			if (weapon.Name.ToUpper().Equals(weaponName.ToUpper()))
-				return weapon;
-		}
-		return null;
+	public Weapon? GetMatchingWeapon(string weaponName) {
+		return Weapons.weapons.FirstOrDefault(weapon => weapon.Name.ToUpper().Equals(weaponName.ToUpper()));
 	}
 	
-	public Armor GetMatchingArmor(string armorName) {
-		foreach (var armor in Armors.armors) {
-			if (armor.Name.ToUpper().Equals(armorName.ToUpper()))
-				return armor;
-		}
-		return null;
+	public Armor? GetMatchingArmor(string armorName) {
+		return Armors.armors.FirstOrDefault(armor => armor.Name.ToUpper().Equals(armorName.ToUpper()));
 	}
 	
-	public Shield GetMatchingShield(string shieldName) {
-		foreach (var shield in Shields.shields) {
-			if (shield.Name.ToUpper().Equals(shieldName.ToUpper()))
-				return shield;
-		}
-		return null;
+	public Shield? GetMatchingShield(string shieldName) {
+		return Shields.shields.FirstOrDefault(shield => shield.Name.ToUpper().Equals(shieldName.ToUpper()));
 	}
 
-	public Skill GetMatchingSkill(string skillName) {
-		foreach (var skill in General.Skills.Skills.skills) {
-			if(skill.Name.ToUpper().Equals(skillName.ToUpper()))
-				return skill;
-		}
-		return null;
+	public Skill? GetMatchingSkill(string skillName) {
+		return General.Skills.Skills.skills.FirstOrDefault(skill => skill.Name.ToUpper().Equals(skillName.ToUpper()));
 	}
 	
 	#endregion
-
-	public bool HasFeat(Feat feat) {
-		foreach (var playerFeat in Feats) {
-			if(playerFeat.ToUpper().Equals(feat.Name.ToUpper()))
-				return true;
-		}
-
-		return false;
-	}
 	
 	public bool HasFeat(string featName) {
-		foreach (var playerFeat in Feats) {
-			if(playerFeat.ToUpper().Equals(featName.ToUpper()))
-				return true;
-		}
-
-		return false;
+		return Feats.Any(playerFeat => playerFeat.ToUpper().Equals(featName.ToUpper()));
 	}
 	
 	#region Displays
@@ -159,37 +131,37 @@ public class Player {
 	}
 
 	public void DisplayWeapons() {
-		if (CombatInfo.Weapons == null) {
+		if (Inventory.Weapons == null) {
 			Console.WriteLine("No weapons on character");
 		}
 		else {
-			Console.WriteLine($"Weapons detected: {CombatInfo.Weapons.Count}");
-			for (var i = 0; i < CombatInfo.Weapons.Count; ++i) {
-				Console.WriteLine($"{i + 1}: {CombatInfo.Weapons[i]}");
+			Console.WriteLine($"Weapons detected: {Inventory.Weapons.Count}");
+			for (var i = 0; i < Inventory.Weapons.Count; ++i) {
+				Console.WriteLine($"{i + 1}: {Inventory.Weapons[i].Name}");
 			}
 		}
 	}
 
 	public void DisplayArmors() {
-		if (CombatInfo.Armors == null) {
+		if (Inventory.Armors == null) {
 			Console.WriteLine("No armor on character");
 		}
 		else {
-			Console.WriteLine("Armors: ");
-			foreach (var armor in CombatInfo.Armors) {
-				Console.WriteLine($"  {armor}");
+			Console.WriteLine($"Armors detected: {Inventory.Armors.Count}");
+			for (var i = 0; i < Inventory.Armors.Count; ++i) {
+				Console.WriteLine($"{i + 1}: {Inventory.Armors[i].Name}");
 			}
 		}
 	}
 
 	public void DisplayShields() {
-		if (CombatInfo.Shields == null) {
+		if (Inventory.Shields == null) {
 			Console.WriteLine("No shield on character");
 		}
 		else {
-			Console.WriteLine("Shields: ");
-			foreach (var shield in CombatInfo.Shields) {
-				Console.WriteLine($"  {shield}");
+			Console.WriteLine($"Shields detected: {Inventory.Shields.Count}");
+			for (var i = 0; i < Inventory.Shields.Count; ++i) {
+				Console.WriteLine($"{i + 1}: {Inventory.Shields[i].Name}");
 			}
 		}
 	}
