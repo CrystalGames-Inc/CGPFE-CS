@@ -129,10 +129,10 @@ public static class FileManager {
 		WritePlayerProperty(player.Wallet, WalletFileName);
 		WritePlayerProperty(player.CombatInfo, CombatInfoFileName);
 		WritePlayerProperty(player.Feats, FeatsFileName);
-		WritePlayerProperty(player.Inventory.Items, ItemsFileName);
-		WritePlayerProperty(player.Inventory.Weapons, WeaponsFileName);
-		WritePlayerProperty(player.Inventory.Armors, ArmorsFileName);
-		WritePlayerProperty(player.Inventory.Shields, ShieldsFileName);
+		WritePlayerProperty(player.Inventory.Items, _inventoryPath, ItemsFileName);
+		WritePlayerProperty(player.Inventory.Weapons, _inventoryPath, WeaponsFileName);
+		WritePlayerProperty(player.Inventory.Armors, _inventoryPath, ArmorsFileName);
+		WritePlayerProperty(player.Inventory.Shields, _inventoryPath, ShieldsFileName);
 		
 		if(DebugMode)
 			Console.WriteLine($"Loaded all files from {_playerPath}");
@@ -162,10 +162,10 @@ public static class FileManager {
 
 	private static Inventory LoadPlayerInventory() {
 		return new Inventory {
-			Items = LoadPlayerProperty<List<InventoryItem>>(ItemsFileName),
-			Weapons = LoadPlayerProperty<List<InventoryItem>>(WeaponsFileName),
-			Armors = LoadPlayerProperty<List<InventoryItem>>(ArmorsFileName),
-			Shields = LoadPlayerProperty<List<InventoryItem>>(ShieldsFileName)
+			Items = LoadPlayerProperty<List<InventoryItem>>(_inventoryPath, ItemsFileName),
+			Weapons = LoadPlayerProperty<List<InventoryItem>>(_inventoryPath, WeaponsFileName),
+			Armors = LoadPlayerProperty<List<InventoryItem>>(_inventoryPath, ArmorsFileName),
+			Shields = LoadPlayerProperty<List<InventoryItem>>(_inventoryPath, ShieldsFileName)
 		};
 	}
 	
@@ -243,10 +243,31 @@ public static class FileManager {
 		if(DebugMode)
 			Console.WriteLine($"Successfully written player attribute mods to {path}");
 	}
+	
+	private static void WritePlayerProperty<T>(T o, string path, string fileName) {
+		var finalPath = Path.Combine(path, fileName);
+		File.Create(finalPath).Dispose();
+		var json = JsonSerializer.Serialize(o, Options);
+		File.WriteAllText(finalPath, json);
+		
+		if(DebugMode)
+			Console.WriteLine($"Successfully written player attribute mods to {finalPath}");
+	}
 
 	private static T LoadPlayerProperty<T>(string fileName) {
 		var path = Path.Combine(_playerPath, fileName);
 		var json = File.ReadAllText(path);
+		
+		if (DebugMode) 
+			Console.WriteLine($"Loaded file text: " + json);
+		
+		return JsonSerializer.Deserialize<T>(json, Options);
+
+	}
+	
+	private static T LoadPlayerProperty<T>(string path, string fileName) {
+		var finalPath = Path.Combine(path, fileName);
+		var json = File.ReadAllText(finalPath);
 		
 		if (DebugMode) 
 			Console.WriteLine($"Loaded file text: " + json);
