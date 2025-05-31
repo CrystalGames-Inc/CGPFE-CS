@@ -4,7 +4,7 @@ using CGPFE.World.Settlement.Properties;
 
 namespace CGPFE.World.Settlement;
 
-public class Settlement{
+public class Settlement: Location{
 	#region Properties
 
 	public bool Discovered { get; set; }
@@ -16,7 +16,7 @@ public class Settlement{
 
 	#endregion
 
-	public Settlement(Info info, Modifiers mods, Location[]? locations) {
+	public Settlement(Info info, Modifiers mods, Location[]? locations) : base(info.Name, null, null) {
 		Discovered = false;
 		Info = info;
 		Modifiers = mods;

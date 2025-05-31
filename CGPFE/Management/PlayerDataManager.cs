@@ -9,6 +9,8 @@ using CGPFE.God.Creation.General.Skills;
 using CGPFE.God.Creation.Player;
 using CGPFE.God.Creation.Player.Properties.Inventory;
 using CGPFE.Mechanics;
+using CGPFE.World;
+using CGPFE.World.Settlement;
 using Attribute = CGPFE.Data.Constants.Attribute;
 
 namespace CGPFE.Management;
@@ -19,6 +21,7 @@ public class PlayerDataManager {
 	private static PlayerDataManager _instance = null;
 	private static readonly object Padlock = new object();
 
+	
 	public static PlayerDataManager Instance {
 		get {
 			lock (Padlock) {

@@ -50,7 +50,7 @@ public static class FileManager {
 	
 	#endregion
 
-	#region Campaign File Management
+	#region Game Data File Management
 	
 	public static GameData NewGameData() {
 		var g = GameDataManager.Instance.RegisterGameData();
@@ -88,7 +88,8 @@ public static class FileManager {
 		var jsonString = File.ReadAllText(filePath);
 		GameData g = JsonSerializer.Deserialize<GameData>(jsonString, Options);
 
-		Console.WriteLine($"Loaded json file from path {filePath}: {File.ReadAllText(filePath)}");
+		if(DebugMode)
+			Console.WriteLine($"Loaded json file from path {filePath}: {File.ReadAllText(filePath)}");
 
 		if (!File.Exists(_playerPath + "\\PlayerInfo.json")) return g;
 		Console.WriteLine("Player data detected, loading player");
@@ -97,24 +98,7 @@ public static class FileManager {
 		return g;
 	}
 
-	public static void UpdatePaths(string campaignName) {
-		_campaignPath = Path.Combine(SavesPath, campaignName);
-		_gameDataPath = Path.Combine(_campaignPath, "Game");
-		_resourcesPath = Path.Combine(_campaignPath, "Resources");
-		_worldPath = Path.Combine(_campaignPath, "World");
-		_npCsPath = Path.Combine(_campaignPath, "NPCs");
-		_playerPath = Path.Combine(_campaignPath, "Player");
-		_inventoryPath = Path.Combine(_playerPath, "Inventory");
-	}
-	
-	private static void CreateGameDirectories() {
-		Directory.CreateDirectory(_gameDataPath);
-		Directory.CreateDirectory(_resourcesPath);
-		Directory.CreateDirectory(_worldPath);
-		Directory.CreateDirectory(_npCsPath);
-		Directory.CreateDirectory(_playerPath);
-		Directory.CreateDirectory(_inventoryPath);
-	}
+
 
 	#endregion
 	
@@ -277,9 +261,34 @@ public static class FileManager {
 	}
 	
 	#endregion
+	
+	#region World File Management
+	
+	
+	
+	#endregion
 
 	#region General File Management
 
+	public static void UpdatePaths(string campaignName) {
+		_campaignPath = Path.Combine(SavesPath, campaignName);
+		_gameDataPath = Path.Combine(_campaignPath, "Game");
+		_resourcesPath = Path.Combine(_campaignPath, "Resources");
+		_worldPath = Path.Combine(_campaignPath, "World");
+		_npCsPath = Path.Combine(_campaignPath, "NPCs");
+		_playerPath = Path.Combine(_campaignPath, "Player");
+		_inventoryPath = Path.Combine(_playerPath, "Inventory");
+	}
+	
+	private static void CreateGameDirectories() {
+		Directory.CreateDirectory(_gameDataPath);
+		Directory.CreateDirectory(_resourcesPath);
+		Directory.CreateDirectory(_worldPath);
+		Directory.CreateDirectory(_npCsPath);
+		Directory.CreateDirectory(_playerPath);
+		Directory.CreateDirectory(_inventoryPath);
+	}
+	
 	private static void SerializeToFile(string path, object obj) {
 			var jsonString = JsonSerializer.Serialize(obj, Options);
 

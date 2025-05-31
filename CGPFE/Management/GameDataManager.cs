@@ -69,4 +69,17 @@ public class GameDataManager {
 			break;
 		}
 	}
+
+	public void AskNewWorld() {
+		Console.WriteLine("Would you like to create the game world [Y/N] (Default: N)");
+		var newWorld = Console.ReadLine();
+		switch (newWorld.ToUpper()) {
+			case "Y":
+				WorldManager.Instance.RegisterWorld();
+				break;
+			default:
+				Console.WriteLine();
+				break;
+		}
+	}
 }
