@@ -1,17 +1,12 @@
-﻿using CGPFE.Data.Constants;
-using CGPFE.Data.Game.StoryModifiers;
-using CGPFE.Data.Models.Item.Equipment.Defense;
-using CGPFE.Data.Models.Item.Equipment.Offense;
-using CGPFE.Data.Storage.Items.Equipment.Defense;
-using CGPFE.Data.Storage.Items.Equipment.Offense;
-using CGPFE.God.Creation.General.Feat;
-using CGPFE.God.Creation.General.Skills;
-using CGPFE.God.Creation.Player;
-using CGPFE.God.Creation.Player.Properties.Inventory;
+﻿using CGPFE.Core.Enums;
+using CGPFE.Domain.Characters.Player;
+using CGPFE.Domain.Characters.Player.Properties.Inventory;
+using CGPFE.Domain.Items.Equipment.Defense;
+using CGPFE.Domain.Items.Equipment.Offense;
 using CGPFE.Mechanics;
-using CGPFE.World;
-using CGPFE.World.Settlement;
-using Attribute = CGPFE.Data.Constants.Attribute;
+using CGPFE.Storage.Items.Equipment.Defense;
+using CGPFE.Storage.Items.Equipment.Offense;
+using Attribute = CGPFE.Core.Enums.Attribute;
 
 namespace CGPFE.Management;
 

@@ -1,0 +1,50 @@
+﻿namespace CGPFE.Core.Enums;
+
+public static class Materials
+{
+    public static Material Abysium;
+    public static Material Adamanite;
+    public static Material Angleskin;
+    public static Material Aszite;
+    public static Material MagicBridgeBasalt;
+    public static Material Bone;
+    public static Material Bronze;
+    public static Material Cryptstone;
+    public static Material BloodCrystal;
+    public static Material DarkleafCloth;
+    public static Material Darkwood;
+    public static Material Druchite;
+    public static Material Djezet;
+    public static Material Dragonhide;
+    public static Material Dragonskin;
+    public static Material EelHide;
+    public static Material ElysianBronze;
+    public static Material Gold;
+    public static Material Greenwood;
+    public static Material GriffonMane;
+    public static Material Horacalcum;
+    public static Material Inubrix;
+    public static Material ColdIron;
+    public static Material LeadLined;
+    public static Material Mindglass;
+    public static Material Mithral;
+    public static Material Noqual;
+    public static Material Obsidian;
+    public static Material Siccatite;
+    public static Material AlchemicalSilver;
+    public static Material Silversheen;
+    public static Material SkymetalAlloys;
+    public static Material FireForgedSteel;
+    public static Material FrostForgedSteel;
+    public static Material LivingSteel;
+    public static Material SingingSteel;
+    public static Material StainlessSteel;
+    public static Material Stone;
+    public static Material Sunsilk;
+    public static Material SerpentStone;
+    public static Material Spiresteel;
+    public static Material Viridium;
+    public static Material Voidglass;
+    public static Material Whipood;
+    public static Material Wyroot;
+}

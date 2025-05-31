@@ -1,5 +1,5 @@
-﻿using CGPFE.Data.Game;
-using CGPFE.Data.Game.StoryModifiers;
+﻿using CGPFE.Core.Enums;
+using CGPFE.Domain.Game;
 
 namespace CGPFE.Management;
 

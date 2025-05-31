@@ -1,10 +1,10 @@
 ﻿using System.Text.Json;
-using CGPFE.Data.Constants;
-using CGPFE.Data.Game;
-using CGPFE.God.Creation.General;
-using CGPFE.God.Creation.Player;
-using CGPFE.God.Creation.Player.Properties;
-using CGPFE.God.Creation.Player.Properties.Inventory;
+using CGPFE.Core.Enums;
+using CGPFE.Domain.Characters.Common;
+using CGPFE.Domain.Characters.Player;
+using CGPFE.Domain.Characters.Player.Properties;
+using CGPFE.Domain.Characters.Player.Properties.Inventory;
+using CGPFE.Domain.Game;
 
 namespace CGPFE.Management;
 

@@ -1,4 +1,4 @@
-﻿using CGPFE.World;
+﻿using CGPFE.Domain.World;
 
 namespace CGPFE.Management;
 

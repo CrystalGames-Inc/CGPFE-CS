@@ -1,4 +1,4 @@
-﻿using CGPFE.Data.Constants;
+﻿using CGPFE.Core.Enums;
 
 namespace CGPFE.Mechanics;
 
