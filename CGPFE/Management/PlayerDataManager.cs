@@ -1,9 +1,11 @@
 ﻿using CGPFE.Core.Enums;
+using CGPFE.Core.Utilities;
 using CGPFE.Domain.Characters.Player;
 using CGPFE.Domain.Characters.Player.Properties.Inventory;
 using CGPFE.Domain.Items.Equipment.Defense;
 using CGPFE.Domain.Items.Equipment.Offense;
 using CGPFE.Mechanics;
+using CGPFE.Mechanics.General;
 using CGPFE.Storage.Items.Equipment.Defense;
 using CGPFE.Storage.Items.Equipment.Offense;
 using Attribute = CGPFE.Core.Enums.Attribute;
@@ -29,18 +31,18 @@ public class PlayerDataManager {
 	#region Player Registration
 
 	public void RegisterPlayer() {
-		RegisterPlayerName();
+		Player.PlayerInfo.Name = PromptHelper.TextPrompt("Please choose the player's name: ");
 		
-		Player.PlayerInfo.Gender = EnumPrompt<Gender>("Please choose your gender: "); //Registers the player's gender
+		Player.PlayerInfo.Gender = PromptHelper.EnumPrompt<Gender>("Please choose your gender: ");
 		
 		RegisterAbilityScores();
 		
 		/*Race registration and its calculations*/
-		Player.PlayerInfo.Race = EnumPrompt<Race>("Please choose your race: ");
+		Player.PlayerInfo.Race = PromptHelper.EnumPrompt<Race>("Please choose your race: ");
 		CalculateRacialBonus();
 		
 		/*Class registration and its follow-up functions*/
-		Player.PlayerInfo.Class = EnumPrompt<Class>("Please choose your class: ");
+		Player.PlayerInfo.Class = PromptHelper.EnumPrompt<Class>("Please choose your class: ");
 		FileManager.CreateCombatTable();
 		CalculateMaxHealth();
 		RegisterAlignment();
@@ -56,17 +58,7 @@ public class PlayerDataManager {
 		
 		FileManager.WritePlayerData();
 	}
-
-	private void RegisterPlayerName() {
-		Console.WriteLine("Please choose your character's name: ");
-		var name = Console.ReadLine();
-		if (string.IsNullOrEmpty(name)) {
-			Console.WriteLine("Cannot enter an empty name");
-			RegisterPlayerName();
-		}
-		Player.PlayerInfo.Name = name;
-	}
-
+	
 	private void RegisterAbilityScores() {
 		
 		List<int> abilityScores = [];
@@ -169,28 +161,17 @@ public class PlayerDataManager {
 
 	private void RegisterPlayerAge() {
 		Player.PlayerInfo.Age = Player.PlayerInfo.Race switch {
-			Race.Dwarf => AskAge(40, 450),
-			Race.Elf => AskAge(110, 750),
-			Race.Gnome => AskAge(40, 500),
-			Race.HalfElf => AskAge(20, 185),
-			Race.HalfOrc => AskAge(14, 80),
-			Race.Halfling => AskAge(20, 200),
-			Race.Human => AskAge(15, 110),
+			Race.Dwarf => PromptHelper.RangePrompt("Please choose the player's age", 40, 450),
+			Race.Elf => PromptHelper.RangePrompt("Please choose the player's age", 110, 750),
+			Race.Gnome => PromptHelper.RangePrompt("Please choose the player's age", 40, 500),
+			Race.HalfElf => PromptHelper.RangePrompt("Please choose the player's age", 20, 185),
+			Race.HalfOrc => PromptHelper.RangePrompt("Please choose the player's age", 14, 80),
+			Race.Halfling => PromptHelper.RangePrompt("Please choose the player's age", 20, 200),
+			Race.Human => PromptHelper.RangePrompt("Please choose the player's age", 15, 110),
 			_ => Player.PlayerInfo.Age
 		};
 
 		CalculateAgeEffects();
-	}
-
-	private int AskAge(int minAge, int maxAge) {
-		Console.WriteLine($"Please choose your player's age ({minAge} - {maxAge})");
-		var age = Convert.ToInt32(Console.ReadLine());
-
-		if (age >= minAge && age <= maxAge) return age;
-		Console.WriteLine("Invalid age. Please try again.");
-		AskAge(minAge, maxAge);
-
-		return 0;
 	}
 
 	private void RegisterPlayerWealth() {
@@ -709,30 +690,6 @@ public class PlayerDataManager {
 
 	private void PurchaseStartingShields() {
 		
-	}
-	
-	#endregion
-	
-	#region Utility
-
-	private T Prompt<T>(string message, List<T> choices) {
-		while (true) {
-			Console.WriteLine(message);
-			for(int i = 0; i < choices.Count; i++)
-				Console.WriteLine($"{i + 1}. {choices[i]}");
-
-			Console.WriteLine("Please enter the index of your choice: ");
-			var input = Console.ReadLine();
-			
-			if(int.TryParse(input, out int index) && index >= 1 && index <= choices.Count)
-				return choices[index - 1];
-
-			Console.WriteLine("Invalid choice. Please try again.\n");
-		}
-	}
-
-	private T EnumPrompt<T>(string message) where T : Enum {
-		return Prompt<T>(message, Enum.GetValues(typeof(T)).Cast<T>().ToList());
 	}
 	
 	#endregion

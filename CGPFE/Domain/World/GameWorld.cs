@@ -34,10 +34,9 @@ public class GameWorld(string worldName) {
 	public Region GetRegion(Region r) {
 		if(HasRegion(r))
 			return r;
-		else {
-			Console.WriteLine($"Region {r.Name} does not exist in the world");
-			return null;
-		}
+		
+		Console.WriteLine($"Region {r.Name} does not exist in the world");
+		return null;
 		
 	}
 

@@ -5,6 +5,7 @@ using CGPFE.Domain.Characters.Player;
 using CGPFE.Domain.Characters.Player.Properties;
 using CGPFE.Domain.Characters.Player.Properties.Inventory;
 using CGPFE.Domain.Game;
+using CGPFE.Domain.World;
 
 namespace CGPFE.Management;
 
@@ -20,8 +21,8 @@ public static class FileManager {
 	#region Paths
 	
 	private const string EngineName = "CGPFE";
-	
 	private static readonly string SavesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
+	
 	private static string _gameDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
 	private static string _resourcesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
 	private static string _worldPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
@@ -34,6 +35,7 @@ public static class FileManager {
 	
 	#region File Names
 	
+	/*Player info file names*/
 	private const string GameDataFileName = "Settings.json";
 	private const string PlayerInfoFileName = "PlayerInfo.json";
 	private const string AttributesFileName = "PlayerAttributes.json";
@@ -42,11 +44,14 @@ public static class FileManager {
 	private const string WalletFileName = "PlayerWallet.json";
 	private const string FeatsFileName = "PlayerFeats.json";
 	
-	/*The inventory items file names*/
+	/*Inventory items file names*/
 	private const string ItemsFileName = "PlayerItems.json";
 	private const string WeaponsFileName = "PlayerWeapons.json";
 	private const string ArmorsFileName = "PlayerArmors.json";
 	private const string ShieldsFileName = "PlayerShields.json";
+	
+	/*World data file names*/
+	private const string RegionsFileName = "Regions.json";
 	
 	#endregion
 
@@ -263,8 +268,19 @@ public static class FileManager {
 	#endregion
 	
 	#region World File Management
-	
-	
+
+	public static void NewGameWorld() {
+		
+	}
+
+	public static GameWorld LoadGameWorld() {
+		var json = File.ReadAllText(_worldPath);
+		
+		if(DebugMode)
+			Console.WriteLine($"Loaded world file text: " + json);
+		
+		return JsonSerializer.Deserialize<GameWorld>(json, Options);
+	}
 	
 	#endregion
 
@@ -279,7 +295,7 @@ public static class FileManager {
 		_playerPath = Path.Combine(_campaignPath, "Player");
 		_inventoryPath = Path.Combine(_playerPath, "Inventory");
 	}
-	
+
 	private static void CreateGameDirectories() {
 		Directory.CreateDirectory(_gameDataPath);
 		Directory.CreateDirectory(_resourcesPath);
@@ -289,31 +305,31 @@ public static class FileManager {
 		Directory.CreateDirectory(_inventoryPath);
 	}
 	
-	private static void SerializeToFile(string path, object obj) {
-			var jsonString = JsonSerializer.Serialize(obj, Options);
+	private static void SerializeToFile<T>(string path, T obj) {
+		var jsonString = JsonSerializer.Serialize(obj, Options);
 
-			if (File.Exists(path)) {
-				Console.WriteLine($"File already exists at {path}\nOverwrite? [Y/N]");
-				var ans = Console.ReadLine() ?? throw new InvalidOperationException();
-				if (string.Equals(ans, "N", StringComparison.OrdinalIgnoreCase))
-					return;
-				if (!string.Equals(ans, "Y", StringComparison.OrdinalIgnoreCase)) return;
-				try {
-					File.Create(path).Dispose();
-					File.WriteAllText(path, jsonString);
-
-					Console.WriteLine($"File successfully created at {path}");
-				}
-				catch (Exception e) {
-					Console.WriteLine(e);
-				}
-			} else {
-				File.Create(path).Close();
+		if (File.Exists(path)) {
+			Console.WriteLine($"File already exists at {path}\nOverwrite? [Y/N]");
+			var ans = Console.ReadLine() ?? throw new InvalidOperationException();
+			if (string.Equals(ans, "N", StringComparison.OrdinalIgnoreCase))
+				return;
+			if (!string.Equals(ans, "Y", StringComparison.OrdinalIgnoreCase)) return;
+			try {
+				File.Create(path).Dispose();
 				File.WriteAllText(path, jsonString);
 
-				if(DebugMode)
-					Console.WriteLine($"File successfully created at {path}");
+				Console.WriteLine($"File successfully created at {path}");
 			}
+			catch (Exception e) {
+				Console.WriteLine(e);
+			}
+		} else {
+			File.Create(path).Close();
+			File.WriteAllText(path, jsonString);
+
+			if(DebugMode)
+				Console.WriteLine($"File successfully created at {path}");
+		}
 	}
 	
 	private static void WriteToFile(string path, string data) {

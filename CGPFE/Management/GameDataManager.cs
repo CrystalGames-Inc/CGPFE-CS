@@ -1,4 +1,5 @@
 ﻿using CGPFE.Core.Enums;
+using CGPFE.Core.Utilities;
 using CGPFE.Domain.Game;
 
 namespace CGPFE.Management;
@@ -20,48 +21,21 @@ public class GameDataManager {
 	}
 
 	public GameData RegisterGameData() {
-		Console.WriteLine("Please choose the campaign's name: ");
-		GameData.CampaignName = Console.ReadLine();
-
-		Console.WriteLine("Please choose a game fantasty (Default - Standard):\nLow - 1\nStandard - 2\nHigh - 3\nEpic - 4");
-		var fantasty = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException()) - 1;
-		GameData.GameFantasty = fantasty switch {
-			0 => Fantasty.Low,
-			1 => Fantasty.Standard,
-			2 => Fantasty.High,
-			3 => Fantasty.Epic,
-			_ => Fantasty.Standard
-		};
-		
-		Console.WriteLine("Please choose the game speed (Default - Medium):\nSlow - 1\nMedium - 2\nFast - 3");
-		var gameSpeed = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
-		GameData.GameSpeed = gameSpeed switch {
-			1 => GameSpeed.Slow,
-			2 => GameSpeed.Medium,
-			3 => GameSpeed.Fast,
-			_ => GameSpeed.Medium
-		};
-
-		Console.WriteLine("Please choose the method of initial point distribution ( Default - Standard):\nStandard - 1\nClassic - 2\nHeroic - 3\nPurchase - 4");
-		var scoreType = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
-		GameData.AbilityScoreType = scoreType switch {
-			1 => AbilityScoreType.Standard,
-			2 => AbilityScoreType.Classic,
-			3 => AbilityScoreType.Heroic,
-			4 => AbilityScoreType.Purchase,
-			_ => AbilityScoreType.Standard
-		};
-		
+		GameData.CampaignName = PromptHelper.TextPrompt("Please enter the name of the campaign: ");
 		FileManager.UpdatePaths(GameData.CampaignName);
+		
+		GameData.GameFantasty = PromptHelper.EnumPrompt<Fantasty>("Please enter a fantasty: ");
+		
+		GameData.GameSpeed = PromptHelper.EnumPrompt<GameSpeed>("Please enter the speed: ");
+
+		GameData.AbilityScoreType = PromptHelper.EnumPrompt<AbilityScoreType>("Please choose the method of initial point distribution: ");
 
 		return GameData;
 	}
 
 	public void AskNewCharacter() {
-		Console.WriteLine("Would you also like to create a new player? [Y/N] (Default: N)");
-		var newPlayer = Console.ReadLine();
-		switch (newPlayer.ToUpper()) {
-			case "Y":
+		switch (PromptHelper.YesNoPrompt("Would you also like to create a new player?", false)) {
+			case true:
 				PlayerDataManager.Instance.RegisterPlayer();
 			break;
 			default:
@@ -71,10 +45,8 @@ public class GameDataManager {
 	}
 
 	public void AskNewWorld() {
-		Console.WriteLine("Would you like to create the game world [Y/N] (Default: N)");
-		var newWorld = Console.ReadLine();
-		switch (newWorld.ToUpper()) {
-			case "Y":
+		switch (PromptHelper.YesNoPrompt("Would you also like to create the game world?", false)) {
+			case true:
 				WorldManager.Instance.RegisterWorld();
 				break;
 			default:

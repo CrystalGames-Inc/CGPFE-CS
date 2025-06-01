@@ -2,6 +2,7 @@
 using CGPFE.Domain.World.Geography;
 using CGPFE.Domain.World.Settlements.Properties;
 using CGPFE.Mechanics;
+using CGPFE.Mechanics.General;
 
 namespace CGPFE.Domain.World.Settlements;
 
