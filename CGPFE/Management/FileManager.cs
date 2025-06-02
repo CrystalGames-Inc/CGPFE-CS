@@ -33,6 +33,17 @@ public static class FileManager {
 	
 	#endregion
 	
+	#region Directory Names
+
+	private const string GameDataDirectoryName = "Game";
+	private const string ResourcesDirectoryName = "Game";
+	private const string WorldDirectoryName = "Game";
+	private const string NpcDirectoryName = "Game";
+	private const string PlayerDirectoryName = "Game";
+	private const string InventoryDirectoryName = "Game";
+	
+	#endregion
+	
 	#region File Names
 	
 	/*Player info file names*/
@@ -270,7 +281,7 @@ public static class FileManager {
 	#region World File Management
 
 	public static void NewGameWorld() {
-		
+		WorldManager.Instance.RegisterWorld();
 	}
 
 	public static GameWorld LoadGameWorld() {
@@ -288,12 +299,12 @@ public static class FileManager {
 
 	public static void UpdatePaths(string campaignName) {
 		_campaignPath = Path.Combine(SavesPath, campaignName);
-		_gameDataPath = Path.Combine(_campaignPath, "Game");
-		_resourcesPath = Path.Combine(_campaignPath, "Resources");
-		_worldPath = Path.Combine(_campaignPath, "World");
-		_npCsPath = Path.Combine(_campaignPath, "NPCs");
-		_playerPath = Path.Combine(_campaignPath, "Player");
-		_inventoryPath = Path.Combine(_playerPath, "Inventory");
+		_gameDataPath = Path.Combine(_campaignPath, GameDataDirectoryName);
+		_resourcesPath = Path.Combine(_campaignPath, ResourcesDirectoryName);
+		_worldPath = Path.Combine(_campaignPath, WorldDirectoryName);
+		_npCsPath = Path.Combine(_campaignPath, NpcDirectoryName);
+		_playerPath = Path.Combine(_campaignPath, PlayerDirectoryName);
+		_inventoryPath = Path.Combine(_playerPath, InventoryDirectoryName);
 	}
 
 	private static void CreateGameDirectories() {

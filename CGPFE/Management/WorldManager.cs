@@ -1,6 +1,7 @@
 ﻿using CGPFE.Core.Enums;
 using CGPFE.Core.Utilities;
 using CGPFE.Domain.World;
+using CGPFE.Domain.World.Geography;
 
 namespace CGPFE.Management;
 
@@ -20,33 +21,23 @@ public class WorldManager {
 	}
 
 	public void RegisterWorld() {
-		while (true) {
-			Console.WriteLine("Please choose a name for the game world: ");
-			var name = Console.ReadLine();
-			if (string.IsNullOrEmpty(name)) {
-				Console.WriteLine("Must enter a name");
-				continue;
-			}
-			World.WorldName = name;
-			break;
-		}
+		World.WorldName = PromptHelper.TextPrompt("Please choose a name for the world: ");
+
+		if (PromptHelper.YesNoPrompt("Would you also like to start creating regions? ", true))
+			RegisterNewRegion();
 	}
 
-	public void RegisterNewRegion() {
-		string name;
-		while (true) {
-			Console.WriteLine("Please choose a name for the region: ");
-			name = Console.ReadLine();
-			if (string.IsNullOrEmpty(name)) {
-				Console.WriteLine("Must enter a name");
-				continue;
-			}
-			break;
-		}
+	public Region RegisterNewRegion() {
+		var name = PromptHelper.TextPrompt("Please enter a name for the region: ");
 		
-		Terrain terrain;
-		terrain = PromptHelper.EnumPrompt<Terrain>("Please enter a terrain type: ");
+		var terrain = PromptHelper.EnumPrompt<Terrain>("Please enter a terrain type: ");
 		
+		var climate = PromptHelper.EnumPrompt<Climate>("Please enter a climate type: ");
 		
+		var r = new Region(name, terrain, climate);
+		
+		World.AddRegion(r);
+
+		return r;
 	}
 }
