@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+﻿using Newtonsoft.Json;
 using CGPFE.Core.Enums;
 using CGPFE.Domain.Characters.Common;
 using CGPFE.Domain.Characters.Player;
@@ -13,10 +13,9 @@ namespace CGPFE.Management;
 public static class FileManager {
 	
 	public static bool DebugMode = false;
-	
-	private static readonly JsonSerializerOptions? Options = new() {
-		WriteIndented = true,
-		PropertyNameCaseInsensitive = true
+
+	private static readonly JsonSerializerSettings settings = new JsonSerializerSettings() {
+		Formatting = Formatting.Indented
 	};
 	
 	#region Paths
@@ -113,7 +112,7 @@ public static class FileManager {
 		var filePath = Path.Combine(SavesPath, campaigns[loadedCampaign - 1], "Game", GameDataFileName);
 		UpdatePaths(campaigns[loadedCampaign - 1]);
 		var jsonString = File.ReadAllText(filePath);
-		GameData g = JsonSerializer.Deserialize<GameData>(jsonString, Options);
+		GameData? g = JsonConvert.DeserializeObject<GameData>(jsonString);
 
 		if(DebugMode)
 			Console.WriteLine($"Loaded json file from path {filePath}: {File.ReadAllText(filePath)}");
@@ -241,7 +240,7 @@ public static class FileManager {
 			break;
 		}
 		
-		var combatTable = JsonSerializer.Deserialize<CombatTableRow[]>(File.ReadAllText(path));
+		var combatTable = JsonConvert.DeserializeObject<CombatTableRow[]>(File.ReadAllText(path));
 		if (combatTable == null) return;
 		PlayerDataManager.Instance.Player.CombatInfo.BaseAttackBonus = combatTable[0].BAB;
 		PlayerDataManager.Instance.Player.CombatInfo.Fortitude = combatTable[0].Fort;
@@ -252,7 +251,7 @@ public static class FileManager {
 	private static void WritePlayerProperty<T>(T o, string fileName) {
 		var path = Path.Combine(_playerPath, fileName);
 		File.Create(path).Dispose();
-		var json = JsonSerializer.Serialize(o, Options);
+		var json = JsonConvert.SerializeObject(o, settings);
 		File.WriteAllText(path, json);
 		
 		if(DebugMode)
@@ -262,7 +261,7 @@ public static class FileManager {
 	private static void WritePlayerProperty<T>(T o, string path, string fileName) {
 		var finalPath = Path.Combine(path, fileName);
 		File.Create(finalPath).Dispose();
-		var json = JsonSerializer.Serialize(o, Options);
+		var json = JsonConvert.SerializeObject(o, settings);
 		File.WriteAllText(finalPath, json);
 		
 		if(DebugMode)
@@ -276,7 +275,7 @@ public static class FileManager {
 		if (DebugMode) 
 			Console.WriteLine($"Loaded file text: " + json);
 		
-		return JsonSerializer.Deserialize<T>(json, Options);
+		return JsonConvert.DeserializeObject<T>(json);
 
 	}
 	
@@ -287,7 +286,7 @@ public static class FileManager {
 		if (DebugMode) 
 			Console.WriteLine($"Loaded file text: " + json);
 		
-		return JsonSerializer.Deserialize<T>(json, Options);
+		return JsonConvert.DeserializeObject<T>(json);
 
 	}
 	
@@ -303,7 +302,7 @@ public static class FileManager {
 			return null;
 		}
 		
-		var world = JsonSerializer.Deserialize<GameWorld>(json, Options);
+		var world = JsonConvert.DeserializeObject<GameWorld>(json);
 		
 		if(DebugMode)
 			Console.WriteLine($"Loaded world file text: {json}");
@@ -319,7 +318,7 @@ public static class FileManager {
 
 		for (var i = 0; i < RegionFileNames.Count; i++) {
 			var path = Path.Combine(_regionsPath, (RegionFileNames[i] + ".json"));
-			var json = JsonSerializer.Serialize(world.WritableRegions[i], Options);
+			var json = JsonConvert.SerializeObject(world.WritableRegions[i], settings);
 			if(DebugMode)
 				Console.WriteLine(json);
 			
@@ -335,7 +334,9 @@ public static class FileManager {
 			var path = Path.Combine(_regionsPath, t);
 			var json = File.ReadAllText(path);
 			
-			WorldManager.Instance.World.Regions.Add(JsonSerializer.Deserialize<Region>(json, Options));
+			WorldManager.Instance.World.Regions ??= [];
+			
+			WorldManager.Instance.World.Regions.Add(JsonConvert.DeserializeObject<Region>(json));
 		}
 	}
 	
@@ -365,7 +366,7 @@ public static class FileManager {
 	}
 	
 	private static void SerializeToFile<T>(string path, T obj, string fileName) {
-		var jsonString = JsonSerializer.Serialize(obj, Options);
+		var jsonString = JsonConvert.SerializeObject(obj, settings);
 		
 		var finalPath = Path.Combine(path, fileName);
 		

@@ -34,3 +34,4 @@ D:\Users\User\Documents\GitHub\CrystalGames\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPF
 D:\Users\User\Documents\GitHub\CrystalGames\CGPFE-CS\CGPFE\obj\Debug\net8.0\refint\CGPFE.dll
 D:\Users\User\Documents\GitHub\CrystalGames\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.pdb
 D:\Users\User\Documents\GitHub\CrystalGames\CGPFE-CS\CGPFE\obj\Debug\net8.0\ref\CGPFE.dll
+C:\Users\Admin\Documents\GitHub\CGPFE-CS\CGPFE\obj\Debug\net8.0\CGPFE.csproj.AssemblyReference.cache
