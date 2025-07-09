@@ -1,5 +1,4 @@
 ﻿using CGPFE.Domain.World.Geography;
-using CGPFE.Domain.World.Geography.Writables;
 
 namespace CGPFE.Domain.World;
 
@@ -8,14 +7,11 @@ public class GameWorld(string worldName) {
 	public string WorldName = worldName;
 
 	public List<Region>? Regions;
-	public List<WRegion>? WritableRegions;
 	public List<string>? RegionNames;
 
 	public void AddRegion(Region region) {
 		Regions ??= [];
 		Regions.Add(region);
-		WritableRegions ??= [];
-		WritableRegions.Add(new WRegion(region.Name, region.TerrainType, region.Climate));
 		RegionNames ??= [];
 		RegionNames.Add(region.Name);
 	}

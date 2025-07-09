@@ -318,7 +318,7 @@ public static class FileManager {
 
 		for (var i = 0; i < RegionFileNames.Count; i++) {
 			var path = Path.Combine(_regionsPath, (RegionFileNames[i] + ".json"));
-			var json = JsonConvert.SerializeObject(world.WritableRegions[i], settings);
+			var json = JsonConvert.SerializeObject(world.Regions[i], settings);
 			if(DebugMode)
 				Console.WriteLine(json);
 			
@@ -334,9 +334,13 @@ public static class FileManager {
 			var path = Path.Combine(_regionsPath, t);
 			var json = File.ReadAllText(path);
 			
-			WorldManager.Instance.World.Regions ??= [];
+			var region = JsonConvert.DeserializeObject<Region>(json);
 			
-			WorldManager.Instance.World.Regions.Add(JsonConvert.DeserializeObject<Region>(json));
+			WorldManager.Instance.World.Regions ??= [];
+			WorldManager.Instance.World.RegionNames ??= [];
+
+			WorldManager.Instance.World.Regions.Add(region);
+			WorldManager.Instance.World.RegionNames.Add(region.Name);
 		}
 	}
 	

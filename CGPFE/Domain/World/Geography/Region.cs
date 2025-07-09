@@ -1,5 +1,4 @@
 ﻿using CGPFE.Core.Enums;
-using CGPFE.Domain.World.Geography.Writables;
 using CGPFE.Domain.World.Settlements;
 using CGPFE.Mechanics;
 
@@ -35,12 +34,6 @@ public class Region(string name, Terrain terrainType, Climate climate) : Locatio
 		
 		Console.WriteLine("No regions in the world");
 		return null;
-	}
-
-	public void MatchRegion(WRegion region) {
-		Name = region.Name;
-		TerrainType = region.TerrainType;
-		Climate = region.Climate;
 	}
 	
 	public void DisplayNeighbouringRegions() {
