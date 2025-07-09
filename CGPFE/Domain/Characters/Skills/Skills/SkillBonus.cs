@@ -7,16 +7,18 @@ public class SkillBonus
     public int AbilityMod;
     public int Ranks;
     public int MiscMod;
+    public int RacialBonus;
 
     public SkillBonus(int abilityMod, int ranks, int miscMod) {
         AbilityMod = abilityMod;
         Ranks = ranks;
         MiscMod = miscMod;
+        RacialBonus = 0;
         CalculateBonus();
     }
 
     private void CalculateBonus() {
-        Size = AbilityMod + Ranks +  MiscMod;
+        Size = AbilityMod + Ranks +  MiscMod + RacialBonus;
     }
 
     public void SetAbilityMod(int size) {

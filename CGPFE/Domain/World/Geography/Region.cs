@@ -1,17 +1,48 @@
 ﻿using CGPFE.Core.Enums;
+using CGPFE.Domain.World.Geography.Writables;
 using CGPFE.Domain.World.Settlements;
 using CGPFE.Mechanics;
 
 namespace CGPFE.Domain.World.Geography;
 
 public class Region(string name, Terrain terrainType, Climate climate) : Location(name, terrainType, climate) {
-	public readonly string Name = name;
-	public readonly Terrain TerrainType = terrainType;
-	public readonly Climate Climate = climate;
-	public List<Location>? Locations = [];
-	public List<Settlement>? Settlements = [];
+	
+	//Region Data
+	public new string Name = name;
+	public new Terrain TerrainType = terrainType;
+	public Climate Climate = climate;
+	
+	//Locations
+	public List<Location>? Locations;
+	public List<string>? LocationNames;
+	
 	public Dictionary<Region, int>? BorderingRegions = new();
 
+	public void AddLocation(Location location) {
+		Locations ??= [];
+		Locations.Add(location);
+		
+		LocationNames ??= [];
+		LocationNames.Add(location.Name);
+	}
+
+	public bool HasLocation(Location location) {
+		return Locations != null && Locations.Contains(location);
+	}
+
+	public Location? GetMatchingLocation(string locationName) {
+		if (LocationNames != null) return Locations.FirstOrDefault(r => locationName.Equals(r.Name));
+		
+		Console.WriteLine("No regions in the world");
+		return null;
+	}
+
+	public void MatchRegion(WRegion region) {
+		Name = region.Name;
+		TerrainType = region.TerrainType;
+		Climate = region.Climate;
+	}
+	
 	public void DisplayNeighbouringRegions() {
 		if (BorderingRegions == null) {
 			Console.WriteLine($"No bordering regions for region {Name}");
@@ -36,12 +67,20 @@ public class Region(string name, Terrain terrainType, Climate climate) : Locatio
 	}
 
 	public void DisplaySettlements() {
-		if (Settlements == null) {
-			Console.WriteLine("No settlements in the region");
+		if (Locations == null) {
+			Console.WriteLine($"No settlements in {Name}");
 			return;
 		}
+		
+		List<Location> settlements = [];
+		foreach (var l in Locations) {
+			if(l.GetType() == typeof(Settlement))
+				settlements.Add(l);
+		}
+
 		Console.WriteLine($"Settlements in {Name}:");
-		foreach (var s in Settlements.Where(s => s.Discovered))
-			Console.WriteLine(s.Info.Name);
+		for (var i = 0; i < settlements.Count; i++) {
+			Console.WriteLine($"{i}. {settlements[i].Name}");
+		}
 	}
 }

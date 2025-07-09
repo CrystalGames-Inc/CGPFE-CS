@@ -17,4 +17,21 @@ public class Skill
         Attribute = attribute;
         Untrained = untrained;
     }
+
+    public bool SkillCheck(int dc) {
+        
+        
+        return false;
+    }
+
+    public int GetSkillCheckBonus() {
+        int bonus = 0;
+
+        if (Untrained) {
+            bonus += Bonus.AbilityMod;
+        }
+        
+        
+        return bonus;
+    }
 }

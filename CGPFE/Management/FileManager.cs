@@ -6,6 +6,7 @@ using CGPFE.Domain.Characters.Player.Properties;
 using CGPFE.Domain.Characters.Player.Properties.Inventory;
 using CGPFE.Domain.Game;
 using CGPFE.Domain.World;
+using CGPFE.Domain.World.Geography;
 
 namespace CGPFE.Management;
 
@@ -26,6 +27,7 @@ public static class FileManager {
 	private static string _gameDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
 	private static string _resourcesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
 	private static string _worldPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
+	private static string _regionsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
 	private static string _npCsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
 	private static string _playerPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
 	private static string _inventoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), EngineName);
@@ -36,11 +38,12 @@ public static class FileManager {
 	#region Directory Names
 
 	private const string GameDataDirectoryName = "Game";
-	private const string ResourcesDirectoryName = "Game";
-	private const string WorldDirectoryName = "Game";
-	private const string NpcDirectoryName = "Game";
-	private const string PlayerDirectoryName = "Game";
-	private const string InventoryDirectoryName = "Game";
+	private const string ResourcesDirectoryName = "Resources";
+	private const string WorldDirectoryName = "World";
+	private const string RegionsDirectoryName = "Regions";
+	private const string NpcDirectoryName = "NPCs";
+	private const string PlayerDirectoryName = "Player";
+	private const string InventoryDirectoryName = "Inventory";
 	
 	#endregion
 	
@@ -63,6 +66,7 @@ public static class FileManager {
 	
 	/*World data file names*/
 	private const string RegionsFileName = "Regions.json";
+	private static List<string> RegionFileNames;
 	
 	#endregion
 
@@ -76,11 +80,18 @@ public static class FileManager {
 		
 		if(!Directory.Exists(_campaignPath))
 			Directory.CreateDirectory(_campaignPath);
-		var gameDataPath = Path.Combine(_gameDataPath, GameDataFileName);
 		
-		SerializeToFile(gameDataPath, g);
+		SerializeToFile(_gameDataPath, g, GameDataFileName);
 		GameDataManager.Instance.GameData = g;
 		
+		WorldManager.Instance.RegisterWorld();
+		if (WorldManager.Instance.World.RegionNames == null) return g;
+		
+		RegionFileNames = WorldManager.Instance.World.RegionNames;
+		SerializeToFile(_worldPath, WorldManager.Instance.World.RegionNames, RegionsFileName);
+		WriteWorldRegionFiles();
+
+
 		return g;
 	}
 	
@@ -107,15 +118,19 @@ public static class FileManager {
 		if(DebugMode)
 			Console.WriteLine($"Loaded json file from path {filePath}: {File.ReadAllText(filePath)}");
 
-		if (!File.Exists(_playerPath + "\\PlayerInfo.json")) return g;
-		Console.WriteLine("Player data detected, loading player");
-		PlayerDataManager.Instance.Player = LoadPlayerData();
+		if (File.Exists(Path.Combine(_playerPath, PlayerInfoFileName))) {
+			Console.WriteLine("Player data detected, loading player");
+			PlayerDataManager.Instance.Player = LoadPlayerData();
+		}
 
+		if (Directory.GetFiles(_worldPath).Length != 0) {
+			Console.WriteLine("World data detected, loading world");
+			LoadWorldRegions();
+		}
+		
 		return g;
 	}
-
-
-
+	
 	#endregion
 	
 	#region Player File Management
@@ -138,7 +153,7 @@ public static class FileManager {
 			Console.WriteLine($"Loaded all files from {_playerPath}");
 	}
 
-	private static Player LoadPlayerData() {
+	private static Player? LoadPlayerData() {
 		if (!Directory.EnumerateFiles(_playerPath).Any() && DebugMode) {
 			Console.WriteLine("No player found to load, returning null");
 			return null;
@@ -254,7 +269,7 @@ public static class FileManager {
 			Console.WriteLine($"Successfully written player attribute mods to {finalPath}");
 	}
 
-	private static T LoadPlayerProperty<T>(string fileName) {
+	private static T? LoadPlayerProperty<T>(string fileName) {
 		var path = Path.Combine(_playerPath, fileName);
 		var json = File.ReadAllText(path);
 		
@@ -265,7 +280,7 @@ public static class FileManager {
 
 	}
 	
-	private static T LoadPlayerProperty<T>(string path, string fileName) {
+	private static T? LoadPlayerProperty<T>(string path, string fileName) {
 		var finalPath = Path.Combine(path, fileName);
 		var json = File.ReadAllText(finalPath);
 		
@@ -280,17 +295,48 @@ public static class FileManager {
 	
 	#region World File Management
 
-	public static void NewGameWorld() {
-		WorldManager.Instance.RegisterWorld();
-	}
-
-	public static GameWorld LoadGameWorld() {
+	public static GameWorld? LoadGameWorld() {
 		var json = File.ReadAllText(_worldPath);
+
+		if (string.IsNullOrWhiteSpace(json)) {
+			Console.WriteLine("World file empty");
+			return null;
+		}
+		
+		var world = JsonSerializer.Deserialize<GameWorld>(json, Options);
 		
 		if(DebugMode)
-			Console.WriteLine($"Loaded world file text: " + json);
+			Console.WriteLine($"Loaded world file text: {json}");
+
+		WorldManager.Instance.World = world;
+		RegionFileNames = world.RegionNames;
 		
-		return JsonSerializer.Deserialize<GameWorld>(json, Options);
+		return world;
+	}
+
+	private static void WriteWorldRegionFiles() {
+		var world = WorldManager.Instance.World;
+
+		for (var i = 0; i < RegionFileNames.Count; i++) {
+			var path = Path.Combine(_regionsPath, (RegionFileNames[i] + ".json"));
+			var json = JsonSerializer.Serialize(world.WritableRegions[i], Options);
+			if(DebugMode)
+				Console.WriteLine(json);
+			
+			File.WriteAllText(path, json);
+		}
+	}
+
+	private static void LoadWorldRegions() {
+		var regionFileNames = Directory.GetFiles(_regionsPath);
+		RegionFileNames = regionFileNames.ToList();
+
+		foreach (var t in RegionFileNames) {
+			var path = Path.Combine(_regionsPath, t);
+			var json = File.ReadAllText(path);
+			
+			WorldManager.Instance.World.Regions.Add(JsonSerializer.Deserialize<Region>(json, Options));
+		}
 	}
 	
 	#endregion
@@ -302,6 +348,7 @@ public static class FileManager {
 		_gameDataPath = Path.Combine(_campaignPath, GameDataDirectoryName);
 		_resourcesPath = Path.Combine(_campaignPath, ResourcesDirectoryName);
 		_worldPath = Path.Combine(_campaignPath, WorldDirectoryName);
+		_regionsPath = Path.Combine(_worldPath, RegionsDirectoryName);
 		_npCsPath = Path.Combine(_campaignPath, NpcDirectoryName);
 		_playerPath = Path.Combine(_campaignPath, PlayerDirectoryName);
 		_inventoryPath = Path.Combine(_playerPath, InventoryDirectoryName);
@@ -311,35 +358,38 @@ public static class FileManager {
 		Directory.CreateDirectory(_gameDataPath);
 		Directory.CreateDirectory(_resourcesPath);
 		Directory.CreateDirectory(_worldPath);
+		Directory.CreateDirectory(_regionsPath);
 		Directory.CreateDirectory(_npCsPath);
 		Directory.CreateDirectory(_playerPath);
 		Directory.CreateDirectory(_inventoryPath);
 	}
 	
-	private static void SerializeToFile<T>(string path, T obj) {
+	private static void SerializeToFile<T>(string path, T obj, string fileName) {
 		var jsonString = JsonSerializer.Serialize(obj, Options);
-
-		if (File.Exists(path)) {
-			Console.WriteLine($"File already exists at {path}\nOverwrite? [Y/N]");
+		
+		var finalPath = Path.Combine(path, fileName);
+		
+		if (File.Exists(finalPath)) {
+			Console.WriteLine($"File already exists at {finalPath}\nOverwrite? [Y/N]");
 			var ans = Console.ReadLine() ?? throw new InvalidOperationException();
 			if (string.Equals(ans, "N", StringComparison.OrdinalIgnoreCase))
 				return;
 			if (!string.Equals(ans, "Y", StringComparison.OrdinalIgnoreCase)) return;
 			try {
-				File.Create(path).Dispose();
-				File.WriteAllText(path, jsonString);
+				File.Create(finalPath).Dispose();
+				File.WriteAllText(finalPath, jsonString);
 
-				Console.WriteLine($"File successfully created at {path}");
+				Console.WriteLine($"File successfully created at {finalPath}");
 			}
 			catch (Exception e) {
 				Console.WriteLine(e);
 			}
 		} else {
-			File.Create(path).Close();
-			File.WriteAllText(path, jsonString);
+			File.Create(finalPath).Close();
+			File.WriteAllText(finalPath, jsonString);
 
 			if(DebugMode)
-				Console.WriteLine($"File successfully created at {path}");
+				Console.WriteLine($"File successfully created at {finalPath}");
 		}
 	}
 	

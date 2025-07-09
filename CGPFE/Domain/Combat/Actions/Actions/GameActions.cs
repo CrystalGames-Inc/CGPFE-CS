@@ -10,7 +10,7 @@ using CGPFE.Domain.Combat.Actions.Base;
 namespace CGPFE.Domain.Combat.Actions.Actions;
 
 public static class GameActions {
-	private static List<CombatAction> FreeActions { get; } = [
+	public static List<CombatAction> FreeActions { get; } = [
 		new CeaseSpellConcentration(),
 		new DropItem(),
 		new DropToFloor(),
@@ -18,7 +18,7 @@ public static class GameActions {
 		new Speak()
 	];
 
-	private static List<CombatAction> FullRoundActions { get; } = [
+	public static List<CombatAction> FullRoundActions { get; } = [
 		new Charge(),
 		new DeliverCoupDeGrace(),
 		new EscapeNet(),
@@ -34,11 +34,11 @@ public static class GameActions {
 		new Withdraw()
 	];
 
-	private static List<CombatAction> ImmediateActions { get; } = [
+	public static List<CombatAction> ImmediateActions { get; } = [
 		new CastFeatherFall()
 	];
 
-	private static List<CombatAction> MoveActions { get; } = [
+	public static List<CombatAction> MoveActions { get; } = [
 		new ControlFrightenedMount(),
 		new DirectActiveSpell(),
 		new DrawWeapon(),
@@ -54,12 +54,12 @@ public static class GameActions {
 		new StandUpFromProne()
 	];
 
-	private static List<CombatAction> NoActions { get; } = [
+	public static List<CombatAction> NoActions { get; } = [
 		new Delay(),
 		new FiveFootStep()
 	];
 	
-	private static List<CombatAction> StandardActions { get; } = [
+	public static List<CombatAction> StandardActions { get; } = [
 		new ActivateMagicItem(),
 		new AidAnother(),
 		new AttackMelee(),
@@ -85,7 +85,7 @@ public static class GameActions {
 		new UseSupernaturalAbility()
 	];
 
-	private static List<CombatAction> SwiftActions { get; } = [
+	public static List<CombatAction> SwiftActions { get; } = [
 		new CastQuickenedSpell()
 	];
 }

@@ -1,4 +1,5 @@
 ﻿using CGPFE.Domain.World.Geography;
+using CGPFE.Domain.World.Geography.Writables;
 
 namespace CGPFE.Domain.World;
 
@@ -6,38 +7,45 @@ public class GameWorld(string worldName) {
 	
 	public string WorldName = worldName;
 
-	private List<Region>? _regions;
+	public List<Region>? Regions;
+	public List<WRegion>? WritableRegions;
+	public List<string>? RegionNames;
 
 	public void AddRegion(Region region) {
-		_regions ??= [];
-		_regions.Add(region);
+		Regions ??= [];
+		Regions.Add(region);
+		WritableRegions ??= [];
+		WritableRegions.Add(new WRegion(region.Name, region.TerrainType, region.Climate));
+		RegionNames ??= [];
+		RegionNames.Add(region.Name);
 	}
 
 	public void RemoveRegion(Region region) {
-		_regions?.Remove(region);
+		Regions?.Remove(region);
+		RegionNames?.Remove(region.Name);
 	}
 
 	public void DisplayRegions() {
-		if (_regions != null)
-			foreach (var r in _regions) {
-				Console.WriteLine(r.Name);
+		if (RegionNames != null) {
+			Console.WriteLine($"Regions in {WorldName}");
+			foreach (var r in RegionNames) {
+				Console.WriteLine(r);
 			}
-		else {
-			Console.WriteLine("No regions in the world");
+
+			return;
 		}
+		Console.WriteLine("No regions in the world");
 	}
 
-	bool HasRegion(Region region) {
-		return _regions != null && _regions.Contains(region);
+	public bool HasRegion(Region region) {
+		return Regions != null && Regions.Contains(region);
 	}
 
-	public Region GetRegion(Region r) {
-		if(HasRegion(r))
-			return r;
+	public Region? GetMatchingRegion(string regionName) {
+		if (RegionNames != null) return Regions.FirstOrDefault(r => regionName.Equals(r.Name));
 		
-		Console.WriteLine($"Region {r.Name} does not exist in the world");
+		Console.WriteLine("No regions in the world");
 		return null;
-		
 	}
 
 	public void DisplayRegionInfo(Region region) {

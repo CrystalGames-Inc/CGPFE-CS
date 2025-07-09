@@ -18,7 +18,7 @@ public class Player {
 	public Attributes Attributes { get; set; } = new();
 	public Attributes AttributeModifiers { get; set; } = new() {MoveSpeed = 0};
 	public CombatInfo CombatInfo { get; set; } = new();
-	public List<string> Skills { get; set; } = [];
+	public List<string> ClassSkills { get; set; } = [];
 	public List<string> Feats { get; set; } = [];
 	public Inventory Inventory { get; set; } = new();
 	public Wallet Wallet = new();
@@ -80,6 +80,12 @@ public class Player {
 	
 	public bool HasFeat(string featName) {
 		return Feats.Any(playerFeat => playerFeat.ToUpper().Equals(featName.ToUpper()));
+	}
+
+	public void SetClassSkills() {
+		foreach (var skill in ClassSkills) {
+			GetMatchingSkill(skill)!.ClassSkill = true;
+		}
 	}
 	
 	#region Displays
