@@ -25,9 +25,11 @@ public class WorldManager {
 
 		if (PromptHelper.YesNoPrompt("Would you also like to start creating regions? ", true))
 			RegisterNewRegion();
+
+		Console.WriteLine("World Successfully Created!");
 	}
 
-	public Region RegisterNewRegion() {
+	public void RegisterNewRegion() {
 		var name = PromptHelper.TextPrompt("Please enter a name for the region: ");
 		
 		var terrain = PromptHelper.EnumPrompt<Terrain>("Please enter a terrain type: ");
@@ -38,6 +40,7 @@ public class WorldManager {
 		
 		World.AddRegion(r);
 
-		return r;
+		if (PromptHelper.YesNoPrompt("Would you like to create another region? ", true))
+			RegisterNewRegion();
 	}
 }
