@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using CGPFE.Core.Enums;
+using CGPFE.Core.Utilities;
 using CGPFE.Domain.Characters.Common;
 using CGPFE.Domain.Characters.Player;
 using CGPFE.Domain.Characters.Player.Properties;
@@ -83,7 +84,7 @@ public static class FileManager {
 		SerializeToFile(_gameDataPath, g, GameDataFileName);
 		GameDataManager.Instance.GameData = g;
 		
-		WorldManager.Instance.RegisterWorld();
+		GameDataManager.Instance.AskNewWorld();
 		if (WorldManager.Instance.World.RegionNames == null) return g;
 		
 		RegionFileNames = WorldManager.Instance.World.RegionNames;
@@ -128,6 +129,38 @@ public static class FileManager {
 		}
 		
 		return g;
+	}
+	
+	public static void EditGameData() {
+		switch (PromptHelper.ListPrompt<string>("Please choose what to edit: ", ["Campaign Data", "World"]).ToUpper()) {
+			case "CAMPAIGN DATA":
+				EditCampaignData();
+			break;
+			case "WORLD":
+				EditWorld();
+			break;
+		}
+	}
+	
+	private static void EditCampaignData() {
+		
+		var g = GameDataManager.Instance.GameData;
+		
+		while (true) {
+			switch (PromptHelper.ListPrompt<string>("Please choose what to edit: ", ["Fantasty", "Game Speed"]).ToUpper()) {
+				case "FANTASTY":
+					g.GameFantasty = PromptHelper.EnumPrompt<Fantasty>("Please enter the fantasty: ");
+				break;
+				case "GAME SPEED":
+					g.GameSpeed = PromptHelper.EnumPrompt<GameSpeed>("Please choose the speed: ");
+				break;
+			}
+
+			SerializeToFile(_gameDataPath, g, GameDataFileName);
+			
+			if (PromptHelper.YesNoPrompt("Would you like to edit another game value?", false)) continue;
+			break;
+		}
 	}
 	
 	#endregion
@@ -342,6 +375,10 @@ public static class FileManager {
 			WorldManager.Instance.World.Regions.Add(region);
 			WorldManager.Instance.World.RegionNames.Add(region.Name);
 		}
+	}
+	
+	private static void EditWorld() {
+		
 	}
 	
 	#endregion

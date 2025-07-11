@@ -1,6 +1,5 @@
-﻿using System.Text.Json;
-using CGPFE.Core.Enums;
-using CGPFE.Domain.World;
+﻿using CGPFE.Core.Enums;
+using Newtonsoft.Json;
 
 namespace CGPFE.Domain.Game;
 
@@ -15,10 +14,10 @@ public class GameData(
 	public GameSpeed GameSpeed { get; set; } = gameSpeed;
 	public AbilityScoreType AbilityScoreType { get; set; } = abilityScoreType;
 
-	public GameWorld? GameWorld { get; set; }
+	public string? WorldName { get; set; }
 
 	
-	public string GetJson() => JsonSerializer.Serialize(this);
+	public string GetJson() => JsonConvert.SerializeObject(this);
 
 	public void DisplayGameData()
 	{
