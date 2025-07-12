@@ -410,54 +410,21 @@ public static class FileManager {
 		var jsonString = JsonConvert.SerializeObject(obj, settings);
 		
 		var finalPath = Path.Combine(path, fileName);
-		
-		if (File.Exists(finalPath)) {
-			Console.WriteLine($"File already exists at {finalPath}\nOverwrite? [Y/N]");
-			var ans = Console.ReadLine() ?? throw new InvalidOperationException();
-			if (string.Equals(ans, "N", StringComparison.OrdinalIgnoreCase))
-				return;
-			if (!string.Equals(ans, "Y", StringComparison.OrdinalIgnoreCase)) return;
-			try {
-				File.Create(finalPath).Dispose();
-				File.WriteAllText(finalPath, jsonString);
 
-				Console.WriteLine($"File successfully created at {finalPath}");
-			}
-			catch (Exception e) {
-				Console.WriteLine(e);
-			}
-		} else {
-			File.Create(finalPath).Close();
-			File.WriteAllText(finalPath, jsonString);
+		File.Create(finalPath).Close();
+		File.WriteAllText(finalPath, jsonString);
 
-			if(DebugMode)
-				Console.WriteLine($"File successfully created at {finalPath}");
-		}
+		if(DebugMode) 
+			Console.WriteLine($"File successfully created at {finalPath}");
 	}
 	
 	private static void WriteToFile(string path, string data) {
-		if (File.Exists(path)) {
-			Console.WriteLine($"File already exists at {path}\nOverwrite? [Y/N]");
-			var ans = Console.ReadLine() ?? throw new InvalidOperationException();
-			if (string.Equals(ans, "N", StringComparison.OrdinalIgnoreCase))
-				return;
-			if (!string.Equals(ans, "Y", StringComparison.OrdinalIgnoreCase)) return;
-			try {
-				File.Create(path).Close();
-				File.WriteAllText(path, data);
-
-				Console.WriteLine($"File successfully created at {path}");
-			}
-			catch (Exception e) {
-				Console.WriteLine(e);
-			}
-		} else {
-			File.Create(path).Dispose();
-			File.WriteAllText(path, data);
-
-			if(DebugMode)
-				Console.WriteLine($"File successfully created at {path}");
-		}
+		File.Create(path).Dispose();
+		
+		File.WriteAllText(path, data);
+		
+		if(DebugMode)
+			Console.WriteLine($"File successfully created at {path}");
 	}
 	
 	#endregion

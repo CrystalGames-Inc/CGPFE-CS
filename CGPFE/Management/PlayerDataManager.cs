@@ -643,21 +643,18 @@ public class PlayerDataManager {
 				Console.WriteLine("Invalid weapon index entered");
 				continue;
 			}
-			else
+			else {
 				Player.Inventory.Weapons.Add(new InventoryItem(purchasableWeapons[ans - 1].Name));
+				Player.Wallet.GoldPieces -= purchasableWeapons[ans - 1].Cost;
+			}
 
-			Console.WriteLine("Would you like to purchase another weapon? [Y/N] (Default - N)");
-			var again = Console.ReadLine().ToUpper();
-			if(again.Equals("Y"))
+			if (PromptHelper.YesNoPrompt("Would you like to purchase another weapon? ", true))
 				continue;
-			break;
-		}
-
-		Console.WriteLine("Would you like to buy armor and shields? [Y/N] (Default - Y):");
-		var armor = Console.ReadLine().ToUpper();
-		if(armor.Equals("N"))
+			if (PromptHelper.YesNoPrompt("Would you like to purchase armor/shields? ", true))
+				PurchaseStartingArmor();
+			
 			return;
-		PurchaseStartingArmor();
+		}
 	}
 
 	private void PurchaseStartingArmor() {
@@ -677,19 +674,46 @@ public class PlayerDataManager {
 				Console.WriteLine("Invalid armor index entered");
 				continue;
 			}
-			else 
+			else {
 				Player.Inventory.Armors.Add(new InventoryItem(purchasableArmors[ans - 1].Name));
+				Player.Wallet.GoldPieces -= purchasableArmors[ans - 1].Cost;
+			}
+			
 
-			Console.WriteLine("Would you like to purchase another armor? [Y/N] (Default - Y):");
-			var again = Console.ReadLine().ToUpper();
-			if(again.Equals("N"))
-				return;
-			PurchaseStartingShields();
+			if(PromptHelper.YesNoPrompt("Would you like to purchase another armor? ", true))
+				continue;
+			if(PromptHelper.YesNoPrompt("Would you like to purchase shield? ", true))
+				PurchaseStartingShields();
+			
+			return;
 		}
 	}
 
 	private void PurchaseStartingShields() {
+		List<Shield> purchasableShields = [];
+		purchasableShields.AddRange(Shields.shields.Where(shield => shield.Cost <= Player.Wallet.GoldPieces));
 		
+		Console.WriteLine("Available Shields:");
+		for(var i = 1; i <= purchasableShields.Count; i++)
+			Console.WriteLine($"{i}. {purchasableShields[i - 1].Name} - {purchasableShields[i - 1].Cost}gp");
+
+		while (true) {
+			Console.WriteLine("Please enter the index of the shield you'd like to purchase (0 to leave): ");
+			var ans = Convert.ToInt32(Console.ReadLine());
+			if (ans == 0)
+				return;
+			else if (ans > purchasableShields.Count) {
+				Console.WriteLine("Invalid shield index entered");
+				continue;
+			}
+			else {
+				Player.Inventory.Shields.Add(new InventoryItem(purchasableShields[ans - 1].Name));
+				Player.Wallet.GoldPieces -= purchasableShields[ans - 1].Cost;
+			}
+
+			if (!PromptHelper.YesNoPrompt("Would you like to purchase another shield? ", true))
+				return;
+		}
 	}
 	
 	#endregion
