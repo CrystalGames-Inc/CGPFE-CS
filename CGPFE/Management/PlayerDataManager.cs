@@ -37,11 +37,11 @@ public class PlayerDataManager {
 		
 		RegisterAbilityScores();
 		
-		/*Race registration and its calculations*/
+		/*__Race registration and its calculations__*/
 		Player.PlayerInfo.Race = PromptHelper.EnumPrompt<Race>("Please choose your race: ");
 		CalculateRacialBonus();
 		
-		/*Class registration and its follow-up functions*/
+		/*__Class registration and its follow-up functions__*/
 		Player.PlayerInfo.Class = PromptHelper.EnumPrompt<Class>("Please choose your class: ");
 		FileManager.CreateCombatTable();
 		CalculateMaxHealth();
@@ -56,7 +56,7 @@ public class PlayerDataManager {
 		CalculatePlayerCombatInfo();
 		CalculateAbilityModifiers();
 		
-		FileManager.WritePlayerData();
+		FileManager.SavePlayerData();
 	}
 	
 	private void RegisterAbilityScores() {

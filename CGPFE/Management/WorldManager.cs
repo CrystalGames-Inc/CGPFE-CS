@@ -22,6 +22,7 @@ public class WorldManager {
 
 	public void RegisterWorld() {
 		World.WorldName = PromptHelper.TextPrompt("Please choose a name for the world: ");
+		GameDataManager.Instance.GameData.WorldName = World.WorldName;
 
 		if (PromptHelper.YesNoPrompt("Would you also like to start creating regions? ", true))
 			RegisterNewRegion();

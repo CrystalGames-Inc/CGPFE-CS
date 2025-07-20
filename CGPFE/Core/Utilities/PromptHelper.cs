@@ -26,10 +26,10 @@ public static class PromptHelper {
 
 	public static int RangePrompt(string message, int min, int max) {
 		while (true) {
-			Console.WriteLine(message, "\n");
+			Console.WriteLine(message, $"({min} - {max})");
 			var ans = int.Parse(Console.ReadLine());
 			if (ans >= min && ans <= max) return ans;
-			Console.WriteLine($"Invalid answer. Please choose within the range ({min} - {max})");
+			Console.WriteLine($"Invalid answer. Please choose within the range ({min} - {max})\n");
 		}
 	}
 

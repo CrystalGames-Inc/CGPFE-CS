@@ -15,7 +15,7 @@ public static class FileManager {
 	
 	public static bool DebugMode = false;
 
-	private static readonly JsonSerializerSettings settings = new JsonSerializerSettings() {
+	private static readonly JsonSerializerSettings settings = new() {
 		Formatting = Formatting.Indented
 	};
 	
@@ -89,7 +89,7 @@ public static class FileManager {
 		
 		RegionFileNames = WorldManager.Instance.World.RegionNames;
 		SerializeToFile(_worldPath, WorldManager.Instance.World.RegionNames, RegionsFileName);
-		WriteWorldRegionFiles();
+		SaveWorldRegionFiles();
 
 
 		return g;
@@ -167,19 +167,19 @@ public static class FileManager {
 	
 	#region Player File Management
 	
-	public static void WritePlayerData() {
+	public static void SavePlayerData() {
 		var player = PlayerDataManager.Instance.Player;
 		
-		WritePlayerProperty(player.PlayerInfo, PlayerInfoFileName);
-		WritePlayerProperty(player.Attributes, AttributesFileName);
-		WritePlayerProperty(player.AttributeModifiers, AttributeModsFileName);
-		WritePlayerProperty(player.Wallet, WalletFileName);
-		WritePlayerProperty(player.CombatInfo, CombatInfoFileName);
-		WritePlayerProperty(player.Feats, FeatsFileName);
-		WritePlayerProperty(player.Inventory.Items, _inventoryPath, ItemsFileName);
-		WritePlayerProperty(player.Inventory.Weapons, _inventoryPath, WeaponsFileName);
-		WritePlayerProperty(player.Inventory.Armors, _inventoryPath, ArmorsFileName);
-		WritePlayerProperty(player.Inventory.Shields, _inventoryPath, ShieldsFileName);
+		SavePlayerProperty(player.PlayerInfo, PlayerInfoFileName);
+		SavePlayerProperty(player.Attributes, AttributesFileName);
+		SavePlayerProperty(player.AttributeModifiers, AttributeModsFileName);
+		SavePlayerProperty(player.Wallet, WalletFileName);
+		SavePlayerProperty(player.CombatInfo, CombatInfoFileName);
+		SavePlayerProperty(player.Feats, FeatsFileName);
+		SavePlayerProperty(player.Inventory.Items, _inventoryPath, ItemsFileName);
+		SavePlayerProperty(player.Inventory.Weapons, _inventoryPath, WeaponsFileName);
+		SavePlayerProperty(player.Inventory.Armors, _inventoryPath, ArmorsFileName);
+		SavePlayerProperty(player.Inventory.Shields, _inventoryPath, ShieldsFileName);
 		
 		if(DebugMode)
 			Console.WriteLine($"Loaded all files from {_playerPath}");
@@ -281,9 +281,13 @@ public static class FileManager {
 		PlayerDataManager.Instance.Player.CombatInfo.Will = combatTable[0].Will;
 	}
 	
-	private static void WritePlayerProperty<T>(T o, string fileName) {
+	private static void SavePlayerProperty<T>(T o, string fileName) {
 		var path = Path.Combine(_playerPath, fileName);
-		File.Create(path).Dispose();
+		if(!File.Exists(path))
+			File.Create(path).Dispose();
+		else
+			File.Open(path, FileMode.Open).Dispose();
+		
 		var json = JsonConvert.SerializeObject(o, settings);
 		File.WriteAllText(path, json);
 		
@@ -291,9 +295,13 @@ public static class FileManager {
 			Console.WriteLine($"Successfully written player attribute mods to {path}");
 	}
 	
-	private static void WritePlayerProperty<T>(T o, string path, string fileName) {
+	private static void SavePlayerProperty<T>(T o, string path, string fileName) {
 		var finalPath = Path.Combine(path, fileName);
-		File.Create(finalPath).Dispose();
+		
+		if(!File.Exists(finalPath))
+			File.Create(finalPath).Dispose();
+		else
+			File.Open(finalPath, FileMode.Open).Dispose();
 		var json = JsonConvert.SerializeObject(o, settings);
 		File.WriteAllText(finalPath, json);
 		
@@ -346,7 +354,7 @@ public static class FileManager {
 		return world;
 	}
 
-	private static void WriteWorldRegionFiles() {
+	private static void SaveWorldRegionFiles() {
 		var world = WorldManager.Instance.World;
 
 		for (var i = 0; i < RegionFileNames.Count; i++) {
@@ -378,7 +386,17 @@ public static class FileManager {
 	}
 	
 	private static void EditWorld() {
-		
+		switch (PromptHelper.ListPrompt<string>("Please choose what to edit: ", ["World Name", "Regions"]).ToUpper()) {
+			case "WORLD NAME":
+				var g = GameDataManager.Instance.GameData;
+				g.WorldName = PromptHelper.TextPrompt($"Please choose a name for the world:\n(Current world name: {g.WorldName})\n");
+				
+				SerializeToFile(_gameDataPath, g, GameDataFileName);
+				break;
+			case "REGIONS":
+				Console.WriteLine("Under development :)");
+				break;
+		}
 	}
 	
 	#endregion
@@ -411,20 +429,15 @@ public static class FileManager {
 		
 		var finalPath = Path.Combine(path, fileName);
 
-		File.Create(finalPath).Close();
+		if(!File.Exists(finalPath))
+			File.Create(finalPath).Dispose();
+		else
+			File.Open(finalPath, FileMode.Open).Dispose();
+		
 		File.WriteAllText(finalPath, jsonString);
 
 		if(DebugMode) 
 			Console.WriteLine($"File successfully created at {finalPath}");
-	}
-	
-	private static void WriteToFile(string path, string data) {
-		File.Create(path).Dispose();
-		
-		File.WriteAllText(path, data);
-		
-		if(DebugMode)
-			Console.WriteLine($"File successfully created at {path}");
 	}
 	
 	#endregion
