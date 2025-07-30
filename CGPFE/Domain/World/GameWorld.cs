@@ -2,9 +2,9 @@
 
 namespace CGPFE.Domain.World;
 
-public class GameWorld(string worldName) {
+public class GameWorld {
 	
-	public string WorldName = worldName;
+	public string WorldName;
 
 	public List<Region>? Regions;
 	public List<string>? RegionNames;
@@ -14,6 +14,14 @@ public class GameWorld(string worldName) {
 		Regions.Add(region);
 		RegionNames ??= [];
 		RegionNames.Add(region.Name);
+	}
+
+	public GameWorld() {
+		
+	}
+
+	public GameWorld(string worldName) {
+		WorldName = worldName;
 	}
 
 	public void RemoveRegion(Region region) {

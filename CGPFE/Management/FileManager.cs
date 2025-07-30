@@ -386,7 +386,13 @@ public static class FileManager {
 	}
 	
 	private static void EditWorld() {
-		switch (PromptHelper.ListPrompt<string>("Please choose what to edit: ", ["World Name", "Regions"]).ToUpper()) {
+		switch (
+			PromptHelper.ListPrompt<string>(
+				"Please choose what to edit: ", 
+				["World Name", 
+					"Regions"]
+				).ToUpper()) {
+			
 			case "WORLD NAME":
 				var g = GameDataManager.Instance.GameData;
 				g.WorldName = PromptHelper.TextPrompt($"Please choose a name for the world:\n(Current world name: {g.WorldName})\n");
@@ -394,7 +400,70 @@ public static class FileManager {
 				SerializeToFile(_gameDataPath, g, GameDataFileName);
 				break;
 			case "REGIONS":
-				Console.WriteLine("Under development :)");
+				switch (
+					PromptHelper.ListPrompt<string>(
+					        "Please choose what to do: ", 
+					        ["Add New Region", 
+						        "Edit Region"]
+					        ).ToUpper()) {
+					
+					case "ADD NEW REGION":
+						WorldManager.Instance.RegisterNewRegion();
+						break;
+					case "EDIT REGION":
+						var w = WorldManager.Instance.World;
+						if (w.RegionNames == null) {
+							Console.WriteLine("No regions available to edit");
+							break;
+						}
+
+						var regions = w.Regions;
+
+						List<string> regionNames = [];
+						regionNames.AddRange(regions.Select(region => region.Name));
+
+						var r = JsonConvert.DeserializeObject<Region>(File.ReadAllText(Path.Combine(_regionsPath,
+							PromptHelper.ListPrompt("Please choose region to edit: ", regionNames)) + ".json"));
+						
+						if (DebugMode) {
+							Console.WriteLine($"Loaded region: {r.Name}");
+						}
+
+						regions.Remove(r);
+						
+						switch (
+							PromptHelper.ListPrompt<string>(
+							        "Please choose what to edit: ", 
+							        ["Region Name", 
+								        "Terrain Type", 
+								        "Climate", 
+								        "Bordering Regions"]
+							        ).ToUpper()) {
+							
+							case "REGION NAME":
+								r.Name = PromptHelper.TextPrompt("Please choose a name for the region:\n(Current region name: " + r.Name + ")");
+								SerializeToFile(_regionsPath, r, r.Name + ".json");
+								break;
+							case "TERRAIN TYPE":
+								r.TerrainType = PromptHelper.EnumPrompt<Terrain>("Please choose a terrain type:\n(Current terrain type: " + r.TerrainType);
+								SerializeToFile(_regionsPath, r, r.Name + ".json");
+								break;
+							case "CLIMATE":
+								r.Climate = PromptHelper.EnumPrompt<Climate>("Please choose a climate:\n(Current climate type: " + r.Climate);
+								SerializeToFile(_regionsPath, r, r.Name + ".json");
+								break;
+							case "BORDERING REGIONS":
+								r.BorderingRegions.Add(
+									PromptHelper.ListPrompt($"Please choose a region that will border {r.Name}: ", regions),
+									PromptHelper.NumberPrompt("Please choose the degrees of border (relative to the initial region): ")
+									);
+								SerializeToFile(_regionsPath, r, r.Name + ".json");
+								break;
+						}
+						
+						regions.Add(r);
+					break;
+				}		
 				break;
 		}
 	}
