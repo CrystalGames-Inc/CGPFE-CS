@@ -72,7 +72,7 @@ public static class FileManager {
 
 	#region Game Data File Management
 	
-	public static GameData NewGameData() {
+	public static GameData SaveGameData() {
 		var g = GameDataManager.Instance.RegisterGameData();
 		CreateGameDirectories();
 		
@@ -81,14 +81,14 @@ public static class FileManager {
 		if(!Directory.Exists(_campaignPath))
 			Directory.CreateDirectory(_campaignPath);
 		
-		SerializeToFile(_gameDataPath, g, GameDataFileName);
+		SaveToFile(_gameDataPath, g, GameDataFileName);
 		GameDataManager.Instance.GameData = g;
 		
 		GameDataManager.Instance.AskNewWorld();
 		if (WorldManager.Instance.World.RegionNames == null) return g;
 		
 		RegionFileNames = WorldManager.Instance.World.RegionNames;
-		SerializeToFile(_worldPath, WorldManager.Instance.World.RegionNames, RegionsFileName);
+		SaveToFile(_worldPath, WorldManager.Instance.World.RegionNames, RegionsFileName);
 		SaveWorldRegionFiles();
 
 
@@ -156,7 +156,7 @@ public static class FileManager {
 				break;
 			}
 
-			SerializeToFile(_gameDataPath, g, GameDataFileName);
+			SaveToFile(_gameDataPath, g, GameDataFileName);
 			
 			if (PromptHelper.YesNoPrompt("Would you like to edit another game value?", false)) continue;
 			break;
@@ -397,7 +397,7 @@ public static class FileManager {
 				var g = GameDataManager.Instance.GameData;
 				g.WorldName = PromptHelper.TextPrompt($"Please choose a name for the world:\n(Current world name: {g.WorldName})\n");
 				
-				SerializeToFile(_gameDataPath, g, GameDataFileName);
+				SaveToFile(_gameDataPath, g, GameDataFileName);
 				break;
 			case "REGIONS":
 				switch (
@@ -449,19 +449,19 @@ public static class FileManager {
 								r.Name = PromptHelper.TextPrompt("Please choose a name for the region:\n(Current region name: " + r.Name + ")");
 								
 								File.Delete(Path.Combine(_regionsPath, oName + ".json"));
-								SerializeToFile(_regionsPath, r, r.Name + ".json");
+								SaveToFile(_regionsPath, r, r.Name + ".json");
 								break;
 							case "TERRAIN TYPE":
 								r.TerrainType = PromptHelper.EnumPrompt<Terrain>("Please choose a terrain type:\n(Current terrain type: " + r.TerrainType);
 								
 								File.Delete(Path.Combine(_regionsPath, oName + ".json"));
-								SerializeToFile(_regionsPath, r, r.Name + ".json");
+								SaveToFile(_regionsPath, r, r.Name + ".json");
 								break;
 							case "CLIMATE":
 								r.Climate = PromptHelper.EnumPrompt<Climate>("Please choose a climate:\n(Current climate type: " + r.Climate);
 								
 								File.Delete(Path.Combine(_regionsPath, oName + ".json"));
-								SerializeToFile(_regionsPath, r, r.Name + ".json");
+								SaveToFile(_regionsPath, r, r.Name + ".json");
 								break;
 							case "BORDERING REGIONS":
 								r.BorderingRegions.Add(
@@ -470,7 +470,7 @@ public static class FileManager {
 									);
 								
 								File.Delete(Path.Combine(_regionsPath, oName + ".json"));
-								SerializeToFile(_regionsPath, r, r.Name + ".json");
+								SaveToFile(_regionsPath, r, r.Name + ".json");
 								break;
 						}
 						
@@ -486,6 +486,24 @@ public static class FileManager {
 
 	#region General File Management
 
+	public static string GetPathForGameProperty(string property) {
+		return property.ToUpper() switch {
+			"SETTINGS" => Path.Combine(_gameDataPath, GameDataFileName),
+			_ => string.Empty
+		};
+	}
+	
+	public static string GetPathForPlayerProperty(string property) {
+		return property.ToUpper() switch {
+			"COMBATTABLE" => Path.Combine(_playerPath, "CombatTable.json"),
+			"COMBATINFO" => Path.Combine(_playerPath, CombatInfoFileName),
+			"FEATS" or "PLAYERFEATS" => Path.Combine(_playerPath, FeatsFileName),
+			"INFO" or "PLAYERINFO" => Path.Combine(_playerPath, PlayerInfoFileName),
+			"WALLET" or "PLAYERWALLET" => Path.Combine(_playerPath, WalletFileName),
+			_ => string.Empty
+		};
+	}
+	
 	public static void UpdatePaths(string campaignName) {
 		_campaignPath = Path.Combine(SavesPath, campaignName);
 		_gameDataPath = Path.Combine(_campaignPath, GameDataDirectoryName);
@@ -507,7 +525,21 @@ public static class FileManager {
 		Directory.CreateDirectory(_inventoryPath);
 	}
 	
-	private static void SerializeToFile<T>(string path, T obj, string fileName) {
+	public static void SaveToFile<T>(string path, T obj) {
+		var jsonString = JsonConvert.SerializeObject(obj, settings);
+		
+		if(!File.Exists(path))
+			File.Create(path).Dispose();
+		else
+			File.Open(path, FileMode.Open).Dispose();
+		
+		File.WriteAllText(path, jsonString);
+
+		if(DebugMode) 
+			Console.WriteLine($"File successfully created at {path}");
+	}
+	
+	public static void SaveToFile<T>(string path, T obj, string fileName) {
 		var jsonString = JsonConvert.SerializeObject(obj, settings);
 		
 		var finalPath = Path.Combine(path, fileName);

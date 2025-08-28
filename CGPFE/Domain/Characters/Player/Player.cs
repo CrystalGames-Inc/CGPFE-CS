@@ -98,7 +98,7 @@ public class Player {
 		Console.WriteLine($"  Age: {PlayerInfo.Age}");
 		Console.WriteLine($"  Race: {PlayerInfo.Race}");
 		Console.WriteLine($"  Size: {PlayerInfo.Size}");
-		Console.WriteLine($"  Size Modifier: {PlayerInfo.SizeMod}");
+		Console.WriteLine($"  Size Modifier: {PlayerInfo.GetSizeMod()}");
 		Console.WriteLine($"  Class: {PlayerInfo.Class}");
 		Console.WriteLine($"  Level: {PlayerInfo.Level}");
 		Console.WriteLine($"  Current XP: {PlayerInfo.Xp}");

@@ -17,8 +17,8 @@ public class GameData(
 
 	public string? WorldName { get; set; }
 	
-	public Region? StartingRegion { get; set; }
-	public Location? StartingLocation { get; set; }
+	public string? StartingRegion { get; set; }
+	public string? StartingLocation { get; set; }
 
 	
 	public string GetJson() => JsonConvert.SerializeObject(this);

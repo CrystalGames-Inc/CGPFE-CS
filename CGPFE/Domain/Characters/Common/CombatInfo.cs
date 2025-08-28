@@ -24,4 +24,18 @@ public class CombatInfo {
 		CombatManeuverBonus = 0;
 		CombatManeuverDefense = 0;
 	}
+
+	public int GetValueForKey(string key) {
+		return key.ToUpper() switch {
+			"INI" => InitMod,
+			"ACL" => ArmorClass,
+			"FOR" => Fortitude,
+			"REF" => Reflex,
+			"WIL" => Will,
+			"BAB" => BaseAttackBonus,
+			"CMB" => CombatManeuverBonus,
+			"CMD"  => CombatManeuverDefense,
+			_ => throw new NotSupportedException($"Invalid key {key}")
+		};
+	}
 }

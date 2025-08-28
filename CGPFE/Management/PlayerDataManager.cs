@@ -397,7 +397,7 @@ public class PlayerDataManager {
 		}
 
 		ac += Player.AttributeModifiers.Dexterity;
-		ac += Player.PlayerInfo.SizeMod;
+		ac += Player.PlayerInfo.GetSizeMod();
 
 		Player.CombatInfo.ArmorClass = ac;
 	}
@@ -407,7 +407,7 @@ public class PlayerDataManager {
 
 		cmb += Player.CombatInfo.BaseAttackBonus;
 		cmb += Player.AttributeModifiers.Strength;
-		cmb += Player.PlayerInfo.SizeMod;
+		cmb += Player.PlayerInfo.GetSizeMod();
 
 		Player.CombatInfo.CombatManeuverBonus = cmb;
 	}
@@ -418,7 +418,7 @@ public class PlayerDataManager {
 		cmd += Player.CombatInfo.BaseAttackBonus;
 		cmd += Player.AttributeModifiers.Strength;
 		cmd += Player.AttributeModifiers.Dexterity;
-		cmd += Player.PlayerInfo.SizeMod;
+		cmd += Player.PlayerInfo.GetSizeMod();
 		
 		Player.CombatInfo.CombatManeuverDefense = cmd;
 	}

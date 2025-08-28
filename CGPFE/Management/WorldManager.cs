@@ -38,10 +38,17 @@ public class WorldManager {
 		var climate = PromptHelper.EnumPrompt<Climate>("Please enter a climate type: ");
 		
 		var r = new Region(name, terrain, climate);
+
+		if(GameDataManager.Instance.GameData.StartingRegion == null) {
+			GameDataManager.Instance.GameData.StartingRegion = PromptHelper.YesNoPrompt("Would you like to set this region as the starting region?", true) ? name : null;
+			FileManager.SaveToFile(FileManager.GetPathForGameProperty("Settings"), GameDataManager.Instance.GameData);
+		}
 		
 		World.AddRegion(r);
 
 		if (PromptHelper.YesNoPrompt("Would you like to create another region? ", true))
 			RegisterNewRegion();
+		
+		
 	}
 }

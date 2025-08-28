@@ -55,31 +55,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\akeyless\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\CGPFE.csproj",
+      "projectUniqueName": "C:\\Users\\akeyless\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\CGPFE.csproj",
       "projectName": "CGPFE",
-      "projectPath": "C:\\Users\\Admin\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\CGPFE.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\obj\\",
+      "projectPath": "C:\\Users\\akeyless\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\CGPFE.csproj",
+      "packagesPath": "C:\\Users\\akeyless\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\akeyless\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\akeyless\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -124,7 +117,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\Admin\\.dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\akeyless\\.dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
