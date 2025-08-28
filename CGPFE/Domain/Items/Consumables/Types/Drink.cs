@@ -1,6 +1,4 @@
-﻿using CGPFE.Domain.Items.Other;
-
-namespace CGPFE.Domain.Items.GoodsServices.Types;
+﻿namespace CGPFE.Domain.Items.Consumables.Types;
 
 public class Drink: Consumable {
 	public bool Alcoholic;
@@ -10,5 +8,9 @@ public class Drink: Consumable {
 
 	public Drink(string name, int id, double cost, double weight, bool alcoholic) : base(name, id, cost, weight) {
 		Alcoholic = alcoholic;
+	}
+
+	public override void Consume() {
+		
 	}
 }

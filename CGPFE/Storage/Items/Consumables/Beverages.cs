@@ -1,6 +1,7 @@
-﻿using CGPFE.Domain.Items.GoodsServices.Types;
+﻿using CGPFE.Domain.Items.Consumables.Types;
+using CGPFE.Domain.Items.GoodsServices.Types;
 
-namespace CGPFE.Storage.Items.GoodsServices;
+namespace CGPFE.Storage.Items.Consumables;
 
 public static class Beverages {
 	#region Alcoholic Beverages

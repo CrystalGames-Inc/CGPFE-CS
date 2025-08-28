@@ -1,6 +1,6 @@
-﻿namespace CGPFE.Domain.Items.Other;
+﻿namespace CGPFE.Domain.Items.Consumables;
 
-public class Consumable: Domain.Items.Item {
+public abstract class Consumable: Item {
 
 	public double? Weight;
 
@@ -10,4 +10,6 @@ public class Consumable: Domain.Items.Item {
 	protected Consumable(string name, int id, double cost, double weight) : base(name, id, cost) {
 		Weight = weight;
 	}
+
+	public abstract void Consume();
 }

@@ -1,6 +1,8 @@
-﻿using CGPFE.Domain.Items.GoodsServices.Types;
+﻿using CGPFE.Domain.Items.Consumables;
+using CGPFE.Domain.Items.Consumables.Types;
+using CGPFE.Domain.Items.GoodsServices.Types;
 
-namespace CGPFE.Storage.Items.GoodsServices;
+namespace CGPFE.Storage.Items.Consumables;
 
 public static class Foods {
 	public static Food Bread = new Food("Bread", 0, 0.02, 0.5);
