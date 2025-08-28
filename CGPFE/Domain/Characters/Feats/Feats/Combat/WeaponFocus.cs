@@ -4,7 +4,7 @@ using CGPFE.Management;
 
 namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 
-public class WeaponFocus : Domain.Characters.Feats.Properties.Feat {
+public class WeaponFocus : Properties.Feat {
 	public WeaponFocus() : base("Weapon Focus", FeatType.Combat) {
 		Prerequisites = [
 			//TODO add specific weapon

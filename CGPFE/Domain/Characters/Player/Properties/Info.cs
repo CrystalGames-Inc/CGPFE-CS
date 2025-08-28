@@ -1,4 +1,5 @@
 ﻿using CGPFE.Core.Enums;
+using CGPFE.Domain.World.Geography;
 
 namespace CGPFE.Domain.Characters.Player.Properties;
 
@@ -11,9 +12,10 @@ public class PlayerInfo {
 	public Size Size { get; set; }
 	public int SizeMod { get; set; }
 	public Class Class { get; set; }
-	
 	public int Level { get; set; }
 	public int Xp { get; set; }
 	public int MaxHealth { get; set; }
 	public int Health { get; set; }
+	public Region? CurrentRegion { get; set; }
+	public Location? CurrentLocation { get; set; }
 }

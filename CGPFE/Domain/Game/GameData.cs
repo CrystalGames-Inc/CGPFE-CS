@@ -1,4 +1,5 @@
 ﻿using CGPFE.Core.Enums;
+using CGPFE.Domain.World.Geography;
 using Newtonsoft.Json;
 
 namespace CGPFE.Domain.Game;
@@ -15,6 +16,9 @@ public class GameData(
 	public AbilityScoreType AbilityScoreType { get; set; } = abilityScoreType;
 
 	public string? WorldName { get; set; }
+	
+	public Region? StartingRegion { get; set; }
+	public Location? StartingLocation { get; set; }
 
 	
 	public string GetJson() => JsonConvert.SerializeObject(this);

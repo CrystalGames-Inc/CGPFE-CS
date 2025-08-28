@@ -15,7 +15,7 @@ public class Region(string name, Terrain terrainType, Climate climate) : Locatio
 	public List<Location>? Locations;
 	public List<string>? LocationNames;
 	
-	public Dictionary<Region, int>? BorderingRegions = new();
+	public Dictionary<string, int>? BorderingRegions = new();
 
 	public void AddLocation(Location location) {
 		Locations ??= [];
@@ -44,7 +44,7 @@ public class Region(string name, Terrain terrainType, Climate climate) : Locatio
 
 		Console.WriteLine($"Bordering regions for {Name}:");
 		foreach (var region in BorderingRegions) {
-			Console.WriteLine($"{region.Key.Name}: {Compass.ToDirection(region.Value)}");
+			Console.WriteLine($"{region.Key}: {Compass.ToDirection(region.Value)}");
 		}
 	}
 	

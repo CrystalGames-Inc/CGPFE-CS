@@ -6,7 +6,7 @@ using CGPFE.Domain.World.Geography;
 namespace CGPFE.Management;
 
 public class WorldManager {
-	public GameWorld World = new GameWorld("Placeholder");
+	public GameWorld World = new("Placeholder");
 	
 	private static WorldManager _instance = null;
 	private static readonly object Padlock = new object();

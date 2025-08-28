@@ -649,7 +649,7 @@ public class PlayerDataManager {
 			}
 
 			if (PromptHelper.YesNoPrompt("Would you like to purchase another weapon? ", true))
-				continue;
+				PurchaseStartingWeapons();
 			if (PromptHelper.YesNoPrompt("Would you like to purchase armor/shields? ", true))
 				PurchaseStartingArmor();
 			
@@ -681,7 +681,7 @@ public class PlayerDataManager {
 			
 
 			if(PromptHelper.YesNoPrompt("Would you like to purchase another armor? ", true))
-				continue;
+				PurchaseStartingArmor();
 			if(PromptHelper.YesNoPrompt("Would you like to purchase shield? ", true))
 				PurchaseStartingShields();
 			
@@ -702,11 +702,11 @@ public class PlayerDataManager {
 			var ans = Convert.ToInt32(Console.ReadLine());
 			if (ans == 0)
 				return;
-			else if (ans > purchasableShields.Count) {
+			if (ans > purchasableShields.Count) {
 				Console.WriteLine("Invalid shield index entered");
 				continue;
 			}
-			else {
+			{
 				Player.Inventory.Shields.Add(new InventoryItem(purchasableShields[ans - 1].Name));
 				Player.Wallet.GoldPieces -= purchasableShields[ans - 1].Cost;
 			}
