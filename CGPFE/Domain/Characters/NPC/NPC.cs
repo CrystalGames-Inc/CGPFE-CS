@@ -11,6 +11,10 @@ public class NPC
     public CombatInfo? CombatInfo;
     public Inventory Inventory;
 
+    public NPC() {
+        
+    }
+    
     public NPC(Info info, Attributes attributes) {
         Info = info;
         Attributes = attributes;

@@ -43,7 +43,7 @@ public class PlayerDataManager {
 		
 		/*__Class registration and its follow-up functions__*/
 		Player.PlayerInfo.Class = PromptHelper.EnumPrompt<Class>("Please choose your class: ");
-		FileManager.CreateCombatTable();
+		FileManager.CreatePlayerCombatTable();
 		CalculateMaxHealth();
 		RegisterAlignment();
 		
@@ -98,12 +98,12 @@ public class PlayerDataManager {
 		}
 		
 		Attribute[] attributeOrder = [
-		Attribute.Strength,
-		Attribute.Dexterity,
-		Attribute.Constitution,
-		Attribute.Intelligence,
-		Attribute.Wisdom,
-		Attribute.Charisma
+			Attribute.Strength,
+			Attribute.Dexterity,
+			Attribute.Constitution,
+			Attribute.Intelligence,
+			Attribute.Wisdom,
+			Attribute.Charisma
 		];
 
 		foreach (var attribute in attributeOrder)

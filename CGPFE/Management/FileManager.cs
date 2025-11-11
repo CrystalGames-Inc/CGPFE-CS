@@ -58,6 +58,9 @@ public static class FileManager {
 	private const string WalletFileName = "PlayerWallet.json";
 	private const string FeatsFileName = "PlayerFeats.json";
 	
+	/*NPC info file names*/
+	private static List<string> NpcNames;
+	
 	/*Inventory items file names*/
 	private const string ItemsFileName = "PlayerItems.json";
 	private const string WeaponsFileName = "PlayerWeapons.json";
@@ -67,6 +70,7 @@ public static class FileManager {
 	/*World data file names*/
 	private const string RegionsFileName = "Regions.json";
 	private static List<string> RegionFileNames;
+	
 	
 	#endregion
 
@@ -216,7 +220,7 @@ public static class FileManager {
 		};
 	}
 	
-	public static void CreateCombatTable() {
+	public static void CreatePlayerCombatTable() {
 		var path = Path.Combine(_playerPath, "CombatTable.json");
 		File.Create(path).Dispose();
 		switch (PlayerDataManager.Instance.Player.PlayerInfo.Class) {
