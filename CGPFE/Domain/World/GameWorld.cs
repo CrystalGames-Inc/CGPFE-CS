@@ -9,6 +9,8 @@ public class GameWorld {
 	public List<Region>? Regions;
 	public List<string>? RegionNames;
 
+	public List<string>? NpcNames;
+
 	public void AddRegion(Region region) {
 		Regions ??= [];
 		Regions.Add(region);

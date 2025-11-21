@@ -4,10 +4,11 @@ public static class PromptHelper {
 
 	public static string TextPrompt(string message) {
 		Console.WriteLine(message, "\n");
-		var ans = Console.ReadLine();
-		if (!string.IsNullOrEmpty(ans)) return ans;
-		Console.WriteLine("Can't enter empty value");
-		TextPrompt(message);
+		string? ans;
+		do {
+			ans = Console.ReadLine();
+			if(string.IsNullOrEmpty(ans)) Console.WriteLine("Can't enter empty value");
+		} while (string.IsNullOrEmpty(ans));
 		return ans;
 	}
 
@@ -21,16 +22,21 @@ public static class PromptHelper {
 
 	public static int NumberPrompt(string message) {
 		Console.Write(message, "\n");
-		return int.Parse(Console.ReadLine());
+		var ans = int.Parse(Console.ReadLine());
+		return ans;
 	}
 
 	public static int RangePrompt(string message, int min, int max) {
-		while (true) {
-			Console.WriteLine(message, $"({min} - {max})");
-			var ans = int.Parse(Console.ReadLine());
-			if (ans >= min && ans <= max) return ans;
-			Console.WriteLine($"Invalid answer. Please choose within the range ({min} - {max})\n");
-		}
+		Console.WriteLine($"{message}\nRange: ({min} - {max})");
+		var ans = min;
+		do {
+			Console.WriteLine(message, $"\nRange: ({min} - {max})");
+			ans = int.Parse(Console.ReadLine());
+			if (ans < min || ans > max)
+				Console.WriteLine($"Invalid answer. Please choose within the range ({min} - {max})\n");
+		} while (ans < min || ans > max);
+
+		return ans;
 	}
 
 	public static T ListPrompt<T>(string message, List<T> choices) {

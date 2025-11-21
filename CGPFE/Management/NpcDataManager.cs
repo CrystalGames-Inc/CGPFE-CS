@@ -12,6 +12,7 @@ public class NpcDataManager {
 	private static NpcDataManager _instance = null;
 	private static readonly object Padlock = new object();
 
+	private List<NPC> NPCs = [];
 	
 	public static NpcDataManager Instance {
 		get {

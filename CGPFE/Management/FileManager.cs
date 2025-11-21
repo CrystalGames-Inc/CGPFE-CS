@@ -99,17 +99,17 @@ public static class FileManager {
 		return g;
 	}
 	
-	public static GameData LoadGameData() {
+	public static GameData? LoadGameData() {
 		var campaigns = Directory.GetDirectories(SavesPath);
+        if (campaigns.Length == 0) {
+            Console.WriteLine("No campaigns found");
+            return null;
+        }
 
-		for (var i = 0; i < campaigns.Length; i++) 
-			campaigns[i] = campaigns[i].Split("\\").Last();
+        ListCampaigns();
 
-		Console.WriteLine("Choose campaign to load: ");
-		for(var i = 0; i < campaigns.Length; i++)
-			Console.WriteLine($"{i + 1}. {campaigns[i]}");
-		
 		var loadedCampaign = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+		loadedCampaign = PromptHelper.RangePrompt("Choose campaign to load", 1, campaigns.Length);
 
 		if (loadedCampaign < 1 || loadedCampaign > campaigns.Length)
 			throw new IndexOutOfRangeException();
@@ -134,6 +134,18 @@ public static class FileManager {
 
 		return g;
 	}
+
+	public static void ListCampaigns() {
+		var campaigns = Directory.GetDirectories(SavesPath);
+		if (campaigns.Length == 0) {
+			Console.WriteLine("No available campaigns found :(");
+			return;
+		}
+
+        Console.WriteLine("Available Campaigns:");
+        for (int i = 0; i < campaigns.Length; i++)
+            Console.WriteLine($"{i+1}. {campaigns[i].Split("\\").Last()}");
+    }
 	
 	public static void EditGameData() {
 		switch (PromptHelper.ListPrompt<string>("Please choose what to edit: ", ["Campaign Data", "World"]).ToUpper()) {
@@ -165,6 +177,25 @@ public static class FileManager {
 			if (PromptHelper.YesNoPrompt("Would you like to edit another game value?", false)) continue;
 			break;
 		}
+	}
+
+	public static void DeleteCampaign() {
+		var campaigns = Directory.GetDirectories(SavesPath);
+		if(campaigns.Length == 0) {
+            Console.WriteLine("No campaigns found");
+			return;
+		}
+
+		ListCampaigns();
+
+		var deletedCampaign = PromptHelper.RangePrompt("Choose Campaign to Delete:", 1, campaigns.Length);
+
+		if(PromptHelper.YesNoPrompt("Are you absolutely sure you want to delete this campaign?", false))
+			try {
+				Directory.Delete(SavesPath, true);
+			} finally {
+                Console.WriteLine("Campaign Deleted Successfully!");
+			}
 	}
 	
 	#endregion
