@@ -1,9 +1,4 @@
 ﻿using CGPFE.Core.CLI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CGPFE.CLI
 {
@@ -30,7 +25,7 @@ namespace CGPFE.CLI
             Console.WriteLine($"Running: {command}");
             shell.GetType()
                 .GetMethod("HandleInput", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-                ?.Invoke(shell, new object[] { command });
+                ?.Invoke(shell, [command]);
         }
     }
 }

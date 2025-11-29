@@ -76,7 +76,7 @@ public static class FileManager {
 
 	#region Game Data File Management
 	
-	public static GameData SaveGameData() {
+	public static GameData RegisterGameData() {
 		var g = GameDataManager.Instance.RegisterGameData();
 		CreateGameDirectories();
 		
@@ -108,10 +108,10 @@ public static class FileManager {
 
         ListCampaigns();
 
-		var loadedCampaign = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
-		loadedCampaign = PromptHelper.RangePrompt("Choose campaign to load", 1, campaigns.Length);
+		var loadedCampaign = PromptHelper.RangePrompt("Choose campaign to load", 1, campaigns.Length);
 
-		if (loadedCampaign < 1 || loadedCampaign > campaigns.Length)
+
+        if (loadedCampaign < 1 || loadedCampaign > campaigns.Length)
 			throw new IndexOutOfRangeException();
 		
 		var filePath = Path.Combine(SavesPath, campaigns[loadedCampaign - 1], "Game", GameDataFileName);
@@ -135,6 +135,38 @@ public static class FileManager {
 		return g;
 	}
 
+	public static GameData? LoadGameData(string campaignName) {
+		var campaigns = Directory.GetDirectories(SavesPath);
+		if(campaigns.Length == 0) {
+            Console.WriteLine("No campaigns found");
+			return null;
+		}
+
+		foreach (string d in campaigns) {
+			if (d.ToLower().Equals(campaignName.ToLower())) {
+				var filePath = Path.Combine(SavesPath, d, "Game", GameDataFileName);
+				UpdatePaths(d);
+				var jsonString = File.ReadAllText(filePath);
+				var g = JsonConvert.DeserializeObject<GameData>(jsonString);
+
+				if (File.Exists(Path.Combine(_playerPath, PlayerInfoFileName))) {
+					Console.WriteLine("Player data detected, loading player");
+					PlayerDataManager.Instance.Player = LoadPlayerData();
+				}
+
+				if (Directory.GetFiles(_worldPath).Length == 0) return g;
+
+				Console.WriteLine("World data detected, loading world");
+				LoadWorldRegions();
+
+				return g;
+            }
+        }
+
+        Console.WriteLine("Campaign was not found. Please make sure the name is correct.");
+		return null;
+	}
+
 	public static void ListCampaigns() {
 		var campaigns = Directory.GetDirectories(SavesPath);
 		if (campaigns.Length == 0) {
@@ -147,12 +179,19 @@ public static class FileManager {
             Console.WriteLine($"{i+1}. {campaigns[i].Split("\\").Last()}");
     }
 	
+	public static GameData? GetMatchingCampaign(string name) {
+		if(Directory.Exists(Path.Combine(SavesPath, name))) {
+            var g = LoadGameData();
+			return g;
+		}
+		return null;
+	}
 	public static void EditGameData() {
-		switch (PromptHelper.ListPrompt<string>("Please choose what to edit: ", ["Campaign Data", "World"]).ToUpper()) {
-			case "CAMPAIGN DATA":
+        switch (PromptHelper.ListPrompt<string>("Please choose what to edit: ", ["Campaign Data", "World"]).ToLower()) {
+			case "campaign data":
 				EditCampaignData();
 			break;
-			case "WORLD":
+			case "world":
 				EditWorld();
 			break;
 		}
@@ -163,11 +202,11 @@ public static class FileManager {
 		var g = GameDataManager.Instance.GameData;
 		
 		while (true) {
-			switch (PromptHelper.ListPrompt<string>("Please choose what to edit: ", ["Fantasty", "Game Speed"]).ToUpper()) {
-				case "FANTASTY":
+			switch (PromptHelper.ListPrompt<string>("Please choose what to edit: ", ["Fantasty", "Game Speed"]).ToLower()) {
+				case "fantasty":
 					g.GameFantasty = PromptHelper.EnumPrompt<Fantasty>("Please enter the fantasty: ");
 				break;
-				case "GAME SPEED":
+				case "game speed":
 					g.GameSpeed = PromptHelper.EnumPrompt<GameSpeed>("Please choose the speed: ");
 				break;
 			}
@@ -190,9 +229,9 @@ public static class FileManager {
 
 		var deletedCampaign = PromptHelper.RangePrompt("Choose Campaign to Delete:", 1, campaigns.Length);
 
-		if(PromptHelper.YesNoPrompt("Are you absolutely sure you want to delete this campaign?", false))
+		if(PromptHelper.YesNoPrompt($"Are you absolutely sure you want to delete campaign {campaigns[deletedCampaign - 1]}?", false))
 			try {
-				Directory.Delete(SavesPath, true);
+				Directory.Delete(Path.Combine(SavesPath, campaigns[deletedCampaign - 1]), true);
 			} finally {
                 Console.WriteLine("Campaign Deleted Successfully!");
 			}
@@ -426,27 +465,27 @@ public static class FileManager {
 				"Please choose what to edit: ", 
 				["World Name", 
 					"Regions"]
-				).ToUpper()) {
+				).ToLower()) {
 			
-			case "WORLD NAME":
+			case "world name":
 				var g = GameDataManager.Instance.GameData;
 				g.WorldName = PromptHelper.TextPrompt($"Please choose a name for the world:\n(Current world name: {g.WorldName})\n");
 				
 				SaveToFile(_gameDataPath, g, GameDataFileName);
 				break;
-			case "REGIONS":
+			case "regions":
 				switch (
 					PromptHelper.ListPrompt<string>(
 					        "Please choose what to do: ", 
 					        ["Add New Region", 
 						        "Edit Region"]
-					        ).ToUpper()) {
+					        ).ToLower()) {
 					
-					case "ADD NEW REGION":
+					case "add new region":
 						WorldManager.Instance.RegisterNewRegion();
 						SaveWorldRegionFiles();
 						break;
-					case "EDIT REGION":
+					case "edit region":
 						var w = WorldManager.Instance.World;
 						if (w.RegionNames == null) {
 							Console.WriteLine("No regions available to edit");
@@ -478,28 +517,28 @@ public static class FileManager {
 								        "Terrain Type", 
 								        "Climate", 
 								        "Bordering Regions"]
-							        ).ToUpper()) {
+							        ).ToLower()) {
 							
-							case "REGION NAME":
+							case "region name":
 								r.Name = PromptHelper.TextPrompt("Please choose a name for the region:\n(Current region name: " + r.Name + ")");
 								
 								File.Delete(Path.Combine(_regionsPath, oName + ".json"));
 								SaveToFile(_regionsPath, r, r.Name + ".json");
 								break;
-							case "TERRAIN TYPE":
+							case "terrain type":
 								r.TerrainType = PromptHelper.EnumPrompt<Terrain>("Please choose a terrain type:\n(Current terrain type: " + r.TerrainType);
 								
 								File.Delete(Path.Combine(_regionsPath, oName + ".json"));
 								SaveToFile(_regionsPath, r, r.Name + ".json");
 								break;
-							case "CLIMATE":
+							case "climate":
 								r.Climate = PromptHelper.EnumPrompt<Climate>("Please choose a climate:\n(Current climate type: " + r.Climate);
 								
 								File.Delete(Path.Combine(_regionsPath, oName + ".json"));
 								SaveToFile(_regionsPath, r, r.Name + ".json");
 								break;
-							case "BORDERING REGIONS":
-								r.BorderingRegions.Add(
+							case "bordering regions":
+                                r.BorderingRegions.Add(
 									PromptHelper.ListPrompt($"Please choose a region that will border {r.Name}: ", regionNames),
 									PromptHelper.NumberPrompt("Please choose the degrees of border (relative to the initial region): ")
 									);
@@ -551,6 +590,11 @@ public static class FileManager {
 	}
 
 	private static void CreateGameDirectories() {
+		if(!Directory.Exists(SavesPath))
+			Directory.CreateDirectory(SavesPath);
+
+		Directory.CreateDirectory(_campaignPath);
+
 		Directory.CreateDirectory(_gameDataPath);
 		Directory.CreateDirectory(_resourcesPath);
 		Directory.CreateDirectory(_worldPath);

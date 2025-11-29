@@ -1,6 +1,8 @@
-﻿using CGPFE.Management;
-using System;
-using System.Collections.Generic;
+﻿using CGPFE.CLI;
+using CGPFE.CLI.Commands;
+using CGPFE.Core.Utilities;
+using CGPFE.Domain.Game;
+using CGPFE.Management;
 
 namespace CGPFE.Core.CLI
 {
@@ -13,6 +15,7 @@ namespace CGPFE.Core.CLI
 
         public CGPFEShell() {
             RegisterCommand(new NewCommand());
+            RegisterCommand(new ClearCommand());
             RegisterCommand(new LoadCommand(this));
             RegisterCommand(new DeleteCommand());
             RegisterCommand(new ListCommand());
@@ -78,8 +81,11 @@ namespace CGPFE.Core.CLI
 
         private void PrintHelp() {
             Console.WriteLine("\nAvailable Commands:");
-            foreach (var cmd in _commands.Values)
+            foreach (var cmd in _commands.Values) {
+                if (CurrentCampaign == null && cmd.RequiresCampaign)
+                    continue;
                 Console.WriteLine($"  {cmd.Name.PadRight(15)} - {cmd.Description}");
+            }
             Console.WriteLine();
         }
 
@@ -89,6 +95,8 @@ namespace CGPFE.Core.CLI
         }
 
         public void UnloadCampaign() {
+            if (PromptHelper.YesNoPrompt("Would you like to save any changes made?", true))
+                FileManager.RegisterGameData();
             CurrentCampaign = null;
         }
 
@@ -109,138 +117,6 @@ namespace CGPFE.Core.CLI
         }
     }
 
-    // =====================================================================
-    // COMMAND INTERFACE
-    // =====================================================================
-
-    public interface ICommand
-    {
-        string Name { get; }
-        string Description { get; }
-        bool RequiresCampaign { get; }
-        void Execute(string[] args);
-    }
-
-    // =====================================================================
-    // COMMAND IMPLEMENTATIONS
-    // =====================================================================
-
-    public class NewCommand : ICommand
-    {
-        public string Name => "new";
-        public string Description => "Creates a new campaign";
-        public bool RequiresCampaign => false;
-
-        public void Execute(string[] args) {
-            FileManager.SaveGameData();
-        }
-    }
-
-    public class LoadCommand : ICommand
-    {
-        private readonly CGPFEShell _shell;
-
-        public LoadCommand(CGPFEShell shell) {
-            _shell = shell;
-        }
-
-        public string Name => "load";
-        public string Description => "Loads a campaign";
-        public bool RequiresCampaign => false;
-
-        public void Execute(string[] args) {
-            if (args.Length == 0) {
-                Console.Write("Campaign name to load: ");
-                args = [Console.ReadLine() ?? ""];
-            }
-
-            if (string.IsNullOrWhiteSpace(args[0])) {
-                CGPFEShell.Error("No campaign name provided.");
-                return;
-            }
-
-            _shell.LoadCampaign(args[0]);
-        }
-    }
-
-    public class DeleteCommand : ICommand
-    {
-        public string Name => "delete";
-        public string Description => "Deletes a campaign";
-        public bool RequiresCampaign => false;
-
-        public void Execute(string[] args) {
-            string? target;
-
-            if (args.Length == 0) {
-                Console.Write("Campaign name to delete: ");
-                target = Console.ReadLine();
-            } else {
-                target = args[0];
-            }
-
-            if (string.IsNullOrWhiteSpace(target)) {
-                CGPFEShell.Error("No campaign name provided.");
-                return;
-            }
-
-            Console.Write($"Are you sure you want to delete '{target}'? (y/n): ");
-            if (Console.ReadLine()?.ToLower() == "y")
-                Console.WriteLine($"Deleted campaign '{target}'.");
-        }
-    }
-
-    public class ListCommand : ICommand
-    {
-        public string Name => "list";
-        public string Description => "Lists all campaigns";
-        public bool RequiresCampaign => false;
-
-        public void Execute(string[] args) {
-            FileManager.ListCampaigns();
-        }
-    }
-
-    public class ExitCommand : ICommand
-    {
-        private readonly CGPFEShell _shell;
-
-        public ExitCommand(CGPFEShell shell) {
-            _shell = shell;
-        }
-
-        public string Name => "exit";
-        public string Description => "Exits CGPFE or closes the current campaign";
-        public bool RequiresCampaign => false;
-
-        public void Execute(string[] args) {
-            if (_shell.CurrentCampaign != null) {
-                Console.WriteLine($"Exiting campaign '{_shell.CurrentCampaign}'...");
-                _shell.UnloadCampaign();
-                return;
-            }
-
-            Console.WriteLine("Goodbye!");
-            _shell.Stop();
-        }
-    }
-
-    public class SaveCommand : ICommand
-    {
-        private readonly CGPFEShell _shell;
-
-        public SaveCommand(CGPFEShell shell) => _shell = shell;
-
-        public string Name => "save";
-        public string Description => "Saves the current campaign";
-        public bool RequiresCampaign => true;
-
-        public void Execute(string[] args) {
-            Console.WriteLine($"Saved campaign '{_shell.CurrentCampaign}'.");
-            // TODO: Save campaign data.
-        }
-    }
-
     public class AddCharacterCommand : ICommand
     {
         private readonly CGPFEShell _shell;
@@ -249,7 +125,7 @@ namespace CGPFE.Core.CLI
 
         public string Name => "add_char";
         public string Description => "Adds a new character to the current campaign";
-        public bool RequiresCampaign => true;
+        public bool? RequiresCampaign => true;
 
         public void Execute(string[] args) {
             Console.Write("Character Name: ");

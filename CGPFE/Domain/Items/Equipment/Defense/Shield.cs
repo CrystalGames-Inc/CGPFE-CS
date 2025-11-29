@@ -9,7 +9,7 @@ public class Shield(
 	int armorCheckPenalty,
 	int spellFailChance,
 	int weight)
-	: Domain.Items.Item(name, id, cost) {
+	: Item(name, id, cost) {
 
 	public int ShieldBonus = shieldBonus;
 	public int MaxDexBonus = maxDexBonus;

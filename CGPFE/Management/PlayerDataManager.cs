@@ -4,7 +4,6 @@ using CGPFE.Domain.Characters.Player;
 using CGPFE.Domain.Characters.Player.Properties.Inventory;
 using CGPFE.Domain.Items.Equipment.Defense;
 using CGPFE.Domain.Items.Equipment.Offense;
-using CGPFE.Mechanics;
 using CGPFE.Mechanics.General;
 using CGPFE.Storage.Items.Equipment.Defense;
 using CGPFE.Storage.Items.Equipment.Offense;
