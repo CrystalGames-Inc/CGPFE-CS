@@ -9,6 +9,7 @@ public class IntimidatingProwess(): Domain.Characters.Feats.Properties.Feat("Int
 	}
 
 	public override void Benefits() {
-		PlayerDataManager.Instance.Player.GetMatchingSkill("Intimidate").Bonus.MiscMod += PlayerDataManager.Instance.Player.AttributeModifiers.Strength;
+        PlayerDataManager.Instance.Player.GetMatchingSkill("Intimidate").Bonus.MiscMod
+			+= PlayerDataManager.Instance.Player.AttributeModifiers.Strength.value;
 	}
 }

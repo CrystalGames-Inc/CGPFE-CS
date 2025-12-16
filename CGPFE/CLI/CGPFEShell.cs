@@ -15,14 +15,14 @@ namespace CGPFE.Core.CLI
 
         public CGPFEShell() {
             RegisterCommand(new NewCommand());
-            RegisterCommand(new ClearCommand());
-            RegisterCommand(new LoadCommand(this));
-            RegisterCommand(new DeleteCommand());
-            RegisterCommand(new ListCommand());
-            RegisterCommand(new ExitCommand(this));
+            //RegisterCommand(new ClearCommand());
+            //RegisterCommand(new LoadCommand(this));
+            //RegisterCommand(new DeleteCommand());
+            //RegisterCommand(new ListCommand());
+            //RegisterCommand(new ExitCommand(this));
 
             // Commands that require a loaded campaign
-            RegisterCommand(new SaveCommand(this));
+            //RegisterCommand(new SaveCommand(this));
             RegisterCommand(new AddCharacterCommand(this));
         }
 
@@ -71,7 +71,7 @@ namespace CGPFE.Core.CLI
             }
 
             // Check if this command requires a campaign loaded
-            if (command.RequiresCampaign && CurrentCampaign == null) {
+            if(command.RequiresCampaign is not null and true && CurrentCampaign == null) {
                 Error("This command requires an active campaign.");
                 return;
             }
@@ -82,7 +82,7 @@ namespace CGPFE.Core.CLI
         private void PrintHelp() {
             Console.WriteLine("\nAvailable Commands:");
             foreach (var cmd in _commands.Values) {
-                if (CurrentCampaign == null && cmd.RequiresCampaign)
+                if (CurrentCampaign == null && cmd.RequiresCampaign is not null and false)
                     continue;
                 Console.WriteLine($"  {cmd.Name.PadRight(15)} - {cmd.Description}");
             }
@@ -114,6 +114,18 @@ namespace CGPFE.Core.CLI
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(msg);
             Console.ResetColor();
+        }
+    }
+
+    public class NewCommand : ICommand
+    {
+        public string Name => "new";
+        public string Description => "Creates a new campaign";
+        public bool? RequiresCampaign => null;
+
+        public void Execute(string[] args) {
+            if (args[0].Equals("-debug")) FileManager.DebugMode = true;
+            FileManager.RegisterGameData();
         }
     }
 

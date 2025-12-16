@@ -1,5 +1,6 @@
 ﻿using CGPFE.Core.Enums;
 using CGPFE.Core.Utilities;
+using CGPFE.Domain.Characters.Common;
 using CGPFE.Domain.Characters.NPC;
 using CGPFE.Domain.Characters.NPC.Properties;
 using Attribute = CGPFE.Core.Enums.Attribute;
@@ -40,44 +41,44 @@ public class NpcDataManager {
 		if (PromptHelper.YesNoPrompt("Would you like to use Preset ability scores?", true)) {
 			switch (Npc.Info.Type) {
 				case NpcType.Arcane:
-					Npc.Attributes.Strength = 8;
-					Npc.Attributes.Dexterity = Npc.Info.Heroic ? 12 : 14;
-					Npc.Attributes.Constitution = Npc.Info.Heroic ? 10 : 12;
-					Npc.Attributes.Intelligence = Npc.Info.Heroic ? 13 : 15;
-					Npc.Attributes.Wisdom = Npc.Info.Heroic ? 9 : 10;
-					Npc.Attributes.Constitution = Npc.Info.Heroic ? 11 : 13;
+					Npc.Attributes.Strength = new AbilityScore(8);
+					Npc.Attributes.Dexterity = new AbilityScore(Npc.Info.Heroic ? 12 : 14);
+					Npc.Attributes.Constitution = new AbilityScore(Npc.Info.Heroic ? 10 : 12);
+					Npc.Attributes.Intelligence = new AbilityScore(Npc.Info.Heroic ? 13 : 15);
+					Npc.Attributes.Wisdom = new AbilityScore(Npc.Info.Heroic ? 9 : 10);
+					Npc.Attributes.Constitution = new AbilityScore(Npc.Info.Heroic ? 11 : 13);
 					break;
 				case NpcType.Divine:
-					Npc.Attributes.Strength = Npc.Info.Heroic ? 10 : 12;
-					Npc.Attributes.Dexterity = 8;
-					Npc.Attributes.Constitution = Npc.Info.Heroic ? 12 : 14;
-					Npc.Attributes.Intelligence = Npc.Info.Heroic ? 9 : 10;
-					Npc.Attributes.Wisdom = Npc.Info.Heroic ? 13 : 15;
-					Npc.Attributes.Constitution = Npc.Info.Heroic ? 11 : 13;
+					Npc.Attributes.Strength = new AbilityScore(Npc.Info.Heroic ? 10 : 12);
+					Npc.Attributes.Dexterity = new AbilityScore (8);
+					Npc.Attributes.Constitution = new AbilityScore(Npc.Info.Heroic ? 12 : 14);
+					Npc.Attributes.Intelligence = new AbilityScore(Npc.Info.Heroic ? 9 : 10);
+					Npc.Attributes.Wisdom = new AbilityScore(Npc.Info.Heroic ? 13 : 15);
+					Npc.Attributes.Constitution = new AbilityScore(Npc.Info.Heroic ? 11 : 13);
 					break;
 				case NpcType.Melee:
-					Npc.Attributes.Strength = Npc.Info.Heroic ? 13 : 15;
-					Npc.Attributes.Dexterity = Npc.Info.Heroic ? 11 : 13;
-					Npc.Attributes.Constitution = Npc.Info.Heroic ? 12 : 14;
-					Npc.Attributes.Intelligence = Npc.Info.Heroic ? 9 : 10;
-					Npc.Attributes.Wisdom = Npc.Info.Heroic ? 10 : 12;
-					Npc.Attributes.Constitution = 8;
+					Npc.Attributes.Strength = new AbilityScore(Npc.Info.Heroic ? 13 : 15);
+					Npc.Attributes.Dexterity = new AbilityScore(Npc.Info.Heroic ? 11 : 13);
+					Npc.Attributes.Constitution = new AbilityScore(Npc.Info.Heroic ? 12 : 14);
+					Npc.Attributes.Intelligence = new AbilityScore(Npc.Info.Heroic ? 9 : 10);
+					Npc.Attributes.Wisdom = new AbilityScore(Npc.Info.Heroic ? 10 : 12);
+					Npc.Attributes.Constitution = new AbilityScore(8);
 					break;
 				case NpcType.Ranged:
-					Npc.Attributes.Strength = Npc.Info.Heroic ? 11 : 13;
-					Npc.Attributes.Dexterity = Npc.Info.Heroic ? 13 : 15;
-					Npc.Attributes.Constitution = Npc.Info.Heroic ? 12 : 14;
-					Npc.Attributes.Intelligence = Npc.Info.Heroic ? 10 : 12;
-					Npc.Attributes.Wisdom = Npc.Info.Heroic ? 9 : 10;
-					Npc.Attributes.Constitution = 8;
+					Npc.Attributes.Strength = new AbilityScore(Npc.Info.Heroic ? 11 : 13);
+					Npc.Attributes.Dexterity = new AbilityScore(Npc.Info.Heroic ? 13 : 15);
+					Npc.Attributes.Constitution = new AbilityScore(Npc.Info.Heroic ? 12 : 14);
+					Npc.Attributes.Intelligence = new AbilityScore(Npc.Info.Heroic ? 10 : 12);
+					Npc.Attributes.Wisdom =		new AbilityScore(Npc.Info.Heroic ? 9 : 10);
+					Npc.Attributes.Constitution = new AbilityScore(8);
 					break;
 				case NpcType.Skill:
-					Npc.Attributes.Strength = Npc.Info.Heroic ? 10 : 12;
-					Npc.Attributes.Dexterity = Npc.Info.Heroic ? 12 : 14;
-					Npc.Attributes.Constitution = Npc.Info.Heroic ? 11 : 13;
-					Npc.Attributes.Intelligence = Npc.Info.Heroic ? 13 : 15;
-					Npc.Attributes.Wisdom = 8;
-					Npc.Attributes.Constitution = Npc.Info.Heroic ? 9 : 10;
+					Npc.Attributes.Strength = new AbilityScore(Npc.Info.Heroic ? 10 : 12);
+					Npc.Attributes.Dexterity = new AbilityScore(Npc.Info.Heroic ? 12 : 14);
+					Npc.Attributes.Constitution = new AbilityScore(Npc.Info.Heroic ? 11 : 13);
+					Npc.Attributes.Intelligence = new AbilityScore(Npc.Info.Heroic ? 13 : 15);
+					Npc.Attributes.Wisdom = new AbilityScore(8);
+					Npc.Attributes.Constitution = new AbilityScore(Npc.Info.Heroic ? 9 : 10);
 					break;
 			}
 			
@@ -121,22 +122,22 @@ public class NpcDataManager {
 			switch (attribute)
 			{
 				case Attribute.Strength:
-					Npc.Attributes.Strength = chosenScore;
+					Npc.Attributes.Strength = new AbilityScore(chosenScore);
 				break;
 				case Attribute.Dexterity:
-					Npc.Attributes.Dexterity = chosenScore;
+					Npc.Attributes.Dexterity = new AbilityScore(chosenScore);
 				break;
 				case Attribute.Constitution:
-					Npc.Attributes.Constitution = chosenScore;
+					Npc.Attributes.Constitution = new AbilityScore(chosenScore);
 				break;
 				case Attribute.Intelligence:
-					Npc.Attributes.Intelligence = chosenScore;
+					Npc.Attributes.Intelligence = new AbilityScore(chosenScore);
 				break;
 				case Attribute.Wisdom:
-					Npc.Attributes.Wisdom = chosenScore;
+					Npc.Attributes.Wisdom = new AbilityScore(chosenScore);
 				break;
 				case Attribute.Charisma:
-					Npc.Attributes.Charisma = chosenScore;
+					Npc.Attributes.Charisma = new AbilityScore(chosenScore);
 				break;
 			}
 

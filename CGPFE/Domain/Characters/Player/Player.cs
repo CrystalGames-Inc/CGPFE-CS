@@ -16,7 +16,7 @@ namespace CGPFE.Domain.Characters.Player;
 public class Player {
 	public PlayerInfo PlayerInfo { get; set; } = new();
 	public Attributes Attributes { get; set; } = new();
-	public Attributes AttributeModifiers { get; set; } = new() {MoveSpeed = 0};
+	public Attributes AttributeModifiers { get; set; } = new() {MoveSpeed = new AbilityScore(0)};
 	public CombatInfo CombatInfo { get; set; } = new();
 	public List<string> ClassSkills { get; set; } = [];
 	public List<string> Feats { get; set; } = [];
@@ -29,12 +29,12 @@ public class Player {
 	
 	public int GetValueForKey(string key) {
 		return key.ToUpper() switch {
-			"STR" => Attributes.Strength,
-			"DEX" => Attributes.Dexterity,
-			"CON" => Attributes.Constitution,
-			"INT" => Attributes.Intelligence,
-			"WIS" => Attributes.Wisdom,
-			"CHA" => Attributes.Charisma,
+			"STR" => Attributes.Strength.value,
+			"DEX" => Attributes.Dexterity.value,
+			"CON" => Attributes.Constitution.value,
+			"INT" => Attributes.Intelligence.value,
+			"WIS" => Attributes.Wisdom.value,
+			"CHA" => Attributes.Charisma.value,
 			"BAB" => CombatInfo.BaseAttackBonus,
 			"LVL" => PlayerInfo.Level,
 			"CLS" => (int)PlayerInfo.Class,
@@ -46,12 +46,12 @@ public class Player {
 	
 	public int GetAbilityScore(Attribute ability) {
 		return ability switch {
-			Attribute.Strength => Attributes.Strength,
-			Attribute.Dexterity => Attributes.Dexterity,
-			Attribute.Constitution => Attributes.Constitution,
-			Attribute.Intelligence => Attributes.Intelligence,
-			Attribute.Wisdom => Attributes.Wisdom,
-			Attribute.Charisma => Attributes.Charisma,
+			Attribute.Strength => Attributes.Strength.value,
+			Attribute.Dexterity => Attributes.Dexterity.value,
+			Attribute.Constitution => Attributes.Constitution.value,
+			Attribute.Intelligence => Attributes.Intelligence.value,
+			Attribute.Wisdom => Attributes.Wisdom.value,
+			Attribute.Charisma => Attributes.Charisma.value,
 			_ => 0
 		};
 	}

@@ -1,5 +1,6 @@
 ﻿using CGPFE.Core.Enums;
 using CGPFE.Core.Utilities;
+using CGPFE.Domain.Characters.Common;
 using CGPFE.Domain.Characters.Player;
 using CGPFE.Domain.Characters.Player.Properties.Inventory;
 using CGPFE.Domain.Items.Equipment.Defense;
@@ -133,22 +134,22 @@ public class PlayerDataManager {
 			switch (attribute)
 			{
 				case Attribute.Strength:
-					Player.Attributes.Strength = chosenScore;
+					Player.Attributes.Strength = new AbilityScore(chosenScore);
 					break;
 				case Attribute.Dexterity:
-					Player.Attributes.Dexterity = chosenScore;
+					Player.Attributes.Dexterity = new AbilityScore(chosenScore);
 					break;
 				case Attribute.Constitution:
-					Player.Attributes.Constitution = chosenScore;
+					Player.Attributes.Constitution = new AbilityScore(chosenScore);
 					break;
 				case Attribute.Intelligence:
-					Player.Attributes.Intelligence = chosenScore;
+					Player.Attributes.Intelligence = new AbilityScore(chosenScore);
 					break;
 				case Attribute.Wisdom:
-					Player.Attributes.Wisdom = chosenScore;
+					Player.Attributes.Wisdom = new AbilityScore(chosenScore);
 					break;
 				case Attribute.Charisma:
-					Player.Attributes.Charisma = chosenScore;
+					Player.Attributes.Charisma = new AbilityScore(chosenScore);
 					break;
 			}
 
@@ -352,7 +353,12 @@ public class PlayerDataManager {
 	}
 
 	private void CalculateAbilityModifiers() {
-		int[] abilities = [Player.Attributes.Strength, Player.Attributes.Dexterity, Player.Attributes.Constitution, Player.Attributes.Intelligence, Player.Attributes.Wisdom, Player.Attributes.Charisma];
+		int[] abilities = [Player.Attributes.Strength.value,
+			Player.Attributes.Dexterity.value, 
+			Player.Attributes.Constitution.value,
+			Player.Attributes.Intelligence.value,
+			Player.Attributes.Wisdom.value,
+			Player.Attributes.Charisma.value];
 		var abilityMods = new int[6];
 		
 		for (var i = 0; i < abilities.Length; i++) {
@@ -360,12 +366,12 @@ public class PlayerDataManager {
 			abilityMods[i] = (int)Math.Floor((value - 10) / 2);
 		}
 		
-		Player.AttributeModifiers.Strength =     abilityMods[0];
-		Player.AttributeModifiers.Dexterity =    abilityMods[1];
-		Player.AttributeModifiers.Constitution = abilityMods[2];
-		Player.AttributeModifiers.Intelligence = abilityMods[3];
-		Player.AttributeModifiers.Wisdom =   	 abilityMods[4];
-		Player.AttributeModifiers.Charisma = 	 abilityMods[5];
+		Player.AttributeModifiers.Strength =     new AbilityScore(abilityMods[0]);
+		Player.AttributeModifiers.Dexterity =    new AbilityScore(abilityMods[1]);
+		Player.AttributeModifiers.Constitution = new AbilityScore(abilityMods[2]);
+		Player.AttributeModifiers.Intelligence = new AbilityScore(abilityMods[3]);
+		Player.AttributeModifiers.Wisdom =   	 new AbilityScore(abilityMods[4]);
+		Player.AttributeModifiers.Charisma = 	 new AbilityScore(abilityMods[5]);
 		
 		CalculateInitMod();
 	}
@@ -373,7 +379,7 @@ public class PlayerDataManager {
 	private void CalculateInitMod() {
 		var init = 0;
 
-		init += Player.AttributeModifiers.Dexterity;
+		init += Player.AttributeModifiers.Dexterity.value;
 
 		Player.CombatInfo.InitMod = init;
 	}
@@ -395,7 +401,7 @@ public class PlayerDataManager {
 			ac += Player.Inventory.Shields.Sum(s => Player.GetMatchingShield(s.Name).ShieldBonus);
 		}
 
-		ac += Player.AttributeModifiers.Dexterity;
+		ac += Player.AttributeModifiers.Dexterity.value;
 		ac += Player.PlayerInfo.GetSizeMod();
 
 		Player.CombatInfo.ArmorClass = ac;
@@ -405,7 +411,7 @@ public class PlayerDataManager {
 		var cmb = 0;
 
 		cmb += Player.CombatInfo.BaseAttackBonus;
-		cmb += Player.AttributeModifiers.Strength;
+		cmb += Player.AttributeModifiers.Strength.value;
 		cmb += Player.PlayerInfo.GetSizeMod();
 
 		Player.CombatInfo.CombatManeuverBonus = cmb;
@@ -415,8 +421,8 @@ public class PlayerDataManager {
 		var cmd = 10;
 		
 		cmd += Player.CombatInfo.BaseAttackBonus;
-		cmd += Player.AttributeModifiers.Strength;
-		cmd += Player.AttributeModifiers.Dexterity;
+		cmd += Player.AttributeModifiers.Strength.value;
+		cmd += Player.AttributeModifiers.Dexterity.value;
 		cmd += Player.PlayerInfo.GetSizeMod();
 		
 		Player.CombatInfo.CombatManeuverDefense = cmd;
@@ -424,23 +430,23 @@ public class PlayerDataManager {
 
 	private void CalculateMaxHealth() {
 		Player.PlayerInfo.MaxHealth = Player.PlayerInfo.Class switch {
-			Class.Alchemist => 9 + Player.AttributeModifiers.Constitution,
-			Class.Barbarian => 13 + Player.AttributeModifiers.Constitution,
-			Class.Bard => 9 + Player.AttributeModifiers.Constitution,
-			Class.Cavalier => 11 + Player.AttributeModifiers.Constitution,
-			Class.Cleric => 9 + Player.AttributeModifiers.Constitution,
-			Class.Druid => 9 + Player.AttributeModifiers.Constitution,
-			Class.Fighter => 11 + Player.AttributeModifiers.Constitution,
-			Class.Inquisitor => 9 + Player.AttributeModifiers.Constitution,
-			Class.Monk => 9 + Player.AttributeModifiers.Constitution,
-			Class.Oracle => 9 + Player.AttributeModifiers.Constitution,
-			Class.Paladin => 11 + Player.AttributeModifiers.Constitution,
-			Class.Ranger => 11 + Player.AttributeModifiers.Constitution,
-			Class.Rogue => 9 + Player.AttributeModifiers.Constitution,
-			Class.Sorcerer => 7 + Player.AttributeModifiers.Constitution,
-			Class.Summoner => 9 + Player.AttributeModifiers.Constitution,
-			Class.Witch => 7 + Player.AttributeModifiers.Constitution,
-			Class.Wizard => 7 + Player.AttributeModifiers.Constitution
+			Class.Alchemist => 9 + Player.AttributeModifiers.Constitution.value,
+			Class.Barbarian => 13 + Player.AttributeModifiers.Constitution.value,
+			Class.Bard => 9 + Player.AttributeModifiers.Constitution.value,
+			Class.Cavalier => 11 + Player.AttributeModifiers.Constitution.value,
+			Class.Cleric => 9 + Player.AttributeModifiers.Constitution.value,
+			Class.Druid => 9 + Player.AttributeModifiers.Constitution.value,
+			Class.Fighter => 11 + Player.AttributeModifiers.Constitution.value,
+			Class.Inquisitor => 9 + Player.AttributeModifiers.Constitution.value,
+			Class.Monk => 9 + Player.AttributeModifiers.Constitution.value,
+			Class.Oracle => 9 + Player.AttributeModifiers.Constitution.value,
+			Class.Paladin => 11 + Player.AttributeModifiers.Constitution.value,
+			Class.Ranger => 11 + Player.AttributeModifiers.Constitution.value,
+			Class.Rogue => 9 + Player.AttributeModifiers.Constitution.value,
+			Class.Sorcerer => 7 + Player.AttributeModifiers.Constitution.value,
+			Class.Summoner => 9 + Player.AttributeModifiers.Constitution.value,
+			Class.Witch => 7 + Player.AttributeModifiers.Constitution.value,
+			Class.Wizard => 7 + Player.AttributeModifiers.Constitution.value
 		};
 	}
 
