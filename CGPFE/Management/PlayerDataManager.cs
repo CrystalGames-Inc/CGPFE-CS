@@ -195,8 +195,8 @@ public class PlayerDataManager {
 			Class.Wizard => 70
 		};
 		
-		Console.WriteLine($"Please choose the way you'd like to get your starter wealth (default - average):\n1. Average (Your class's average is {avg})\n2. Random");
-		var ans = Convert.ToInt32(Console.ReadLine());
+
+		var ans = PromptHelper.RangePrompt($"Please choose the way you'd like to get your starter wealth (default - average)\n1. Average (Your class's average is {avg})\n. Random", 1, 2);
 
 		Player.Wallet.GoldPieces = ans switch {
 			1 => avg,
@@ -236,6 +236,7 @@ public class PlayerDataManager {
             case Class.Barbarian: {
                 Console.WriteLine("Please Select An Alignment:\nNeutralGood\nChaoticGood\nNeutral\nChaoticNeutral\nNeutralEvil\nChaoticEvil");
                 alignmentIn = Console.ReadLine();
+					
                 Player.PlayerInfo.Alignment = alignmentIn.ToUpper() switch {
 	                "NEUTRALGOOD" => Alignment.NeutralGood,
 	                "CHAOTICGOOD" => Alignment.ChaoticGood,
@@ -636,7 +637,7 @@ public class PlayerDataManager {
 
 		Console.WriteLine("Available Weapons:");
 		for (var i = 1; i <= purchasableWeapons.Count; i++) 
-			Console.WriteLine($"{i}. {purchasableWeapons[i - 1].Name} - {purchasableWeapons[i - 1].Cost}gp");
+			Console.WriteLine($"{i}. {purchasableWeapons[i - 1].Name.PadRight(25)} - {purchasableWeapons[i - 1].Cost}gp");
 		
 
 		while (true) {
@@ -668,7 +669,7 @@ public class PlayerDataManager {
 
 		Console.WriteLine("Available Armors:");
 		for (var i = 1; i <= purchasableArmors.Count; i++)
-			Console.WriteLine($"{i}. {purchasableArmors[i - 1].Name} - {purchasableArmors[i - 1].Cost}gp");
+			Console.WriteLine($"{i}. {purchasableArmors[i - 1].Name.PadRight(25)} - {purchasableArmors[i - 1].Cost}gp");
 
 		while (true) {
 			Console.WriteLine("Please enter the index of the armor you'd like to purchase (0 to advance to shields): ");
@@ -700,7 +701,7 @@ public class PlayerDataManager {
 		
 		Console.WriteLine("Available Shields:");
 		for(var i = 1; i <= purchasableShields.Count; i++)
-			Console.WriteLine($"{i}. {purchasableShields[i - 1].Name} - {purchasableShields[i - 1].Cost}gp");
+			Console.WriteLine($"{i}. {purchasableShields[i - 1].Name.PadRight(25)} - {purchasableShields[i - 1].Cost}gp");
 
 		while (true) {
 			Console.WriteLine("Please enter the index of the shield you'd like to purchase (0 to leave): ");

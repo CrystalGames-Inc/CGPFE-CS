@@ -13,7 +13,7 @@ using Attribute = CGPFE.Core.Enums.Attribute;
 
 namespace CGPFE.Domain.Characters.Player;
 
-public class Player {
+public class Player: Entity {
 	public PlayerInfo PlayerInfo { get; set; } = new();
 	public Attributes Attributes { get; set; } = new();
 	public Attributes AttributeModifiers { get; set; } = new() {MoveSpeed = new AbilityScore(0)};
@@ -22,8 +22,6 @@ public class Player {
 	public List<string> Feats { get; set; } = [];
 	public Inventory Inventory { get; set; } = new();
 	public Wallet Wallet = new();
-	
-	public Location CurrentLocation { get; set; }
 
 	#region Getters
 	
@@ -183,17 +181,18 @@ public class Player {
 		Console.WriteLine($"  Gold: {Wallet.GoldPieces}");
 		Console.WriteLine($"  Platinum: {Wallet.PlatinumPieces}");
 	}
-	
-	public void DisplayCurrentLocation() {
-		if(CurrentLocation == null)
-			Console.WriteLine("You are now in the abyss, the void. You can see nothing, hear nothing.");
-		else if (CurrentLocation.GetType() == typeof(Region))
-			Console.WriteLine($"You are currently in {CurrentLocation.Name} region, roaming around");
-		else if (CurrentLocation.GetType() == typeof(Settlement))
-			Console.WriteLine($"You are currently in the settlement of {CurrentLocation.Name}, roaming around");
-		else if(CurrentLocation.GetType() == typeof(Location))
-			Console.WriteLine($"You are currently in {CurrentLocation.Name}");
-	}
-	
-	#endregion
+
+    public void DisplayCurrentLocation() {
+		Location? currentLocation = PlayerInfo.CurrentLocation;
+        if (currentLocation == null)
+            Console.WriteLine("You are now in the abyss, the void. You can see nothing, hear nothing.");
+        else if (currentLocation.GetType() == typeof(Region))
+            Console.WriteLine($"You are currently in {currentLocation.Name} region, roaming around");
+        else if (currentLocation.GetType() == typeof(Settlement))
+            Console.WriteLine($"You are currently in the settlement of {currentLocation.Name}, roaming around");
+        else if (currentLocation.GetType() == typeof(Location))
+            Console.WriteLine($"You are currently in {currentLocation.Name}");
+    }
+
+    #endregion
 }

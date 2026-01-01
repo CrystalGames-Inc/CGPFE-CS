@@ -15,11 +15,11 @@ namespace CGPFE.Core.CLI
 
         public CGPFEShell() {
             RegisterCommand(new NewCommand());
-            //RegisterCommand(new ClearCommand());
+            RegisterCommand(new ClearCommand());
             //RegisterCommand(new LoadCommand(this));
             //RegisterCommand(new DeleteCommand());
             //RegisterCommand(new ListCommand());
-            //RegisterCommand(new ExitCommand(this));
+            RegisterCommand(new ExitCommand());
 
             // Commands that require a loaded campaign
             //RegisterCommand(new SaveCommand(this));
@@ -124,8 +124,43 @@ namespace CGPFE.Core.CLI
         public bool? RequiresCampaign => null;
 
         public void Execute(string[] args) {
-            if (args[0].Equals("-debug")) FileManager.DebugMode = true;
-            FileManager.RegisterGameData();
+            if (args.Length == 0) {
+                FileManager.RegisterGameData(); 
+                return; 
+            }
+            switch (args[0].ToLower()) {
+                case "-debug":
+                    FileManager.DebugMode = true;
+                    FileManager.RegisterGameData();
+                    break;
+                case "help":
+                    Console.WriteLine("Overloads for command 'new':");
+                    Console.WriteLine("  -debug: Displays debug information");
+                    break;
+                default:
+                    Console.WriteLine($"Unknown overload {args[0]}. Use 'new help' for a list of overloads.");
+                    break;
+            }
+        }
+    }
+
+    public class ClearCommand : ICommand {
+        public string Name => "clear";
+        public string Description => "clears the screen";
+        public bool? RequiresCampaign => null;
+
+        public void Execute(string[] args) {
+            Console.Clear();
+        }
+    }
+
+    public class ExitCommand : ICommand {
+        public string Name => "exit";
+        public string Description => "quits the program";
+        public bool? RequiresCampaign => null;
+
+        public void Execute(string[] args) {
+            Environment.Exit(0);
         }
     }
 

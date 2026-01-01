@@ -4,26 +4,21 @@ using CGPFE.Domain.Characters.Player.Properties.Inventory;
 
 namespace CGPFE.Domain.Characters.NPC;
 
-public class NPC
+public class NPC: Entity
 {
     public Info Info;
-    public Attributes Attributes;
-    public CombatInfo? CombatInfo;
+    public new Attributes Attributes;
+    public new CombatInfo? CombatInfo;
     public Inventory Inventory;
 
     public NPC() {
         
     }
     
-    public NPC(Info info, Attributes attributes) {
+    public NPC(Info info, Attributes attributes, CombatInfo? combatInfo = null) {
         Info = info;
         Attributes = attributes;
-        CombatInfo = null;
-    }
-    
-    public NPC(Info info, Attributes attributes, CombatInfo? combatInfo) {
-        Info = info;
-        Attributes = attributes;
-        CombatInfo = combatInfo;
+        if(combatInfo != null) 
+            CombatInfo = combatInfo;
     }
 }

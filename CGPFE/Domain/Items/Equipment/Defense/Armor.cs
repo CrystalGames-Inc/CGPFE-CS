@@ -13,7 +13,7 @@ public class Armor(
 	int arcCheckFailChance,
 	int[] speeds,
 	int weight)
-	: Domain.Items.Item(name, id, cost) {
+	: Item(name, id, cost) {
 
 	public Weight Type = type;
 	public int ArmorBonus = armorBonus;

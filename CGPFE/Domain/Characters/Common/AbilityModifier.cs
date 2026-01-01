@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace CGPFE.Domain.Characters.Common
 {
     public record AbilityModifier(
-        Core.Enums.Attribute Ability,
         int Value,
         ModifierSourceType Srouce
         );
