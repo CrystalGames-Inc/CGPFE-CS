@@ -1,0 +1,38 @@
+﻿namespace CGPFE.Core.Enums;
+
+public enum Condition
+{
+    Bleed,
+    Blinded,
+    Broken,
+    Cowering,
+    Dazed,
+    Dazzled,
+    Dead,
+    Deafened,
+    Disabled,
+    Dying,
+    EnergyDrained,
+    Entangled,
+    Exhausted,
+    Fascinated,
+    Fatigued,
+    FlatFooted,
+    Frightened,
+    Grappled,
+    Helpless,
+    Incorporeal,
+    Invisible,
+    Nauseated,
+    Panicked,
+    Paralyzed,
+    Petrified,
+    Pinned,
+    Prone,
+    Shaken,
+    Sickened,
+    Stable,
+    Staggered,
+    Stunned,
+    Unconscious
+}

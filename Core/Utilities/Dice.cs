@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Mechanics.General;
+﻿namespace CGPFE.Core.Utilities;
 
 public static class Dice {
 	private static  readonly Random Random = new Random();
