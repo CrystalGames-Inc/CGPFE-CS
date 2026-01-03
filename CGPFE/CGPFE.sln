@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.1.11312.151 d18.0
+VisualStudioVersion = 18.1.11312.151
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "..\Core\Core.csproj", "{79DE78CF-C8C3-464C-BD0D-F448E53FB80C}"
 EndProject
@@ -14,8 +14,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storage", "..\Storage\Storage.csproj", "{BE26340D-0F45-4E74-ACC1-0497311D0249}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLI", "..\CLI\CLI.csproj", "{DAABA912-FBE0-4505-9563-8443ACBD80E8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "..\Tests\Tests.csproj", "{400A6D1B-185D-456B-8DFA-25AE892D8198}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +45,6 @@ Global
 		{DAABA912-FBE0-4505-9563-8443ACBD80E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAABA912-FBE0-4505-9563-8443ACBD80E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAABA912-FBE0-4505-9563-8443ACBD80E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{400A6D1B-185D-456B-8DFA-25AE892D8198}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{400A6D1B-185D-456B-8DFA-25AE892D8198}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{400A6D1B-185D-456B-8DFA-25AE892D8198}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{400A6D1B-185D-456B-8DFA-25AE892D8198}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

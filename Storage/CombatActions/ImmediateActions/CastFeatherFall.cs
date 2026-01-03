@@ -1,6 +1,6 @@
 ﻿using Domain.Combat.Action.Types;
 
-namespace CGPFE.Domain.Combat.Actions.Actions.ImmediateActions;
+namespace CGPFE.Storage.CombatActions.ImmediateActions;
 
 public class CastFeatherFall() : ImmediateAction("Cast Feather Fall", false) {
 	

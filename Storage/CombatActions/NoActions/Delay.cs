@@ -1,6 +1,6 @@
 ﻿using Domain.Combat.Action.Types;
 
-namespace CGPFE.Domain.Combat.Actions.Actions.NoActions;
+namespace CGPFE.Storage.CombatActions.NoActions;
 
 public class Delay() : NoAction("Delay", false) {
 	

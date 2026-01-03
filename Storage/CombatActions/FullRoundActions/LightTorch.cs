@@ -1,6 +1,6 @@
 ﻿using Domain.Combat.Action.Types;
 
-namespace CGPFE.Domain.Combat.Actions.Actions.FullRoundActions;
+namespace CGPFE.Storage.CombatActions.FullRoundActions;
 
 public class LightTorch() : FullRoundAction("Light a torch", true) {
 	

@@ -394,11 +394,11 @@ public class PlayerDataManager {
 		var ac = 10;
 
 		if (Player.Inventory.Armors != null) {
-			ac += Player.Inventory.Armors.Sum(a => Player.GetMatchingArmor(a.Name).ArmorBonus);
+            ac += Player.Inventory.Armors.Sum(a => Player.GetMatchingArmor(a.Name, Armors.armors).ArmorBonus);
 		}
 
 		if (Player.Inventory.Shields != null) {
-			ac += Player.Inventory.Shields.Sum(s => Player.GetMatchingShield(s.Name).ShieldBonus);
+			ac += Player.Inventory.Shields.Sum(s => Player.GetMatchingShield(s.Name, Shields.shields).ShieldBonus);
 		}
 
 		ac += Player.AttributeModifiers.Dexterity.value;

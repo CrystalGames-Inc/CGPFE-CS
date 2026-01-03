@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Profile 1": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\Admin\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\bin\\Debug\\net8.0\\CGPFE.exe"
+    }
+  }
+}

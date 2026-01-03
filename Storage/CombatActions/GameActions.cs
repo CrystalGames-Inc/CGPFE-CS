@@ -1,13 +1,13 @@
-﻿using CGPFE.Domain.Combat.Actions.Actions.FreeActions;
-using CGPFE.Domain.Combat.Actions.Actions.FullRoundActions;
-using CGPFE.Domain.Combat.Actions.Actions.ImmediateActions;
-using CGPFE.Domain.Combat.Actions.Actions.MoveActions;
-using CGPFE.Domain.Combat.Actions.Actions.NoActions;
-using CGPFE.Domain.Combat.Actions.Actions.StandardActions;
-using CGPFE.Domain.Combat.Actions.Actions.SwiftActions;
+﻿using CGPFE.Storage.CombatActions.FreeActions;
+using CGPFE.Storage.CombatActions.FullRoundActions;
+using CGPFE.Storage.CombatActions.ImmediateActions;
+using CGPFE.Storage.CombatActions.MoveActions;
+using CGPFE.Storage.CombatActions.NoActions;
+using CGPFE.Storage.CombatActions.StandardActions;
+using CGPFE.Storage.CombatActions.SwiftActions;
 using Domain.Combat.Action;
 
-namespace CGPFE.Domain.Combat.Actions.Actions;
+namespace CGPFE.Storage.CombatActions.Actions;
 
 public static class GameActions {
 	public static List<CombatAction> FreeActions { get; } = [

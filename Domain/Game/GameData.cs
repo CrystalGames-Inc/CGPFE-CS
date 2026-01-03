@@ -1,7 +1,6 @@
 ﻿using CGPFE.Core.Enums;
 using CGPFE.Domain.World.Geography;
 using Newtonsoft.Json;
-
 namespace CGPFE.Domain.Game;
 
 public class GameData(

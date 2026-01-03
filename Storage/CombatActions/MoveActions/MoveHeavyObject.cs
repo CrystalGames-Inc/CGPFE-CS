@@ -1,6 +1,6 @@
 ﻿using Domain.Combat.Action.Types;
 
-namespace CGPFE.Domain.Combat.Actions.Actions.MoveActions;
+namespace CGPFE.Storage.CombatActions.MoveActions;
 
 public class MoveHeavyObject() : MoveAction("Move a heavy object", true) {
 	

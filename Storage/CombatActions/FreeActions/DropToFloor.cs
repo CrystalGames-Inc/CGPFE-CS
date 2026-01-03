@@ -1,6 +1,6 @@
 ﻿using Domain.Combat.Action.Types;
 
-namespace CGPFE.Domain.Combat.Actions.Actions.FreeActions;
+namespace CGPFE.Storage.CombatActions.FreeActions;
 
 public class DropToFloor() : FreeAction("Drop to the floor", false) {
 	

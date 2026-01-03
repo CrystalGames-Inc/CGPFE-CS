@@ -1,14 +1,13 @@
 ﻿using CGPFE.Domain.Characters.Common;
-using CGPFE.Domain.Characters.Feats.Properties;
 using CGPFE.Domain.Characters.Player.Properties;
 using CGPFE.Domain.Characters.Player.Properties.Inventory;
-using CGPFE.Domain.Characters.Skills.Skills;
 using CGPFE.Domain.Items.Equipment.Defense;
 using CGPFE.Domain.Items.Equipment.Offense;
 using CGPFE.Domain.World.Geography;
 using CGPFE.Domain.World.Settlements;
-using CGPFE.Storage.Items.Equipment.Defense;
-using CGPFE.Storage.Items.Equipment.Offense;
+
+using Domain.Characters.Feats;
+using Domain.Characters.Skills;
 using Attribute = CGPFE.Core.Enums.Attribute;
 
 namespace CGPFE.Domain.Characters.Player;
@@ -54,36 +53,30 @@ public class Player: Entity {
 		};
 	}
 	
-	public Feat? GetMatchingFeat(string featName) {
-		return Domain.Characters.Feats.Feats.Feats.feats.FirstOrDefault(feat => feat.Name.ToUpper().Equals(featName.ToUpper()));
+	public Feat? GetMatchingFeat(string featName, List<Feat> availableFeats) {
+		return availableFeats.FirstOrDefault(feat => feat.Name.ToUpper().Equals(featName.ToUpper()));
 	}
 	
-	public Weapon? GetMatchingWeapon(string weaponName) {
-		return Weapons.weapons.FirstOrDefault(weapon => weapon.Name.ToUpper().Equals(weaponName.ToUpper()));
+	public Weapon? GetMatchingWeapon(string weaponName, List<Weapon> availableWeapons) {
+		return availableWeapons.FirstOrDefault(weapon => weapon.Name.ToUpper().Equals(weaponName.ToUpper()));
 	}
 	
-	public Armor? GetMatchingArmor(string armorName) {
-		return Armors.armors.FirstOrDefault(armor => armor.Name.ToUpper().Equals(armorName.ToUpper()));
+	public Armor? GetMatchingArmor(string armorName, List<Armor> availableArmors) {
+		return availableArmors.FirstOrDefault(armor => armor.Name.ToUpper().Equals(armorName.ToUpper()));
 	}
 	
-	public Shield? GetMatchingShield(string shieldName) {
-		return Shields.shields.FirstOrDefault(shield => shield.Name.ToUpper().Equals(shieldName.ToUpper()));
+	public Shield? GetMatchingShield(string shieldName, List<Shield> availableShields) {
+		return availableShields.FirstOrDefault(shield => shield.Name.ToUpper().Equals(shieldName.ToUpper()));
 	}
 
-	public Skill? GetMatchingSkill(string skillName) {
-		return Domain.Characters.Skills.Skills.Skills.skills.FirstOrDefault(skill => skill.Name.ToUpper().Equals(skillName.ToUpper()));
+	public Skill? GetMatchingSkill(string skillName, List<Skill> availableSkills) {
+		return availableSkills.FirstOrDefault(skill => skill.Name.ToUpper().Equals(skillName.ToUpper()));
 	}
 	
 	#endregion
 	
 	public bool HasFeat(string featName) {
 		return Feats.Any(playerFeat => playerFeat.ToUpper().Equals(featName.ToUpper()));
-	}
-
-	public void SetClassSkills() {
-		foreach (var skill in ClassSkills) {
-			GetMatchingSkill(skill)!.ClassSkill = true;
-		}
 	}
 	
 	#region Displays
