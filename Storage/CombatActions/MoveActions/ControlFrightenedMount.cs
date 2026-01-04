@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.MoveActions;
 
-public class ControlFrightenedMount() : MoveAction("Control a frightened mount", true) {
-	
+public class ControlFrightenedMount() : MoveAction("Control a frightened mount", true)
+{
+
 }

@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.FreeActions;
 
-public class DropToFloor() : FreeAction("Drop to the floor", false) {
-	
+public class DropToFloor() : FreeAction("Drop to the floor", false)
+{
+
 }

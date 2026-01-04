@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class UseSupernaturalAbility() : StandardAction("Use supernatural ability", false) {
-	
+public class UseSupernaturalAbility() : StandardAction("Use supernatural ability", false)
+{
+
 }

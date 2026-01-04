@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class LightTorchWithTinderwig() : StandardAction("Light a torch with a tinderwig", true) {
-	
+public class LightTorchWithTinderwig() : StandardAction("Light a torch with a tinderwig", true)
+{
+
 }

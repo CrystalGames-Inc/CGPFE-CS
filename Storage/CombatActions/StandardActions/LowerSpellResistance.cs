@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class LowerSpellResistance() : StandardAction("Lower Spell Resistance", false) {
-	
+public class LowerSpellResistance() : StandardAction("Lower Spell Resistance", false)
+{
+
 }

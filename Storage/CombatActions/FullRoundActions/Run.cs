@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.FullRoundActions;
 
-public class Run() : FullRoundAction("Run", true) {
-	
+public class Run() : FullRoundAction("Run", true)
+{
+
 }

@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class ReadScroll() : StandardAction("Read a scroll", true) {
-	
+public class ReadScroll() : StandardAction("Read a scroll", true)
+{
+
 }

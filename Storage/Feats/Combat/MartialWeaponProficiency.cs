@@ -2,12 +2,15 @@
 
 namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 
-public class MartialWeaponProficiency() : Characters.Feats.Feat("Martial Weapon Proficiency", FeatType.Combat) {
-	public override bool CanAcquire() {
-		return true;
-	}
+public class MartialWeaponProficiency() : Characters.Feats.Feat("Martial Weapon Proficiency", FeatType.Combat)
+{
+    public override bool CanAcquire()
+    {
+        return true;
+    }
 
-	public override void ApplyBenefits() {
-		throw new NotImplementedException();
-	}
+    public override void ApplyBenefits()
+    {
+        throw new NotImplementedException();
+    }
 }

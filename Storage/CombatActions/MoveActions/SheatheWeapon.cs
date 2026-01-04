@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.MoveActions;
 
-public class SheatheWeapon() : MoveAction("Sheathe a weapon", true) {
-	
+public class SheatheWeapon() : MoveAction("Sheathe a weapon", true)
+{
+
 }

@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.FullRoundActions;
 
-public class Charge() : FullRoundAction("Charge", false) {
-	
+public class Charge() : FullRoundAction("Charge", false)
+{
+
 }

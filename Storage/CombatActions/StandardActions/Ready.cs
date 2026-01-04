@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class Ready() : StandardAction("Ready", false) {
-	
+public class Ready() : StandardAction("Ready", false)
+{
+
 }

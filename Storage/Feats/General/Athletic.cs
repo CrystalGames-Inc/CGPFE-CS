@@ -1,8 +1,7 @@
-using CGPFE.Management;
-
 namespace CGPFE.Domain.Characters.Feats.Feats.General;
 
-public class Athletic() : Characters.Feats.Feat("Athletic") {
+public class Athletic() : Characters.Feats.Feat("Athletic")
+{
     public override bool CanAcquire()
     {
         return true;

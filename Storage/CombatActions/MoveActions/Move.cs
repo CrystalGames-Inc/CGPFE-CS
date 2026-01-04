@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.MoveActions;
 
-public class Move() : MoveAction("Move", true) {
-	
+public class Move() : MoveAction("Move", true)
+{
+
 }

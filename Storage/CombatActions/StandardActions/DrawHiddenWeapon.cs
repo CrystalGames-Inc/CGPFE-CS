@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class DrawHiddenWeapon() : StandardAction("Draw a hidden weapon", false) {
-	
+public class DrawHiddenWeapon() : StandardAction("Draw a hidden weapon", false)
+{
+
 }

@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.MoveActions;
 
-public class OpenCloseDoor() : MoveAction("Open or close a door", false) {
-	
+public class OpenCloseDoor() : MoveAction("Open or close a door", false)
+{
+
 }

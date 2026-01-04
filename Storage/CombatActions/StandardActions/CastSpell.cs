@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class CastSpell() : StandardAction("Cast a spell", true) {
-	
+public class CastSpell() : StandardAction("Cast a spell", true)
+{
+
 }

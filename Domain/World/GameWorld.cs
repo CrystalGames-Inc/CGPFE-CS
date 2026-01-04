@@ -2,62 +2,73 @@
 
 namespace CGPFE.Domain.World;
 
-public class GameWorld {
-	
-	public string WorldName;
+public class GameWorld
+{
 
-	public List<Region>? Regions;
-	public List<string>? RegionNames;
+    public string WorldName;
 
-	public List<string>? NpcNames;
+    public List<Region>? Regions;
+    public List<string>? RegionNames;
 
-	public void AddRegion(Region region) {
-		Regions ??= [];
-		Regions.Add(region);
-		RegionNames ??= [];
-		RegionNames.Add(region.Name);
-	}
+    public List<string>? NpcNames;
 
-	public GameWorld() {
-		
-	}
+    public void AddRegion(Region region)
+    {
+        Regions ??= [];
+        Regions.Add(region);
+        RegionNames ??= [];
+        RegionNames.Add(region.Name);
+    }
 
-	public GameWorld(string worldName) {
-		WorldName = worldName;
-	}
+    public GameWorld()
+    {
 
-	public void RemoveRegion(Region region) {
-		Regions?.Remove(region);
-		RegionNames?.Remove(region.Name);
-	}
+    }
 
-	public void DisplayRegions() {
-		if (RegionNames != null) {
-			Console.WriteLine($"Regions in {WorldName}");
-			foreach (var r in RegionNames) {
-				Console.WriteLine(r);
-			}
+    public GameWorld(string worldName)
+    {
+        WorldName = worldName;
+    }
 
-			return;
-		}
-		Console.WriteLine("No regions in the world");
-	}
+    public void RemoveRegion(Region region)
+    {
+        Regions?.Remove(region);
+        RegionNames?.Remove(region.Name);
+    }
 
-	public bool HasRegion(Region region) {
-		return Regions != null && Regions.Contains(region);
-	}
+    public void DisplayRegions()
+    {
+        if (RegionNames != null)
+        {
+            Console.WriteLine($"Regions in {WorldName}");
+            foreach (var r in RegionNames)
+            {
+                Console.WriteLine(r);
+            }
 
-	public Region? GetMatchingRegion(string regionName) {
-		if (RegionNames != null) return Regions.FirstOrDefault(r => regionName.Equals(r.Name));
-		
-		Console.WriteLine("No regions in the world");
-		return null;
-	}
+            return;
+        }
+        Console.WriteLine("No regions in the world");
+    }
 
-	public void DisplayRegionInfo(Region region) {
-		if (!HasRegion(region)) return;
-		Console.WriteLine("Info for " + region.Name + ": ");
-		Console.WriteLine(" Climate Type: " + region.Climate);
-		Console.WriteLine(" Terrain Type: " + region.TerrainType);
-	}
+    public bool HasRegion(Region region)
+    {
+        return Regions != null && Regions.Contains(region);
+    }
+
+    public Region? GetMatchingRegion(string regionName)
+    {
+        if (RegionNames != null) return Regions.FirstOrDefault(r => regionName.Equals(r.Name));
+
+        Console.WriteLine("No regions in the world");
+        return null;
+    }
+
+    public void DisplayRegionInfo(Region region)
+    {
+        if (!HasRegion(region)) return;
+        Console.WriteLine("Info for " + region.Name + ": ");
+        Console.WriteLine(" Climate Type: " + region.Climate);
+        Console.WriteLine(" Terrain Type: " + region.TerrainType);
+    }
 }

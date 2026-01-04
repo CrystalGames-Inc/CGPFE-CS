@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class AttackUnarmed() : StandardAction("Attack (unarmed)", true) {
-	
+public class AttackUnarmed() : StandardAction("Attack (unarmed)", true)
+{
+
 }

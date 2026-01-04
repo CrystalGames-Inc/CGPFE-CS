@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class UseExtraordinaryAbility() : StandardAction("Use extraordinary ability", false) {
-	
+public class UseExtraordinaryAbility() : StandardAction("Use extraordinary ability", false)
+{
+
 }

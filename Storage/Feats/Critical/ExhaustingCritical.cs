@@ -1,12 +1,11 @@
 ﻿using CGPFE.Core.Enums;
-using CGPFE.Domain.Characters.Feats.Properties.Prerequisites;
-using CGPFE.Management;
 
 namespace CGPFE.Domain.Characters.Feats.Feats.Critical;
 
-public class ExhaustingCritical: Characters.Feats.Feat
+public class ExhaustingCritical : Characters.Feats.Feat
 {
-    public ExhaustingCritical() : base("Exhausting Critical", FeatType.Critical) {
+    public ExhaustingCritical() : base("Exhausting Critical", FeatType.Critical)
+    {
         Prerequisites = [
             new FeatPrerequisite("Critical Focus"),
             new FeatPrerequisite("Tiring Critical"),
@@ -14,11 +13,13 @@ public class ExhaustingCritical: Characters.Feats.Feat
         ];
     }
 
-    public override bool CanAcquire() {
+    public override bool CanAcquire()
+    {
         return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
     }
 
-    public override void ApplyBenefits() {
+    public override void ApplyBenefits()
+    {
         throw new NotImplementedException();
     }
 }

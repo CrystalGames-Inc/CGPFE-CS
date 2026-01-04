@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.MoveActions;
 
-public class StandUpFromProne() : MoveAction("Stand up from Prone", true) {
-	
+public class StandUpFromProne() : MoveAction("Stand up from Prone", true)
+{
+
 }

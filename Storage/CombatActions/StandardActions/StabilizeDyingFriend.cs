@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class StabilizeDyingFriend() : StandardAction("Stabilize a dying friend", true) {
-	
+public class StabilizeDyingFriend() : StandardAction("Stabilize a dying friend", true)
+{
+
 }

@@ -1,11 +1,14 @@
-﻿using Domain.Characters.Feats;
+﻿using CGPFE.Domain.Characters.Player;
+using Domain.Characters.Feats;
 
-namespace Domain.Characters.Feats.Prerequisites;
+namespace Domain.Characters.Feat.Prerequisites;
 
-public class FeatPrerequisite(string name) : IPrerequisite {
-	private string Name { get; set; } = name;
+public class FeatPrerequisite(string name) : IPrerequisite
+{
+    private string Name { get; set; } = name;
 
-	public bool IsSatisfiedBy(Player.Player player) {
-		return player.HasFeat(Name);
-	}
+    public bool IsSatisfiedBy(Player player)
+    {
+        return player.HasFeat(Name);
+    }
 }

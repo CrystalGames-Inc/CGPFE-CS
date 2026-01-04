@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.FullRoundActions;
 
-public class DeliverCoupDeGrace() : FullRoundAction("Deliver Coup De Grace", true) {
-	
+public class DeliverCoupDeGrace() : FullRoundAction("Deliver Coup De Grace", true)
+{
+
 }

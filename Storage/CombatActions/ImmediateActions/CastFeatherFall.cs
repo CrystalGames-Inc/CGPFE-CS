@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.ImmediateActions;
 
-public class CastFeatherFall() : ImmediateAction("Cast Feather Fall", false) {
-	
+public class CastFeatherFall() : ImmediateAction("Cast Feather Fall", false)
+{
+
 }

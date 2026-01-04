@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class EscapeGrapple() : StandardAction("Escape a grapple", false) {
-	
+public class EscapeGrapple() : StandardAction("Escape a grapple", false)
+{
+
 }

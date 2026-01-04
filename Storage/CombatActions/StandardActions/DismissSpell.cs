@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class DismissSpell() : StandardAction("Dismiss a spell", false) {
-	
+public class DismissSpell() : StandardAction("Dismiss a spell", false)
+{
+
 }

@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class AttackMelee() : StandardAction("Attack (melee)", false) {
-	
+public class AttackMelee() : StandardAction("Attack (melee)", false)
+{
+
 }

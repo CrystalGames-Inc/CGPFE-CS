@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CGPFE.CLI.Commands.Campaign
+﻿namespace CGPFE.CLI.Commands.Campaign
 {
     public class CommandGroup : ICommand
     {
         public string Name => "campaign";
         public string Description => "Manage Campaigns";
-        public bool? RequiresCampaign {  get; }
+        public bool? RequiresCampaign { get; }
 
         private readonly Dictionary<string, ICommand> _subcommands;
 
 
-        public void Execute(string[] args) {
+        public void Execute(string[] args)
+        {
             throw new NotImplementedException();
         }
     }

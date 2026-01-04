@@ -1,7 +1,8 @@
 ﻿namespace CGPFE.Core.Enums;
 
-public enum FactionType {
-	Cult,
-	Faction,
-	Group
+public enum FactionType
+{
+    Cult,
+    Faction,
+    Group
 }

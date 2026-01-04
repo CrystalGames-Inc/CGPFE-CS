@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.FullRoundActions;
 
-public class Withdraw() : FullRoundAction("Withdraw", false) {
-	
+public class Withdraw() : FullRoundAction("Withdraw", false)
+{
+
 }

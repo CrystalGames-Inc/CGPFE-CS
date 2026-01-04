@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.MoveActions;
 
-public class RetrieveStoredItem() : MoveAction("Retrieve a stored item", true) {
-	
+public class RetrieveStoredItem() : MoveAction("Retrieve a stored item", true)
+{
+
 }

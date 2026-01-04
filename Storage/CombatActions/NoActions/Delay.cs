@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.NoActions;
 
-public class Delay() : NoAction("Delay", false) {
-	
+public class Delay() : NoAction("Delay", false)
+{
+
 }

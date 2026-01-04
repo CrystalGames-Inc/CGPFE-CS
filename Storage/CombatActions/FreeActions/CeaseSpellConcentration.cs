@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.FreeActions;
 
-public class CeaseSpellConcentration() : FreeAction("Cease concentration on spell", false) {
-	
+public class CeaseSpellConcentration() : FreeAction("Cease concentration on spell", false)
+{
+
 }

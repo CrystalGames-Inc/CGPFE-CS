@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class ActivateMagicItem() : StandardAction("Activate a magic item", false) {
-	
+public class ActivateMagicItem() : StandardAction("Activate a magic item", false)
+{
+
 }

@@ -23,11 +23,12 @@ namespace CGPFE.Management
         {
             bool playerFirst = false;
             Console.WriteLine("Combat started!");
-            if(Dice.Roll(20) + PlayerDataManager.Instance.Player.CombatInfo.InitMod >= Dice.Roll(20) + other.CombatInfo.InitMod)
+            if (Dice.Roll(20) + PlayerDataManager.Instance.Player.CombatInfo.InitMod >= Dice.Roll(20) + other.CombatInfo.InitMod)
             {
                 Console.WriteLine("You go first!");
                 playerFirst = true;
-            } else
+            }
+            else
                 Console.WriteLine("You go second!");
         }
     }

@@ -1,9 +1,10 @@
 ﻿namespace CGPFE.Domain.Items.Equipment.Offense.Properties;
 
-public enum Type {
-	Bludgeoning,
-	Piercing,
-	Slashing,
-	And,
-	Or
+public enum Type
+{
+    Bludgeoning,
+    Piercing,
+    Slashing,
+    And,
+    Or
 }

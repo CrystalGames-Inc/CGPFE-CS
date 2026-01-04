@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.MoveActions;
 
-public class DirectActiveSpell() : MoveAction("Direct active spell", false) {
-	
+public class DirectActiveSpell() : MoveAction("Direct active spell", false)
+{
+
 }

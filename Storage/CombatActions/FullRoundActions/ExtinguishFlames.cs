@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.FullRoundActions;
 
-public class ExtinguishFlames() : FullRoundAction("Extinguish Flames", false) {
-	
+public class ExtinguishFlames() : FullRoundAction("Extinguish Flames", false)
+{
+
 }

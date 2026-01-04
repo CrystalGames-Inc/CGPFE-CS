@@ -1,22 +1,24 @@
 ﻿using CGPFE.Core.Enums;
-using CGPFE.Domain.Characters.Feats.Properties.Prerequisites;
-using CGPFE.Management;
 
 namespace CGPFE.Domain.Characters.Feats.Feats.Critical;
 
-public class BlindingCritical: Characters.Feats.Feat {
-	public BlindingCritical() : base("Blinding Critical", FeatType.Critical) {
-		Prerequisites = [
-			new FeatPrerequisite("Critical Focus"),
-			new ValuePrerequisite("Bab", 15)
-		];
-	}
+public class BlindingCritical : Characters.Feats.Feat
+{
+    public BlindingCritical() : base("Blinding Critical", FeatType.Critical)
+    {
+        Prerequisites = [
+            new FeatPrerequisite("Critical Focus"),
+            new ValuePrerequisite("Bab", 15)
+        ];
+    }
 
-	public override bool CanAcquire() {
-		return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
-	}
+    public override bool CanAcquire()
+    {
+        return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
+    }
 
-	public override void ApplyBenefits() {
-		throw new NotImplementedException();
-	}
+    public override void ApplyBenefits()
+    {
+        throw new NotImplementedException();
+    }
 }

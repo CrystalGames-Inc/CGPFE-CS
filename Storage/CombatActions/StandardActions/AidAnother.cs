@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class AidAnother() : StandardAction("Aid another", true) {
-	
+public class AidAnother() : StandardAction("Aid another", true)
+{
+
 }

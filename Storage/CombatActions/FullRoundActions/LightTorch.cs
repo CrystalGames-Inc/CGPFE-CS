@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.FullRoundActions;
 
-public class LightTorch() : FullRoundAction("Light a torch", true) {
-	
+public class LightTorch() : FullRoundAction("Light a torch", true)
+{
+
 }

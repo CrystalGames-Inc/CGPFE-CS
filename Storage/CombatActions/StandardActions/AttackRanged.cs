@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class AttackRanged() : StandardAction("Attack (ranged)", true) {
-	
+public class AttackRanged() : StandardAction("Attack (ranged)", true)
+{
+
 }

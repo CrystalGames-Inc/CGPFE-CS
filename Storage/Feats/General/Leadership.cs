@@ -1,20 +1,21 @@
-﻿using CGPFE.Domain.Characters.Feats.Properties.Prerequisites;
-using CGPFE.Management;
+﻿namespace CGPFE.Domain.Characters.Feats.Feats.General;
 
-namespace CGPFE.Domain.Characters.Feats.Feats.General;
+public class Leadership : Characters.Feats.Feat
+{
+    public Leadership() : base("Leadership")
+    {
+        Prerequisites = [
+            new ValuePrerequisite("Lvl", 7)
+        ];
+    }
 
-public class Leadership: Characters.Feats.Feat {
-	public Leadership() : base("Leadership") {
-		Prerequisites = [
-			new ValuePrerequisite("Lvl", 7)
-		];
-	}
+    public override bool CanAcquire()
+    {
+        return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
+    }
 
-	public override bool CanAcquire() {
-		return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
-	}
-
-	public override void ApplyBenefits() {
-		throw new NotImplementedException();
-	}
+    public override void ApplyBenefits()
+    {
+        throw new NotImplementedException();
+    }
 }

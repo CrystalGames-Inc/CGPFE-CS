@@ -1,6 +1,6 @@
 ﻿using Attribute = CGPFE.Core.Enums.Attribute;
 
-namespace Domain.Characters.Skills;
+namespace Domain.Characters.Skill;
 
 public class Skill
 {
@@ -10,7 +10,7 @@ public class Skill
     public bool Untrained { get; set; } = false;
 
     public SkillBonus Bonus { get; set; } = new SkillBonus(0, 0, 0);
-    
+
     public Skill(string name, Attribute attribute, bool untrained)
     {
         Name = name;
@@ -18,20 +18,23 @@ public class Skill
         Untrained = untrained;
     }
 
-    public bool SkillCheck(int dc) {
-        
-        
+    public bool SkillCheck(int dc)
+    {
+
+
         return false;
     }
 
-    public int GetSkillCheckBonus() {
+    public int GetSkillCheckBonus()
+    {
         int bonus = 0;
 
-        if (Untrained) {
+        if (Untrained)
+        {
             bonus += Bonus.AbilityMod;
         }
-        
-        
+
+
         return bonus;
     }
 }

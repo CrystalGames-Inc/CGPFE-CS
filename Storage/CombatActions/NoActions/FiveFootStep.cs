@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.NoActions;
 
-public class FiveFootStep() : NoAction("5-foot step", false) {
-	
+public class FiveFootStep() : NoAction("5-foot step", false)
+{
+
 }

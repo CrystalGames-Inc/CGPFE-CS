@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class Feint() : StandardAction("Feint", false) {
-	
+public class Feint() : StandardAction("Feint", false)
+{
+
 }

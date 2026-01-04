@@ -1,10 +1,11 @@
 using CGPFE.Core.Enums;
-using CGPFE.Domain.Characters.Feats.Properties.Prerequisites;
 
 namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 
-public class ArmorProficiencyMedium: Characters.Feats.Feat {
-    public ArmorProficiencyMedium() : base("Armor Proficiency, Medium", FeatType.Combat) {
+public class ArmorProficiencyMedium : Characters.Feats.Feat
+{
+    public ArmorProficiencyMedium() : base("Armor Proficiency, Medium", FeatType.Combat)
+    {
         Prerequisites = [
             new FeatPrerequisite("Armor Proficiency, Light")
         ];

@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.StandardActions;
 
-public class ChannelEnergy() : StandardAction("Channel energy", false) {
-	
+public class ChannelEnergy() : StandardAction("Channel energy", false)
+{
+
 }

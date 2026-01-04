@@ -1,10 +1,4 @@
 ﻿using CGPFE.Domain.Characters.Common;
-using CGPFE.Domain.Characters.Player.Properties;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CGPFE.Domain.Characters
 {
@@ -13,8 +7,10 @@ namespace CGPFE.Domain.Characters
         public Attributes Attributes { get; set; }
         public CombatInfo? CombatInfo { get; set; }
 
-        public int GetValueForKey(string key) {
-            return key.ToUpper() switch {
+        public int GetValueForKey(string key)
+        {
+            return key.ToUpper() switch
+            {
                 "STR" => Attributes.Strength.value,
                 "DEX" => Attributes.Dexterity.value,
                 "CON" => Attributes.Constitution.value,

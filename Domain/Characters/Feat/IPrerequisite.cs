@@ -1,5 +1,8 @@
-﻿namespace Domain.Characters.Feats;
+﻿using CGPFE.Domain.Characters.Player;
 
-public interface IPrerequisite {
-	bool IsSatisfiedBy(Player.Player player);
+namespace Domain.Characters.Feats;
+
+public interface IPrerequisite
+{
+    bool IsSatisfiedBy(Player player);
 }

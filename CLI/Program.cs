@@ -4,9 +4,11 @@ namespace CGPFE.CLI
 {
     internal class Program
     {
-        public static void Main(string[] args) {
+        public static void Main(string[] args)
+        {
             // If you want to support "CGPFE new campaign" from the OS command line:
-            if (args.Length > 0) {
+            if (args.Length > 0)
+            {
                 RunSingleCommand(args);
                 return;
             }
@@ -16,7 +18,8 @@ namespace CGPFE.CLI
             shell.Start();
         }
 
-        private static void RunSingleCommand(string[] args) {
+        private static void RunSingleCommand(string[] args)
+        {
             var shell = new CGPFEShell();
 
             // Combine args into a normal CLI input string

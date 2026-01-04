@@ -1,20 +1,21 @@
-﻿using CGPFE.Management;
+﻿namespace CGPFE.Domain.Characters.Feats.Feats.General;
 
-namespace CGPFE.Domain.Characters.Feats.Feats.General;
-
-public class ExtraPerformance: Characters.Feats.Feat
+public class ExtraPerformance : Characters.Feats.Feat
 {
-    public ExtraPerformance() : base("Extra Performance") {
+    public ExtraPerformance() : base("Extra Performance")
+    {
         Prerequisites = [
-            
+
         ];
     }
 
-    public override bool CanAcquire() {
+    public override bool CanAcquire()
+    {
         return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
     }
 
-    public override void ApplyBenefits() {
+    public override void ApplyBenefits()
+    {
         throw new NotImplementedException();
     }
 }

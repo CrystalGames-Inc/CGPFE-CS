@@ -1,19 +1,21 @@
-﻿using CGPFE.Management;
+﻿namespace CGPFE.Domain.Characters.Feats.Feats.General;
 
-namespace CGPFE.Domain.Characters.Feats.Feats.General;
-
-public class ElementalChannel: Characters.Feats.Feat {
-    public ElementalChannel() : base("Elemental Channel") {
+public class ElementalChannel : Characters.Feats.Feat
+{
+    public ElementalChannel() : base("Elemental Channel")
+    {
         Prerequisites = [
-            
+
         ];
     }
 
-    public override bool CanAcquire() {
+    public override bool CanAcquire()
+    {
         return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
     }
 
-    public override void ApplyBenefits() {
+    public override void ApplyBenefits()
+    {
         throw new NotImplementedException();
     }
 }

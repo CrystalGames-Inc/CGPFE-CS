@@ -1,6 +1,6 @@
 ﻿using Attribute = CGPFE.Core.Enums.Attribute;
 
-namespace Domain.Characters.Skills;
+namespace Domain.Characters.Skill;
 
 public static class Skills
 {
@@ -13,17 +13,17 @@ public static class Skills
         "Appraise",
         Attribute.Intelligence,
         true);
-    
+
     public static Skill Bluff = new Skill(
         "Bluff",
         Attribute.Charisma,
         true);
-    
+
     public static Skill Climb = new Skill(
         "Climb",
         Attribute.Strength,
         true);
-    
+
     public static Skill Craft = new Skill(
         "Craft",
         Attribute.Intelligence,
@@ -48,7 +48,7 @@ public static class Skills
         "Escape Artist",
         Attribute.Dexterity,
         true);
-    
+
     public static Skill Fly = new Skill(
         "Fly",
         Attribute.Dexterity,
@@ -73,47 +73,47 @@ public static class Skills
         "Knowledge (Arcana)",
         Attribute.Intelligence,
         false);
-    
+
     public static Skill KnowDungeoneering = new Skill(
         "Knowledge (Dungeoneering)",
         Attribute.Intelligence,
         false);
-    
+
     public static Skill KnowEngineering = new Skill(
         "Knowledge (Engineering)",
         Attribute.Intelligence,
         false);
-    
+
     public static Skill KnowGeography = new Skill(
         "Knowledge (Geography)",
         Attribute.Intelligence,
         false);
-    
+
     public static Skill KnowHistory = new Skill(
         "Knowledge (History)",
         Attribute.Intelligence,
         false);
-    
+
     public static Skill KnowLocal = new Skill(
         "Knowledge (Local)",
         Attribute.Intelligence,
         false);
-    
+
     public static Skill KnowNature = new Skill(
         "Knowledge (Nature)",
         Attribute.Intelligence,
         false);
-    
+
     public static Skill KnowNobility = new Skill(
         "Knowledge (Nobility)",
         Attribute.Intelligence,
         false);
-    
+
     public static Skill KnowPlanes = new Skill(
         "Knowledge (Planes)",
         Attribute.Intelligence,
         false);
-    
+
     public static Skill KnowReligion = new Skill(
         "Knowledge (Religion)",
         Attribute.Intelligence,
@@ -133,12 +133,12 @@ public static class Skills
         "Profession",
         Attribute.Wisdom,
         false);
-    
+
     public static Skill Ride = new Skill(
         "Ride",
         Attribute.Dexterity,
         true);
-    
+
     public static Skill SenseMotive = new Skill(
         "Sense Motive",
         Attribute.Wisdom,
@@ -148,7 +148,7 @@ public static class Skills
         "Sleight of Hand",
         Attribute.Dexterity,
         false);
-    
+
     public static Skill Spellcraft = new Skill(
         "Spellcraft",
         Attribute.Intelligence,
@@ -163,7 +163,7 @@ public static class Skills
         "Survival",
         Attribute.Wisdom,
         true);
-    
+
     public static Skill Swim = new Skill(
         "Swim",
         Attribute.Strength,

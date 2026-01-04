@@ -1,21 +1,23 @@
 ﻿using CGPFE.Core.Enums;
-using CGPFE.Domain.Characters.Feats.Properties.Prerequisites;
-using CGPFE.Management;
 
 namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 
-public class VitalStrike: Characters.Feats.Feat {
-	public VitalStrike() : base("Vital Strike", FeatType.Combat) {
-		Prerequisites = [
-			new ValuePrerequisite("Bab", 6)
-		];
-	}
+public class VitalStrike : Characters.Feats.Feat
+{
+    public VitalStrike() : base("Vital Strike", FeatType.Combat)
+    {
+        Prerequisites = [
+            new ValuePrerequisite("Bab", 6)
+        ];
+    }
 
-	public override bool CanAcquire() {
-		return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
-	}
+    public override bool CanAcquire()
+    {
+        return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
+    }
 
-	public override void ApplyBenefits() {
-		throw new NotImplementedException();
-	}
+    public override void ApplyBenefits()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace CGPFE.Storage.CombatActions.FreeActions;
 
-public class Speak() : FreeAction("Speak", false) {
+public class Speak() : FreeAction("Speak", false)
+{
 
 }
