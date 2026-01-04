@@ -6,20 +6,17 @@ namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 
 public class ExoticWeaponProficiency : Feat
 {
-    public ExoticWeaponProficiency() : base("Exotic Weapon Proficiency", FeatType.Combat)
-    {
+    public ExoticWeaponProficiency() : base("Exotic Weapon Proficiency", FeatType.Combat) {
         Prerequisites = [
             new ValuePrerequisite("Bab", 1)
         ];
     }
 
-    public override bool CanAcquire(Player.Player player)
-    {
+    public override bool CanAcquire(Player.Player player) {
         return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits(ref Player.Player player)
-    {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

@@ -1,11 +1,12 @@
 ﻿using CGPFE.Core.Enums;
+using Domain.Characters.Feat;
+using Domain.Characters.Feat.Prerequisites;
 
 namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 
-public class ShatterDefenses : Characters.Feats.Feat
+public class ShatterDefenses : Feat
 {
-    public ShatterDefenses() : base("Shatter Defenses", FeatType.Combat)
-    {
+    public ShatterDefenses() : base("Shatter Defenses", FeatType.Combat) {
         Prerequisites = [
             new FeatPrerequisite("Weapon Focus"),
             new FeatPrerequisite("Dazzling Display"),
@@ -14,13 +15,11 @@ public class ShatterDefenses : Characters.Feats.Feat
 		];
     }
 
-    public override bool CanAcquire()
-    {
-        return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
+    public override bool CanAcquire(Player.Player player) {
+        return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

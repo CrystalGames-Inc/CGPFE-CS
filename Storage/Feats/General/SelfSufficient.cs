@@ -2,13 +2,11 @@
 
 public class SelfSufficient() : Characters.Feats.Feat("Self-Sufficient")
 {
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return true;
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         PlayerDataManager.Instance.Player.GetMatchingSkill("Heal").Bonus.SetMiscMod(
             PlayerDataManager.Instance.Player.GetMatchingSkill("Heal").Bonus.Ranks >= 10 ? 4 : 2);
 

@@ -2,20 +2,17 @@
 
 public class ExtraMercy : Characters.Feats.Feat
 {
-    public ExtraMercy() : base("Extra Mercy")
-    {
+    public ExtraMercy() : base("Extra Mercy") {
         Prerequisites = [
 
         ];
     }
 
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         throw new NotImplementedException();
     }
 }

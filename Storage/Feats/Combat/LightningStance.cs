@@ -1,11 +1,12 @@
 ﻿using CGPFE.Core.Enums;
+using Domain.Characters.Feat;
+using Domain.Characters.Feat.Prerequisites;
 
 namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 
-public class LightningStance : Characters.Feats.Feat
+public class LightningStance : Feat
 {
-    public LightningStance() : base("Lightning Stance", FeatType.Combat)
-    {
+    public LightningStance() : base("Lightning Stance", FeatType.Combat) {
         Prerequisites = [
             new ValuePrerequisite("Dex", 17),
             new FeatPrerequisite("Dodge"),
@@ -14,13 +15,11 @@ public class LightningStance : Characters.Feats.Feat
         ];
     }
 
-    public override bool CanAcquire()
-    {
-        return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
+    public override bool CanAcquire(Player.Player player) {
+        return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

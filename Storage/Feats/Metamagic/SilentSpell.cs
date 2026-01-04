@@ -4,13 +4,11 @@ namespace CGPFE.Domain.Characters.Feats.Feats.Metamagic;
 
 public class SilentSpell() : Characters.Feats.Feat("Silent Spell", FeatType.Metamagic)
 {
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return true;
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         throw new NotImplementedException();
     }
 }

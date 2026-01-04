@@ -2,13 +2,11 @@
 
 public class DeftHands() : Characters.Feats.Feat("Deft Hands")
 {
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return true;
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         PlayerDataManager.Instance.Player.GetMatchingSkill("Disable Device").Bonus.SetMiscMod(
             PlayerDataManager.Instance.Player.GetMatchingSkill("Disable Device").Bonus.Ranks >= 10 ? 4 : 2);
 

@@ -1,23 +1,22 @@
 ﻿using CGPFE.Core.Enums;
+using Domain.Characters.Feat;
+using Domain.Characters.Feat.Prerequisites;
 
 namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 
-public class Lunge : Characters.Feats.Feat
+public class Lunge : Feat
 {
-    public Lunge() : base("Lunge", FeatType.Combat)
-    {
+    public Lunge() : base("Lunge", FeatType.Combat) {
         Prerequisites = [
             new ValuePrerequisite("Bab", 6)
         ];
     }
 
-    public override bool CanAcquire()
-    {
-        return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
+    public override bool CanAcquire(Player.Player player) {
+        return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

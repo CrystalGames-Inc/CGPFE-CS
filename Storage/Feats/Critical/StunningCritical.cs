@@ -4,8 +4,7 @@ namespace CGPFE.Domain.Characters.Feats.Feats.Critical;
 
 public class StunningCritical : Characters.Feats.Feat
 {
-    public StunningCritical() : base("Stunning Critical", FeatType.Critical)
-    {
+    public StunningCritical() : base("Stunning Critical", FeatType.Critical) {
         Prerequisites = [
             new FeatPrerequisite("Critical Focus"),
             new FeatPrerequisite("Staggering Critical"),
@@ -13,13 +12,11 @@ public class StunningCritical : Characters.Feats.Feat
         ];
     }
 
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         throw new NotImplementedException();
     }
 }

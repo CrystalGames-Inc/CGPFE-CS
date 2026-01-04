@@ -2,13 +2,11 @@
 
 public class AlignmentChannel() : Characters.Feats.Feat("Alignment Channel")
 {
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         throw new NotImplementedException();
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         throw new NotImplementedException();
     }
 }

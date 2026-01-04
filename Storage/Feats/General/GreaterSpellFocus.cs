@@ -2,20 +2,17 @@
 
 public class GreaterSpellFocus : Characters.Feats.Feat
 {
-    public GreaterSpellFocus() : base("Greater Spell Focus")
-    {
+    public GreaterSpellFocus() : base("Greater Spell Focus") {
         Prerequisites = [
             new FeatPrerequisite("Spell Focus")
         ];
     }
 
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         throw new NotImplementedException();
     }
 }

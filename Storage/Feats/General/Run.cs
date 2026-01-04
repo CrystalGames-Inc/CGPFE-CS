@@ -2,13 +2,11 @@
 
 public class Run() : Characters.Feats.Feat("Run")
 {
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return true;
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         throw new NotImplementedException();
     }
 }

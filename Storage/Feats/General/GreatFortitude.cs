@@ -2,13 +2,11 @@
 
 public class GreatFortitude() : Characters.Feats.Feat("Great Fortitude")
 {
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return true;
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         PlayerDataManager.Instance.Player.CombatInfo.Fortitude += 2;
     }
 }

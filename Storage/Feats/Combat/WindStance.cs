@@ -1,9 +1,11 @@
-﻿namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
+﻿using Domain.Characters.Feat;
+using Domain.Characters.Feat.Prerequisites;
 
-public class WindStance : Characters.Feats.Feat
+namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
+
+public class WindStance : Feat
 {
-    public WindStance() : base("Wind Stance")
-    {
+    public WindStance() : base("Wind Stance") {
         Prerequisites = [
             new ValuePrerequisite("Dex", 15),
             new FeatPrerequisite("Dodge"),
@@ -11,13 +13,11 @@ public class WindStance : Characters.Feats.Feat
         ];
     }
 
-    public override bool CanAcquire()
-    {
-        return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
+    public override bool CanAcquire(Player.Player player) {
+        return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

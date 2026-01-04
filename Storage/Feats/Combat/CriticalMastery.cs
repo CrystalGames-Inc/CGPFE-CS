@@ -6,8 +6,7 @@ namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 
 public class CriticalMastery : Feat
 {
-    public CriticalMastery() : base("Critical Mastery", FeatType.Combat)
-    {
+    public CriticalMastery() : base("Critical Mastery", FeatType.Combat) {
         Prerequisites = [
             new FeatPrerequisite("Critical Focus"),
             new ValuePrerequisite("Lvl", 14),
@@ -15,13 +14,11 @@ public class CriticalMastery : Feat
         ];
     }
 
-    public override bool CanAcquire(Player.Player player)
-    {
+    public override bool CanAcquire(Player.Player player) {
         return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits(ref Player.Player player)
-    {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

@@ -2,20 +2,17 @@
 
 public class ImprovedGreatFortitude : Characters.Feats.Feat
 {
-    public ImprovedGreatFortitude() : base("Improved Great Fortitude")
-    {
+    public ImprovedGreatFortitude() : base("Improved Great Fortitude") {
         Prerequisites = [
             new FeatPrerequisite("Great Fortitude")
         ];
     }
 
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         throw new NotImplementedException();
     }
 }

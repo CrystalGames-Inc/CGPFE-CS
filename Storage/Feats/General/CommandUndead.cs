@@ -2,20 +2,17 @@
 
 public class CommandUndead : Characters.Feats.Feat
 {
-    public CommandUndead() : base("Command Undead")
-    {
+    public CommandUndead() : base("Command Undead") {
         Prerequisites = [
 
         ];
     }
 
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         throw new NotImplementedException();
     }
 }

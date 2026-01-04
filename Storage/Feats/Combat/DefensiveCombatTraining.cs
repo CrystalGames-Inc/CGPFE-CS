@@ -5,13 +5,11 @@ namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 
 public class DefensiveCombatTraining() : Feat("Defensive Combat Training", FeatType.Combat)
 {
-    public override bool CanAcquire(Player.Player player)
-    {
+    public override bool CanAcquire(Player.Player player) {
         return true;
     }
 
-    public override void ApplyBenefits(ref Player.Player player)
-    {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

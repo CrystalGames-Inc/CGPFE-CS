@@ -2,20 +2,17 @@
 
 public class ImprovedChannel : Characters.Feats.Feat
 {
-    public ImprovedChannel() : base("Improved Channel")
-    {
+    public ImprovedChannel() : base("Improved Channel") {
         Prerequisites = [
 
         ];
     }
 
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         throw new NotImplementedException();
     }
 }

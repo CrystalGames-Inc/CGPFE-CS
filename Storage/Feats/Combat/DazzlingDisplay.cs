@@ -6,20 +6,17 @@ namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 
 public class DazzlingDisplay : Feat
 {
-    public DazzlingDisplay() : base("Dazzling Display", FeatType.Combat)
-    {
+    public DazzlingDisplay() : base("Dazzling Display", FeatType.Combat) {
         Prerequisites = [
             new FeatPrerequisite("Weapon Focus")
         ];
     }
 
-    public override bool CanAcquire(Player.Player player)
-    {
+    public override bool CanAcquire(Player.Player player) {
         return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits(ref Player.Player player)
-    {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

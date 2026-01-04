@@ -6,8 +6,7 @@ namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 
 public class GorgonsFist : Feat
 {
-    public GorgonsFist() : base("Gorgon's Fist", FeatType.Combat)
-    {
+    public GorgonsFist() : base("Gorgon's Fist", FeatType.Combat) {
         Prerequisites = [
             new FeatPrerequisite("Improved Unarmed Strike"),
             new FeatPrerequisite("Scorpion Style"),
@@ -15,13 +14,11 @@ public class GorgonsFist : Feat
         ];
     }
 
-    public override bool CanAcquire(Player.Player player)
-    {
+    public override bool CanAcquire(Player.Player player) {
         return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits(ref Player.Player player)
-    {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

@@ -6,20 +6,17 @@ namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 
 public class ArmorProficiencyHeavy : Feat
 {
-    public ArmorProficiencyHeavy() : base("Armor Proficiency, Heavy", FeatType.Combat)
-    {
+    public ArmorProficiencyHeavy() : base("Armor Proficiency, Heavy", FeatType.Combat) {
         Prerequisites = [
             new FeatPrerequisite("Armor Proficiency, Light")
         ];
     }
 
-    public override bool CanAcquire(Player.Player player)
-    {
+    public override bool CanAcquire(Player.Player player) {
         return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits(ref Player.Player player)
-    {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

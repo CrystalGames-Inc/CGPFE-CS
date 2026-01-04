@@ -2,13 +2,11 @@
 
 public class Alertness() : Characters.Feats.Feat("Alertness")
 {
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return true;
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         PlayerDataManager.Instance.Player.GetMatchingSkill("Perception").Bonus.SetMiscMod(
             PlayerDataManager.Instance.Player.GetMatchingSkill("Perception").Bonus.Ranks >= 10 ? 4 : 2);
 

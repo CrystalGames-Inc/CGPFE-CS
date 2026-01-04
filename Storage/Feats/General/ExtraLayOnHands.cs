@@ -2,20 +2,17 @@
 
 public class ExtraLayOnHands : Characters.Feats.Feat
 {
-    public ExtraLayOnHands() : base("Extra Lay On Hands")
-    {
+    public ExtraLayOnHands() : base("Extra Lay On Hands") {
         Prerequisites = [
 
         ];
     }
 
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         throw new NotImplementedException();
     }
 }

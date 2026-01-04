@@ -2,13 +2,11 @@
 
 public class IronWill() : Characters.Feats.Feat("Iron Will")
 {
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return true;
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         PlayerDataManager.Instance.Player.CombatInfo.Will += 2;
     }
 }

@@ -1,16 +1,15 @@
 ﻿using CGPFE.Core.Enums;
+using Domain.Characters.Feat;
 
 namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 
-public class ImprovedInitiative() : Characters.Feats.Feat("Improved Initiative", FeatType.Combat)
+public class ImprovedInitiative() : Feat("Improved Initiative", FeatType.Combat)
 {
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire(Player.Player player) {
         return true;
     }
 
-    public override void ApplyBenefits()
-    {
-        PlayerDataManager.Instance.Player.CombatInfo.InitMod += 4;
+    public override void ApplyBenefits(ref Player.Player player) {
+        player.CombatInfo.InitMod += 4;
     }
 }

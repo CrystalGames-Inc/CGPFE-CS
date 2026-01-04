@@ -2,13 +2,11 @@
 
 public class Toughness() : Characters.Feats.Feat("Toughness")
 {
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return true;
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         PlayerDataManager.Instance.Player.PlayerInfo.MaxHealth += 3;
     }
 }

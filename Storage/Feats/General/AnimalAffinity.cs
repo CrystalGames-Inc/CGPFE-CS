@@ -2,13 +2,11 @@
 
 public class AnimalAffinity() : Characters.Feats.Feat("Animal Affinity")
 {
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return true;
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         PlayerDataManager.Instance.Player.GetMatchingSkill("Handle Animal").Bonus.SetMiscMod(
             PlayerDataManager.Instance.Player.GetMatchingSkill("Handle Animal").Bonus.Ranks >= 10 ? 4 : 2);
 

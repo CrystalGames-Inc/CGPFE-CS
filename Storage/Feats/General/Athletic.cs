@@ -2,13 +2,11 @@ namespace CGPFE.Domain.Characters.Feats.Feats.General;
 
 public class Athletic() : Characters.Feats.Feat("Athletic")
 {
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return true;
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         PlayerDataManager.Instance.Player.GetMatchingSkill("Climb").Bonus.SetMiscMod(
             PlayerDataManager.Instance.Player.GetMatchingSkill("Climb").Bonus.Ranks >= 10 ? 4 : 2);
 

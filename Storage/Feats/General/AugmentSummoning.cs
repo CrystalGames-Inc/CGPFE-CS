@@ -2,20 +2,17 @@
 
 public class AugmentSummoning : Characters.Feats.Feat
 {
-    public AugmentSummoning() : base("Augment Summoning")
-    {
+    public AugmentSummoning() : base("Augment Summoning") {
         Prerequisites = [
 
         ];
     }
 
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         throw new NotImplementedException();
     }
 }

@@ -6,21 +6,18 @@ namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 
 public class DeflectArrows : Feat
 {
-    public DeflectArrows() : base("Deflect Arrows", FeatType.Combat)
-    {
+    public DeflectArrows() : base("Deflect Arrows", FeatType.Combat) {
         Prerequisites = [
             new ValuePrerequisite("Dex", 13),
             new FeatPrerequisite("Improved Unarmed Strike")
         ];
     }
 
-    public override bool CanAcquire(Player.Player player)
-    {
+    public override bool CanAcquire(Player.Player player) {
         return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits(ref Player.Player player)
-    {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

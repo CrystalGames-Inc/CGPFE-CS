@@ -4,20 +4,17 @@ namespace CGPFE.Domain.Characters.Feats.Feats.ItemCreation;
 
 public class ForgeRing : Characters.Feats.Feat
 {
-    public ForgeRing() : base("Forge Ring", FeatType.ItemCreation)
-    {
+    public ForgeRing() : base("Forge Ring", FeatType.ItemCreation) {
         Prerequisites = [
             new ValuePrerequisite("Lvl", 7)
         ];
     }
 
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         throw new NotImplementedException();
     }
 }

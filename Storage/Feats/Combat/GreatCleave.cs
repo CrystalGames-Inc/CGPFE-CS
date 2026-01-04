@@ -6,8 +6,7 @@ namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 
 public class GreatCleave : Feat
 {
-    public GreatCleave() : base("Great Cleave", FeatType.Combat)
-    {
+    public GreatCleave() : base("Great Cleave", FeatType.Combat) {
         Prerequisites = [
             new ValuePrerequisite("Str", 13),
             new FeatPrerequisite("Cleave"),
@@ -16,13 +15,11 @@ public class GreatCleave : Feat
         ];
     }
 
-    public override bool CanAcquire(Player.Player player)
-    {
+    public override bool CanAcquire(Player.Player player) {
         return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits(ref Player.Player player)
-    {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

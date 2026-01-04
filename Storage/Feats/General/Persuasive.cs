@@ -2,13 +2,11 @@
 
 public class Persuasive() : Characters.Feats.Feat("Persuasive")
 {
-    public override bool CanAcquire()
-    {
+    public override bool CanAcquire() {
         return true;
     }
 
-    public override void ApplyBenefits()
-    {
+    public override void ApplyBenefits() {
         PlayerDataManager.Instance.Player.GetMatchingSkill("Diplomacy").Bonus.SetMiscMod(
             PlayerDataManager.Instance.Player.GetMatchingSkill("Diplomacy").Bonus.Ranks >= 10 ? 4 : 2);
 

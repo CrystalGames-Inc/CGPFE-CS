@@ -1,5 +1,4 @@
 ﻿using CGPFE.Core.Enums;
-using CGPFE.Domain.Characters.Player;
 using Domain.Characters.Feat;
 using Domain.Characters.Feat.Prerequisites;
 
@@ -8,8 +7,7 @@ namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
 public class ArcaneArmorMastery : Feat
 {
 
-    public ArcaneArmorMastery() : base("Arcane Armor Mastery", FeatType.Combat)
-    {
+    public ArcaneArmorMastery() : base("Arcane Armor Mastery", FeatType.Combat) {
         Prerequisites = [
             new FeatPrerequisite("Arcane Armor Training"),
             new FeatPrerequisite("Medium Armor Proficiency"),
@@ -17,13 +15,11 @@ public class ArcaneArmorMastery : Feat
         ];
     }
 
-    public override bool CanAcquire(Player.Player player)
-    {
+    public override bool CanAcquire(Player.Player player) {
         return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits(ref Player.Player player)
-    {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }
