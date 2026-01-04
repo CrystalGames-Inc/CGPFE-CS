@@ -10,7 +10,7 @@ public abstract class Feat
     public FeatType Type { get; }
     public List<IPrerequisite> Prerequisites { get; set; } = new();
 
-    protected Feat(string name, FeatType type)
+    protected Feat(string name, FeatType type = FeatType.General)
     {
         Name = name;
         Type = type;
