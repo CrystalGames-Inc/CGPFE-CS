@@ -1,8 +1,9 @@
 ﻿using CGPFE.Core.Enums;
+using Domain.Characters.Feat;
 
 namespace CGPFE.Domain.Characters.Feats.Feats.Metamagic;
 
-public class WidenSpell() : Characters.Feats.Feat("Widen", FeatType.Metamagic)
+public class WidenSpell() : Feat("Widen", FeatType.Metamagic)
 {
     public override bool CanAcquire() {
         return true;
