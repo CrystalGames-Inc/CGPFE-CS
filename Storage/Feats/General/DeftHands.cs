@@ -1,16 +1,18 @@
-﻿namespace CGPFE.Domain.Characters.Feats.Feats.General;
+﻿using Domain.Characters.Feat;
 
-public class DeftHands() : Characters.Feats.Feat("Deft Hands")
+namespace CGPFE.Domain.Characters.Feats.Feats.General;
+
+public class DeftHands() : Feat("Deft Hands")
 {
-    public override bool CanAcquire() {
+    public override bool CanAcquire(Player.Player player) {
         return true;
     }
 
-    public override void ApplyBenefits() {
-        PlayerDataManager.Instance.Player.GetMatchingSkill("Disable Device").Bonus.SetMiscMod(
-            PlayerDataManager.Instance.Player.GetMatchingSkill("Disable Device").Bonus.Ranks >= 10 ? 4 : 2);
+    public override void ApplyBenefits(ref Player.Player player) {
+        player.GetMatchingSkill("Disable Device").Bonus.SetMiscMod(
+            player.GetMatchingSkill("Disable Device").Bonus.Ranks >= 10 ? 4 : 2);
 
-        PlayerDataManager.Instance.Player.GetMatchingSkill("Sleight Of Hand").Bonus.SetMiscMod(
-            PlayerDataManager.Instance.Player.GetMatchingSkill("Sleight Of Hand").Bonus.Ranks >= 10 ? 4 : 2);
+        player.GetMatchingSkill("Sleight Of Hand").Bonus.SetMiscMod(
+            player.GetMatchingSkill("Sleight Of Hand").Bonus.Ranks >= 10 ? 4 : 2);
     }
 }

@@ -1,6 +1,9 @@
-﻿namespace CGPFE.Domain.Characters.Feats.Feats.General;
+﻿using Domain.Characters.Feat;
+using Domain.Characters.Feat.Prerequisites;
 
-public class GreaterSpellPenetration : Characters.Feats.Feat
+namespace CGPFE.Domain.Characters.Feats.Feats.General;
+
+public class GreaterSpellPenetration : Feat
 {
     public GreaterSpellPenetration() : base("Greater Spell Penetration") {
         Prerequisites = [
@@ -8,11 +11,11 @@ public class GreaterSpellPenetration : Characters.Feats.Feat
         ];
     }
 
-    public override bool CanAcquire() {
-        return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
+    public override bool CanAcquire(Player.Player player) {
+        return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits() {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

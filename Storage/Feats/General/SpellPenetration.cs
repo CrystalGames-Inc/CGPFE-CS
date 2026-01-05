@@ -1,12 +1,14 @@
-﻿namespace CGPFE.Domain.Characters.Feats.Feats.General;
+﻿using Domain.Characters.Feat;
 
-public class SpellPenetration() : Characters.Feats.Feat("Spell Penetration")
+namespace CGPFE.Domain.Characters.Feats.Feats.General;
+
+public class SpellPenetration() : Feat("Spell Penetration")
 {
-    public override bool CanAcquire() {
+    public override bool CanAcquire(Player.Player player) {
         return true;
     }
 
-    public override void ApplyBenefits() {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

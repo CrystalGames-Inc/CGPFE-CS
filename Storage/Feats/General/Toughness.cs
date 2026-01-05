@@ -1,12 +1,14 @@
-﻿namespace CGPFE.Domain.Characters.Feats.Feats.General;
+﻿using Domain.Characters.Feat;
 
-public class Toughness() : Characters.Feats.Feat("Toughness")
+namespace CGPFE.Domain.Characters.Feats.Feats.General;
+
+public class Toughness() : Feat("Toughness")
 {
-    public override bool CanAcquire() {
+    public override bool CanAcquire(Player.Player player) {
         return true;
     }
 
-    public override void ApplyBenefits() {
-        PlayerDataManager.Instance.Player.PlayerInfo.MaxHealth += 3;
+    public override void ApplyBenefits(ref Player.Player player) {
+        player.PlayerInfo.MaxHealth += 3;
     }
 }

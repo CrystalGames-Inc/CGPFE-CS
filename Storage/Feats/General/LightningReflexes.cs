@@ -1,12 +1,14 @@
-﻿namespace CGPFE.Domain.Characters.Feats.Feats.General;
+﻿using Domain.Characters.Feat;
 
-public class LightningReflexes() : Characters.Feats.Feat("Lightning Reflexes")
+namespace CGPFE.Domain.Characters.Feats.Feats.General;
+
+public class LightningReflexes() : Feat("Lightning Reflexes")
 {
-    public override bool CanAcquire() {
+    public override bool CanAcquire(Player.Player player) {
         return true;
     }
 
-    public override void ApplyBenefits() {
-        PlayerDataManager.Instance.Player.CombatInfo.Reflex += 2;
+    public override void ApplyBenefits(ref Player.Player player) {
+        player.CombatInfo.Reflex += 2;
     }
 }

@@ -1,6 +1,9 @@
-﻿namespace CGPFE.Domain.Characters.Feats.Feats.General;
+﻿using Domain.Characters.Feat;
+using Domain.Characters.Feat.Prerequisites;
 
-public class SpellMastery : Characters.Feats.Feat
+namespace CGPFE.Domain.Characters.Feats.Feats.General;
+
+public class SpellMastery : Feat
 {
     public SpellMastery() : base("Spell Mastery") {
         Prerequisites = [
@@ -9,11 +12,11 @@ public class SpellMastery : Characters.Feats.Feat
         ];
     }
 
-    public override bool CanAcquire() {
-        return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
+    public override bool CanAcquire(Player.Player player) {
+        return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits() {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

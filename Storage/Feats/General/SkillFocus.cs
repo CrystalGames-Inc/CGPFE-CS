@@ -1,6 +1,8 @@
-﻿namespace CGPFE.Domain.Characters.Feats.Feats.General;
+﻿using Domain.Characters.Feat;
 
-public class SkillFocus : Characters.Feats.Feat
+namespace CGPFE.Domain.Characters.Feats.Feats.General;
+
+public class SkillFocus : Feat
 {
 
     private string SkillName { get; }
@@ -12,14 +14,14 @@ public class SkillFocus : Characters.Feats.Feat
         SkillName = skillName;
     }
 
-    public override bool CanAcquire() {
+    public override bool CanAcquire(Player.Player player) {
         return true;
     }
 
-    public override void ApplyBenefits() {
-        if (PlayerDataManager.Instance.Player.GetMatchingSkill(SkillName).Bonus.Ranks >= 10)
-            PlayerDataManager.Instance.Player.GetMatchingSkill(SkillName).Bonus.MiscMod += 6;
+    public override void ApplyBenefits(ref Player.Player player) {
+        if (player.GetMatchingSkill(SkillName).Bonus.Ranks >= 10)
+            player.GetMatchingSkill(SkillName).Bonus.MiscMod += 6;
         else
-            PlayerDataManager.Instance.Player.GetMatchingSkill(SkillName).Bonus.MiscMod += 3;
+            player.GetMatchingSkill(SkillName).Bonus.MiscMod += 3;
     }
 }

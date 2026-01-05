@@ -1,12 +1,14 @@
-﻿namespace CGPFE.Domain.Characters.Feats.Feats.General;
+﻿using Domain.Characters.Feat;
 
-public class IronWill() : Characters.Feats.Feat("Iron Will")
+namespace CGPFE.Domain.Characters.Feats.Feats.General;
+
+public class IronWill() : Feat("Iron Will")
 {
-    public override bool CanAcquire() {
+    public override bool CanAcquire(Player.Player player) {
         return true;
     }
 
-    public override void ApplyBenefits() {
-        PlayerDataManager.Instance.Player.CombatInfo.Will += 2;
+    public override void ApplyBenefits(ref Player.Player player) {
+        player.CombatInfo.Will += 2;
     }
 }

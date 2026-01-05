@@ -1,6 +1,8 @@
-﻿namespace CGPFE.Domain.Characters.Feats.Feats.General;
+﻿using Domain.Characters.Feat;
 
-public class ImprovedChannel : Characters.Feats.Feat
+namespace CGPFE.Domain.Characters.Feats.Feats.General;
+
+public class ImprovedChannel : Feat
 {
     public ImprovedChannel() : base("Improved Channel") {
         Prerequisites = [
@@ -8,11 +10,11 @@ public class ImprovedChannel : Characters.Feats.Feat
         ];
     }
 
-    public override bool CanAcquire() {
-        return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
+    public override bool CanAcquire(Player.Player player) {
+        return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits() {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

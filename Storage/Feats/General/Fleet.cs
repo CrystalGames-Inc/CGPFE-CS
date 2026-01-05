@@ -1,12 +1,14 @@
-﻿namespace CGPFE.Domain.Characters.Feats.Feats.General;
+﻿using Domain.Characters.Feat;
 
-public class Fleet() : Characters.Feats.Feat("Fleet")
+namespace CGPFE.Domain.Characters.Feats.Feats.General;
+
+public class Fleet() : Feat("Fleet")
 {
-    public override bool CanAcquire() {
+    public override bool CanAcquire(Player.Player player) {
         return true;
     }
 
-    public override void ApplyBenefits() {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }
