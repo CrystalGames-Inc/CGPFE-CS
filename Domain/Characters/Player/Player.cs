@@ -24,22 +24,14 @@ public class Player : Entity
 
     #region Getters
 
-    public int GetValueForKey(string key)
-    {
+    public int GetValueForKey(string key) {
         return key.ToUpper() switch
         {
-            "STR" => Attributes.Strength.value,
-            "DEX" => Attributes.Dexterity.value,
-            "CON" => Attributes.Constitution.value,
-            "INT" => Attributes.Intelligence.value,
-            "WIS" => Attributes.Wisdom.value,
-            "CHA" => Attributes.Charisma.value,
-            "BAB" => CombatInfo.BaseAttackBonus,
             "LVL" => PlayerInfo.Level,
             "CLS" => (int)PlayerInfo.Class,
             "RCE" => (int)PlayerInfo.Race,
             "SZE" => (int)PlayerInfo.Size,
-            _ => throw new InvalidOperationException($"Unsupported key: {key}"),
+            _ => base.GetValueForKey(key)
         };
     }
 
@@ -91,7 +83,7 @@ public class Player : Entity
 
     public bool HasFeat(string featName)
     {
-        return Feats.Any(playerFeat => playerFeat.ToUpper().Equals(featName.ToUpper()));
+        return Feats.Any(playerFeat => playerFeat.ToUpper().Equals(featName, StringComparison.OrdinalIgnoreCase));
     }
 
     #region Displays
