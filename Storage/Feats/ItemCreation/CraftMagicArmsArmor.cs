@@ -1,8 +1,10 @@
 ﻿using CGPFE.Core.Enums;
+using Domain.Characters.Feat;
+using Domain.Characters.Feat.Prerequisites;
 
 namespace CGPFE.Domain.Characters.Feats.Feats.ItemCreation;
 
-public class CraftMagicArmsArmor : Characters.Feats.Feat
+public class CraftMagicArmsArmor : Feat
 {
     public CraftMagicArmsArmor() : base("Craft Magic Arms and Armor", FeatType.ItemCreation) {
         Prerequisites = [
@@ -10,11 +12,11 @@ public class CraftMagicArmsArmor : Characters.Feats.Feat
         ];
     }
 
-    public override bool CanAcquire() {
-        return Prerequisites.All(p => p.IsSatisfiedBy(PlayerDataManager.Instance.Player));
+    public override bool CanAcquire(Player.Player player) {
+        return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits() {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }
