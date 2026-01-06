@@ -1,14 +1,14 @@
-﻿using CGPFE.Domain.Characters.Feats.Feats.Combat;
-using CGPFE.Domain.Characters.Feats.Feats.Critical;
-using CGPFE.Domain.Characters.Feats.Feats.General;
-using CGPFE.Domain.Characters.Feats.Feats.ItemCreation;
-using CGPFE.Domain.Characters.Feats.Feats.Metamagic;
+﻿using CGPFE.Domain.Characters.Feat;
+using CGPFE.Storage.Feats.Combat;
+using CGPFE.Storage.Feats.Critical;
+using CGPFE.Storage.Feats.General;
+using CGPFE.Storage.Feats.ItemCreation;
+using CGPFE.Storage.Feats.Metamagic;
 
-namespace CGPFE.Domain.Characters.Feats.Feats;
+namespace CGPFE.Storage.Feats;
 
-public abstract class Feats
-{
-    public static List<Characters.Feats.Feat> feats = [
+public static class Feats {
+    public static List<Feat> feats = [
         new Acrobatic(),
         new AcrobaticSteps(),
         new AgileManeuvers(),
@@ -184,5 +184,18 @@ public abstract class Feats
         new WhirlwindAttack(),
         new WidenSpell(),
         new WindStance()
+    ];
+
+    public static List<Feat> BarbarianFeats { get; } = [
+       new SimpleWeaponProficiency(),
+       new MartialWeaponProficiency(),
+       new ArmorProficiencyLight(),
+       new ArmorProficiencyMedium(),
+       new ShieldProficiency(),
+    ];
+
+    private static List<Feat> BardFeats { get; } = [
+        new SimpleWeaponProficiency(),
+        
     ];
 }

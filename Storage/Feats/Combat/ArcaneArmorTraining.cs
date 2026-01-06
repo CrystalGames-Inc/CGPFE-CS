@@ -1,11 +1,11 @@
 ﻿using CGPFE.Core.Enums;
-using Domain.Characters.Feat;
+using CGPFE.Domain.Characters.Feat;
+using CGPFE.Domain.Characters.Player;
 using Domain.Characters.Feat.Prerequisites;
 
-namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
+namespace CGPFE.Storage.Feats.Combat;
 
-public class ArcaneArmorTraining : Feat
-{
+public class ArcaneArmorTraining : Feat {
 
     public ArcaneArmorTraining() : base("Arcane Armor Training", FeatType.Combat) {
         Prerequisites = [
@@ -13,12 +13,12 @@ public class ArcaneArmorTraining : Feat
             new ValuePrerequisite("Lvl", 3)
         ];
     }
-
-    public override bool CanAcquire(Player.Player player) {
+    
+    public override bool CanAcquire(Player player) {
         return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits(ref Player.Player player) {
+    public override void ApplyBenefits(ref Player player) {
         throw new NotImplementedException();
     }
 }

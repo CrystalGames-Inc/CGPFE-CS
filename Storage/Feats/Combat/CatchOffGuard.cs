@@ -1,15 +1,16 @@
 ﻿using CGPFE.Core.Enums;
-using Domain.Characters.Feat;
+using CGPFE.Domain.Characters.Feat;
+using CGPFE.Domain.Characters.Player;
 
-namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
+namespace CGPFE.Storage.Feats.Combat;
 
 public class CatchOffGuard() : Feat("Catch Off-Guard", FeatType.Combat)
 {
-    public override bool CanAcquire(Player.Player player) {
+    public override bool CanAcquire(Player player) {
         return true;
     }
 
-    public override void ApplyBenefits(ref Player.Player player) {
+    public override void ApplyBenefits(ref Player player) {
         throw new NotImplementedException();
     }
 }

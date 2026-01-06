@@ -1,8 +1,10 @@
 ﻿using CGPFE.Core.Enums;
+using CGPFE.Domain.Characters.Feat;
+using CGPFE.Domain.Characters.Player;
 using Domain.Characters.Feat;
 using Domain.Characters.Feat.Prerequisites;
 
-namespace CGPFE.Domain.Characters.Feats.Feats.Combat;
+namespace CGPFE.Storage.Feats.Combat;
 
 public class TwoWeaponFighting : Feat
 {
@@ -12,11 +14,11 @@ public class TwoWeaponFighting : Feat
         ];
     }
 
-    public override bool CanAcquire(Player.Player player) {
+    public override bool CanAcquire(Player player) {
         return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits(ref Player.Player player) {
+    public override void ApplyBenefits(ref Player player) {
         throw new NotImplementedException();
     }
 }

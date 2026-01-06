@@ -5,11 +5,11 @@ namespace CGPFE.Domain.Characters.Feats.Feats.Metamagic;
 
 public class WidenSpell() : Feat("Widen", FeatType.Metamagic)
 {
-    public override bool CanAcquire() {
+    public override bool CanAcquire(Player.Player player) {
         return true;
     }
 
-    public override void ApplyBenefits() {
+    public override void ApplyBenefits(ref Player.Player player) {
         throw new NotImplementedException();
     }
 }

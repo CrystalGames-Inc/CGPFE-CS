@@ -5,7 +5,6 @@ using CGPFE.Domain.Items.Equipment.Defense;
 using CGPFE.Domain.Items.Equipment.Offense;
 using CGPFE.Domain.World.Geography;
 using CGPFE.Domain.World.Settlements;
-using Domain.Characters.Feat;
 using Domain.Characters.Skill;
 using Attribute = CGPFE.Core.Enums.Attribute;
 
@@ -49,7 +48,7 @@ public class Player : Entity
         };
     }
 
-    public Feat? GetMatchingFeat(string featName, List<Feat> availableFeats)
+    public Feat.Feat? GetMatchingFeat(string featName, List<Feat.Feat> availableFeats)
     {
         if (string.IsNullOrEmpty(featName)) return null;
         return availableFeats.FirstOrDefault(feat => feat.Name.ToUpper().Equals(featName.ToUpper()));
