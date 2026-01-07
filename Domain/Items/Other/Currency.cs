@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Domain.Items.Other;
+﻿namespace Domain.Items.Other;
 
 public class Currency(string name, double copperValue, double silverValue, double goldValue, double platinumValue)
 {

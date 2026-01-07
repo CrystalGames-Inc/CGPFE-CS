@@ -1,7 +1,8 @@
 ﻿using Domain.Characters.Feat;
 using Domain.Characters.Feat.Prerequisites;
+using Domain.Characters.Player;
 
-namespace CGPFE.Domain.Characters.Feats.Feats.General;
+namespace Storage.Feats.General;
 
 public class MasterCraftsman : Feat
 {
@@ -12,11 +13,11 @@ public class MasterCraftsman : Feat
         ];
     }
 
-    public override bool CanAcquire(Player.Player player) {
+    public override bool CanAcquire(Player player) {
         return Prerequisites.Any(prereq => prereq.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits(ref Player.Player player) {
+    public override void ApplyBenefits(ref Player player) {
         throw new NotImplementedException();
     }
 }

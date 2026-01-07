@@ -1,10 +1,10 @@
-﻿using CGPFE.Core.Enums;
-using CGPFE.Core.Utilities;
-using CGPFE.Domain.Characters.Common;
-using CGPFE.Domain.Characters.NPC;
-using Attribute = CGPFE.Core.Enums.Attribute;
+﻿using Domain.Characters.Common;
+using Core.Enums;
+using Core.Utilities;
+using Domain.Characters.NPC;
+using Attribute = Core.Enums.Attribute;
 
-namespace CGPFE.Management;
+namespace Management;
 
 public class NpcDataManager
 {

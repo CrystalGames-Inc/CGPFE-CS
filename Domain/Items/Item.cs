@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Domain.Items;
+﻿namespace Domain.Items;
 
 public class Item
 {
@@ -6,8 +6,7 @@ public class Item
     public int Id;
     public double? Cost; //Price is in gp
 
-    protected Item(string name, int id, double cost)
-    {
+    protected Item(string name, int id, double cost) {
         Name = name;
         Id = id;
         Cost = cost;

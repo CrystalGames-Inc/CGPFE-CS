@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Domain.Items.Equipment.Offense.Properties;
+﻿namespace Domain.Items.Equipment.Offense.Properties;
 
 public enum Special
 {

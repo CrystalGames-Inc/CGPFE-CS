@@ -1,6 +1,6 @@
-﻿using CGPFE.Domain.Items.Equipment.Defense;
+﻿using Domain.Items.Equipment.Defense;
 
-namespace CGPFE.Storage.Items.Equipment.Defense;
+namespace Storage.Items.Equipment.Defense;
 
 public class ArmorExtras
 {

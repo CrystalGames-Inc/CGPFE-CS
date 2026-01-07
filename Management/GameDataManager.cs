@@ -1,8 +1,8 @@
-﻿using CGPFE.Core.Enums;
-using CGPFE.Core.Utilities;
-using CGPFE.Domain.Game;
+﻿using Core.Enums;
+using Core.Utilities;
+using Domain.Game;
 
-namespace CGPFE.Management;
+namespace Management;
 
 public class GameDataManager
 {

@@ -1,7 +1,7 @@
-﻿using CGPFE.Domain.Items.Equipment.Offense.Properties;
-using Type = CGPFE.Domain.Items.Equipment.Offense.Properties.Type;
+﻿using Domain.Items.Equipment.Offense.Properties;
+using Type = Domain.Items.Equipment.Offense.Properties.Type;
 
-namespace CGPFE.Domain.Items.Equipment.Offense;
+namespace Domain.Items.Equipment.Offense;
 
 public class Weapon(string name, int id, int maxCapacity, double? cost, Damage? damageS, Damage? damageM, Critical? critical, int? range, double? weight, Type[]? type, Special[]? special)
     : Item(name, id, (double)cost!)

@@ -1,6 +1,6 @@
-﻿using CGPFE.Core.Enums;
+﻿using Core.Enums;
 using Newtonsoft.Json;
-namespace CGPFE.Domain.Game;
+namespace Domain.Game;
 
 public class GameData(
     string campaignName,
@@ -21,8 +21,7 @@ public class GameData(
 
     public string GetJson() => JsonConvert.SerializeObject(this);
 
-    public void DisplayGameData()
-    {
+    public void DisplayGameData() {
         Console.WriteLine($"Data for Campaign {CampaignName}:");
         Console.WriteLine($"  Game Fantasty: {GameFantasty}");
         Console.WriteLine($"  Game Speed: {GameSpeed}");

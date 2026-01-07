@@ -1,11 +1,11 @@
-﻿using CGPFE.Domain.Characters.Feat;
-using CGPFE.Storage.Feats.Combat;
-using CGPFE.Storage.Feats.Critical;
-using CGPFE.Storage.Feats.General;
-using CGPFE.Storage.Feats.ItemCreation;
-using CGPFE.Storage.Feats.Metamagic;
+﻿using Storage.Feats.Combat;
+using Storage.Feats.Critical;
+using Storage.Feats.General;
+using Storage.Feats.ItemCreation;
+using Storage.Feats.Metamagic;
+using Domain.Characters.Feat;
 
-namespace CGPFE.Storage.Feats;
+namespace Storage.Feats;
 
 public static class Feats {
     public static List<Feat> feats = [

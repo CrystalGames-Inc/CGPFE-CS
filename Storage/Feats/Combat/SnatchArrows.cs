@@ -1,10 +1,9 @@
-﻿using CGPFE.Core.Enums;
-using CGPFE.Domain.Characters.Feat;
-using CGPFE.Domain.Characters.Player;
+﻿using Core.Enums;
 using Domain.Characters.Feat;
 using Domain.Characters.Feat.Prerequisites;
+using Domain.Characters.Player;
 
-namespace CGPFE.Storage.Feats.Combat;
+namespace Storage.Feats.Combat;
 
 public class SnatchArrows : Feat
 {

@@ -1,9 +1,9 @@
-﻿using CGPFE.Core.Enums;
-using CGPFE.Core.Utilities;
-using CGPFE.Domain.World;
-using CGPFE.Domain.World.Geography;
+﻿using Domain.World.Geography;
+using Core.Enums;
+using Core.Utilities;
+using Domain.World;
 
-namespace CGPFE.Management;
+namespace Management;
 
 public class WorldManager
 {

@@ -1,8 +1,8 @@
-﻿using CGPFE.Domain.Items.Equipment.Offense;
-using CGPFE.Domain.Items.Equipment.Offense.Properties;
-using Type = CGPFE.Domain.Items.Equipment.Offense.Properties.Type;
+﻿using Domain.Items.Equipment.Offense;
+using Domain.Items.Equipment.Offense.Properties;
+using Type = Domain.Items.Equipment.Offense.Properties.Type;
 
-namespace CGPFE.Storage.Items.Equipment.Offense;
+namespace Storage.Items.Equipment.Offense;
 
 public abstract class Weapons
 {

@@ -1,34 +1,28 @@
-﻿using CGPFE.Core.CLI;
+﻿namespace CLI;
 
-namespace CGPFE.CLI
+internal class Program
 {
-    internal class Program
-    {
-        public static void Main(string[] args)
-        {
-            // If you want to support "CGPFE new campaign" from the OS command line:
-            if (args.Length > 0)
-            {
-                RunSingleCommand(args);
-                return;
-            }
-
-            // Otherwise start the interactive shell:
-            var shell = new CGPFEShell();
-            shell.Start();
+    public static void Main(string[] args) {
+        // If you want to support "CGPFE new campaign" from the OS command line:
+        if (args.Length > 0) {
+            RunSingleCommand(args);
+            return;
         }
 
-        private static void RunSingleCommand(string[] args)
-        {
-            var shell = new CGPFEShell();
+        // Otherwise start the interactive shell:
+        var shell = new CGPFEShell();
+        shell.Start();
+    }
 
-            // Combine args into a normal CLI input string
-            string command = string.Join(" ", args);
+    private static void RunSingleCommand(string[] args) {
+        var shell = new CGPFEShell();
 
-            Console.WriteLine($"Running: {command}");
-            shell.GetType()
-                .GetMethod("HandleInput", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-                ?.Invoke(shell, [command]);
-        }
+        // Combine args into a normal CLI input string
+        string command = string.Join(" ", args);
+
+        Console.WriteLine($"Running: {command}");
+        shell.GetType()
+            .GetMethod("HandleInput", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            ?.Invoke(shell, [command]);
     }
 }

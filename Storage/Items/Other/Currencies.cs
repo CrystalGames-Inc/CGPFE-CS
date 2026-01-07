@@ -1,6 +1,6 @@
-﻿using CGPFE.Domain.Items.Other;
+﻿using Domain.Items.Other;
 
-namespace CGPFE.Storage.Items.Other;
+namespace Storage.Items.Other;
 
 public class Currencies
 {

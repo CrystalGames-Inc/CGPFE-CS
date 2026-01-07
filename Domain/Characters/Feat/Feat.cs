@@ -1,7 +1,6 @@
-﻿using CGPFE.Core.Enums;
-using Domain.Characters.Feats;
+﻿using Core.Enums;
 
-namespace CGPFE.Domain.Characters.Feat;
+namespace Domain.Characters.Feat;
 
 public abstract class Feat
 {
@@ -9,8 +8,7 @@ public abstract class Feat
     public FeatType Type { get; }
     public List<IPrerequisite> Prerequisites { get; set; } = new();
 
-    protected Feat(string name, FeatType type = FeatType.General)
-    {
+    protected Feat(string name, FeatType type = FeatType.General) {
         Name = name;
         Type = type;
     }

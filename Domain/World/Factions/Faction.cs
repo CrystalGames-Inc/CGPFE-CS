@@ -1,7 +1,7 @@
-﻿using CGPFE.Core.Enums;
-using CGPFE.Domain.World.Geography;
+﻿using Core.Enums;
+using Domain.World.Geography;
 
-namespace CGPFE.Domain.World.Factions;
+namespace Domain.World.Factions;
 
 public class Faction(string name, FactionType type, Location operationBase)
 {
@@ -14,19 +14,16 @@ public class Faction(string name, FactionType type, Location operationBase)
 
     #region Outposts
 
-    public void AddOutpost(FactionOutpost location)
-    {
+    public void AddOutpost(FactionOutpost location) {
         Outposts ??= [];
         Outposts.Add(location);
     }
 
-    public void RemoveOutpost(FactionOutpost location)
-    {
+    public void RemoveOutpost(FactionOutpost location) {
         Outposts?.Remove(location);
     }
 
-    public Location? GetOutpost(FactionOutpost location)
-    {
+    public Location? GetOutpost(FactionOutpost location) {
         if (Outposts != null && Outposts.Contains(location))
             return location;
         Console.WriteLine("Bureau does not exist for the faction");
@@ -37,27 +34,23 @@ public class Faction(string name, FactionType type, Location operationBase)
 
     #region Members
 
-    public void AddMember(FactionMember member)
-    {
+    public void AddMember(FactionMember member) {
         Members ??= [];
         Members.Add(member);
     }
 
-    public void RemoveMember(FactionMember member)
-    {
+    public void RemoveMember(FactionMember member) {
         Members?.Remove(member);
     }
 
-    public FactionMember? GetMember(FactionMember member)
-    {
+    public FactionMember? GetMember(FactionMember member) {
         if (Members != null && Members.Contains(member))
             return Members[Members.IndexOf(member)];
         Console.WriteLine("Member does not exist in the faction");
         return null;
     }
 
-    public void ChangeMemberRank(FactionMember member, Rank rank)
-    {
+    public void ChangeMemberRank(FactionMember member, Rank rank) {
         if (Members != null && Members.Contains(member))
             Members[Members.IndexOf(member)].FactionRank = rank;
         else

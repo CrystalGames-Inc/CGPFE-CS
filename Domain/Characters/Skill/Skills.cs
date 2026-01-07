@@ -1,4 +1,4 @@
-﻿using Attribute = CGPFE.Core.Enums.Attribute;
+﻿using Attribute = Core.Enums.Attribute;
 
 namespace Domain.Characters.Skill;
 

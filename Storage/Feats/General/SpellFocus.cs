@@ -1,6 +1,7 @@
 ﻿using Domain.Characters.Feat;
+using Domain.Characters.Player;
 
-namespace CGPFE.Domain.Characters.Feats.Feats.General;
+namespace Storage.Feats.General;
 
 public class SpellFocus : Feat
 {
@@ -15,11 +16,11 @@ public class SpellFocus : Feat
         SpellName = spellName;
     }
 
-    public override bool CanAcquire(Player.Player player) {
+    public override bool CanAcquire(Player player) {
         return true;
     }
 
-    public override void ApplyBenefits(ref Player.Player player) {
+    public override void ApplyBenefits(ref Player player) {
         throw new NotImplementedException();
     }
 }

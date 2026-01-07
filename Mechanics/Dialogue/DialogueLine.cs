@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Mechanics.Dialogue;
+﻿namespace Mechanics.Dialogue;
 
 public class DialogueLine(string? speakerName, string line)
 {

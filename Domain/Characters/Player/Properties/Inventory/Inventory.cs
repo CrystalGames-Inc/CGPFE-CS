@@ -1,5 +1,4 @@
-﻿
-namespace CGPFE.Domain.Characters.Player.Properties.Inventory;
+﻿namespace Domain.Characters.Player.Properties.Inventory;
 
 public class Inventory
 {
@@ -8,8 +7,7 @@ public class Inventory
     public List<InventoryItem>? Armors { get; set; }
     public List<InventoryItem>? Shields { get; set; }
 
-    public Inventory()
-    {
+    public Inventory() {
         Items = [];
         Weapons = [];
         Armors = [];

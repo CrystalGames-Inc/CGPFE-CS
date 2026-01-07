@@ -1,8 +1,7 @@
-﻿namespace CGPFE.Domain.Items.GoodsServices;
+﻿namespace Domain.Items.GoodsServices;
 
-public class Service : Domain.Items.Item
+public class Service : Item
 {
-    protected Service(string name, int id, double cost) : base(name, id, cost)
-    {
+    protected Service(string name, int id, double cost) : base(name, id, cost) {
     }
 }

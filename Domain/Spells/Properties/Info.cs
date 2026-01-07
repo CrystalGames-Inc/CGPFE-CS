@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Domain.Spells.Properties;
+﻿namespace Domain.Spells.Properties;
 
 public abstract class Info(string name, string school, string description)
 {

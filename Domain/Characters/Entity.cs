@@ -1,16 +1,14 @@
-﻿using CGPFE.Domain.Characters.Common;
+﻿using Domain.Characters.Common;
 
-namespace CGPFE.Domain.Characters
+namespace Domain.Characters
 {
     public class Entity
     {
         public Attributes Attributes { get; set; }
         public CombatInfo? CombatInfo { get; set; }
 
-        public int GetValueForKey(string key)
-        {
-            return key.ToUpper() switch
-            {
+        public int GetValueForKey(string key) {
+            return key.ToUpper() switch {
                 "STR" => Attributes.Strength.value,
                 "DEX" => Attributes.Dexterity.value,
                 "CON" => Attributes.Constitution.value,

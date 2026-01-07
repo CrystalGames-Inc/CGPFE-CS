@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Domain.World.Settlements.Properties;
+﻿namespace Domain.World.Settlements.Properties;
 
 public class Modifiers(Quality[] qualities, Disadvantage[] disadvantages)
 {

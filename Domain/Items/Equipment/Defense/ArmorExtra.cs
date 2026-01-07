@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Domain.Items.Equipment.Defense;
+﻿namespace Domain.Items.Equipment.Defense;
 
 public class ArmorExtra(
     string name,
@@ -7,7 +7,7 @@ public class ArmorExtra(
     int? armorCheckPenalty,
     int? arcSpellFailChance,
     int weightMod)
-    : Domain.Items.Item(name, id, cost)
+    : Item(name, id, cost)
 {
 
     public int? ArmorCheckPenalty = armorCheckPenalty;

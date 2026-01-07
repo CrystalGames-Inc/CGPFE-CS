@@ -1,6 +1,6 @@
-﻿using CGPFE.Core.Enums;
+﻿using Core.Enums;
 
-namespace CGPFE.Domain.Characters.NPC.Properties;
+namespace Domain.Characters.NPC.Properties;
 
 public class Info
 {

@@ -1,6 +1,6 @@
-﻿using CGPFE.Core.Enums;
+﻿using Core.Enums;
 
-namespace CGPFE.Domain.World.Settlements.Properties;
+namespace Domain.World.Settlements.Properties;
 
 public class Info
 {
@@ -14,8 +14,7 @@ public class Info
     public readonly Government Government;
     public int Population;
 
-    public Info(string name, string nickname, Type type, Alignment alignment, Government government)
-    {
+    public Info(string name, string nickname, Type type, Alignment alignment, Government government) {
         Name = name;
         Nickname = nickname;
         Type = type;
@@ -24,8 +23,7 @@ public class Info
         CalculatePopulationByType();
     }
 
-    public Info(string name, string nickname, int population, Type type, Alignment alignment)
-    {
+    public Info(string name, string nickname, int population, Type type, Alignment alignment) {
         Name = name;
         Nickname = nickname;
         Population = population;
@@ -34,8 +32,7 @@ public class Info
         CalculateTypeByPopulation();
     }
 
-    public Info(string name, Type type, Alignment alignment, Government government)
-    {
+    public Info(string name, Type type, Alignment alignment, Government government) {
         Name = name;
         Type = type;
         Alignment = alignment;
@@ -43,8 +40,7 @@ public class Info
         CalculatePopulationByType();
     }
 
-    public Info(string name, int population, Type type, Alignment alignment)
-    {
+    public Info(string name, int population, Type type, Alignment alignment) {
         Name = name;
         Population = population;
         Type = type;
@@ -52,10 +48,8 @@ public class Info
         CalculateTypeByPopulation();
     }
 
-    private void CalculatePopulationByType()
-    {
-        switch (Type)
-        {
+    private void CalculatePopulationByType() {
+        switch (Type) {
             case Type.Thorpe:
                 Population = 15;
                 break;
@@ -83,8 +77,7 @@ public class Info
         }
     }
 
-    private void CalculateTypeByPopulation()
-    {
+    private void CalculateTypeByPopulation() {
         if (Population <= 20)
             Type = Type.Thorpe;
         else if (Population is > 20 and <= 60)

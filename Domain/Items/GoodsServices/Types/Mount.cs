@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Domain.Items.GoodsServices.Types;
+﻿namespace Domain.Items.GoodsServices.Types;
 
 public class Mount
 {

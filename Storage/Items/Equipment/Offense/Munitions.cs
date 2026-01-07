@@ -1,6 +1,6 @@
-﻿using CGPFE.Domain.Items.Equipment.Offense;
+﻿using Domain.Items.Equipment.Offense;
 
-namespace CGPFE.Storage.Items.Equipment.Offense;
+namespace Storage.Items.Equipment.Offense;
 
 public abstract class Munitions
 {

@@ -1,4 +1,4 @@
-﻿using CGPFE.Core.Enums;
+﻿using Core.Enums;
 
 namespace Domain.Combat.Action.Types;
 

@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Domain.Characters.Common;
+﻿namespace Domain.Characters.Common;
 
 public class Attributes
 {
@@ -10,8 +10,7 @@ public class Attributes
     public AbilityScore Charisma { get; set; }
     public AbilityScore MoveSpeed { get; set; }
 
-    public Attributes()
-    {
+    public Attributes() {
         Strength = new AbilityScore(0);
         Dexterity = new AbilityScore(0);
         Constitution = new AbilityScore(0);

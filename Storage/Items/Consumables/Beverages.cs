@@ -1,6 +1,6 @@
-﻿using CGPFE.Domain.Items.Consumables.Types;
+﻿using Domain.Items.Consumables.Types;
 
-namespace CGPFE.Storage.Items.Consumables;
+namespace Storage.Items.Consumables;
 
 public static class Beverages
 {

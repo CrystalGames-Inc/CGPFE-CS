@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Domain.Spells.Properties;
+﻿namespace Domain.Spells.Properties;
 
 public abstract class Levels(
     int alchemist,

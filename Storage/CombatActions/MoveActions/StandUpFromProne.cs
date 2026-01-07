@@ -1,6 +1,6 @@
 ﻿using Domain.Combat.Action.Types;
 
-namespace CGPFE.Storage.CombatActions.MoveActions;
+namespace Storage.CombatActions.MoveActions;
 
 public class StandUpFromProne() : MoveAction("Stand up from Prone", true)
 {

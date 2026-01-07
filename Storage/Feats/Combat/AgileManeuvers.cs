@@ -1,11 +1,12 @@
-﻿using CGPFE.Core.Enums;
-using CGPFE.Domain.Characters.Feat;
-using CGPFE.Domain.Characters.Player;
-using Attribute = CGPFE.Core.Enums.Attribute;
+﻿using Core.Enums;
+using Domain.Characters.Feat;
+using Domain.Characters.Player;
+using Attribute = Core.Enums.Attribute;
 
-namespace CGPFE.Storage.Feats.Combat;
+namespace Storage.Feats.Combat;
 
-public class AgileManeuvers() : Feat("Agile Maneuvers", FeatType.Combat) {
+public class AgileManeuvers() : Feat("Agile Maneuvers", FeatType.Combat)
+{
 
     public override bool CanAcquire(Player player) {
         return true;

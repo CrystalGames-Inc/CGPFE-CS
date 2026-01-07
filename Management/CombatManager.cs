@@ -1,7 +1,7 @@
-﻿using CGPFE.Core.Utilities;
-using CGPFE.Domain.Characters;
+﻿using Core.Utilities;
+using Domain.Characters;
 
-namespace CGPFE.Management
+namespace Management
 {
     public class CombatManager
     {

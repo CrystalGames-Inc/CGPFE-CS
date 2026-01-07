@@ -1,8 +1,9 @@
-﻿using CGPFE.Core.Enums;
+﻿using Core.Enums;
 using Domain.Characters.Feat;
 using Domain.Characters.Feat.Prerequisites;
+using Domain.Characters.Player;
 
-namespace CGPFE.Domain.Characters.Feats.Feats.ItemCreation;
+namespace Storage.Feats.ItemCreation;
 
 public class ScribeScroll : Feat
 {
@@ -12,11 +13,11 @@ public class ScribeScroll : Feat
         ];
     }
 
-    public override bool CanAcquire(Player.Player player) {
+    public override bool CanAcquire(Player player) {
         return Prerequisites.All(p => p.IsSatisfiedBy(player));
     }
 
-    public override void ApplyBenefits(ref Player.Player player) {
+    public override void ApplyBenefits(ref Player player) {
         throw new NotImplementedException();
     }
 }

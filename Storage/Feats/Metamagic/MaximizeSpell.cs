@@ -1,15 +1,16 @@
-﻿using CGPFE.Core.Enums;
+﻿using Core.Enums;
 using Domain.Characters.Feat;
+using Domain.Characters.Player;
 
-namespace CGPFE.Domain.Characters.Feats.Feats.Metamagic;
+namespace Storage.Feats.Metamagic;
 
 public class MaximizeSpell() : Feat("Maximize Spell", FeatType.Metamagic)
 {
-    public override bool CanAcquire(Player.Player player) {
+    public override bool CanAcquire(Player player) {
         return true;
     }
 
-    public override void ApplyBenefits(ref Player.Player player) {
+    public override void ApplyBenefits(ref Player player) {
         throw new NotImplementedException();
     }
 }

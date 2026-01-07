@@ -1,6 +1,6 @@
-﻿using Attribute = CGPFE.Core.Enums.Attribute;
+﻿using Attribute = Core.Enums.Attribute;
 
-namespace CGPFE.Domain.Characters.Common;
+namespace Domain.Characters.Common;
 
 public class CombatInfo
 {
@@ -14,8 +14,7 @@ public class CombatInfo
     public int CombatManeuverBonus { get; set; }
     public int CombatManeuverDefense { get; set; }
 
-    public CombatInfo()
-    {
+    public CombatInfo() {
         InitMod = 0;
         ArmorClass = 0;
         Fortitude = 0;
@@ -27,10 +26,8 @@ public class CombatInfo
         CombatManeuverDefense = 0;
     }
 
-    public int GetValueForKey(string key)
-    {
-        return key.ToUpper() switch
-        {
+    public int GetValueForKey(string key) {
+        return key.ToUpper() switch {
             "INI" => InitMod,
             "ACL" => ArmorClass,
             "FOR" => Fortitude,

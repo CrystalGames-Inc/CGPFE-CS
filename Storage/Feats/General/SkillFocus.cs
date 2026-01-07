@@ -1,6 +1,7 @@
 ﻿using Domain.Characters.Feat;
+using Domain.Characters.Player;
 
-namespace CGPFE.Domain.Characters.Feats.Feats.General;
+namespace Storage.Feats.General;
 
 public class SkillFocus : Feat
 {
@@ -14,11 +15,11 @@ public class SkillFocus : Feat
         SkillName = skillName;
     }
 
-    public override bool CanAcquire(Player.Player player) {
+    public override bool CanAcquire(Player player) {
         return true;
     }
 
-    public override void ApplyBenefits(ref Player.Player player) {
+    public override void ApplyBenefits(ref Player player) {
         if (player.GetMatchingSkill(SkillName).Bonus.Ranks >= 10)
             player.GetMatchingSkill(SkillName).Bonus.MiscMod += 6;
         else

@@ -1,6 +1,6 @@
-﻿using CGPFE.Core.Enums;
+﻿using Core.Enums;
 
-namespace CGPFE.Domain.World.Geography;
+namespace Domain.World.Geography;
 
 public class Location(string name, Terrain? terrainType, Climate? climateType)
 {
@@ -9,8 +9,7 @@ public class Location(string name, Terrain? terrainType, Climate? climateType)
     public Terrain? TerrainType = terrainType;
     public Climate? ClimateType = climateType;
 
-    public void Discover()
-    {
+    public void Discover() {
         Discovered = true;
     }
 }

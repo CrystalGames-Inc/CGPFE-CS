@@ -1,13 +1,13 @@
-﻿using CGPFE.Storage.CombatActions.FreeActions;
-using CGPFE.Storage.CombatActions.FullRoundActions;
-using CGPFE.Storage.CombatActions.ImmediateActions;
-using CGPFE.Storage.CombatActions.MoveActions;
-using CGPFE.Storage.CombatActions.NoActions;
-using CGPFE.Storage.CombatActions.StandardActions;
-using CGPFE.Storage.CombatActions.SwiftActions;
+﻿using Storage.CombatActions.FreeActions;
+using Storage.CombatActions.FullRoundActions;
+using Storage.CombatActions.ImmediateActions;
+using Storage.CombatActions.MoveActions;
+using Storage.CombatActions.NoActions;
+using Storage.CombatActions.StandardActions;
+using Storage.CombatActions.SwiftActions;
 using Domain.Combat.Action;
 
-namespace CGPFE.Storage.CombatActions.Actions;
+namespace Storage.CombatActions;
 
 public static class GameActions
 {

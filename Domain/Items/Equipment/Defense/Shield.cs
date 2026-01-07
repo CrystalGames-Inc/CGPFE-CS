@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Domain.Items.Equipment.Defense;
+﻿namespace Domain.Items.Equipment.Defense;
 
 public class Shield(
     string name,

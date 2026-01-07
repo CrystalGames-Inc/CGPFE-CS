@@ -1,4 +1,4 @@
-﻿namespace CGPFE.CLI
+﻿namespace CLI
 {
     public class CommandNode : ICommandNode
     {

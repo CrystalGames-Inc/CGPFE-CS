@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Core.Utilities;
+﻿namespace Core.Utilities;
 
 public static class Dice
 {

@@ -1,14 +1,18 @@
-﻿using CGPFE.Core.Enums;
-using CGPFE.Domain.Characters.Feat;
-using CGPFE.Domain.Characters.Player;
-using CGPFE.Domain.Items.Equipment.Offense;
+﻿using Core.Enums;
+using Domain.Characters.Feat;
+using Domain.Characters.Player;
 
-namespace CGPFE.Storage.Feats.Combat;
+namespace Storage.Feats.Combat;
 
 public class WeaponProficiency : Feat
 {
+    private string WeaponName { get; }
+
+    public WeaponProficiency() : base("Weapon Proficiency", FeatType.Combat) {
+    }
+
     public WeaponProficiency(string weaponName) : base("Weapon Proficiency", FeatType.Combat) {
-        
+        WeaponName = weaponName;
     }
     public override bool CanAcquire(Player player) {
         return true;

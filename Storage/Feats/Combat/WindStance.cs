@@ -1,9 +1,8 @@
-﻿using CGPFE.Domain.Characters.Feat;
-using CGPFE.Domain.Characters.Player;
-using Domain.Characters.Feat;
+﻿using Domain.Characters.Feat;
 using Domain.Characters.Feat.Prerequisites;
+using Domain.Characters.Player;
 
-namespace CGPFE.Storage.Feats.Combat;
+namespace Storage.Feats.Combat;
 
 public class WindStance : Feat
 {

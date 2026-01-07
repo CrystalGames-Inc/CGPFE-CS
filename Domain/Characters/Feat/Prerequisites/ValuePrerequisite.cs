@@ -1,7 +1,4 @@
-﻿using CGPFE.Domain.Characters.Player;
-using Domain.Characters.Feats;
-
-namespace Domain.Characters.Feat.Prerequisites;
+﻿namespace Domain.Characters.Feat.Prerequisites;
 
 public class ValuePrerequisite : IPrerequisite
 {
@@ -10,25 +7,21 @@ public class ValuePrerequisite : IPrerequisite
 
     private string Operator { get; } = ">=";
 
-    public ValuePrerequisite(string key, int value)
-    {
+    public ValuePrerequisite(string key, int value) {
         Key = key;
         Value = value;
     }
 
-    public ValuePrerequisite(string key, int value, string @operator)
-    {
+    public ValuePrerequisite(string key, int value, string @operator) {
         Key = key;
         Value = value;
         Operator = @operator;
     }
 
-    public bool IsSatisfiedBy(Player player)
-    {
+    public bool IsSatisfiedBy(Player.Player player) {
         var pValue = player.GetValueForKey(Key);
 
-        return Operator switch
-        {
+        return Operator switch {
             "==" => pValue == Value,
             ">=" => pValue >= Value,
             "<=" => pValue <= Value,

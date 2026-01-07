@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Core.Enums;
+﻿namespace Core.Enums;
 
 public enum Size
 {

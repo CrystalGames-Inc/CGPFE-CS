@@ -1,9 +1,9 @@
-﻿using CGPFE.Core.Enums;
-using CGPFE.Core.Utilities;
-using CGPFE.Domain.World.Geography;
-using CGPFE.Domain.World.Settlements.Properties;
+﻿using Core.Enums;
+using Core.Utilities;
+using Domain.World.Geography;
+using Domain.World.Settlements.Properties;
 
-namespace CGPFE.Domain.World.Settlements;
+namespace Domain.World.Settlements;
 
 public class Settlement : Location
 {
@@ -18,8 +18,7 @@ public class Settlement : Location
 
     #endregion
 
-    public Settlement(Info info, Modifiers mods, Location[]? locations) : base(info.Name, null, null)
-    {
+    public Settlement(Info info, Modifiers mods, Location[]? locations) : base(info.Name, null, null) {
         Discovered = false;
         Info = info;
         Modifiers = mods;
@@ -30,20 +29,16 @@ public class Settlement : Location
 
     #region Checkers
 
-    public bool HasQuality(Quality quality)
-    {
-        foreach (Quality q in Modifiers.Qualities)
-        {
+    public bool HasQuality(Quality quality) {
+        foreach (Quality q in Modifiers.Qualities) {
             if (q == quality)
                 return true;
         }
         return false;
     }
 
-    public bool HasDisadvantage(Disadvantage disadvantage)
-    {
-        foreach (Disadvantage d in Modifiers.Disadvantages)
-        {
+    public bool HasDisadvantage(Disadvantage disadvantage) {
+        foreach (Disadvantage d in Modifiers.Disadvantages) {
             if (d == disadvantage)
                 return true;
         }
@@ -54,8 +49,7 @@ public class Settlement : Location
 
     #region Data Calculations
 
-    private void CalculateSettlementData()
-    {
+    private void CalculateSettlementData() {
         CalculateDanger();
         CalculateQualitySize();
         CalculateSettlementMarketplace();
@@ -63,10 +57,8 @@ public class Settlement : Location
     }
 
 
-    private void CalculateSettlementMarketplace()
-    {
-        switch (Info.Type)
-        {
+    private void CalculateSettlementMarketplace() {
+        switch (Info.Type) {
             case Type.Thorpe:
                 Marketplace.BaseValue = 50;
                 Marketplace.PurchaseLimit = 500;
@@ -128,10 +120,8 @@ public class Settlement : Location
         }
     }
 
-    private void CalculateDanger()
-    {
-        switch (Info.Type)
-        {
+    private void CalculateDanger() {
+        switch (Info.Type) {
             case Type.Thorpe:
                 Info.Danger = -4;
                 break;
@@ -159,10 +149,8 @@ public class Settlement : Location
         }
     }
 
-    private void CalculateQualitySize()
-    {
-        Modifiers.Qualities = Info.Type switch
-        {
+    private void CalculateQualitySize() {
+        Modifiers.Qualities = Info.Type switch {
             Type.Thorpe => new Quality[1],
             Type.Hamlet => new Quality[1],
             Type.Village => new Quality[2],
@@ -175,18 +163,15 @@ public class Settlement : Location
         };
     }
 
-    private void CalculateSettlementModifiers()
-    {
+    private void CalculateSettlementModifiers() {
         CalculateAlignmentModifiers();
         CalculateGovernmentModifiers();
         CalculateQualityModifiers();
         CalculateDisadvantageModifiers();
     }
 
-    private void CalculateGovernmentModifiers()
-    {
-        switch (Info.Government)
-        {
+    private void CalculateGovernmentModifiers() {
+        switch (Info.Government) {
             case Government.Colonial:
                 Modifiers.Corruption += 2;
                 Modifiers.Economy += 1;
@@ -240,12 +225,9 @@ public class Settlement : Location
         }
     }
 
-    private void CalculateQualityModifiers()
-    {
-        foreach (Quality q in Modifiers.Qualities)
-        {
-            switch (q)
-            {
+    private void CalculateQualityModifiers() {
+        foreach (Quality q in Modifiers.Qualities) {
+            switch (q) {
                 case Quality.Abundant:
                     Modifiers.Economy += 1;
                     break;
@@ -374,8 +356,7 @@ public class Settlement : Location
                     Modifiers.Crime -= 1;
                     break;
                 case Quality.Legendarymarketplace:
-                    if (Info.Type == Type.Metropolis)
-                    {
+                    if (Info.Type == Type.Metropolis) {
                         Marketplace.BaseValue *= 2;
                         Marketplace.PurchaseLimit *= 2;
                     }
@@ -585,12 +566,9 @@ public class Settlement : Location
         }
     }
 
-    private void CalculateDisadvantageModifiers()
-    {
-        foreach (Disadvantage d in Modifiers.Disadvantages)
-        {
-            switch (d)
-            {
+    private void CalculateDisadvantageModifiers() {
+        foreach (Disadvantage d in Modifiers.Disadvantages) {
+            switch (d) {
                 case Disadvantage.Anarchy:
                     Modifiers.Crime += 4;
                     Modifiers.Economy -= 4;
@@ -674,10 +652,8 @@ public class Settlement : Location
         }
     }
 
-    private void CalculateAlignmentModifiers()
-    {
-        switch (Info.Alignment)
-        {
+    private void CalculateAlignmentModifiers() {
+        switch (Info.Alignment) {
             case Alignment.LawfulGood:
                 Modifiers.Society += 1;
                 Modifiers.Law += 1;
@@ -718,8 +694,7 @@ public class Settlement : Location
 
     #region Data Displays
 
-    public void DisplaySettlementData()
-    {
+    public void DisplaySettlementData() {
         DisplaySettlementInfo();
         Console.WriteLine();
         DisplaySettlementMarketplace();
@@ -727,8 +702,7 @@ public class Settlement : Location
         DisplaySettlementModifiers();
     }
 
-    public void DisplaySettlementInfo()
-    {
+    public void DisplaySettlementInfo() {
         Console.WriteLine("Info: ");
         Console.WriteLine(" Name: " + Info.Name);
         if (Info.Nickname != null) Console.WriteLine(" Nickname: " + Info.Nickname);
@@ -739,8 +713,7 @@ public class Settlement : Location
         Console.WriteLine(" Population: " + Info.Population);
     }
 
-    public void DisplaySettlementMarketplace()
-    {
+    public void DisplaySettlementMarketplace() {
         Console.WriteLine("Marketplace: ");
         Console.WriteLine(" Base Value: " + Marketplace.BaseValue);
         Console.WriteLine(" Purchase Limit: " + Marketplace.PurchaseLimit);
@@ -751,8 +724,7 @@ public class Settlement : Location
         if (Marketplace.MajorMagicItems != null) Console.WriteLine(" Major Magic Items: " + Marketplace.MajorMagicItems);
     }
 
-    public void DisplaySettlementModifiers()
-    {
+    public void DisplaySettlementModifiers() {
         Console.WriteLine("Modifiers: ");
         Console.WriteLine(" Corruption: " + Modifiers.Corruption);
         Console.WriteLine(" Crime: " + Modifiers.Crime);
@@ -762,14 +734,12 @@ public class Settlement : Location
         Console.WriteLine(" Society: " + Modifiers.Society);
 
         Console.WriteLine("\n Qualities: ");
-        foreach (var q in Modifiers.Qualities)
-        {
+        foreach (var q in Modifiers.Qualities) {
             Console.WriteLine("  " + q);
         }
 
         Console.WriteLine("\n Disadvantages: ");
-        foreach (var d in Modifiers.Disadvantages)
-        {
+        foreach (var d in Modifiers.Disadvantages) {
             Console.WriteLine("  " + d);
         }
     }

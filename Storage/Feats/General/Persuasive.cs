@@ -1,14 +1,15 @@
 ﻿using Domain.Characters.Feat;
+using Domain.Characters.Player;
 
-namespace CGPFE.Domain.Characters.Feats.Feats.General;
+namespace Storage.Feats.General;
 
 public class Persuasive() : Feat("Persuasive")
 {
-    public override bool CanAcquire(Player.Player player) {
+    public override bool CanAcquire(Player player) {
         return true;
     }
 
-    public override void ApplyBenefits(ref Player.Player player) {
+    public override void ApplyBenefits(ref Player player) {
         player.GetMatchingSkill("Diplomacy").Bonus.SetMiscMod(
             player.GetMatchingSkill("Diplomacy").Bonus.Ranks >= 10 ? 4 : 2);
 

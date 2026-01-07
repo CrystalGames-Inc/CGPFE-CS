@@ -1,4 +1,4 @@
-﻿namespace CGPFE.Domain.Characters.Player.Properties.Inventory;
+﻿namespace Domain.Characters.Player.Properties.Inventory;
 
 public class InventoryItem(string name, int amount = 1)
 {

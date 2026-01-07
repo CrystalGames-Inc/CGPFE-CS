@@ -1,7 +1,7 @@
-﻿using CGPFE.Core.Enums;
-using CGPFE.Domain.World.Geography;
+﻿using Core.Enums;
+using Domain.World.Geography;
 
-namespace CGPFE.Domain.Characters.Player.Properties;
+namespace Domain.Characters.Player.Properties;
 
 public class PlayerInfo
 {
@@ -19,10 +19,8 @@ public class PlayerInfo
     public Region? CurrentRegion { get; set; }
     public Location? CurrentLocation { get; set; }
 
-    public int GetSizeMod()
-    {
-        return Size switch
-        {
+    public int GetSizeMod() {
+        return Size switch {
             Size.Fine => 8,
             Size.Diminutive => 6,
             Size.Tiny => 4,
