@@ -1,4 +1,6 @@
-﻿namespace Domain.World.Settlements.Properties;
+﻿using Domain.World.Settlements;
+
+namespace Domain.World.Settlements.Properties;
 
 public class Modifiers(Quality[] qualities, Disadvantage[] disadvantages)
 {

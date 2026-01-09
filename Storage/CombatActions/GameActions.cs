@@ -1,11 +1,11 @@
-﻿using Storage.CombatActions.FreeActions;
+﻿using Domain.Combat.Action;
+using Storage.CombatActions.FreeActions;
 using Storage.CombatActions.FullRoundActions;
 using Storage.CombatActions.ImmediateActions;
 using Storage.CombatActions.MoveActions;
 using Storage.CombatActions.NoActions;
 using Storage.CombatActions.StandardActions;
 using Storage.CombatActions.SwiftActions;
-using Domain.Combat.Action;
 
 namespace Storage.CombatActions;
 

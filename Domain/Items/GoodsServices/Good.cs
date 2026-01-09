@@ -1,4 +1,6 @@
-﻿namespace Domain.Items.GoodsServices;
+﻿using Domain.Items;
+
+namespace Domain.Items.GoodsServices;
 
 public class Good : Item
 {

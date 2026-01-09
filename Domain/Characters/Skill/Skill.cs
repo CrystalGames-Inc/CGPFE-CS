@@ -1,4 +1,6 @@
 ﻿using Attribute = Core.Enums.Attribute;
+using Domain.Characters.Skill;
+using Core.Enums;
 
 namespace Domain.Characters.Skill;
 

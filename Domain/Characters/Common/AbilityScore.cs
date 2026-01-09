@@ -1,4 +1,6 @@
-﻿namespace Domain.Characters.Common
+﻿using Domain.Characters.Common;
+
+namespace Domain.Characters.Common
 {
     public readonly record struct AbilityScore(int value, List<AbilityModifier>? AbilityModifier = null)
     {

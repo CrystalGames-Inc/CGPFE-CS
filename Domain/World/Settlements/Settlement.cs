@@ -1,7 +1,8 @@
-﻿using Core.Enums;
-using Core.Utilities;
-using Domain.World.Geography;
+﻿using Domain.World.Geography;
+using Domain.World.Settlements;
 using Domain.World.Settlements.Properties;
+using Core.Enums;
+using Core.Utilities;
 
 namespace Domain.World.Settlements;
 

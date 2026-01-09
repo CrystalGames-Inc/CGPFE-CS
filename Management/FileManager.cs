@@ -1,5 +1,4 @@
-﻿using Core.Enums;
-using Core.Utilities;
+﻿using Newtonsoft.Json;
 using Domain.Characters.Common;
 using Domain.Characters.Player;
 using Domain.Characters.Player.Properties;
@@ -7,7 +6,8 @@ using Domain.Characters.Player.Properties.Inventory;
 using Domain.Game;
 using Domain.World;
 using Domain.World.Geography;
-using Newtonsoft.Json;
+using Core.Enums;
+using Core.Utilities;
 
 namespace Management;
 

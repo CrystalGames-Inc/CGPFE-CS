@@ -1,4 +1,6 @@
-﻿namespace Domain.Items.Equipment.Defense;
+﻿using Domain.Items;
+
+namespace Domain.Items.Equipment.Defense;
 
 public class ArmorExtra(
     string name,

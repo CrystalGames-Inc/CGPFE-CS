@@ -1,6 +1,6 @@
-﻿using Core.Enums;
+﻿using Domain.Game;
+using Core.Enums;
 using Core.Utilities;
-using Domain.Game;
 
 namespace Management;
 

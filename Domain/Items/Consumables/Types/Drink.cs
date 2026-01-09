@@ -1,4 +1,6 @@
-﻿namespace Domain.Items.Consumables.Types;
+﻿using Domain.Items.Consumables;
+
+namespace Domain.Items.Consumables.Types;
 
 public class Drink : Consumable
 {

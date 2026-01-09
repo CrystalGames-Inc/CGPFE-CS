@@ -1,7 +1,7 @@
-﻿using Domain.World.Geography;
+﻿using Domain.World;
+using Domain.World.Geography;
 using Core.Enums;
 using Core.Utilities;
-using Domain.World;
 
 namespace Management;
 

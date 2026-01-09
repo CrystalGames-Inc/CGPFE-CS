@@ -1,4 +1,5 @@
-﻿using Core.Enums;
+﻿using Domain.Characters.Feat;
+using Core.Enums;
 
 namespace Domain.Characters.Feat;
 

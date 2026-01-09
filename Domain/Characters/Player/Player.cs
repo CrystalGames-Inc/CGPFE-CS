@@ -1,12 +1,13 @@
-﻿using Domain.Characters.Common;
+﻿using Attribute = Core.Enums.Attribute;
+using Domain.Characters.Common;
 using Domain.Characters.Player.Properties;
-using Domain.Characters.Player.Properties.Inventory;
 using Domain.Characters.Skill;
 using Domain.Items.Equipment.Defense;
 using Domain.Items.Equipment.Offense;
 using Domain.World.Geography;
 using Domain.World.Settlements;
-using Attribute = Core.Enums.Attribute;
+using Domain.Characters.Player.Properties.Inventory;
+using Core.Enums;
 
 namespace Domain.Characters.Player;
 
@@ -45,7 +46,7 @@ public class Player : Entity
         };
     }
 
-    public Feat.Feat? GetMatchingFeat(string featName, List<Feat.Feat> availableFeats) {
+    public Domain.Characters.Feat.Feat? GetMatchingFeat(string featName, List<Domain.Characters.Feat.Feat> availableFeats) {
         if (string.IsNullOrEmpty(featName)) return null;
         return availableFeats.FirstOrDefault(feat => feat.Name.ToUpper().Equals(featName.ToUpper()));
     }

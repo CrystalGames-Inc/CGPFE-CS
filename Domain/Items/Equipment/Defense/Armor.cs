@@ -1,4 +1,5 @@
-﻿using Core.Enums;
+﻿using Domain.Items;
+using Core.Enums;
 
 namespace Domain.Items.Equipment.Defense;
 

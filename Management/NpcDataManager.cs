@@ -1,8 +1,8 @@
-﻿using Domain.Characters.Common;
+﻿using Attribute = Core.Enums.Attribute;
+using Domain.Characters.Common;
+using Domain.Characters.NPC;
 using Core.Enums;
 using Core.Utilities;
-using Domain.Characters.NPC;
-using Attribute = Core.Enums.Attribute;
 
 namespace Management;
 

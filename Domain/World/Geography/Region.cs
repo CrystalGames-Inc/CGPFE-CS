@@ -1,6 +1,7 @@
-﻿using Core.Enums;
+﻿using Domain.World.Geography;
 using Domain.World.Settlements;
-using Mechanics;
+using Core.Enums;
+using CGPFE.Mechanics;
 
 namespace Domain.World.Geography;
 

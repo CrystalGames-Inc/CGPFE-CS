@@ -1,4 +1,6 @@
-﻿namespace Domain.Items.Equipment.Offense;
+﻿using Domain.Items;
+
+namespace Domain.Items.Equipment.Offense;
 
 public class Ammunition(string name, int id, double cost, int amount, int weight)
     : Item(name, id, cost)

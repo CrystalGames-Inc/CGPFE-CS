@@ -1,4 +1,5 @@
-﻿using Core.Enums;
+﻿using Domain.Items.GoodsServices;
+using Core.Enums;
 
 namespace Domain.Items.GoodsServices.Types;
 

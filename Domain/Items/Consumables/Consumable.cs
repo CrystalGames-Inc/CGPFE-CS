@@ -1,4 +1,6 @@
-﻿namespace Domain.Items.Consumables;
+﻿using Domain.Items;
+
+namespace Domain.Items.Consumables;
 
 public abstract class Consumable : Item
 {

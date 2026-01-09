@@ -1,7 +1,7 @@
-﻿using Core.Enums;
+﻿using Attribute = Core.Enums.Attribute;
 using Domain.Characters.Feat;
 using Domain.Characters.Player;
-using Attribute = Core.Enums.Attribute;
+using Core.Enums;
 
 namespace Storage.Feats.Combat;
 

@@ -1,5 +1,5 @@
-﻿using Core.Enums;
-using Domain.World.Geography;
+﻿using Domain.World.Geography;
+using Core.Enums;
 
 namespace Domain.Characters.Player.Properties;
 

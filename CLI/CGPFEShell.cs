@@ -1,5 +1,5 @@
-﻿using Core.Utilities;
-using Management;
+﻿using Management;
+using Core.Utilities;
 
 namespace CLI
 {

@@ -1,4 +1,6 @@
-﻿namespace Core.Enums;
+﻿using Core.Enums;
+
+namespace Core.Enums;
 
 public static class Materials
 {

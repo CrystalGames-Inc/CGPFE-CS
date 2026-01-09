@@ -1,5 +1,5 @@
-﻿using Core.Enums;
-using Domain.Characters.NPC;
+﻿using Domain.Characters.NPC;
+using Core.Enums;
 
 namespace Domain.World.Factions;
 

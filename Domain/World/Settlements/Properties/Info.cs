@@ -1,4 +1,5 @@
-﻿using Core.Enums;
+﻿using Domain.World.Settlements;
+using Core.Enums;
 
 namespace Domain.World.Settlements.Properties;
 

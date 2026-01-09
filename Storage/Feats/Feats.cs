@@ -1,9 +1,9 @@
-﻿using Storage.Feats.Combat;
+﻿using Domain.Characters.Feat;
+using Storage.Feats.Combat;
 using Storage.Feats.Critical;
 using Storage.Feats.General;
 using Storage.Feats.ItemCreation;
 using Storage.Feats.Metamagic;
-using Domain.Characters.Feat;
 
 namespace Storage.Feats;
 

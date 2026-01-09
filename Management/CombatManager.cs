@@ -1,5 +1,5 @@
-﻿using Core.Utilities;
-using Domain.Characters;
+﻿using Domain.Characters;
+using Core.Utilities;
 
 namespace Management
 {

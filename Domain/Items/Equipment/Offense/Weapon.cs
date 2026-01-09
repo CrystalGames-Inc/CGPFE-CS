@@ -1,5 +1,6 @@
-﻿using Domain.Items.Equipment.Offense.Properties;
-using Type = Domain.Items.Equipment.Offense.Properties.Type;
+﻿using Type = Domain.Items.Equipment.Offense.Properties.Type;
+using Domain.Items;
+using Domain.Items.Equipment.Offense.Properties;
 
 namespace Domain.Items.Equipment.Offense;
 

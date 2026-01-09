@@ -1,4 +1,5 @@
 ﻿using Attribute = Core.Enums.Attribute;
+using Core.Enums;
 
 namespace Domain.Characters.Common;
 

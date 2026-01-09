@@ -1,4 +1,6 @@
-﻿namespace Domain.Items.Other;
+﻿using Domain.Items;
+
+namespace Domain.Items.Other;
 
 public class Outfit : Item
 {

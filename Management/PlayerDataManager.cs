@@ -1,13 +1,13 @@
-﻿using Domain.Characters.Common;
-using Domain.Characters.Player.Properties.Inventory;
-using Core.Enums;
-using Core.Utilities;
+﻿using Attribute = Core.Enums.Attribute;
+using Domain.Characters.Common;
 using Domain.Characters.Player;
+using Domain.Characters.Player.Properties.Inventory;
 using Domain.Items.Equipment.Defense;
 using Domain.Items.Equipment.Offense;
+using Core.Enums;
+using Core.Utilities;
 using Storage.Items.Equipment.Defense;
 using Storage.Items.Equipment.Offense;
-using Attribute = Core.Enums.Attribute;
 
 namespace Management;
 

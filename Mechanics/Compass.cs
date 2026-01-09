@@ -1,6 +1,6 @@
 ﻿using Core.Enums;
 
-namespace Mechanics;
+namespace CGPFE.Mechanics;
 
 public static class Compass
 {

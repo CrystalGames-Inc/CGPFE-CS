@@ -1,5 +1,5 @@
-﻿using Core.Enums;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Core.Enums;
 namespace Domain.Game;
 
 public class GameData(

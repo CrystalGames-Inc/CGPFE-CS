@@ -1,5 +1,6 @@
-﻿using Core.Enums;
+﻿using Domain.World.Factions;
 using Domain.World.Geography;
+using Core.Enums;
 
 namespace Domain.World.Factions;
 

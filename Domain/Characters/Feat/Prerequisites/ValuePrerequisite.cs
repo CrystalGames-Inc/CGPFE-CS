@@ -1,4 +1,6 @@
-﻿namespace Domain.Characters.Feat.Prerequisites;
+﻿using Domain.Characters.Feat;
+
+namespace Domain.Characters.Feat.Prerequisites;
 
 public class ValuePrerequisite : IPrerequisite
 {

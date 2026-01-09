@@ -1,4 +1,6 @@
-﻿namespace Domain.Items.Equipment.Offense.Properties;
+﻿using Domain.Items.Equipment.Offense.Properties;
+
+namespace Domain.Items.Equipment.Offense.Properties;
 
 public class Critical(int multiplier, int minDie)
 {

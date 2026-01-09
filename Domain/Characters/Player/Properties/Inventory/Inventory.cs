@@ -1,4 +1,5 @@
-﻿namespace Domain.Characters.Player.Properties.Inventory;
+﻿using Domain.Characters.Player.Properties.Inventory;
+namespace Domain.Characters.Player.Properties.Inventory;
 
 public class Inventory
 {
