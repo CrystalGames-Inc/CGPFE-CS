@@ -1,6 +1,6 @@
-﻿using Core.Enums;
+﻿using CGPFE.Core.Enums;
 
-namespace Core.Enums;
+namespace CGPFE.Core.Enums;
 
 public static class Materials
 {

@@ -1,15 +1,16 @@
-﻿using Attribute = Core.Enums.Attribute;
-using Domain.Characters.Common;
-using Domain.Characters.Player;
-using Domain.Characters.Player.Properties.Inventory;
-using Domain.Items.Equipment.Defense;
-using Domain.Items.Equipment.Offense;
-using Core.Enums;
-using Core.Utilities;
+﻿using Attribute = CGPFE.Core.Enums.Attribute;
 using Storage.Items.Equipment.Defense;
 using Storage.Items.Equipment.Offense;
+using CGPFE.Domain.Characters.Common;
+using CGPFE.Domain.Characters.Player;
+using CGPFE.Domain.Characters.Player.Properties.Inventory;
+using CGPFE.Domain.Items.Equipment.Defense;
+using CGPFE.Domain.Items.Equipment.Offense;
+using CGPFE.Core.Enums;
+using CGPFE.Core.Utilities;
+using CGPFE.Management;
 
-namespace Management;
+namespace CGPFE.Management;
 
 public class PlayerDataManager
 {

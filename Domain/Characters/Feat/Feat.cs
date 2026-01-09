@@ -1,7 +1,7 @@
-﻿using Domain.Characters.Feat;
-using Core.Enums;
+﻿using CGPFE.Domain.Characters.Feat;
+using CGPFE.Core.Enums;
 
-namespace Domain.Characters.Feat;
+namespace CGPFE.Domain.Characters.Feat;
 
 public abstract class Feat
 {

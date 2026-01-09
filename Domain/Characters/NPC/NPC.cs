@@ -1,8 +1,9 @@
-﻿using Domain.Characters.Common;
-using Domain.Characters.NPC.Properties;
-using Domain.Characters.Player.Properties.Inventory;
+﻿using CGPFE.Domain.Characters;
+using CGPFE.Domain.Characters.Common;
+using CGPFE.Domain.Characters.NPC.Properties;
+using CGPFE.Domain.Characters.Player.Properties.Inventory;
 
-namespace Domain.Characters.NPC;
+namespace CGPFE.Domain.Characters.NPC;
 
 public class NPC : Entity
 {

@@ -1,8 +1,8 @@
-﻿using Type = Domain.Items.Equipment.Offense.Properties.Type;
-using Domain.Items.Equipment.Offense;
-using Domain.Items.Equipment.Offense.Properties;
+﻿using Type = CGPFE.Domain.Items.Equipment.Offense.Properties.Type;
+using CGPFE.Domain.Items.Equipment.Offense;
+using CGPFE.Domain.Items.Equipment.Offense.Properties;
 
-namespace Domain.Items.Equipment.Offense;
+namespace CGPFE.Domain.Items.Equipment.Offense;
 
 public class RangedWeapon(
     string name,

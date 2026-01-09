@@ -1,4 +1,4 @@
-﻿using Core.Enums;
+﻿using CGPFE.Core.Enums;
 
 namespace CGPFE.Mechanics;
 

@@ -1,4 +1,4 @@
-﻿namespace Domain.Items.Equipment.Offense.Properties;
+﻿namespace CGPFE.Domain.Items.Equipment.Offense.Properties;
 
 public enum Type
 {

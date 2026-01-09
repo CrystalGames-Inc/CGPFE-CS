@@ -1,4 +1,4 @@
-﻿namespace Domain.Characters.Feat;
+﻿namespace CGPFE.Domain.Characters.Feat;
 
 public interface IPrerequisite
 {

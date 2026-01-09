@@ -1,6 +1,6 @@
-﻿using Domain.Items;
+﻿using CGPFE.Domain.Items;
 
-namespace Domain.Items.Equipment.Defense;
+namespace CGPFE.Domain.Items.Equipment.Defense;
 
 public class ArmorExtra(
     string name,

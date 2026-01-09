@@ -1,4 +1,4 @@
-﻿namespace Domain.World.Settlements.Properties;
+﻿namespace CGPFE.Domain.World.Settlements.Properties;
 
 public class Marketplace(int baseValue, int purchaseLimit, int spellcasting)
 {

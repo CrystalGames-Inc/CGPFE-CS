@@ -1,7 +1,7 @@
-﻿using Type = Domain.Items.Equipment.Offense.Properties.Type;
-using Domain.Items.Equipment.Offense;
-using Domain.Items.Equipment.Offense.Properties;
+﻿using Type = CGPFE.Domain.Items.Equipment.Offense.Properties.Type;
 using Storage.Items.Equipment.Offense;
+using CGPFE.Domain.Items.Equipment.Offense;
+using CGPFE.Domain.Items.Equipment.Offense.Properties;
 
 namespace Storage.Items.Equipment.Offense;
 

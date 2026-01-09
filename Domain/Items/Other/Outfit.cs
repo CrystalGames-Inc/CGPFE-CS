@@ -1,6 +1,6 @@
-﻿using Domain.Items;
+﻿using CGPFE.Domain.Items;
 
-namespace Domain.Items.Other;
+namespace CGPFE.Domain.Items.Other;
 
 public class Outfit : Item
 {

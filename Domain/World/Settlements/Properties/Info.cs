@@ -1,7 +1,7 @@
-﻿using Domain.World.Settlements;
-using Core.Enums;
+﻿using CGPFE.Domain.World.Settlements;
+using CGPFE.Core.Enums;
 
-namespace Domain.World.Settlements.Properties;
+namespace CGPFE.Domain.World.Settlements.Properties;
 
 public class Info
 {

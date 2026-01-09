@@ -1,7 +1,7 @@
-﻿using Domain.Characters.Feat;
-using Domain.Characters.Feat.Prerequisites;
-using Domain.Characters.Player;
-using Core.Enums;
+﻿using CGPFE.Domain.Characters.Feat;
+using CGPFE.Domain.Characters.Feat.Prerequisites;
+using CGPFE.Domain.Characters.Player;
+using CGPFE.Core.Enums;
 
 namespace Storage.Feats.ItemCreation;
 

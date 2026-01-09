@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
-using Core.Enums;
-namespace Domain.Game;
+using CGPFE.Core.Enums;
+namespace CGPFE.Domain.Game;
 
 public class GameData(
     string campaignName,

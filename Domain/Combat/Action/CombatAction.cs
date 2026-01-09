@@ -1,6 +1,6 @@
-﻿using Core.Enums;
+﻿using CGPFE.Core.Enums;
 
-namespace Domain.Combat.Action;
+namespace CGPFE.Domain.Combat.Action;
 
 public class CombatAction(string name, ActionType type, bool attackOfOpportunity)
 {

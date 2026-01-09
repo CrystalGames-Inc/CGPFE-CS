@@ -1,7 +1,7 @@
-﻿using Domain.Items;
-using Core.Enums;
+﻿using CGPFE.Domain.Items;
+using CGPFE.Core.Enums;
 
-namespace Domain.Items.Equipment.Defense;
+namespace CGPFE.Domain.Items.Equipment.Defense;
 
 public class Armor(
     string name,

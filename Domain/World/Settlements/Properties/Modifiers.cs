@@ -1,6 +1,6 @@
-﻿using Domain.World.Settlements;
+﻿using CGPFE.Domain.World.Settlements;
 
-namespace Domain.World.Settlements.Properties;
+namespace CGPFE.Domain.World.Settlements.Properties;
 
 public class Modifiers(Quality[] qualities, Disadvantage[] disadvantages)
 {

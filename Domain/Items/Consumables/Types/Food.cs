@@ -1,6 +1,6 @@
-﻿using Domain.Items.Consumables;
+﻿using CGPFE.Domain.Items.Consumables;
 
-namespace Domain.Items.Consumables.Types;
+namespace CGPFE.Domain.Items.Consumables.Types;
 
 public class Food : Consumable
 {

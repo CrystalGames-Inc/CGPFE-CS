@@ -1,4 +1,4 @@
-﻿namespace Domain.Characters.Common;
+﻿namespace CGPFE.Domain.Characters.Common;
 
 public class CombatTableRow
 {

@@ -1,4 +1,4 @@
-﻿namespace Domain.Items;
+﻿namespace CGPFE.Domain.Items;
 
 public class Item
 {

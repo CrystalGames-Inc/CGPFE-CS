@@ -1,4 +1,6 @@
-﻿namespace CLI.Commands.Campaign
+﻿using CGPFE.CLI;
+
+namespace CGPFE.CLI.Commands.Campaign
 {
     public class CommandGroup : ICommand
     {

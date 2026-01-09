@@ -1,7 +1,7 @@
-﻿using Management;
-using Core.Utilities;
+﻿using CGPFE.Core.Utilities;
+using CGPFE.Management;
 
-namespace CLI
+namespace CGPFE.CLI
 {
     public class CGPFEShell
     {

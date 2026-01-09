@@ -1,6 +1,6 @@
-﻿using Domain.Items;
+﻿using CGPFE.Domain.Items;
 
-namespace Domain.Items.GoodsServices;
+namespace CGPFE.Domain.Items.GoodsServices;
 
 public class Good : Item
 {

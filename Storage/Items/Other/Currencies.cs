@@ -1,4 +1,4 @@
-﻿using Domain.Items.Other;
+﻿using CGPFE.Domain.Items.Other;
 
 namespace Storage.Items.Other;
 

@@ -1,5 +1,5 @@
-﻿using Domain.Characters.Player.Properties.Inventory;
-namespace Domain.Characters.Player.Properties.Inventory;
+﻿using CGPFE.Domain.Characters.Player.Properties.Inventory;
+namespace CGPFE.Domain.Characters.Player.Properties.Inventory;
 
 public class Inventory
 {

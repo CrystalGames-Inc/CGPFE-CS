@@ -1,4 +1,4 @@
-﻿using Domain.Items.Equipment.Defense;
+﻿using CGPFE.Domain.Items.Equipment.Defense;
 
 namespace Storage.Items.Equipment.Defense;
 

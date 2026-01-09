@@ -1,4 +1,4 @@
-﻿using Domain.Items.Consumables.Types;
+﻿using CGPFE.Domain.Items.Consumables.Types;
 
 namespace Storage.Items.Consumables;
 

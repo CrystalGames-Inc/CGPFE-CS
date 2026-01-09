@@ -1,6 +1,6 @@
-﻿using Domain.Items.Equipment.Offense.Properties;
+﻿using CGPFE.Domain.Items.Equipment.Offense.Properties;
 
-namespace Domain.Items.Equipment.Offense.Properties;
+namespace CGPFE.Domain.Items.Equipment.Offense.Properties;
 
 public class Critical(int multiplier, int minDie)
 {

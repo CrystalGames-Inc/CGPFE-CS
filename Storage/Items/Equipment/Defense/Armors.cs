@@ -1,5 +1,5 @@
-﻿using Domain.Items.Equipment.Defense;
-using Core.Enums;
+﻿using CGPFE.Domain.Items.Equipment.Defense;
+using CGPFE.Core.Enums;
 
 namespace Storage.Items.Equipment.Defense;
 

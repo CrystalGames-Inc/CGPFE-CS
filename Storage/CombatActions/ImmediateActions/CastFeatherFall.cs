@@ -1,4 +1,5 @@
-﻿using Domain.Combat.Action.Types;
+﻿
+using CGPFE.Domain.Combat.Action.Types;
 
 namespace Storage.CombatActions.ImmediateActions;
 

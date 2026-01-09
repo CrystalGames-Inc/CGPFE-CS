@@ -1,6 +1,6 @@
-﻿using Domain.World.Geography;
+﻿using CGPFE.Domain.World.Geography;
 
-namespace Domain.World;
+namespace CGPFE.Domain.World;
 
 public class GameWorld
 {

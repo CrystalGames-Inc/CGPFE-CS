@@ -1,7 +1,7 @@
-﻿using Domain.World.Geography;
-using Core.Enums;
+﻿using CGPFE.Domain.World.Geography;
+using CGPFE.Core.Enums;
 
-namespace Domain.Characters.Player.Properties;
+namespace CGPFE.Domain.Characters.Player.Properties;
 
 public class PlayerInfo
 {

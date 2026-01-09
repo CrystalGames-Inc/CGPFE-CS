@@ -1,4 +1,4 @@
-﻿namespace Core.Enums;
+﻿namespace CGPFE.Core.Enums;
 
 public enum NpcType
 {
