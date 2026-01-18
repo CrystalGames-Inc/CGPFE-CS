@@ -5,6 +5,7 @@ public enum Condition
     Bleed,
     Blinded,
     Broken,
+    Confused,
     Cowering,
     Dazed,
     Dazzled,
