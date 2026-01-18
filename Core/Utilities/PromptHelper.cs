@@ -1,4 +1,4 @@
-﻿namespace Core.Utilities;
+﻿namespace CGPFE.Core.Utilities;
 
 public static class PromptHelper
 {

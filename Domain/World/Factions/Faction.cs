@@ -1,8 +1,8 @@
-﻿using Domain.World.Factions;
-using Domain.World.Geography;
-using Core.Enums;
+﻿using CGPFE.Domain.World.Factions;
+using CGPFE.Domain.World.Geography;
+using CGPFE.Core.Enums;
 
-namespace Domain.World.Factions;
+namespace CGPFE.Domain.World.Factions;
 
 public class Faction(string name, FactionType type, Location operationBase)
 {

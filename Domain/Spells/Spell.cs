@@ -1,6 +1,6 @@
-﻿using Domain.Spells.Properties;
+﻿using CGPFE.Domain.Spells.Properties;
 
-namespace Domain.Spells;
+namespace CGPFE.Domain.Spells;
 
 public class Spell(Info info, Levels classLevels)
 {

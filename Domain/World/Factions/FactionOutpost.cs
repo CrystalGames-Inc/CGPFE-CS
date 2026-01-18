@@ -1,7 +1,7 @@
-﻿using Domain.World.Geography;
-using Core.Enums;
+﻿using CGPFE.Domain.World.Geography;
+using CGPFE.Core.Enums;
 
-namespace Domain.World.Factions;
+namespace CGPFE.Domain.World.Factions;
 
 public class FactionOutpost(string name, OutpostType type) : Location(name, null, null)
 {

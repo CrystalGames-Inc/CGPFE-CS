@@ -1,6 +1,6 @@
-﻿using Domain.Items;
+﻿using CGPFE.Domain.Items;
 
-namespace Domain.Items.Consumables;
+namespace CGPFE.Domain.Items.Consumables;
 
 public abstract class Consumable : Item
 {

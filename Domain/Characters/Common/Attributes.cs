@@ -1,6 +1,6 @@
-﻿using Domain.Characters.Common;
+﻿using CGPFE.Domain.Characters.Common;
 
-namespace Domain.Characters.Common;
+namespace CGPFE.Domain.Characters.Common;
 
 public class Attributes
 {

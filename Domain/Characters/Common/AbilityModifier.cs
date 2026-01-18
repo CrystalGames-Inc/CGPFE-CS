@@ -1,6 +1,6 @@
-﻿using Core.Enums;
+﻿using CGPFE.Core.Enums;
 
-namespace Domain.Characters.Common
+namespace CGPFE.Domain.Characters.Common
 {
     public record AbilityModifier(
         int Value,

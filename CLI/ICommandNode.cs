@@ -1,4 +1,6 @@
-﻿namespace CLI
+﻿using CGPFE.CLI;
+
+namespace CGPFE.CLI
 {
     public interface ICommandNode
     {

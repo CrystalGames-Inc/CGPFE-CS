@@ -1,6 +1,6 @@
-﻿using Domain.Characters.Feat;
+﻿using CGPFE.Domain.Characters.Feat;
 
-namespace Domain.Characters.Feat.Prerequisites;
+namespace CGPFE.Domain.Characters.Feat.Prerequisites;
 
 public class SkillRankPrerequisite(string skillName, int minRanks) : IPrerequisite
 {

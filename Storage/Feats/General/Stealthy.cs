@@ -1,5 +1,5 @@
-﻿using Domain.Characters.Feat;
-using Domain.Characters.Player;
+﻿using CGPFE.Domain.Characters.Feat;
+using CGPFE.Domain.Characters.Player;
 
 namespace Storage.Feats.General;
 

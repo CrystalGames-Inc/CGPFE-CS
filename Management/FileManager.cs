@@ -1,15 +1,16 @@
 ﻿using Newtonsoft.Json;
-using Domain.Characters.Common;
-using Domain.Characters.Player;
-using Domain.Characters.Player.Properties;
-using Domain.Characters.Player.Properties.Inventory;
-using Domain.Game;
-using Domain.World;
-using Domain.World.Geography;
-using Core.Enums;
-using Core.Utilities;
+using CGPFE.Domain.Characters.Common;
+using CGPFE.Domain.Characters.Player;
+using CGPFE.Domain.Characters.Player.Properties;
+using CGPFE.Domain.Characters.Player.Properties.Inventory;
+using CGPFE.Domain.Game;
+using CGPFE.Domain.World;
+using CGPFE.Domain.World.Geography;
+using CGPFE.Core.Enums;
+using CGPFE.Core.Utilities;
+using CGPFE.Management;
 
-namespace Management;
+namespace CGPFE.Management;
 
 public static class FileManager
 {

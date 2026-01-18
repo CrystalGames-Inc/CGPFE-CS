@@ -1,7 +1,7 @@
-﻿using Domain.Items.GoodsServices;
-using Core.Enums;
+﻿using CGPFE.Domain.Items.GoodsServices;
+using CGPFE.Core.Enums;
 
-namespace Domain.Items.GoodsServices.Types;
+namespace CGPFE.Domain.Items.GoodsServices.Types;
 
 public class Lodging : Service
 {

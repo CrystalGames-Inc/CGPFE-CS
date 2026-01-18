@@ -1,4 +1,4 @@
-﻿namespace Domain.World.Settlements;
+﻿namespace CGPFE.Domain.World.Settlements;
 
 public enum Type
 {

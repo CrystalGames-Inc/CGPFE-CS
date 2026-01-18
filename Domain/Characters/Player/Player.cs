@@ -1,15 +1,16 @@
-﻿using Attribute = Core.Enums.Attribute;
-using Domain.Characters.Common;
-using Domain.Characters.Player.Properties;
-using Domain.Characters.Skill;
-using Domain.Items.Equipment.Defense;
-using Domain.Items.Equipment.Offense;
-using Domain.World.Geography;
-using Domain.World.Settlements;
-using Domain.Characters.Player.Properties.Inventory;
-using Core.Enums;
+﻿using Attribute = CGPFE.Core.Enums.Attribute;
+using CGPFE.Domain.Characters;
+using CGPFE.Domain.Characters.Common;
+using CGPFE.Domain.Characters.Player.Properties;
+using CGPFE.Domain.Characters.Player.Properties.Inventory;
+using CGPFE.Domain.Characters.Skill;
+using CGPFE.Domain.Items.Equipment.Defense;
+using CGPFE.Domain.Items.Equipment.Offense;
+using CGPFE.Domain.World.Geography;
+using CGPFE.Domain.World.Settlements;
+using CGPFE.Core.Enums;
 
-namespace Domain.Characters.Player;
+namespace CGPFE.Domain.Characters.Player;
 
 public class Player : Entity
 {
@@ -46,7 +47,7 @@ public class Player : Entity
         };
     }
 
-    public Domain.Characters.Feat.Feat? GetMatchingFeat(string featName, List<Domain.Characters.Feat.Feat> availableFeats) {
+    public CGPFE.Domain.Characters.Feat.Feat? GetMatchingFeat(string featName, List<CGPFE.Domain.Characters.Feat.Feat> availableFeats) {
         if (string.IsNullOrEmpty(featName)) return null;
         return availableFeats.FirstOrDefault(feat => feat.Name.ToUpper().Equals(featName.ToUpper()));
     }

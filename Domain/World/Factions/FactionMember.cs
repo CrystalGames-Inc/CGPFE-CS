@@ -1,7 +1,7 @@
-﻿using Domain.Characters.NPC;
-using Core.Enums;
+﻿using CGPFE.Domain.Characters.NPC;
+using CGPFE.Core.Enums;
 
-namespace Domain.World.Factions;
+namespace CGPFE.Domain.World.Factions;
 
 public class FactionMember(Rank factionRank)
 {

@@ -1,4 +1,4 @@
-﻿using Domain.Items.GoodsServices.Types;
+﻿using CGPFE.Domain.Items.GoodsServices.Types;
 
 namespace Storage.Items.GoodsServices;
 

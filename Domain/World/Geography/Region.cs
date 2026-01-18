@@ -1,9 +1,9 @@
-﻿using Domain.World.Geography;
-using Domain.World.Settlements;
-using Core.Enums;
-using CGPFE.Mechanics;
+﻿using CGPFE.Mechanics;
+using CGPFE.Domain.World.Geography;
+using CGPFE.Domain.World.Settlements;
+using CGPFE.Core.Enums;
 
-namespace Domain.World.Geography;
+namespace CGPFE.Domain.World.Geography;
 
 public class Region(string name, Terrain terrainType, Climate climate) : Location(name, terrainType, climate)
 {

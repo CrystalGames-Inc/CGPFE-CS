@@ -1,4 +1,4 @@
-﻿namespace CLI
+﻿namespace CGPFE.CLI
 {
     public interface ICommand
     {

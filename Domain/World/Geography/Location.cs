@@ -1,6 +1,6 @@
-﻿using Core.Enums;
+﻿using CGPFE.Core.Enums;
 
-namespace Domain.World.Geography;
+namespace CGPFE.Domain.World.Geography;
 
 public class Location(string name, Terrain? terrainType, Climate? climateType)
 {

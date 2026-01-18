@@ -1,4 +1,4 @@
-﻿namespace Domain.Characters.Skill;
+﻿namespace CGPFE.Domain.Characters.Skill;
 
 public class SkillBonus
 {

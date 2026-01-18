@@ -1,6 +1,6 @@
-﻿using Domain.Characters.Common;
+﻿using CGPFE.Domain.Characters.Common;
 
-namespace Domain.Characters
+namespace CGPFE.Domain.Characters
 {
     public class Entity
     {

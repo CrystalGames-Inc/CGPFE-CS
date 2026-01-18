@@ -1,10 +1,10 @@
-﻿using Domain.World.Geography;
-using Domain.World.Settlements;
-using Domain.World.Settlements.Properties;
-using Core.Enums;
-using Core.Utilities;
+﻿using CGPFE.Domain.World.Geography;
+using CGPFE.Domain.World.Settlements;
+using CGPFE.Domain.World.Settlements.Properties;
+using CGPFE.Core.Enums;
+using CGPFE.Core.Utilities;
 
-namespace Domain.World.Settlements;
+namespace CGPFE.Domain.World.Settlements;
 
 public class Settlement : Location
 {

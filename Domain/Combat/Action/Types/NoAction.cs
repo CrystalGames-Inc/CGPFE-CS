@@ -1,7 +1,7 @@
-﻿using Domain.Combat.Action;
-using Core.Enums;
+﻿using CGPFE.Domain.Combat.Action;
+using CGPFE.Core.Enums;
 
-namespace Domain.Combat.Action.Types;
+namespace CGPFE.Domain.Combat.Action.Types;
 
 public class NoAction(string name, bool attackOfOpportunity) : CombatAction(name, ActionType.None, attackOfOpportunity)
 {
