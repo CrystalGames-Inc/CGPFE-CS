@@ -3,7 +3,7 @@ using CGPFE.Core.Enums;
 
 namespace CGPFE.Domain.Combat.Action.Types;
 
-public class FullRoundAction(string name, bool attackOfOpportunity) : CombatAction(name, ActionType.FullRound, attackOfOpportunity)
+public abstract class FullRoundAction(string name, bool attackOfOpportunity) : CombatAction(name, ActionType.FullRound, attackOfOpportunity)
 {
 
 }

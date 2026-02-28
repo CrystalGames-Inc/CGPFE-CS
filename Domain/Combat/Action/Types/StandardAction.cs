@@ -3,7 +3,7 @@ using CGPFE.Core.Enums;
 
 namespace CGPFE.Domain.Combat.Action.Types;
 
-public class StandardAction(string name, bool attackOfOpportunity) : CombatAction(name, ActionType.Standard, attackOfOpportunity)
+public abstract class StandardAction(string name, bool attackOfOpportunity) : CombatAction(name, ActionType.Standard, attackOfOpportunity)
 {
 
 }

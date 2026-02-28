@@ -2,7 +2,7 @@
 
 namespace CGPFE.Domain.Characters
 {
-    public class Entity
+    public abstract class Entity
     {
         public Attributes Attributes { get; set; }
         public CombatInfo? CombatInfo { get; set; }

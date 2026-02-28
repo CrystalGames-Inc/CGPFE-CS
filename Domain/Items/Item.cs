@@ -1,6 +1,6 @@
 ﻿namespace CGPFE.Domain.Items;
 
-public class Item
+public abstract class Item
 {
     public string Name;
     public int Id;

@@ -3,7 +3,7 @@ using CGPFE.Core.Enums;
 
 namespace CGPFE.Domain.Combat.Action.Types;
 
-public class MoveAction(string name, bool attackOfOpportunity) : CombatAction(name, ActionType.Move, attackOfOpportunity)
+public abstract class MoveAction(string name, bool attackOfOpportunity) : CombatAction(name, ActionType.Move, attackOfOpportunity)
 {
 
 }

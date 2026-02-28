@@ -1,5 +1,4 @@
 ﻿using Attribute = CGPFE.Core.Enums.Attribute;
-using CGPFE.Domain.Characters;
 using CGPFE.Domain.Characters.Common;
 using CGPFE.Domain.Characters.Player.Properties;
 using CGPFE.Domain.Characters.Player.Properties.Inventory;
@@ -8,7 +7,6 @@ using CGPFE.Domain.Items.Equipment.Defense;
 using CGPFE.Domain.Items.Equipment.Offense;
 using CGPFE.Domain.World.Geography;
 using CGPFE.Domain.World.Settlements;
-using CGPFE.Core.Enums;
 
 namespace CGPFE.Domain.Characters.Player;
 
