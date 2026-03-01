@@ -3,8 +3,6 @@ using CGPFE.Domain.Characters.Common;
 using CGPFE.Domain.Characters.Player.Properties;
 using CGPFE.Domain.Characters.Player.Properties.Inventory;
 using CGPFE.Domain.Characters.Skill;
-using CGPFE.Domain.Items.Equipment.Defense;
-using CGPFE.Domain.Items.Equipment.Offense;
 using CGPFE.Domain.World.Geography;
 using CGPFE.Domain.World.Settlements;
 
@@ -45,25 +43,6 @@ public class Player : Entity
         };
     }
 
-    public CGPFE.Domain.Characters.Feat.Feat? GetMatchingFeat(string featName, List<CGPFE.Domain.Characters.Feat.Feat> availableFeats) {
-        if (string.IsNullOrEmpty(featName)) return null;
-        return availableFeats.FirstOrDefault(feat => feat.Name.ToUpper().Equals(featName.ToUpper()));
-    }
-
-    public Weapon? GetMatchingWeapon(string weaponName, List<Weapon> availableWeapons) {
-        if (string.IsNullOrEmpty(weaponName)) return null;
-        return availableWeapons.FirstOrDefault(weapon => weapon.Name.ToUpper().Equals(weaponName.ToUpper()));
-    }
-
-    public Armor? GetMatchingArmor(string armorName, List<Armor> availableArmors) {
-        if (string.IsNullOrEmpty(armorName)) return null;
-        return availableArmors.FirstOrDefault(armor => armor.Name.ToUpper().Equals(armorName.ToUpper()));
-    }
-
-    public Shield? GetMatchingShield(string shieldName, List<Shield> availableShields) {
-        if (string.IsNullOrEmpty(shieldName)) return null;
-        return availableShields.FirstOrDefault(shield => shield.Name.ToUpper().Equals(shieldName.ToUpper()));
-    }
 
     public Skill.Skill? GetMatchingSkill(string skillName) {
         if (string.IsNullOrEmpty(skillName)) return null;

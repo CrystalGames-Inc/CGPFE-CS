@@ -1,6 +1,6 @@
 ﻿using CGPFE.Domain.Characters;
 using CGPFE.Core.Utilities;
-using CGPFE.Management;
+using CGPFE.Domain.Characters.Player;
 
 namespace CGPFE.Management
 {
@@ -31,6 +31,29 @@ namespace CGPFE.Management
             }
             else
                 Console.WriteLine("You go second!");
+        }
+
+        public void StartRound(Entity entity)
+        {
+            entity.CombatInfo.ActionCount = 2;
+            entity.CombatInfo.SwiftActionCount = 1;
+            if (entity.GetType() == typeof(Player))
+                StartPlayerRound();
+        }
+
+        private void StartPlayerRound()
+        {
+
+        }
+
+        private void PlayerAttack(string attackName)
+        {
+
+        }
+
+        private void AttackMeleeWeapon()
+        {
+
         }
     }
 }

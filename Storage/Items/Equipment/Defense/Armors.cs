@@ -1,7 +1,7 @@
 ﻿using CGPFE.Domain.Items.Equipment.Defense;
 using CGPFE.Core.Enums;
 
-namespace Storage.Items.Equipment.Defense;
+namespace CGPFE.Storage.Items.Equipment.Defense;
 
 public class Armors
 {

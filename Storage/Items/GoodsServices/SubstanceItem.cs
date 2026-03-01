@@ -1,2 +1,2 @@
-﻿namespace Storage.Items.GoodsServices;
+﻿namespace CGPFE.Storage.Items.GoodsServices;
 

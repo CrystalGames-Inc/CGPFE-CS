@@ -1,17 +1,16 @@
-﻿using CGPFE.Domain.Characters.Common;
-using CGPFE.Domain.Characters.Player.Properties;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CGPFE.Domain.Characters.Common;
+using CGPFE.Domain.Characters.Player.Properties.Inventory;
+using CGPFE.Domain.Items.Equipment.Offense;
 
 namespace CGPFE.Domain.Characters
 {
-    public class Entity
+    public abstract class Entity
     {
         public Attributes Attributes { get; set; }
         public CombatInfo? CombatInfo { get; set; }
+        public Inventory? Inventory { get; set; } = null;
 
         public int GetValueForKey(string key) {
             return key.ToUpper() switch {
@@ -26,6 +25,20 @@ namespace CGPFE.Domain.Characters
                 "CMB" => CombatInfo != null ? CombatInfo.CombatManeuverBonus : 0,
                 _ => throw new InvalidOperationException($"Unsupported key: {key}"),
             };
+        }
+
+        public Weapon? GetMatchingWeapon(string weaponName, List<Weapon> availableWeapons) {
+            if (Inventory == null || string.IsNullOrEmpty(weaponName) || availableWeapons == null) return null;
+
+            var inventoryEntry = Inventory.Weapons?.FirstOrDefault(i =>
+                !string.IsNullOrEmpty(i?.Name) &&
+                i.Name.Equals(weaponName, StringComparison.OrdinalIgnoreCase));
+
+            if (inventoryEntry == null) return null;
+
+            return availableWeapons.FirstOrDefault(w =>
+                !string.IsNullOrEmpty(w?.Name) &&
+                w.Name.Equals(inventoryEntry.Name, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

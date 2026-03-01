@@ -1,9 +1,33 @@
-﻿using CGPFE.Domain.Combat.Action;
-using CGPFE.Core.Enums;
+﻿using CGPFE.Core.Enums;
+using CGPFE.Domain.Characters;
+using CGPFE.Domain.Combat.Action;
 
 namespace CGPFE.Domain.Combat.Action.Types;
 
-public abstract class FullRoundAction(string name, bool attackOfOpportunity) : CombatAction(name, ActionType.FullRound, attackOfOpportunity)
+public abstract class FullRoundAction : CombatAction
 {
+    public string Name { get; set; }
+    public bool AttackOfOpportunity { get; set; }
 
+    public FullRoundAction(string name, bool attackOfOpportunity) : base(name, ActionType.FullRound, attackOfOpportunity)
+    {
+        Name = name;
+        AttackOfOpportunity = attackOfOpportunity;
+    }
+
+    public new void Execute(Entity attacker, Entity target)
+    {
+        if (!CanExecute(attacker, target))
+        {
+            Console.Error.WriteLine($"Cannot execute {Name}.");
+            return;
+        }
+
+        Apply(attacker, target);
+    }
+
+    protected new virtual bool CanExecute(Entity attacker, Entity target)
+    {
+        return true;
+    }
 }

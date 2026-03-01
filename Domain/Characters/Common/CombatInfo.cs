@@ -1,5 +1,6 @@
 ﻿using Attribute = CGPFE.Core.Enums.Attribute;
 using CGPFE.Core.Enums;
+using CGPFE.Domain.Combat.Action;
 
 namespace CGPFE.Domain.Characters.Common;
 
@@ -14,6 +15,8 @@ public class CombatInfo
     public Attribute CmbCalcBonus { get; set; }
     public int CombatManeuverBonus { get; set; }
     public int CombatManeuverDefense { get; set; }
+    public int ActionCount { get; set; }
+    public int SwiftActionCount { get; set; }
 
     public CombatInfo() {
         InitMod = 0;

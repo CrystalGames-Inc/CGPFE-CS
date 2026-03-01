@@ -1,9 +1,8 @@
 ﻿using Type = CGPFE.Domain.Items.Equipment.Offense.Properties.Type;
-using Storage.Items.Equipment.Offense;
 using CGPFE.Domain.Items.Equipment.Offense;
 using CGPFE.Domain.Items.Equipment.Offense.Properties;
 
-namespace Storage.Items.Equipment.Offense;
+namespace CGPFE.Storage.Items.Equipment.Offense;
 
 public abstract class Weapons
 {

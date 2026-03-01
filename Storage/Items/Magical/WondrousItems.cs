@@ -1,4 +1,4 @@
-﻿namespace Storage.Items.Magical;
+﻿namespace CGPFE.Storage.Items.Magical;
 
 public class WondrousItems
 {

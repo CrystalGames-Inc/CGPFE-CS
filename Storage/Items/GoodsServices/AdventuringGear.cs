@@ -1,6 +1,6 @@
 ﻿using CGPFE.Domain.Items.GoodsServices.Types;
 
-namespace Storage.Items.GoodsServices;
+namespace CGPFE.Storage.Items.GoodsServices;
 
 public static class AdventureGear
 {

@@ -1,4 +1,4 @@
-﻿namespace Storage.Items.Consumables;
+﻿namespace CGPFE.Storage.Items.Consumables;
 
 public class Poisons
 {

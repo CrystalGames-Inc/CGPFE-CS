@@ -7,7 +7,7 @@ using Storage.CombatActions.StandardActions;
 using Storage.CombatActions.SwiftActions;
 using CGPFE.Domain.Combat.Action;
 
-namespace Storage.CombatActions;
+namespace CGPFE.Storage.CombatActions;
 
 public static class GameActions
 {

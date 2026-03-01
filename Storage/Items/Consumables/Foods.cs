@@ -1,6 +1,6 @@
 ﻿using CGPFE.Domain.Items.Consumables.Types;
 
-namespace Storage.Items.Consumables;
+namespace CGPFE.Storage.Items.Consumables;
 
 public static class Foods
 {

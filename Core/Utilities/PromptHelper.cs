@@ -5,10 +5,10 @@ public static class PromptHelper
 
     public static string TextPrompt(string message)
     {
-        Console.WriteLine(message, "\n");
         string? ans;
         do
         {
+            Console.WriteLine(message, "\n");
             ans = Console.ReadLine();
             if (string.IsNullOrEmpty(ans)) Console.WriteLine("Can't enter empty value");
         } while (string.IsNullOrEmpty(ans));
@@ -33,7 +33,6 @@ public static class PromptHelper
 
     public static int RangePrompt(string message, int min, int max)
     {
-        Console.WriteLine($"{message}\nRange: ({min} - {max})");
         var ans = min;
         do
         {
