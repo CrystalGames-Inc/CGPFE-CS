@@ -37,7 +37,16 @@ public static class PromptHelper
         do
         {
             Console.WriteLine(message, $"\nRange: ({min} - {max})");
-            ans = int.Parse(Console.ReadLine());
+            var nAns = "";
+            do
+            {
+                nAns = Console.ReadLine();
+                if(int.TryParse(nAns, out int parsedAns))
+                    ans = parsedAns;
+                else
+                    Console.WriteLine("Invalid input. Please enter a number.\n");
+            } while(!int.TryParse(nAns, out _));
+
             if (ans < min || ans > max)
                 Console.WriteLine($"Invalid answer. Please choose within the range ({min} - {max})\n");
         } while (ans < min || ans > max);

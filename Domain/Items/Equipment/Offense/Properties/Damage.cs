@@ -1,4 +1,5 @@
-﻿using CGPFE.Domain.Items.Equipment.Offense.Properties;
+﻿using CGPFE.Core.Utilities;
+using CGPFE.Domain.Items.Equipment.Offense.Properties;
 
 namespace CGPFE.Domain.Items.Equipment.Offense.Properties;
 
@@ -6,7 +7,6 @@ public class Damage(int die, int amount)
 {
     public int Die = die;
     public int Amount = amount;
-
     public Damage(int die) : this(die, 1) {
     }
 }

@@ -20,16 +20,18 @@ public class ValuePrerequisite : IPrerequisite
         Operator = @operator;
     }
 
-    public bool IsSatisfiedBy(Player.Player player) {
+    public bool IsSatisfiedBy(Player.Player player, List<Skill.Skill>? skills = null)
+    {
         var pValue = player.GetValueForKey(Key);
 
-        return Operator switch {
+        return Operator switch
+        {
             "==" => pValue == Value,
             ">=" => pValue >= Value,
             "<=" => pValue <= Value,
             ">" => pValue > Value,
             "<" => pValue < Value,
-            _ => throw new InvalidOperationException($"Invalid operator: {Operator} ")
+            _ => throw new InvalidOperationException($"Invalid operator: {Operator}")
         };
     }
 }

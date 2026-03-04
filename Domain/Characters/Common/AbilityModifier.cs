@@ -4,6 +4,6 @@ namespace CGPFE.Domain.Characters.Common
 {
     public record AbilityModifier(
         int Value,
-        ModifierSourceType Srouce
+        ModifierSourceType Source
         );
 }

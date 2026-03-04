@@ -32,5 +32,5 @@ public abstract class CombatAction
         return true;
     }
 
-    protected abstract void Apply(Entity attacker, Entity target);
+    public abstract void Apply(Entity attacker, Entity target);
 }

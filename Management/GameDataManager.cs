@@ -2,6 +2,7 @@
 using CGPFE.Core.Enums;
 using CGPFE.Core.Utilities;
 using CGPFE.Management;
+using CGPFE.Domain.Characters.Player;
 
 namespace CGPFE.Management;
 
@@ -39,17 +40,19 @@ public class GameDataManager
         return GameData;
     }
 
-    public void AskNewCharacter()
+    public Player? AskNewCharacter()
     {
+        Player? p = null;
         switch (PromptHelper.YesNoPrompt("Would you also like to create a new player?", false))
         {
             case true:
-                PlayerDataManager.Instance.RegisterPlayer();
+                p = PlayerDataManager.Instance.RegisterPlayer();
                 break;
             default:
                 Console.WriteLine();
                 break;
         }
+        return p;
     }
 
     public void AskNewWorld()

@@ -5,7 +5,7 @@ namespace Storage.CombatActions.StandardActions;
 
 public class ConcentrateMaintainActiveSpell() : StandardAction("Concentrate to maintain an active spell", false)
 {
-    protected override void Apply(Entity attacker, Entity target)
+    public override void Apply(Entity attacker, Entity target)
     {
         attacker.CombatInfo.ActionCount -= 1;
     }

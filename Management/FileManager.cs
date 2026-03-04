@@ -2,13 +2,14 @@
 using CGPFE.Domain.Characters.Common;
 using CGPFE.Domain.Characters.Player;
 using CGPFE.Domain.Characters.Player.Properties;
-using CGPFE.Domain.Characters.Player.Properties.Inventory;
 using CGPFE.Domain.Game;
 using CGPFE.Domain.World;
 using CGPFE.Domain.World.Geography;
 using CGPFE.Core.Enums;
 using CGPFE.Core.Utilities;
 using CGPFE.Management;
+using Domain.Characters.Inventory;
+using CGPFE.Storage.NPCs;
 
 namespace CGPFE.Management;
 
@@ -56,7 +57,6 @@ public static class FileManager
     private const string GameDataFileName = "Settings.json";
     private const string PlayerInfoFileName = "PlayerInfo.json";
     private const string AttributesFileName = "PlayerAttributes.json";
-    private const string AttributeModsFileName = "PlayerAttributeMods.json";
     private const string CombatInfoFileName = "CombatInfo.json";
     private const string WalletFileName = "PlayerWallet.json";
     private const string FeatsFileName = "PlayerFeats.json";
@@ -69,6 +69,7 @@ public static class FileManager
     private const string WeaponsFileName = "PlayerWeapons.json";
     private const string ArmorsFileName = "PlayerArmors.json";
     private const string ShieldsFileName = "PlayerShields.json";
+    private const string EquippedFileName = "Equipped.json";
 
     /*World data file names*/
     private const string RegionsFileName = "Regions.json";
@@ -82,14 +83,21 @@ public static class FileManager
     public static GameData RegisterGameData()
     {
         var g = GameDataManager.Instance.RegisterGameData();
+        if(DebugMode) Console.WriteLine("Registered game data, not saved to file");
         CreateGameDirectories();
+        if(DebugMode) Console.WriteLine("Created game directories.");
 
-        GameDataManager.Instance.AskNewCharacter();
+        var p = GameDataManager.Instance.AskNewCharacter();
+        if(DebugMode) Console.WriteLine("Asked new character and created it");
+        SavePlayerData(p);
+        PlayerDataManager.Instance.Player = p;
 
         if (!Directory.Exists(_campaignPath))
             Directory.CreateDirectory(_campaignPath);
+        if(DebugMode) Console.WriteLine($"Created directory at campaign path {_campaignPath}");
 
         SaveToFile(_gameDataPath, g, GameDataFileName);
+        if (DebugMode) Console.WriteLine($"Saved game data to file at path {_gameDataPath}\\{GameDataFileName}");
         GameDataManager.Instance.GameData = g;
 
         GameDataManager.Instance.AskNewWorld();
@@ -99,7 +107,8 @@ public static class FileManager
         SaveToFile(_worldPath, WorldManager.Instance.World.RegionNames, RegionsFileName);
         SaveWorldRegionFiles();
 
-
+        CombatManager.Instance.StartCombat(p, Beasts.Goblin);
+        
         return g;
     }
 
@@ -267,13 +276,10 @@ public static class FileManager
 
     #region Player File Management
 
-    public static void SavePlayerData()
+    public static void SavePlayerData(Player player)
     {
-        var player = PlayerDataManager.Instance.Player;
-
         SavePlayerProperty(player.PlayerInfo, PlayerInfoFileName);
         SavePlayerProperty(player.Attributes, AttributesFileName);
-        SavePlayerProperty(player.AttributeModifiers, AttributeModsFileName);
         SavePlayerProperty(player.Wallet, WalletFileName);
         SavePlayerProperty(player.CombatInfo, CombatInfoFileName);
         SavePlayerProperty(player.Feats, FeatsFileName);
@@ -281,6 +287,7 @@ public static class FileManager
         SavePlayerProperty(player.Inventory.Weapons, _inventoryPath, WeaponsFileName);
         SavePlayerProperty(player.Inventory.Armors, _inventoryPath, ArmorsFileName);
         SavePlayerProperty(player.Inventory.Shields, _inventoryPath, ShieldsFileName);
+        SavePlayerProperty(player.Inventory.Equipped, _inventoryPath, EquippedFileName);
 
         if (DebugMode)
             Console.WriteLine($"Loaded all files from {_playerPath}");
@@ -296,7 +303,6 @@ public static class FileManager
 
         PlayerDataManager.Instance.Player.PlayerInfo = LoadPlayerProperty<PlayerInfo>(PlayerInfoFileName);
         PlayerDataManager.Instance.Player.Attributes = LoadPlayerProperty<Attributes>(AttributesFileName);
-        PlayerDataManager.Instance.Player.AttributeModifiers = LoadPlayerProperty<Attributes>(AttributeModsFileName);
         PlayerDataManager.Instance.Player.Wallet = LoadPlayerProperty<Wallet>(WalletFileName);
         PlayerDataManager.Instance.Player.CombatInfo = LoadPlayerProperty<CombatInfo>(CombatInfoFileName);
         PlayerDataManager.Instance.Player.Inventory = LoadPlayerInventory();
@@ -305,7 +311,6 @@ public static class FileManager
         {
             PlayerInfo = PlayerDataManager.Instance.Player.PlayerInfo,
             Attributes = PlayerDataManager.Instance.Player.Attributes,
-            AttributeModifiers = PlayerDataManager.Instance.Player.AttributeModifiers,
             Inventory = PlayerDataManager.Instance.Player.Inventory,
             Wallet = PlayerDataManager.Instance.Player.Wallet
         };
@@ -318,7 +323,8 @@ public static class FileManager
             Items = LoadPlayerProperty<List<InventoryItem>>(_inventoryPath, ItemsFileName),
             Weapons = LoadPlayerProperty<List<InventoryItem>>(_inventoryPath, WeaponsFileName),
             Armors = LoadPlayerProperty<List<InventoryItem>>(_inventoryPath, ArmorsFileName),
-            Shields = LoadPlayerProperty<List<InventoryItem>>(_inventoryPath, ShieldsFileName)
+            Shields = LoadPlayerProperty<List<InventoryItem>>(_inventoryPath, ShieldsFileName),
+            Equipped = LoadPlayerProperty<EquippedInventory>(_inventoryPath, EquippedFileName)
         };
     }
 

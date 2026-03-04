@@ -5,7 +5,7 @@ namespace Storage.CombatActions.FreeActions;
 
 public class Speak() : FreeAction("Speak", false)
 {
-    protected override void Apply(Entity attacker, Entity target)
+    public override void Apply(Entity attacker, Entity target)
     {
         throw new NotImplementedException();
     }

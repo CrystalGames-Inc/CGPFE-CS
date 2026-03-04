@@ -3,11 +3,12 @@ using CGPFE.Storage.Items.Equipment.Defense;
 using CGPFE.Storage.Items.Equipment.Offense;
 using CGPFE.Domain.Characters.Common;
 using CGPFE.Domain.Characters.Player;
-using CGPFE.Domain.Characters.Player.Properties.Inventory;
 using CGPFE.Domain.Items.Equipment.Defense;
 using CGPFE.Domain.Items.Equipment.Offense;
 using CGPFE.Core.Enums;
 using CGPFE.Core.Utilities;
+using Domain.Characters.Inventory;
+using Storage;
 
 namespace CGPFE.Management;
 
@@ -33,7 +34,7 @@ public class PlayerDataManager
 
     #region Player Registration
 
-    public void RegisterPlayer()
+    public Player RegisterPlayer()
     {
         Player.PlayerInfo.Name = PromptHelper.TextPrompt("Please choose the player's name: ");
 
@@ -58,9 +59,8 @@ public class PlayerDataManager
         //TODO add the rest of the registration & calculation methods here :)
 
         CalculatePlayerCombatInfo();
-        CalculateAbilityModifiers();
 
-        FileManager.SavePlayerData();
+        return Player;
     }
 
     private void RegisterAbilityScores()
@@ -164,8 +164,6 @@ public class PlayerDataManager
 
             Console.WriteLine($"Assigned {chosenScore} to {attribute}");
         }
-
-        CalculateAbilityModifiers();
     }
 
     private void RegisterPlayerAge()
@@ -391,41 +389,6 @@ public class PlayerDataManager
         }
     }
 
-    private void CalculateAbilityModifiers()
-    {
-        int[] abilities = [Player.Attributes.Strength.value,
-            Player.Attributes.Dexterity.value,
-            Player.Attributes.Constitution.value,
-            Player.Attributes.Intelligence.value,
-            Player.Attributes.Wisdom.value,
-            Player.Attributes.Charisma.value];
-        var abilityMods = new int[6];
-
-        for (var i = 0; i < abilities.Length; i++)
-        {
-            double value = abilities[i];
-            abilityMods[i] = (int)Math.Floor((value - 10) / 2);
-        }
-
-        Player.AttributeModifiers.Strength = new AbilityScore(abilityMods[0]);
-        Player.AttributeModifiers.Dexterity = new AbilityScore(abilityMods[1]);
-        Player.AttributeModifiers.Constitution = new AbilityScore(abilityMods[2]);
-        Player.AttributeModifiers.Intelligence = new AbilityScore(abilityMods[3]);
-        Player.AttributeModifiers.Wisdom = new AbilityScore(abilityMods[4]);
-        Player.AttributeModifiers.Charisma = new AbilityScore(abilityMods[5]);
-
-        CalculateInitMod();
-    }
-
-    private void CalculateInitMod()
-    {
-        var init = 0;
-
-        init += Player.AttributeModifiers.Dexterity.value;
-
-        Player.CombatInfo.InitMod = init;
-    }
-
     private void CalculatePlayerCombatInfo()
     {
         CalculateArmorClass();
@@ -437,18 +400,20 @@ public class PlayerDataManager
     {
         var ac = 10;
 
-        if (Player.Inventory.Armors != null)
+        if (Player.Inventory.Equipped.Armor != string.Empty)
         {
-            ac += Player.Inventory.Armors.Sum(a => Player.GetMatchingItem<Armor>(a.Name, availableItems: Armors.armors).ArmorBonus);
+            Armor? armor = StorageNavigator.GetMatchingT(Player.Inventory.Equipped.Armor, Armors.armors);
+            ac += armor == null ? 0 : armor.ArmorBonus;
         }
 
-        if (Player.Inventory.Shields != null)
+        if (Player.Inventory.Equipped.Shield != string.Empty)
         {
-            ac += Player.Inventory.Shields.Sum(s => Player.GetMatchingItem<Shield>(s.Name, Shields.shields).ShieldBonus);
+            Shield? shield = StorageNavigator.GetMatchingT(Player.Inventory.Equipped.Shield, Shields.shields);
+            ac += shield == null ? 0 : shield.ShieldBonus;
         }
 
-        ac += Player.AttributeModifiers.Dexterity.value;
-        ac += Player.PlayerInfo.GetSizeMod();
+        ac += Player.Attributes.Dexterity.Modifier;
+        ac += Player.Attributes.SizeMod;
 
         Player.CombatInfo.ArmorClass = ac;
     }
@@ -458,8 +423,8 @@ public class PlayerDataManager
         var cmb = 0;
 
         cmb += Player.CombatInfo.BaseAttackBonus;
-        cmb += Player.AttributeModifiers.Strength.value;
-        cmb += Player.PlayerInfo.GetSizeMod();
+        cmb += Player.Attributes.Strength.Modifier;
+        cmb += Player.Attributes.SizeMod;
 
         Player.CombatInfo.CombatManeuverBonus = cmb;
     }
@@ -469,34 +434,34 @@ public class PlayerDataManager
         var cmd = 10;
 
         cmd += Player.CombatInfo.BaseAttackBonus;
-        cmd += Player.AttributeModifiers.Strength.value;
-        cmd += Player.AttributeModifiers.Dexterity.value;
-        cmd += Player.PlayerInfo.GetSizeMod();
+        cmd += Player.Attributes.Strength.Modifier;
+        cmd += Player.Attributes.Dexterity.Modifier;
+        cmd += Player.Attributes.SizeMod;
 
         Player.CombatInfo.CombatManeuverDefense = cmd;
     }
 
     private void CalculateMaxHealth()
     {
-        Player.PlayerInfo.MaxHealth = Player.PlayerInfo.Class switch
+        Player.CombatInfo.MaxHealth = Player.PlayerInfo.Class switch
         {
-            Class.Alchemist => 9 + Player.AttributeModifiers.Constitution.value,
-            Class.Barbarian => 13 + Player.AttributeModifiers.Constitution.value,
-            Class.Bard => 9 + Player.AttributeModifiers.Constitution.value,
-            Class.Cavalier => 11 + Player.AttributeModifiers.Constitution.value,
-            Class.Cleric => 9 + Player.AttributeModifiers.Constitution.value,
-            Class.Druid => 9 + Player.AttributeModifiers.Constitution.value,
-            Class.Fighter => 11 + Player.AttributeModifiers.Constitution.value,
-            Class.Inquisitor => 9 + Player.AttributeModifiers.Constitution.value,
-            Class.Monk => 9 + Player.AttributeModifiers.Constitution.value,
-            Class.Oracle => 9 + Player.AttributeModifiers.Constitution.value,
-            Class.Paladin => 11 + Player.AttributeModifiers.Constitution.value,
-            Class.Ranger => 11 + Player.AttributeModifiers.Constitution.value,
-            Class.Rogue => 9 + Player.AttributeModifiers.Constitution.value,
-            Class.Sorcerer => 7 + Player.AttributeModifiers.Constitution.value,
-            Class.Summoner => 9 + Player.AttributeModifiers.Constitution.value,
-            Class.Witch => 7 + Player.AttributeModifiers.Constitution.value,
-            Class.Wizard => 7 + Player.AttributeModifiers.Constitution.value
+            Class.Alchemist => 9 + Player.Attributes.Constitution.Modifier,
+            Class.Barbarian => 13 + Player.Attributes.Constitution.Modifier,
+            Class.Bard => 9 + Player.Attributes.Constitution.Modifier,
+            Class.Cavalier => 11 + Player.Attributes.Constitution.Modifier,
+            Class.Cleric => 9 + Player.Attributes.Constitution.Modifier,
+            Class.Druid => 9 + Player.Attributes.Constitution.Modifier,
+            Class.Fighter => 11 + Player.Attributes.Constitution.Modifier,
+            Class.Inquisitor => 9 + Player.Attributes.Constitution.Modifier,
+            Class.Monk => 9 + Player.Attributes.Constitution.Modifier,
+            Class.Oracle => 9 + Player.Attributes.Constitution.Modifier,
+            Class.Paladin => 11 + Player.Attributes.Constitution.Modifier,
+            Class.Ranger => 11 + Player.Attributes.Constitution.Modifier,
+            Class.Rogue => 9 + Player.Attributes.Constitution.Modifier,
+            Class.Sorcerer => 7 + Player.Attributes.Constitution.Modifier,
+            Class.Summoner => 9 + Player.Attributes.Constitution.Modifier,
+            Class.Witch => 7 + Player.Attributes.Constitution.Modifier,
+            Class.Wizard => 7 + Player.Attributes.Constitution.Modifier
         };
     }
 
@@ -591,7 +556,10 @@ public class PlayerDataManager
             Console.WriteLine("Please enter the index of the weapon you'd like to purchase (0 to advance to armors): ");
             var ans = Convert.ToInt32(Console.ReadLine());
             if (ans == 0)
+            {
                 PurchaseStartingArmor();
+
+            }
             else if (ans > purchasableWeapons.Count)
             {
                 Console.WriteLine("Invalid weapon index entered");
@@ -599,8 +567,10 @@ public class PlayerDataManager
             }
             else
             {
-                Player.Inventory.Weapons.Add(new InventoryItem(purchasableWeapons[ans - 1].Name));
-                Player.Wallet.GoldPieces -= purchasableWeapons[ans - 1].Cost;
+                Weapon weapon = purchasableWeapons[ans - 1];
+                Player.Inventory.Weapons.Add(new InventoryItem(weapon.Name));
+                Player.Wallet.GoldPieces -= weapon.Cost;
+                Player.Inventory.Equipped.Weapon = weapon.Name;
             }
 
             if (PromptHelper.YesNoPrompt("Would you like to purchase another weapon? ", true))
@@ -634,8 +604,10 @@ public class PlayerDataManager
             }
             else
             {
-                Player.Inventory.Armors.Add(new InventoryItem(purchasableArmors[ans - 1].Name));
-                Player.Wallet.GoldPieces -= purchasableArmors[ans - 1].Cost;
+                Armor armor = purchasableArmors[ans - 1];
+                Player.Inventory.Armors.Add(new InventoryItem(armor.Name));
+                Player.Wallet.GoldPieces -= armor.Cost;
+                Player.Inventory.Equipped.Armor = armor.Name;
             }
 
 
@@ -669,8 +641,10 @@ public class PlayerDataManager
                 continue;
             }
             {
-                Player.Inventory.Shields.Add(new InventoryItem(purchasableShields[ans - 1].Name));
-                Player.Wallet.GoldPieces -= purchasableShields[ans - 1].Cost;
+                Shield shield = purchasableShields[ans - 1];
+                Player.Inventory.Shields.Add(new InventoryItem(shield.Name));
+                Player.Wallet.GoldPieces -= shield.Cost;
+                Player.Inventory.Equipped.Shield = shield.Name;
             }
 
             if (!PromptHelper.YesNoPrompt("Would you like to purchase another shield? ", true))

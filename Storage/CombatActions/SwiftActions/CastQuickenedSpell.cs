@@ -5,7 +5,7 @@ namespace Storage.CombatActions.SwiftActions;
 
 public class CastQuickenedSpell() : SwiftAction("Cast a quickened spell", false)
 {
-    protected override void Apply(Entity attacker, Entity target)
+    public override void Apply(Entity attacker, Entity target)
     {
         attacker.CombatInfo.SwiftActionCount -= 1;
     }

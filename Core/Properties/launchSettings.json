@@ -2,7 +2,7 @@
   "profiles": {
     "Profile 1": {
       "commandName": "Executable",
-      "executablePath": "C:\\Users\\Admin\\Documents\\GitHub\\CGPFE-CS\\CGPFE\\bin\\Debug\\net8.0\\CGPFE.exe"
+      "executablePath": "C:\\Users\\IMOE001\\Documents\\GitHub\\CGPFE-CS\\CLI\\bin\\Debug\\net8.0\\CLI.exe"
     }
   }
 }

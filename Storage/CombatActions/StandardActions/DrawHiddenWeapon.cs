@@ -5,7 +5,7 @@ namespace Storage.CombatActions.StandardActions;
 
 public class DrawHiddenWeapon() : StandardAction("Draw a hidden weapon", false)
 {
-    protected override void Apply(Entity attacker, Entity target)
+    public override void Apply(Entity attacker, Entity target)
     {
         attacker.CombatInfo.ActionCount -= 1;
     }

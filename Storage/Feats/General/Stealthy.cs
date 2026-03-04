@@ -1,5 +1,6 @@
 ﻿using CGPFE.Domain.Characters.Feat;
 using CGPFE.Domain.Characters.Player;
+using CGPFE.Storage.Skills;
 
 namespace Storage.Feats.General;
 
@@ -10,10 +11,10 @@ public class Stealthy() : Feat("Stealthy")
     }
 
     public override void ApplyBenefits(ref Player player) {
-        player.GetMatchingSkill("Escape Artist").Bonus.SetMiscMod(
-            player.GetMatchingSkill("Escape Artist").Bonus.Ranks >= 10 ? 4 : 2);
+        player.GetMatchingSkill("Escape Artist", [.. Skills.skills]).Bonus.
+            ChangeMiscMod(player.GetMatchingSkill("Escape Artist", [.. Skills.skills]).Bonus.Ranks >= 10 ? 4 : 2);
 
-        player.GetMatchingSkill("Stealth").Bonus.SetMiscMod(
-            player.GetMatchingSkill("Stealth").Bonus.Ranks >= 10 ? 4 : 2);
+        player.GetMatchingSkill("Stealth", [.. Skills.skills]).Bonus.
+    ChangeMiscMod(player.GetMatchingSkill("Stealth", [.. Skills.skills]).Bonus.Ranks >= 10 ? 4 : 2);
     }
 }

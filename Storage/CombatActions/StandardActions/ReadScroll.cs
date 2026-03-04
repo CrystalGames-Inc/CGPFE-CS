@@ -5,7 +5,7 @@ namespace Storage.CombatActions.StandardActions;
 
 public class ReadScroll() : StandardAction("Read a scroll", true)
 {
-    protected override void Apply(Entity attacker, Entity target)
+    public override void Apply(Entity attacker, Entity target)
     {
         attacker.CombatInfo.ActionCount -= 1;
     }

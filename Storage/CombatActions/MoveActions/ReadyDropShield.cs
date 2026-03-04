@@ -5,7 +5,7 @@ namespace Storage.CombatActions.MoveActions;
 
 public class ReadyDropShield() : MoveAction("Ready or drop a shield", false)
 {
-    protected override void Apply(Entity attacker, Entity target)
+    public override void Apply(Entity attacker, Entity target)
     {
         attacker.CombatInfo.ActionCount -= 1;
     }

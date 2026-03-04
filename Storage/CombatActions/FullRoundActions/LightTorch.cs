@@ -5,7 +5,7 @@ namespace Storage.CombatActions.FullRoundActions;
 
 public class LightTorch() : FullRoundAction("Light a torch", true)
 {
-    protected override void Apply(Entity attacker, Entity target)
+    public override void Apply(Entity attacker, Entity target)
     {
         attacker.CombatInfo.ActionCount = 0;
     }

@@ -14,7 +14,7 @@ namespace CGPFE.Core.CLI
         public string? CurrentCampaign { get; private set; }
 
         public CGPFEShell() {
-            RegisterCommand(new NewCommand());
+            RegisterCommand(new NewCommand(this));
             RegisterCommand(new ClearCommand());
             //RegisterCommand(new LoadCommand(this));
             //RegisterCommand(new DeleteCommand());
@@ -24,6 +24,7 @@ namespace CGPFE.Core.CLI
             // Commands that require a loaded campaign
             //RegisterCommand(new SaveCommand(this));
             RegisterCommand(new AddCharacterCommand(this));
+            RegisterCommand(new StartRoundCommand());
         }
 
         private void RegisterCommand(ICommand cmd) {
@@ -70,7 +71,6 @@ namespace CGPFE.Core.CLI
                 return;
             }
 
-            // Check if this command requires a campaign loaded
             if(command.RequiresCampaign is not null and true && CurrentCampaign == null) {
                 Error("This command requires an active campaign.");
                 return;
@@ -119,27 +119,36 @@ namespace CGPFE.Core.CLI
 
     public class NewCommand : ICommand
     {
+        private readonly CGPFEShell _shell;
+
+        public NewCommand(CGPFEShell shell) => _shell = shell;
+
         public string Name => "new";
         public string Description => "Creates a new campaign";
-        public bool? RequiresCampaign => null;
+        public bool? RequiresCampaign => false;
 
-        public void Execute(string[] args) {
-            if (args.Length == 0) {
-                FileManager.RegisterGameData(); 
-                return; 
+        public void Execute(string[] args)
+        {
+            GameData? g;
+            if (args.Length > 0 && args[0].ToLower() == "-debug")
+            {
+                FileManager.DebugMode = true;
+                g = FileManager.RegisterGameData();
             }
-            switch (args[0].ToLower()) {
-                case "-debug":
-                    FileManager.DebugMode = true;
-                    FileManager.RegisterGameData();
-                    break;
-                case "help":
-                    Console.WriteLine("Overloads for command 'new':");
-                    Console.WriteLine("  -debug: Displays debug information");
-                    break;
-                default:
-                    Console.WriteLine($"Unknown overload {args[0]}. Use 'new help' for a list of overloads.");
-                    break;
+            else if (args.Length > 0 && args[0].ToLower() == "help")
+            {
+                Console.WriteLine($"Overloads for command '{Name}':");
+                Console.WriteLine("  -debug: Displays debug information");
+                return;
+            }
+            else
+            {
+                g = FileManager.RegisterGameData();
+            }
+
+            if (g != null && !string.IsNullOrEmpty(g.CampaignName))
+            {
+                _shell.LoadCampaign(g.CampaignName);
             }
         }
     }
@@ -179,6 +188,31 @@ namespace CGPFE.Core.CLI
             string? name = Console.ReadLine();
 
             Console.WriteLine($"Added character '{name}' to {_shell.CurrentCampaign}.");
+        }
+    }
+
+    public class StartRoundCommand : ICommand
+    {
+        public string Name => "startround";
+        public string Description => "Starts a single combat round for the player (requires active campaign)";
+        public bool? RequiresCampaign => true;
+
+        public void Execute(string[] args)
+        {
+            var player = PlayerDataManager.Instance.Player;
+            if (player == null)
+            {
+                CGPFEShell.Error("No player loaded.");
+                return;
+            }
+
+            if (player.CombatInfo == null)
+            {
+                CGPFEShell.Error("No active combat. Use 'startcombat' to begin an encounter.");
+                return;
+            }
+
+            CombatManager.Instance.StartRound(player);
         }
     }
 }

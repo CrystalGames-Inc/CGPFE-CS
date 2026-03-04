@@ -5,7 +5,7 @@ namespace Storage.CombatActions.StandardActions;
 
 public class EscapeGrapple() : StandardAction("Escape a grapple", false)
 {
-    protected override void Apply(Entity attacker, Entity target)
+    public override void Apply(Entity attacker, Entity target)
     {
         attacker.CombatInfo.ActionCount -= 1;
     }

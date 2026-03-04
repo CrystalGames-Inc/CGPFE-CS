@@ -5,7 +5,7 @@ namespace Storage.CombatActions.MoveActions;
 
 public class SheatheWeapon() : MoveAction("Sheathe a weapon", true)
 {
-    protected override void Apply(Entity attacker, Entity target)
+    public override void Apply(Entity attacker, Entity target)
     {
         attacker.CombatInfo.ActionCount -= 1;
     }

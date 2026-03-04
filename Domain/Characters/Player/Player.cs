@@ -1,10 +1,11 @@
 ﻿using Attribute = CGPFE.Core.Enums.Attribute;
 using CGPFE.Domain.Characters.Common;
 using CGPFE.Domain.Characters.Player.Properties;
-using CGPFE.Domain.Characters.Player.Properties.Inventory;
 using CGPFE.Domain.Characters.Skill;
 using CGPFE.Domain.World.Geography;
 using CGPFE.Domain.World.Settlements;
+using Domain.Characters.Inventory;
+using CGPFE.Core.Enums;
 
 namespace CGPFE.Domain.Characters.Player;
 
@@ -12,41 +13,29 @@ public class Player : Entity
 {
     public PlayerInfo PlayerInfo { get; set; } = new();
     public Attributes Attributes { get; set; } = new();
-    public Attributes AttributeModifiers { get; set; } = new() { MoveSpeed = new AbilityScore(0) };
     public CombatInfo CombatInfo { get; set; } = new();
     public List<string> ClassSkills { get; set; } = [];
     public List<string> Feats { get; set; } = [];
     public Inventory Inventory { get; set; } = new();
     public Wallet Wallet = new();
+    public List<Language> KnownLanguages { get; set; } = new();
 
     #region Getters
 
-    public int GetValueForKey(string key) {
+    public override int GetValueForKey(string key) {
         return key.ToUpper() switch {
             "LVL" => PlayerInfo.Level,
             "CLS" => (int)PlayerInfo.Class,
             "RCE" => (int)PlayerInfo.Race,
-            "SZE" => (int)PlayerInfo.Size,
+            "SZE" => (int)Attributes.Size,
             _ => base.GetValueForKey(key)
         };
     }
 
-    public int GetAbilityScore(Attribute ability) {
-        return ability switch {
-            Attribute.Strength => Attributes.Strength.value,
-            Attribute.Dexterity => Attributes.Dexterity.value,
-            Attribute.Constitution => Attributes.Constitution.value,
-            Attribute.Intelligence => Attributes.Intelligence.value,
-            Attribute.Wisdom => Attributes.Wisdom.value,
-            Attribute.Charisma => Attributes.Charisma.value,
-            _ => 0
-        };
-    }
 
-
-    public Skill.Skill? GetMatchingSkill(string skillName) {
+    public Skill.Skill? GetMatchingSkill(string skillName, List<Skill.Skill> availableSkills) {
         if (string.IsNullOrEmpty(skillName)) return null;
-        return Skills.skills.FirstOrDefault(skill => skill.Name.ToUpper().Equals(skillName, StringComparison.OrdinalIgnoreCase));
+        return availableSkills.FirstOrDefault(skill => skill.Name.ToUpper().Equals(skillName, StringComparison.OrdinalIgnoreCase));
     }
 
     #endregion
@@ -64,13 +53,13 @@ public class Player : Entity
         Console.WriteLine($"  Alignment: {PlayerInfo.Alignment}");
         Console.WriteLine($"  Age: {PlayerInfo.Age}");
         Console.WriteLine($"  Race: {PlayerInfo.Race}");
-        Console.WriteLine($"  Size: {PlayerInfo.Size}");
-        Console.WriteLine($"  Size Modifier: {PlayerInfo.GetSizeMod()}");
+        Console.WriteLine($"  Size: {Attributes.Size}");
+        Console.WriteLine($"  Size Modifier: {Attributes.SizeMod}");
         Console.WriteLine($"  Class: {PlayerInfo.Class}");
         Console.WriteLine($"  Level: {PlayerInfo.Level}");
         Console.WriteLine($"  Current XP: {PlayerInfo.Xp}");
-        Console.WriteLine($"  Maximum Health: {PlayerInfo.MaxHealth}");
-        Console.WriteLine($"  Current Health: {PlayerInfo.Health}");
+        Console.WriteLine($"  Maximum Health: {CombatInfo.MaxHealth}");
+        Console.WriteLine($"  Current Health: {CombatInfo.Health}");
     }
 
     public void DisplayAttributes() {
@@ -86,18 +75,17 @@ public class Player : Entity
 
     public void DisplayAttributeMods() {
         Console.WriteLine("Attribute Modifiers: ");
-        Console.WriteLine($"  Strength: {AttributeModifiers.Strength}");
-        Console.WriteLine($"  Dexterity: {AttributeModifiers.Dexterity}");
-        Console.WriteLine($"  Constitution: {AttributeModifiers.Constitution}");
-        Console.WriteLine($"  Intelligence: {AttributeModifiers.Intelligence}");
-        Console.WriteLine($"  Wisdom: {AttributeModifiers.Wisdom}");
-        Console.WriteLine($"  Charisma: {AttributeModifiers.Charisma}");
-        Console.WriteLine($"  Move Speed: {AttributeModifiers.MoveSpeed}");
+        Console.WriteLine($"  Strength: {Attributes.Strength.Modifier}");
+        Console.WriteLine($"  Dexterity: {Attributes.Dexterity.Modifier}");
+        Console.WriteLine($"  Constitution: {Attributes.Constitution.Modifier}");
+        Console.WriteLine($"  Intelligence: {Attributes.Intelligence.Modifier}");
+        Console.WriteLine($"  Wisdom: {Attributes.Wisdom.Modifier}");
+        Console.WriteLine($"  Charisma: {Attributes.Charisma.Modifier}");
     }
 
     public void DisplayCombatInfo() {
         Console.WriteLine("Combat Info: ");
-        Console.WriteLine($"  Init Modifier: {CombatInfo.InitMod}");
+        Console.WriteLine($"  Init Modifier: {Attributes.Initiative.Modifier}");
         Console.WriteLine($"  Base Attack  {CombatInfo.BaseAttackBonus}");
         Console.WriteLine($"  Fortitude: {CombatInfo.Fortitude}");
         Console.WriteLine($"  Reflex: {CombatInfo.Reflex}");

@@ -5,7 +5,7 @@ namespace Storage.CombatActions.MoveActions;
 
 public class LoadLightHandCrossbow() : MoveAction("Load a hand crossbow or light crossbow", true)
 {
-    protected override void Apply(Entity attacker, Entity target)
+    public override void Apply(Entity attacker, Entity target)
     {
         attacker.CombatInfo.ActionCount -= 1;
     }

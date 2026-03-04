@@ -1,6 +1,7 @@
 ﻿using CGPFE.Domain.Characters.Feat;
 using CGPFE.Domain.Characters.Player;
 using CGPFE.Core.Enums;
+using CGPFE.Storage.Skills;
 
 namespace Storage.Feats.Combat;
 
@@ -11,7 +12,7 @@ public class IntimidatingProwess() : Feat("Intimidating Prowess", FeatType.Comba
     }
 
     public override void ApplyBenefits(ref Player player) {
-        player.GetMatchingSkill("Intimidate").Bonus.MiscMod
-            += player.AttributeModifiers.Strength.value;
+        player.GetMatchingSkill("Intimidate", [.. Skills.skills]).Bonus.MiscMod
+            += player.Attributes.Strength.Modifier;
     }
 }

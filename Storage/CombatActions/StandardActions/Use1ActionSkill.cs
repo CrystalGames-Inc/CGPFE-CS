@@ -5,7 +5,7 @@ namespace Storage.CombatActions.StandardActions;
 
 public class Use1ActionSkill() : StandardAction("Use skill that takes 1 action", true)
 {
-    protected override void Apply(Entity attacker, Entity target)
+    public override void Apply(Entity attacker, Entity target)
     {
         attacker.CombatInfo.ActionCount -= 1;
     }

@@ -5,7 +5,7 @@ namespace Storage.CombatActions.MoveActions;
 
 public class MountDismountSteed() : MoveAction("Mount or dismount a steed", false)
 {
-    protected override void Apply(Entity attacker, Entity target)
+    public override void Apply(Entity attacker, Entity target)
     {
         attacker.CombatInfo.ActionCount -= 1;
     }

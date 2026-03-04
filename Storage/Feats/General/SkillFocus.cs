@@ -1,5 +1,6 @@
 ﻿using CGPFE.Domain.Characters.Feat;
 using CGPFE.Domain.Characters.Player;
+using CGPFE.Storage.Skills;
 
 namespace Storage.Feats.General;
 
@@ -20,9 +21,7 @@ public class SkillFocus : Feat
     }
 
     public override void ApplyBenefits(ref Player player) {
-        if (player.GetMatchingSkill(SkillName).Bonus.Ranks >= 10)
-            player.GetMatchingSkill(SkillName).Bonus.MiscMod += 6;
-        else
-            player.GetMatchingSkill(SkillName).Bonus.MiscMod += 3;
+        player.GetMatchingSkill(SkillName, [..Skills.skills]).Bonus.
+            ChangeMiscMod(player.GetMatchingSkill(SkillName, [..Skills.skills]).Bonus.Ranks >= 10 ? 6 : 3);
     }
 }

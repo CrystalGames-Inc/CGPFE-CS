@@ -2,8 +2,9 @@
 
 namespace CGPFE.Domain.Characters.NPC.Properties;
 
-public class Info
+public class NPCInfo
 {
+    public float? CR;
     public string Name;
     public string? Nickname;
     public NpcType Type;
@@ -12,5 +13,8 @@ public class Info
     public NpcClass Class;
     public Alignment Alignment;
     public Gender Gender;
-    public int Level;
+    public int? Level;
+    public int? XP;
+    public Dictionary<string, int>? SkillBonuses;
+    public string[]? Feats;
 }

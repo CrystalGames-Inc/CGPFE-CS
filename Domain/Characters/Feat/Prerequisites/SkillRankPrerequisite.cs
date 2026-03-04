@@ -8,8 +8,8 @@ public class SkillRankPrerequisite(string skillName, int minRanks) : IPrerequisi
     private string SkillName { get; set; } = skillName;
     private int MinRanks { get; set; } = minRanks;
 
-    public bool IsSatisfiedBy(Player.Player player) {
-        var skill = player.GetMatchingSkill(SkillName);
+    public bool IsSatisfiedBy(Player.Player player, List<Skill.Skill> skills) {
+        var skill = player.GetMatchingSkill(SkillName, skills);
         return skill is not null && skill.Bonus.Ranks >= MinRanks;
     }
 }

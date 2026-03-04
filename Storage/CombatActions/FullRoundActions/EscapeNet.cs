@@ -5,7 +5,7 @@ namespace Storage.CombatActions.FullRoundActions;
 
 public class EscapeNet() : FullRoundAction("Escape from net", true)
 {
-    protected override void Apply(Entity attacker, Entity target)
+    public override void Apply(Entity attacker, Entity target)
     {
         attacker.CombatInfo.ActionCount = 0;
     }

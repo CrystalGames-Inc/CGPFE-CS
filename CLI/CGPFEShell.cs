@@ -1,5 +1,6 @@
 ﻿using CGPFE.Core.Utilities;
 using CGPFE.Management;
+using CGPFE.Storage.NPCs;
 
 namespace CGPFE.CLI
 {
@@ -12,7 +13,7 @@ namespace CGPFE.CLI
 
         public CGPFEShell()
         {
-            RegisterCommand(new NewCommand());
+            RegisterCommand(new NewCommand(this));
             RegisterCommand(new ClearCommand());
             //RegisterCommand(new LoadCommand(this));
             //RegisterCommand(new DeleteCommand());
@@ -135,15 +136,18 @@ namespace CGPFE.CLI
 
     public class NewCommand : ICommand
     {
+        private readonly CGPFEShell _shell;
+        public NewCommand(CGPFEShell shell) => _shell = shell;
         public string Name => "new";
         public string Description => "Creates a new campaign";
-        public bool? RequiresCampaign => null;
+        public bool? RequiresCampaign => false;
 
         public void Execute(string[] args)
         {
             if (args.Length == 0)
             {
-                FileManager.RegisterGameData();
+                 FileManager.RegisterGameData();
+                
                 return;
             }
             switch (args[0].ToLower())
@@ -184,6 +188,17 @@ namespace CGPFE.CLI
         public void Execute(string[] args)
         {
             Environment.Exit(0);
+        }
+    }
+
+    public class StartCombatCommand : ICommand
+    {
+        public string Name => "startcombat";
+        public string Description => "Starts a combat encounter";
+        public bool? RequiresCampaign => true;
+        public void Execute(string[] args)
+        {
+            CombatManager.Instance.StartCombat(PlayerDataManager.Instance.Player, Beasts.Goblin);
         }
     }
 

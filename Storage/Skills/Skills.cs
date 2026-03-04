@@ -1,8 +1,7 @@
 ﻿using Attribute = CGPFE.Core.Enums.Attribute;
 using CGPFE.Domain.Characters.Skill;
-using CGPFE.Core.Enums;
 
-namespace CGPFE.Domain.Characters.Skill;
+namespace CGPFE.Storage.Skills;
 
 public static class Skills
 {

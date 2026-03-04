@@ -41,4 +41,9 @@ public class SkillBonus
         CalculateBonus();
     }
 
+    public void ChangeMiscMod(int size) {
+        MiscMod += size;
+        CalculateBonus();
+    }
+
 }

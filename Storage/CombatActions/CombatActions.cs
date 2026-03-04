@@ -9,7 +9,7 @@ using CGPFE.Domain.Combat.Action;
 
 namespace CGPFE.Storage.CombatActions;
 
-public static class GameActions
+public static class CombatActions
 {
     public static List<CombatAction> FreeActions { get; } = [
         new CeaseSpellConcentration(),
@@ -89,4 +89,13 @@ public static class GameActions
     public static List<CombatAction> SwiftActions { get; } = [
         new CastQuickenedSpell()
     ];
+
+    public static List<CombatAction> combatActions = FreeActions
+        .Concat(FullRoundActions)
+        .Concat(ImmediateActions)
+        .Concat(MoveActions)
+        .Concat(NoActions)
+        .Concat(StandardActions)
+        .Concat(SwiftActions)
+        .ToList();
 }

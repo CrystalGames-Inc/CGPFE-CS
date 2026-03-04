@@ -10,6 +10,6 @@ public class Toughness() : Feat("Toughness")
     }
 
     public override void ApplyBenefits(ref Player player) {
-        player.PlayerInfo.MaxHealth += 3;
+        player.CombatInfo.MaxHealth += 3;
     }
 }

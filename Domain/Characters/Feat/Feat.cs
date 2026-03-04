@@ -15,5 +15,5 @@ public abstract class Feat
     }
 
     public abstract bool CanAcquire(Player.Player player);
-    public abstract void ApplyBenefits(ref Player.Player player);
+    public virtual void ApplyBenefits(ref Player.Player player) { }
 }
