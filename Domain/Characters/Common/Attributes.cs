@@ -33,6 +33,7 @@ public class Attributes
         Intelligence = new AbilityScore(0);
         Wisdom = new AbilityScore(0);
         Charisma = new AbilityScore(0);
+        Initiative = new AbilityScore(0);
         MoveSpeed = 30;
     }
 }

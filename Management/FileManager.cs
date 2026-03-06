@@ -90,7 +90,6 @@ public static class FileManager
         var p = GameDataManager.Instance.AskNewCharacter();
         if(DebugMode) Console.WriteLine("Asked new character and created it");
         SavePlayerData(p);
-        PlayerDataManager.Instance.Player = p;
 
         if (!Directory.Exists(_campaignPath))
             Directory.CreateDirectory(_campaignPath);
@@ -98,7 +97,20 @@ public static class FileManager
 
         SaveToFile(_gameDataPath, g, GameDataFileName);
         if (DebugMode) Console.WriteLine($"Saved game data to file at path {_gameDataPath}\\{GameDataFileName}");
-        GameDataManager.Instance.GameData = g;
+
+        try
+        {
+            Console.WriteLine("Attempting to start combat");
+            CombatManager.Instance.StartCombat(p, Beasts.Goblin);
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine("Could not start combat: " + ex.Message);
+        }
+        finally
+        {
+            Console.WriteLine("Combat attempt finished");
+        }
 
         GameDataManager.Instance.AskNewWorld();
         if (WorldManager.Instance.World.RegionNames == null) return g;
@@ -107,7 +119,6 @@ public static class FileManager
         SaveToFile(_worldPath, WorldManager.Instance.World.RegionNames, RegionsFileName);
         SaveWorldRegionFiles();
 
-        CombatManager.Instance.StartCombat(p, Beasts.Goblin);
         
         return g;
     }

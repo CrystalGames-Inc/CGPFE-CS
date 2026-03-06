@@ -134,6 +134,7 @@ namespace CGPFE.Core.CLI
             {
                 FileManager.DebugMode = true;
                 g = FileManager.RegisterGameData();
+                CombatManager.StartCombat(PlayerDataManager.Instance.Player, Beasts.Goblin);
             }
             else if (args.Length > 0 && args[0].ToLower() == "help")
             {

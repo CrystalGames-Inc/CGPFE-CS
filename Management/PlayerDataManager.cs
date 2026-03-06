@@ -402,13 +402,13 @@ public class PlayerDataManager
 
         if (Player.Inventory.Equipped.Armor != string.Empty)
         {
-            Armor? armor = StorageNavigator.GetMatchingT(Player.Inventory.Equipped.Armor, Armors.armors);
+            Armor? armor = StorageNavigator.GetMatchingItem(Player.Inventory.Equipped.Armor, Armors.armors);
             ac += armor == null ? 0 : armor.ArmorBonus;
         }
 
         if (Player.Inventory.Equipped.Shield != string.Empty)
         {
-            Shield? shield = StorageNavigator.GetMatchingT(Player.Inventory.Equipped.Shield, Shields.shields);
+            Shield? shield = StorageNavigator.GetMatchingItem(Player.Inventory.Equipped.Shield, Shields.shields);
             ac += shield == null ? 0 : shield.ShieldBonus;
         }
 

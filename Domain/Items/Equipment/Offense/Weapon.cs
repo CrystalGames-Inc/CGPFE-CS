@@ -1,8 +1,9 @@
-﻿using Type = CGPFE.Domain.Items.Equipment.Offense.Properties.Type;
-using CGPFE.Domain.Items;
-using CGPFE.Domain.Items.Equipment.Offense.Properties;
+﻿using CGPFE.Core.Enums;
 using CGPFE.Core.Utilities;
 using CGPFE.Domain.Characters;
+using CGPFE.Domain.Items;
+using CGPFE.Domain.Items.Equipment.Offense.Properties;
+using Type = CGPFE.Domain.Items.Equipment.Offense.Properties.Type;
 
 namespace CGPFE.Domain.Items.Equipment.Offense;
 
@@ -19,7 +20,7 @@ public class Weapon(string name, int id, int maxCapacity, double? cost, Damage? 
     public Type[]? Type = type;
     public Special[]? Special = special;
 
-    public int RollMDamage(Entity target)
+    public int RollMDamage(Entity attacekr, Entity target)
     {
         Console.WriteLine("Rolling for hit...");
         int hitDie = Dice.Roll(20);
@@ -44,10 +45,10 @@ public class Weapon(string name, int id, int maxCapacity, double? cost, Damage? 
                 Console.WriteLine("No critical hit!");
         }
 
-        return dealtDamage;
+        return dealtDamage + AttackBonus(attacekr);
     }
 
-    public int RollSDamage(Entity target)
+    public int RollSDamage(Entity attacker, Entity target)
     {
         Console.WriteLine("Rolling for hit...");
         int hitDie = Dice.Roll(20);
@@ -72,6 +73,14 @@ public class Weapon(string name, int id, int maxCapacity, double? cost, Damage? 
                 Console.WriteLine("No critical hit!");
         }
 
-        return dealtDamage;
+        return dealtDamage + AttackBonus(attacker);
+    }
+
+    public int AttackBonus(Entity attacker)
+    {
+        int sizeMod = attacker.Attributes.SizeMod;
+        int attrMod = GetType().Equals(typeof(RangedWeapon)) ? attacker.Attributes.Dexterity.Modifier : attacker.Attributes.Strength.Modifier;
+
+        return sizeMod + attrMod;
     }
 }

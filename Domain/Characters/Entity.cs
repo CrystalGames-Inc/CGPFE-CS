@@ -7,8 +7,8 @@ using Domain.Characters.Inventory;
 namespace CGPFE.Domain.Characters;
 public abstract class Entity
 {
-    public Attributes Attributes { get; set; }
-    public CombatInfo? CombatInfo { get; set; }
+    public Attributes Attributes { get; set; } = new();
+    public CombatInfo? CombatInfo { get; set; } = new();
     public Inventory? Inventory { get; set; } = null;
 
     public virtual int GetValueForKey(string key) {

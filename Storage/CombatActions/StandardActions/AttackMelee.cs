@@ -31,8 +31,8 @@ public class AttackMelee(string weaponName = "Unarmed Strike") : StandardAction(
         {
             weaponName = attacker.Inventory.Equipped.Weapon;
         }
-        weapon = StorageNavigator.GetMatchingT(weaponName, Weapons.weapons);
+        weapon = StorageNavigator.GetMatchingItem(weaponName, Weapons.weapons);
         attacker.CombatInfo.ActionCount -= 1;
-        target.CombatInfo.Health -= weapon.RollMDamage(target);
+        target.CombatInfo.Health -= weapon.RollMDamage(attacker, target);
     }
 }

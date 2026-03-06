@@ -32,26 +32,43 @@ namespace CGPFE.Management
             Player = (Player)player;
             Enemy = other;
             Console.WriteLine("Combat started!");
-            if (Dice.Roll(20) + player.Attributes.Initiative.Value >= Dice.Roll(20) + Enemy.Attributes.Initiative.Value)
+            int pInit = Dice.Roll(20);
+            Console.WriteLine($"You rolled a {pInit}");
+            int eInit = Dice.Roll(20);
+            Console.WriteLine($"The enemy rolled a {eInit}");
+
+            int pMod = 0;
+            if(player.Attributes.Initiative == null)
+                pMod = player.Attributes.Initiative.Value;
+
+            int eMod = 0;
+            if(other.Attributes.Initiative == null)
+                eMod += other.Attributes.Initiative.Value;
+
+            if (pMod != 0 || eMod != 0)Console.WriteLine($"After adding the initiative modifiers, you got a {pInit + pMod},\nand the enemy got {eInit + eMod}!");
+            if (pInit + pMod >= eInit + eMod)
             {
                 Console.WriteLine("You go first!");
-                StartRound(Player);
+                StartRound(Player, Enemy);
             }
             else
             {
                 Console.WriteLine("You go second!");
-                StartRound(Enemy);
+                StartRound(Enemy, Player);
             }
         }
 
-        public void StartRound(Entity entity)
+        public void StartRound(Entity attacker, Entity target)
         {
-            entity.CombatInfo.ActionCount = 2;
-            entity.CombatInfo.SwiftActionCount = 1;
-            if (entity.GetType().Equals(typeof(Player)))
-                StartPlayerRound();
-            else
-                StartNPCRound();
+            do
+            {
+                attacker.CombatInfo.ActionCount = 2;
+                attacker.CombatInfo.SwiftActionCount = 1;
+                if (attacker.GetType().Equals(typeof(Player)))
+                    StartPlayerRound();
+                else
+                    StartNPCRound();
+            } while (attacker.CombatInfo.Health > 0 && target.CombatInfo.Health > 0);
         }
 
         private void StartPlayerRound()
@@ -95,7 +112,7 @@ namespace CGPFE.Management
         {
             Console.WriteLine("It's the NPC's turn!");
             //For now he won't attack ;)
-            StartRound(Player);
+            StartRound(Player, Enemy);
         }
 
         private void AttackMeleeWeapon(Entity attacker, Entity target)
